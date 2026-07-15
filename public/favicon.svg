@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    
+    <!-- Text Drop Shadow for depth -->
+    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#022c22" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Main rounded square base with gradient -->
+  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
+
+  <!-- Monogram text with drop shadow -->
+  <text
+    x="50%"
+    y="52%"
+    font-family="system-ui, -apple-system, 'SF Pro Display', Roboto, Helvetica, sans-serif"
+    font-weight="800"
+    font-size="260"
+    fill="#020617"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    filter="url(#shadow)"
+    letter-spacing="-8"
+  >JM</text>
+</svg>
