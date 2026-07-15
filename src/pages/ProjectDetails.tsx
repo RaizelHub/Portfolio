@@ -81,8 +81,38 @@ export const ProjectDetails = () => {
           {/* LEFT: Case Study Writing (8 cols) */}
           <div className="lg:col-span-8 space-y-8 text-left">
             
-            {/* Gallery Image Display */}
-            {galleryImages.length > 0 && (
+            {/* Gallery — live iframe or static image gallery */}
+            {project.liveUrl ? (
+              <div className="space-y-2 bg-navy-950 border border-navy-800 rounded-lg overflow-hidden">
+                {/* Browser chrome bar */}
+                <div className="flex items-center gap-2 px-3 py-2 bg-navy-900 border-b border-navy-800">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400/70" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+                  <span className="ml-2 flex-1 bg-navy-800 rounded text-[10px] font-mono text-slate-500 px-2 py-0.5 truncate">
+                    {project.liveUrl}
+                  </span>
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-slate-500 hover:text-emerald-400 transition-colors"
+                    title="Open in new tab"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+                <div className="relative w-full" style={{ height: '480px' }}>
+                  <iframe
+                    src={project.liveUrl}
+                    title={`${project.title} live demo`}
+                    className="w-full h-full border-none"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ) : galleryImages.length > 0 ? (
               <div className="space-y-3 bg-navy-950 border border-navy-800 p-2.5 rounded-lg">
                 <div className="relative aspect-video rounded overflow-hidden bg-navy-900 border border-navy-850">
                   <img
@@ -99,8 +129,8 @@ export const ProjectDetails = () => {
                         key={i}
                         onClick={() => setActiveImageIndex(i)}
                         className={`relative w-20 aspect-video rounded overflow-hidden border transition-all shrink-0 ${
-                          activeImageIndex === i 
-                            ? 'border-emerald-500 ring-1 ring-emerald-500/30' 
+                          activeImageIndex === i
+                            ? 'border-emerald-500 ring-1 ring-emerald-500/30'
                             : 'border-navy-700/60 hover:border-slate-500'
                         }`}
                       >
@@ -110,7 +140,7 @@ export const ProjectDetails = () => {
                   </div>
                 )}
               </div>
-            )}
+            ) : null}
 
             {/* Overview / Background */}
             <section className="space-y-3">

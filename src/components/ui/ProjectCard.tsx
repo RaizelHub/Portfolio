@@ -24,9 +24,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <div className={`group relative bg-navy-800/40 border border-navy-700/50 hover:border-emerald-500/30 rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-300 ${project.featured ? 'ring-1 ring-emerald-500/20' : ''}`}>
       <div>
-        {/* Project Thumbnail Image */}
+        {/* Project Thumbnail — live iframe or static image */}
         <div className="relative aspect-video overflow-hidden bg-navy-950 border-b border-navy-700/30">
-          {project.image ? (
+          {project.liveUrl ? (
+            <>
+              <iframe
+                src={project.liveUrl}
+                title={`${project.title} live preview`}
+                className="absolute top-0 left-0 pointer-events-none select-none"
+                style={{
+                  width: '400%',
+                  height: '400%',
+                  transform: 'scale(0.25)',
+                  transformOrigin: 'top left',
+                  border: 'none',
+                }}
+                loading="lazy"
+                sandbox="allow-scripts allow-same-origin"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </>
+          ) : project.image ? (
             <img
               src={`/${project.image}`}
               alt={`${project.title} Preview`}
@@ -39,7 +57,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               <span className="text-xs font-mono text-slate-500">{project.category} System</span>
             </div>
           )}
-          
+
           {/* Overlay Tag */}
           <div className="absolute top-3 left-3 flex gap-2">
             {project.featured && (
