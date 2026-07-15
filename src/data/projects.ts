@@ -54,7 +54,7 @@ export const projects: Project[] = [
     images: ['img/Posphoto.png'],
     accessNote: 'Try logging in with user "Janmark Suelto" and code "123456". For admin access, use email "janmarkking@gmail.com" and code "098765".',
     featured: true,
-    liveUrl: 'https://aquamarine-khapse-67e0d4.netlify.app/',
+    liveUrl: 'https://pos-five-flax.vercel.app/',
     githubUrl: 'https://github.com/RaizelHub'
   },
   {

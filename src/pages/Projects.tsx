@@ -12,13 +12,13 @@ export const Projects = () => {
   const categories = ['All', 'Web', 'SaaS', 'IoT', 'Mobile', 'AI', 'Desktop'];
 
   const filteredProjects = projects.filter((project) => {
-    const matchesSearch = 
+    const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.technologies.some(tech => tech.toLowerCase().includes(searchQuery.toLowerCase()));
 
-    const matchesCategory = 
-      activeCategory === 'All' || 
+    const matchesCategory =
+      activeCategory === 'All' ||
       project.category.toLowerCase() === activeCategory.toLowerCase();
 
     return matchesSearch && matchesCategory;
@@ -27,7 +27,7 @@ export const Projects = () => {
   return (
     <main className="min-h-screen pt-28 pb-20 bg-navy-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Navigation Breadcrumb */}
         <div className="mb-6">
           <Link
@@ -53,11 +53,10 @@ export const Projects = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-md font-mono transition-all duration-200 select-none ${
-                  activeCategory === cat
+                className={`px-3.5 py-1.5 rounded-md font-mono transition-all duration-200 select-none ${activeCategory === cat
                     ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold'
                     : 'text-slate-400 hover:text-white border border-transparent'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
