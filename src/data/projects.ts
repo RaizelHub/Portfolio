@@ -99,14 +99,15 @@ export const projects: Project[] = [
     technologies: ['Android Studio', 'Java', 'Firebase Realtime Database', 'Firebase Storage', 'Google Maps API', 'GPS Geolocation'],
     features: [
       'Interactive map pins displaying landlord properties near Bukidnon State University.',
+      'Tenant route direction finder (Google Maps Directions SDK integration).',
+      'Advanced filter tools including price sliders, distance parameters, and amenity tags.',
       'Landlord dashboard to easily post listings, specify vacant rooms, and manage rental prices.',
-      'Tenant route direction finder (Google Maps Directions SDK integrations).',
-      'Real-time chat functionality enabling direct student-landlord negotiations.',
-      'Advance filter tools including price sliders, distance parameters, and amenity tags.'
+      'Real-time chat functionality enabling direct student-landlord negotiations.'
     ],
     challenges: 'Managing responsive Android UI layouts for older mobile devices and keeping Google Maps API queries cost-efficient.',
     results: 'Over 200 prototype queries successfully run, connecting mock students with matching boarding house rooms around Bukidnon State University.',
-    process: 'Created XML custom visual layouts. Integrated Google Maps Android SDK and handled map permissions dynamically. Configured database listeners to instantly update map pins when vacant room statuses changed.',
+    process: 'Created XML custom visual layouts, integrated Google Maps Android SDK and handled map permissions dynamically. Configured database listeners to instantly update map pins when vacant room statuses changed.',
+    apkUrl: 'file/BoardFinder.apk',
     githubUrl: 'https://github.com/RaizelHub'
   },
   {

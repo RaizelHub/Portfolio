@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { 
-  ArrowLeft, Github, ExternalLink, Smartphone, 
-  CheckCircle2, Key, Info, HelpCircle, Shield, 
+import {
+  ArrowLeft, Github, ExternalLink, Smartphone,
+  CheckCircle2, Key, Info, HelpCircle, Shield,
   Workflow, CheckCircle, ListTodo
 } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -12,7 +12,7 @@ import { Button } from '../components/ui/Button';
 export const ProjectDetails = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
-  
+
   const project = projects.find((p) => p.slug === slug);
 
   // Scroll to top on mount
@@ -45,7 +45,7 @@ export const ProjectDetails = () => {
   return (
     <main className="min-h-screen pt-28 pb-20 bg-navy-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Back navigation */}
         <div className="mb-6 flex items-center justify-between">
           <Link
@@ -77,10 +77,10 @@ export const ProjectDetails = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* LEFT: Case Study Writing (8 cols) */}
           <div className="lg:col-span-8 space-y-8 text-left">
-            
+
             {/* Gallery — live iframe or static image gallery */}
             {project.liveUrl ? (
               <div className="space-y-2 bg-navy-950 border border-navy-800 rounded-lg overflow-hidden">
@@ -102,7 +102,7 @@ export const ProjectDetails = () => {
                     <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
-                <div className="relative w-full" style={{ height: '480px' }}>
+                <div className="relative w-full" style={{ height: '700px' }}>
                   <iframe
                     src={project.liveUrl}
                     title={`${project.title} live demo`}
@@ -128,11 +128,10 @@ export const ProjectDetails = () => {
                       <button
                         key={i}
                         onClick={() => setActiveImageIndex(i)}
-                        className={`relative w-20 aspect-video rounded overflow-hidden border transition-all shrink-0 ${
-                          activeImageIndex === i
-                            ? 'border-emerald-500 ring-1 ring-emerald-500/30'
-                            : 'border-navy-700/60 hover:border-slate-500'
-                        }`}
+                        className={`relative w-20 aspect-video rounded overflow-hidden border transition-all shrink-0 ${activeImageIndex === i
+                          ? 'border-emerald-500 ring-1 ring-emerald-500/30'
+                          : 'border-navy-700/60 hover:border-slate-500'
+                          }`}
                       >
                         <img src={`/${img}`} alt="thumbnail" className="w-full h-full object-cover" />
                       </button>
@@ -217,7 +216,7 @@ export const ProjectDetails = () => {
 
           {/* RIGHT: Tech Specs & Links Sidebar (4 cols) */}
           <div className="lg:col-span-4 space-y-6">
-            
+
             {/* Project Access Note if POS */}
             {project.accessNote && (
               <div className="bg-amber-950/20 border border-amber-900/30 p-5 rounded-lg flex items-start gap-3">
@@ -238,7 +237,7 @@ export const ProjectDetails = () => {
               <h3 className="font-bold text-white border-b border-navy-800 pb-2.5 text-sm sm:text-base">
                 Technical Specifications
               </h3>
-              
+
               {/* Stack badges */}
               <div className="space-y-2">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block font-bold">
@@ -246,8 +245,8 @@ export const ProjectDetails = () => {
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {project.technologies.map((tech) => (
-                    <span 
-                      key={tech} 
+                    <span
+                      key={tech}
                       className="text-xs font-mono px-2 py-0.5 bg-navy-900 text-slate-300 rounded border border-navy-800"
                     >
                       {tech}
@@ -265,8 +264,8 @@ export const ProjectDetails = () => {
                     rel="noopener noreferrer"
                     className="w-full"
                   >
-                    <Button 
-                      variant="primary" 
+                    <Button
+                      variant="primary"
                       className="w-full text-xs font-semibold"
                       leftIcon={<ExternalLink className="w-3.5 h-3.5" />}
                     >
@@ -282,8 +281,8 @@ export const ProjectDetails = () => {
                     rel="noopener noreferrer"
                     className="w-full block"
                   >
-                    <Button 
-                      variant="secondary" 
+                    <Button
+                      variant="secondary"
                       className="w-full text-xs"
                       leftIcon={<Github className="w-3.5 h-3.5" />}
                     >
@@ -298,8 +297,8 @@ export const ProjectDetails = () => {
                     download
                     className="w-full block"
                   >
-                    <Button 
-                      variant="secondary" 
+                    <Button
+                      variant="secondary"
                       className="w-full text-xs text-emerald-400 hover:text-emerald-300 border-emerald-800/40 hover:border-emerald-500/40"
                       leftIcon={<Smartphone className="w-3.5 h-3.5" />}
                     >
@@ -317,9 +316,9 @@ export const ProjectDetails = () => {
                 This project was created and compiled by Janmark M. Suelto. He is available for remote opportunities on similar stacks.
               </p>
             </div>
-            
+
           </div>
-          
+
         </div>
       </div>
     </main>
