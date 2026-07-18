@@ -4,11 +4,17 @@ import { Footer } from './components/layout/Footer';
 import { Home } from './pages/Home';
 import { Projects } from './pages/Projects';
 import { ProjectDetails } from './pages/ProjectDetails';
+import TargetCursor from './components/ui/TargetCursor';
 
 function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-navy-900 text-slate-300 font-sans selection:bg-emerald-500/20 selection:text-emerald-300">
+        <TargetCursor 
+          targetSelector="a, button, [role='button'], .cursor-target" 
+          cursorColor="#10b981" 
+          cursorColorOnTarget="#34d399" 
+        />
         {/* Navigation Bar */}
         <Navbar />
 
