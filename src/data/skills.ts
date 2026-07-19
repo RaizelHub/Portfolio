@@ -82,12 +82,13 @@ export const skills: Skill[] = [
       'Git',
       'GitHub',
       'Postman',
+      'n8n',
       'VS Code',
       'Firebase',
       'Supabase',
       'Android Studio',
       'Ollama (Local LLM)'
     ],
-    accentItems: ['Git', 'Postman', 'Ollama (Local LLM)']
+    accentItems: ['Git', 'Postman', 'n8n', 'Ollama (Local LLM)']
   }
 ];

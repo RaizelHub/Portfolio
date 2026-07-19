@@ -57,9 +57,9 @@ export const Home = () => {
 
   // --- Stats Counter State ---
   const statsList = [
-    { label: 'Completed Projects', target: 6, suffix: '+' },
-    { label: 'Technologies Used', target: 15, suffix: '+' },
-    { label: 'Repositories', target: 6, suffix: '+' },
+    { label: 'Completed Projects', target: projects.length, suffix: '+' },
+    { label: 'Technologies Used', target: 18, suffix: '+' },
+    { label: 'Repositories', target: projects.length, suffix: '+' },
     { label: 'Certificates', target: 2, suffix: '+' }
   ];
 

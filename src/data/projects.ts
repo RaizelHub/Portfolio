@@ -2,6 +2,34 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'leadflow-ai',
+    slug: 'leadflow-ai',
+    emoji: '⚡',
+    title: 'LeadFlow AI',
+    category: 'AI',
+    description: 'An AI-powered lead intelligence and automation platform that automatically receives customer messages, analyzes them with Gemini AI, and stores structured results in Supabase PostgreSQL.',
+    longDescription: 'LeadFlow AI is an automated lead intelligence platform designed to help businesses transform unstructured customer messages into actionable sales and support data. Instead of manually reading and categorizing every incoming customer inquiry, the system automatically analyzes each message using Gemini AI and generates structured insights (intent, score, priority, summary) for business teams. The platform combines a React dashboard, n8n workflow automation, Gemini AI, and Supabase PostgreSQL into a complete end-to-end automation pipeline. This project serves as my first practice AI automation.',
+    problem: 'Businesses receive large volumes of customer messages through forms, websites, and communication channels. Manually reviewing each message creates several problems: slow lead processing, inconsistent lead classification, missed high-value opportunities, lack of standardized lead scoring, manual data entry, and poor visibility into customer intent.',
+    solution: 'Engineered an AI-powered automation pipeline that processes customer messages automatically. When a new customer inquiry is submitted, the React application sends the message to an n8n webhook, which routes it through an automation workflow. Gemini AI analyzes the message to classify intent, generate a lead score, set priority levels, and write a summary. The structured results are stored in Supabase PostgreSQL and displayed on the React AI dashboard.',
+    technologies: ['React', 'Vite', 'n8n', 'Gemini AI', 'Supabase', 'PostgreSQL', 'REST APIs', 'Webhooks'],
+    features: [
+      'AI-Powered Message Analysis (Intent, Lead Score, Priority, AI Summary).',
+      'Automated Lead Processing workflow mapping Webhook -> Gemini AI -> JSON processing -> Supabase PostgreSQL.',
+      'AI Lead Dashboard providing total statistics, lead score monitoring, priority indicators, and status tracking.',
+      'Structured PostgreSQL storage mapping fields: id, name, email, message, intent, lead_score, priority, status, and summary.',
+      'Webhook-based architecture compatible with website forms, mobile apps, CRMs, and external APIs.'
+    ],
+    challenges: 'The main technical challenge was ensuring that AI-generated responses could be reliably converted into structured database records. AI responses are naturally unstructured text, while PostgreSQL requires strict data types (such as integer conversion for lead scores, UUID generation, default timestamps, and JSON parsing validation). This required building a robust processing and validation layer within the n8n workflow between Gemini AI and Supabase.',
+    results: 'The result is a functional AI-powered lead intelligence platform capable of automatically analyzing customer messages, reducing manual lead processing, standardizing lead classification, and presenting insights through a modern React dashboard. The architecture is fully extensible for future integrations with email, WhatsApp, CRM systems, and customer support channels.',
+    process: 'Developed using an integration-first architecture: designed the PostgreSQL schema in Supabase, built the n8n webhook receiver workflow, integrated Gemini AI prompts with structured JSON instructions, established validation steps, and connected the React frontend to the webhooks and Supabase client.',
+    image: 'img/AiAuto.png',
+    images: ['img/AiAuto.png', 'img/Workflow.png'],
+    accessNote: 'Note: This is my first practice AI automation project, designed to explore end-to-end automation workflows, prompt engineering, and real-time database state sync.',
+    featured: true,
+    githubUrl: 'https://github.com/RaizelHub',
+    liveUrl: 'https://ai-automation-lead-hazel.vercel.app/'
+  },
+  {
     id: 'laravel-tenancy-reviewer-center',
     slug: 'laravel-tenancy-reviewer-center',
     emoji: '🏢',
