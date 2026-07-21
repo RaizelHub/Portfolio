@@ -16,6 +16,7 @@ export interface Project {
   image?: string;
   images?: string[];
   githubUrl?: string;
+  githubLabel?: string;
   liveUrl?: string;
   apkUrl?: string;
   accessNote?: string;

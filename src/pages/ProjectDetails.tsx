@@ -286,7 +286,7 @@ export const ProjectDetails = () => {
                       className="w-full text-xs"
                       leftIcon={<Github className="w-3.5 h-3.5" />}
                     >
-                      Inspect Source Code
+                      {project.githubLabel || 'Inspect Source Code'}
                     </Button>
                   </a>
                 )}

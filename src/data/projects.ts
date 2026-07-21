@@ -2,6 +2,56 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'omnicommerce-ai',
+    slug: 'omnicommerce-ai',
+    emoji: '🛒',
+    title: 'OmniCommerce AI — E-commerce Automation & Operations Hub',
+    category: 'AI',
+    description: 'An end-to-end e-commerce automation platform using n8n, Supabase, Gemini, and Telegram. Automates order processing, AI support triage, human-controlled refund reviews, inventory synchronization, content generation, daily reporting, and workflow-error monitoring.',
+    longDescription: 'OmniCommerce AI is an end-to-end AI-powered e-commerce automation system built with n8n Cloud, Supabase PostgreSQL, Google Gemini, and Telegram. It connects incoming orders, customer-support requests, supplier inventory, AI-generated marketing content, and business reports through a collection of six dependable n8n workflows. Designed for growing e-commerce and social-commerce businesses, it automates core operational lifecycles while maintaining human oversight for critical financial and content decisions.',
+    problem: 'Growing e-commerce businesses often process orders, check inventory, respond to customers, review refund requests, create promotional content, and prepare reports manually. As order volume increases, these disconnected processes can cause duplicate orders, delayed customer responses, inventory mistakes, unsupported refunds, missed failures, and excessive administrative work.',
+    solution: 'Designed and built six connected n8n workflows that automate the core e-commerce lifecycle. Supabase provides centralized data storage, Google Gemini analyzes support requests and generates product content, while Telegram delivers real-time alerts and human approval controls for sensitive decisions. Duplicate detection, structured AI outputs, validation, execution logging, and centralized error monitoring were included to make the system dependable and easier to maintain.',
+    technologies: [
+      'n8n Cloud',
+      'Supabase',
+      'PostgreSQL',
+      'Google Gemini',
+      'Telegram Bot API',
+      'JavaScript',
+      'Webhooks',
+      'REST APIs',
+      'JSON',
+      'Postman',
+      'SQL',
+      'Git'
+    ],
+    features: [
+      '01 — TikTok Order Processing: Receives simulated TikTok Shop orders, validates the payload, prevents duplicate processing, finds or creates customers, stores orders and items in Supabase, submits mock supplier fulfillment, assigns tracking information, and sends Telegram notifications.',
+      '02 — AI Customer Support & Refund Triage: Receives support requests, verifies the related order, uses Gemini to analyze sentiment, urgency, intent, and risk, creates support tickets, and requests human approval via Telegram before updating any refund decision.',
+      '03 — Inventory & Supplier Synchronization: Scheduled workflow retrieving supplier inventory, updating product availability and pricing in Supabase, detecting low-stock/out-of-stock items, pausing unavailable products, and dispatching Telegram alerts.',
+      '04 — AI Short-Form Content Factory: Generates marketing angles, hooks, video scripts, shot lists, captions, and hashtags using verified product information. All generated content requires human approval via Telegram before use.',
+      '05 — Daily Operations Report: Combines order, revenue, support, refund, inventory, content, and automation data into one daily management report delivered through Telegram.',
+      '06 — Automation Error Monitor: Captures failures from published n8n workflows, records diagnostic information in Supabase, and immediately notifies the operator through Telegram.',
+      'Duplicate-order and ticket protection using unique external order IDs, Supabase REST lookups, conditional branching in n8n, and database constraints.',
+      'Human-in-the-loop approvals via interactive Telegram controls for sensitive refund decisions and AI-generated content.'
+    ],
+    challenges: 'One major challenge was preventing duplicate webhook events from creating duplicate database records or unnecessary AI requests. This was solved using unique external identifiers, Supabase REST lookups, conditional branches, and database constraints. Another challenge was safely using AI for refund and content decisions: the system allows Gemini to analyze and recommend actions but requires a human operator to approve sensitive outcomes.',
+    results: 'Built a working automation backbone that demonstrates how an e-commerce business can reduce repetitive work across order handling, customer support, supplier monitoring, content production, reporting, and troubleshooting. The system currently operates as a portfolio demonstration using mock TikTok Shop and supplier integrations, structured so authorized production APIs can replace mock inputs without rebuilding the architecture.',
+    process: 'Designed the Supabase database schema first (customers, orders, order items, products, support tickets, refund requests, content ideas, workflow executions). Built each n8n workflow incrementally and tested it with Postman webhook payloads. Added duplicate detection, validation branches, structured Gemini responses, Telegram approval actions, execution logs, and failure notifications. Test cases included successful orders, unpaid orders, duplicate submissions, new and existing customers, damaged-product refund requests, approval and rejection decisions, low inventory, unavailable products, and failed workflow executions.',
+    image: 'img/01-Order Processing.png',
+    images: [
+      'img/01-Order Processing.png',
+      'img/02 - AI Customer Support & Refund Triage.png',
+      'img/03 - Inventory & Supplier Synchronization.png',
+      'img/04 - AI Short-Form Content Factory.png',
+      'img/05 - Daily Operations Report.png'
+    ],
+    accessNote: 'Portfolio Disclaimer: TikTok Shop order events and supplier fulfillment are simulated for demonstration purposes. The project does not claim an official TikTok Shop integration or automatic payment-provider refunds. Credentials are stored securely inside n8n with no API keys included in exported workflow files.',
+    featured: true,
+    githubUrl: 'https://github.com/RaizelHub/OmniEcommerce-ai',
+    githubLabel: 'Inspect Workflows'
+  },
+  {
     id: 'leadflow-ai',
     slug: 'leadflow-ai',
     emoji: '⚡',
@@ -135,7 +185,6 @@ export const projects: Project[] = [
     challenges: 'Managing responsive Android UI layouts for older mobile devices and keeping Google Maps API queries cost-efficient.',
     results: 'Over 200 prototype queries successfully run, connecting mock students with matching boarding house rooms around Bukidnon State University.',
     process: 'Created XML custom visual layouts, integrated Google Maps Android SDK and handled map permissions dynamically. Configured database listeners to instantly update map pins when vacant room statuses changed.',
-    apkUrl: 'file/BoardFinder.apk',
     githubUrl: 'https://github.com/RaizelHub'
   },
   {
