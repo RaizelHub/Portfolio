@@ -8,6 +8,7 @@ import {
 import { projects } from '../data/projects';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
+import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
 
 export const ProjectDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -62,7 +63,11 @@ export const ProjectDetails = () => {
           </Link>
         </div>
 
-        {/* Title Block Banner */}
+        {slug === 'jobradar-ai' ? (
+          <JobRadarCaseStudy />
+        ) : (
+          <>
+            {/* Title Block Banner */}
         <div className="border-b border-navy-800 pb-8 mb-8 text-left">
           <div className="flex items-center gap-2 mb-3">
             <span className="text-2xl sm:text-3xl">{project.emoji}</span>
@@ -317,9 +322,12 @@ export const ProjectDetails = () => {
               </p>
             </div>
 
+            </div>
+
           </div>
 
-        </div>
+        </>
+        )}
       </div>
     </main>
   );

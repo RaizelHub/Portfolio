@@ -2,6 +2,56 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'jobradar-ai',
+    slug: 'jobradar-ai',
+    emoji: '📡',
+    title: 'JobRadar AI — Intelligent Job Discovery & Application CRM',
+    category: 'AI',
+    description: 'A production-style job-search automation platform that collects remote opportunities, evaluates candidate-job compatibility with Gemini AI, sends high-match alerts, and tracks applications through a visual pipeline.',
+    longDescription: 'JobRadar AI is a full-stack job-search automation platform built using React, TypeScript, Supabase, n8n, Express, and Google Gemini. The system collects remote opportunities from permitted APIs and official job-alert emails, normalizes and deduplicates listings, evaluates compatibility against candidate skills and preferences, stores structured match reports, sends email notifications for strong opportunities, and displays results in a responsive dashboard.',
+    problem: 'Job hunting across multiple platforms is repetitive. Opportunities are distributed across job boards, duplicate listings are common, and manually checking each role against personal qualifications consumes significant time.',
+    solution: 'JobRadar AI centralizes remote job discovery, normalizes listings from multiple sources, uses AI to evaluate suitability, alerts the user about strong matches, and tracks each application through a structured pipeline.',
+    technologies: [
+      'React',
+      'TypeScript',
+      'Supabase',
+      'PostgreSQL',
+      'Express',
+      'Node.js',
+      'n8n',
+      'Google Gemini',
+      'Gmail Integration',
+      'Tailwind CSS',
+      'TanStack Query',
+      'Zod',
+      'Vite'
+    ],
+    features: [
+      'Remote job collection (Remotive public API, LinkedIn, OnlineJobs.ph, JobStreet official job-alert email ingestion).',
+      'Data normalization converting different job sources into one consistent job schema preserving original URLs.',
+      'Duplicate protection using canonical URL hashing, owner ID, and database uniqueness constraints.',
+      'AI job matching with Gemini evaluating compatibility scores, matched/missing skills, strengths, concerns, and interview tips.',
+      'Smart email alerts delivering high-match job notifications while preventing duplicate dispatches.',
+      'Application CRM tracking candidate status: Discovered -> Saved -> Applied -> Interview -> Offer -> Rejected.',
+      'Automation controls to trigger collectors, AI matching, and high-match alerts via authenticated Express webhooks.',
+      'Reliability architecture featuring execution logs, retry handling, correlation IDs, and structured AI validation.'
+    ],
+    challenges: 'Integrating multi-source job alerts without violating scraping policies required processing official email alerts alongside public REST APIs. Handling unstructured LLM responses was resolved through strict JSON schema validation prior to database storage, while repeated workflow runs were prevented using canonical URL deduplication.',
+    results: 'Built a reliable automated job intelligence system that eliminates manual job aggregation, speeds up candidate fit evaluation with structured AI feedback, and manages job application pipelines end-to-end.',
+    process: 'Designed Supabase PostgreSQL schemas with Row Level Security, built modular n8n workflows for ingestion and Gemini AI evaluation, developed Express proxy microservices for secure secret handling, and created a dynamic React + TypeScript dashboard.',
+    image: 'img/Jobs.png',
+    images: [
+      'img/Jobs.png',
+      'img/High-Match Email Notification.png',
+      'img/JobRadar AI — AI Job Matcher.png',
+      'img/JobRadar AI — Remote Job Collector — Production.png',
+      'img/JobRadar — Email Job Collector.png'
+    ],
+    liveUrl: 'https://job-radar-ai-frontend-80jdtu9ov-janmarkking-1934s-projects.vercel.app/demo',
+    accessNote: 'Flagship Project: Personal single-user automation platform in active development. Live demo environment active.',
+    featured: true
+  },
+  {
     id: 'omnicommerce-ai',
     slug: 'omnicommerce-ai',
     emoji: '🛒',

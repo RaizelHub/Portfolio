@@ -93,10 +93,10 @@ export const Navbar = () => {
     }
   };
 
-  const handleDownloadCV = () => {
+  const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/SUELTO_CV.pdf';
-    link.download = 'Janmark_Suelto_CV.pdf';
+    link.href = '/Janmark_Suelto_Resume.pdf';
+    link.download = 'Janmark_Suelto_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -153,9 +153,9 @@ export const Navbar = () => {
               variant="primary"
               size="sm"
               leftIcon={<Download className="w-3.5 h-3.5" />}
-              onClick={handleDownloadCV}
+              onClick={handleDownloadResume}
             >
-              Download CV
+              Download Resume
             </Button>
           </div>
 
@@ -166,9 +166,9 @@ export const Navbar = () => {
               size="sm"
               className="text-xs px-3 py-1.5"
               leftIcon={<Download className="w-3.5 h-3.5" />}
-              onClick={handleDownloadCV}
+              onClick={handleDownloadResume}
             >
-              CV
+              Resume
             </Button>
             <button
               onClick={() => setIsOpen(!isOpen)}

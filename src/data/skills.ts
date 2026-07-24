@@ -36,6 +36,8 @@ export const skills: Skill[] = [
     icon: 'database',
     description: 'Designing data structures optimized for speed, scalability, and integrity.',
     items: [
+      'PostgreSQL',
+      'Supabase',
       'MySQL',
       'MongoDB',
       'Firebase Firestore',
@@ -43,7 +45,7 @@ export const skills: Skill[] = [
       'Migrations',
       'Query Optimization'
     ],
-    accentItems: ['MySQL', 'Database Design']
+    accentItems: ['PostgreSQL', 'Supabase', 'Database Design']
   },
   {
     category: 'Networking & Security',
@@ -81,14 +83,15 @@ export const skills: Skill[] = [
     items: [
       'Git',
       'GitHub',
-      'Postman',
       'n8n',
+      'Google Gemini',
+      'Postman',
       'VS Code',
       'Firebase',
       'Supabase',
       'Android Studio',
       'Ollama (Local LLM)'
     ],
-    accentItems: ['Git', 'Postman', 'n8n', 'Ollama (Local LLM)']
+    accentItems: ['n8n', 'Google Gemini', 'Supabase', 'Git']
   }
 ];

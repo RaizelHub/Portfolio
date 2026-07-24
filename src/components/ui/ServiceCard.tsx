@@ -1,4 +1,4 @@
-import { Code, Database, Globe, Layers, Table, Headset } from 'lucide-react';
+import { Code, Database, Globe, Layers, Table, Headset, Workflow, Cpu } from 'lucide-react';
 import type { Service } from '../../types';
 
 interface ServiceCardProps {
@@ -9,6 +9,8 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
   const getIcon = (iconName: string) => {
     const defaultClass = "w-6 h-6 text-slate-200 group-hover:text-emerald-400 transition-colors duration-300";
     switch (iconName.toLowerCase()) {
+      case 'workflow': return <Workflow className={defaultClass} />;
+      case 'ai': case 'cpu': return <Cpu className={defaultClass} />;
       case 'code': return <Code className={defaultClass} />;
       case 'database': return <Database className={defaultClass} />;
       case 'api': return <Layers className={defaultClass} />;

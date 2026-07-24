@@ -14,6 +14,7 @@ import { skills } from '../data/skills';
 import { services } from '../data/services';
 import { experiences } from '../data/experience';
 import { certifications } from '../data/certifications';
+import { educationList } from '../data/education';
 
 export const Home = () => {
   // --- Typewriter State ---
@@ -500,34 +501,37 @@ export const Home = () => {
               Education
             </h3>
 
-            <div className="bg-navy-800/20 border border-navy-700/40 p-6 rounded-lg">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                <h4 className="font-bold text-white text-base">Bukidnon State University</h4>
-                <span className="text-xs font-semibold text-emerald-400 font-mono bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/30 w-fit">
-                  Graduated
-                </span>
-              </div>
-              <div className="text-xs font-medium text-slate-400 mb-4 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-emerald-500" /> Bukidnon, Philippines
-              </div>
-              <p className="text-sm font-semibold text-slate-200 mb-2">
-                Bachelor of Science in Information Technology
-              </p>
+            {educationList.map((edu) => (
+              <div key={edu.id} className="bg-navy-800/20 border border-navy-700/40 p-6 rounded-lg">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                  <h4 className="font-bold text-white text-base">{edu.institution}</h4>
+                  <span className="text-xs font-semibold text-emerald-400 font-mono bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/30 w-fit">
+                    {edu.status}
+                  </span>
+                </div>
+                <div className="text-xs font-medium text-slate-400 mb-4 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-emerald-500" /> {edu.location}
+                  </span>
+                  <span className="font-mono text-xs text-slate-400 font-semibold">{edu.period}</span>
+                </div>
+                <p className="text-sm font-semibold text-slate-200 mb-2">
+                  {edu.degree}
+                </p>
 
-              <h5 className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold mt-4 mb-2.5">
-                Highlights
-              </h5>
-              <ul className="space-y-2 text-xs sm:text-sm text-slate-400">
-                <li className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Capstone Project: Smartpipe IoT System</span>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>CCNA Course Trainings Complete</span>
-                </li>
-              </ul>
-            </div>
+                <h5 className="text-xs font-mono uppercase tracking-widest text-emerald-400 font-bold mt-4 mb-2.5">
+                  Highlights
+                </h5>
+                <ul className="space-y-2 text-xs sm:text-sm text-slate-400">
+                  {edu.highlights.map((highlight, i) => (
+                    <li key={i} className="flex items-center gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
