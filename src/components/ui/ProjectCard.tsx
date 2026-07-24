@@ -22,7 +22,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   };
 
   return (
-    <div className={`group relative bg-navy-800/40 border border-navy-700/50 hover:border-emerald-500/30 rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-300 ${project.featured ? 'ring-1 ring-emerald-500/20' : ''}`}>
+    <div className="group relative bg-navy-800/40 border border-navy-700/50 hover:border-emerald-500/30 rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-300">
       <div>
         {/* Project Thumbnail — live iframe or static image */}
         <div className="relative aspect-video overflow-hidden bg-navy-950 border-b border-navy-700/30">
@@ -59,11 +59,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
           {/* Overlay Tag */}
           <div className="absolute top-3 left-3 flex gap-2">
-            {project.featured && (
-              <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-navy-950 bg-emerald-400 rounded-md">
-                ★ Featured
-              </span>
-            )}
             <Badge variant={getCategoryColor(project.category)} className="text-[10px]">
               {project.category}
             </Badge>
