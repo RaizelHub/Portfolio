@@ -53,7 +53,6 @@ export const JobRadarCaseStudy: React.FC = () => {
       <section className="bg-navy-950/60 border border-navy-800/80 rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-3xl">📡</span>
             <Badge variant="emerald">Full-Stack Development / AI Automation / n8n</Badge>
             <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

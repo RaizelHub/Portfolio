@@ -70,7 +70,6 @@ export const ProjectDetails = () => {
             {/* Title Block Banner */}
         <div className="border-b border-navy-800 pb-8 mb-8 text-left">
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-2xl sm:text-3xl">{project.emoji}</span>
             <Badge variant="emerald">{project.category}</Badge>
           </div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">

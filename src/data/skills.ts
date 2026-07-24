@@ -45,7 +45,7 @@ export const skills: Skill[] = [
       'Migrations',
       'Query Optimization'
     ],
-    accentItems: ['PostgreSQL', 'Supabase', 'Database Design']
+    accentItems: ['PostgreSQL', 'Supabase', 'MongoDB', 'Firebase Firestore']
   },
   {
     category: 'Networking & Security',

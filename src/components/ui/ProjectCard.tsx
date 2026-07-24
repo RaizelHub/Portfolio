@@ -53,7 +53,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-navy-950 to-navy-900 select-none">
-              <span className="text-4xl mb-2">{project.emoji || '💻'}</span>
               <span className="text-xs font-mono text-slate-500">{project.category} System</span>
             </div>
           )}
@@ -73,9 +72,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
         {/* Card Body */}
         <div className="p-5">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2 group-hover:text-emerald-400 transition-colors duration-200">
-            <span className="shrink-0">{project.emoji}</span>
-            <span className="truncate">{project.title}</span>
+          <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors duration-200 truncate">
+            {project.title}
           </h3>
           
           <p className="mt-2.5 text-xs sm:text-sm text-slate-400 line-clamp-3 leading-relaxed">

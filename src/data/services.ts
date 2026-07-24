@@ -33,12 +33,12 @@ export const services: Service[] = [
   },
   {
     id: 'db-dev',
-    title: 'Database Architecture & Supabase',
+    title: 'Database Architecture (PostgreSQL, Supabase, MongoDB, Firebase)',
     icon: 'database',
-    description: 'Relational PostgreSQL and MySQL database design, Supabase Row Level Security (RLS) policies, canonical URL deduplication indexes, schema migrations, and query speedup optimization.',
+    description: 'Relational PostgreSQL and MySQL database design alongside NoSQL MongoDB and Firebase setups. Specialized in database structure planning, Supabase Row Level Security (RLS) policies, schema migrations, and query speedup optimization.',
     bannerClass: 'bg-purple-950/20 text-purple-400 border-purple-900/30',
     label: 'DATABASE',
-    tools: ['PostgreSQL', 'Supabase RLS', 'MySQL', 'Schema Design', 'Canonical Indexing', 'Migrations'],
+    tools: ['PostgreSQL', 'Supabase RLS', 'MongoDB', 'Firebase', 'MySQL', 'Schema Design'],
     toolColor: 'indigo'
   },
   {

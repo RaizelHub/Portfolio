@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight, Mail, Phone, MapPin, Clock, CheckCircle2,
-  Send, Code, Layers, ShieldCheck, HeartHandshake, Sparkles, Github
+  Send, Code, Layers, ShieldCheck, HeartHandshake, Sparkles, Github, Workflow, Database
 } from 'lucide-react';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { Button } from '../components/ui/Button';
@@ -289,30 +289,78 @@ export const Home = () => {
             </div>
           </div>
 
-          {/* Right quick strengths card */}
+          {/* Right: Why Work With Me Card */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-navy-800/30 border border-navy-700/60 p-6 rounded-lg">
-              <h3 className="font-bold text-white mb-2 text-sm sm:text-base">What sets me apart</h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-4">
-                Most developers stop at the application layer. I understand OSPF routing, VLAN segmentation, MQTT brokers, sensor fusion, and multi-tenant isolation, giving me a much wider and deeper view of the entire system architecture from physical sensors to cloud deployments.
-              </p>
+            <div className="bg-navy-850/40 border border-navy-700/60 p-6 sm:p-7 rounded-xl space-y-5 shadow-lg">
+              <div className="flex items-center justify-between border-b border-navy-800 pb-3">
+                <h3 className="font-bold text-white text-base sm:text-lg flex items-center gap-2">
+                  <Sparkles className="w-4.5 h-4.5 text-emerald-400" /> Why Work With Me
+                </h3>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-400 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-900/30">
+                  Value Delivered
+                </span>
+              </div>
 
-              <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 block mb-2 font-bold">
-                Core Strengths
-              </span>
-              <div className="flex flex-wrap gap-1.5">
-                {[
-                  'Problem Solver',
-                  'Clean Code Writer',
-                  'Fast Learner',
-                  'Remote-Ready',
-                  'Security-Minded',
-                  'Reliable Communicator'
-                ].map((tag) => (
-                  <span key={tag} className="text-xs font-semibold px-2.5 py-1 bg-navy-900 text-slate-300 border border-navy-800 rounded">
-                    {tag}
+              <div className="space-y-4 text-xs sm:text-sm">
+                <div className="space-y-1">
+                  <span className="font-bold text-white block flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Full-Stack &amp; AI Automation Expertise
                   </span>
-                ))}
+                  <p className="text-slate-400 text-xs leading-relaxed pl-3 font-normal">
+                    Building production n8n workflows, Gemini AI integrations, React dashboards, Express API microservices, and Supabase databases that automate complex manual tasks.
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-bold text-white block flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    CCNA-Grade Security &amp; Infrastructure
+                  </span>
+                  <p className="text-slate-400 text-xs leading-relaxed pl-3 font-normal">
+                    Planning for OSPF routing, VLAN segmentation, JWT authentication, and zero frontend API secret exposure from day one.
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-bold text-white block flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Multi-Tenant SaaS &amp; Systems Architecture
+                  </span>
+                  <p className="text-slate-400 text-xs leading-relaxed pl-3 font-normal">
+                    Experience implementing Laravel Tenancy client isolation, relational PostgreSQL/MySQL schemas, and physical IoT MQTT networks.
+                  </p>
+                </div>
+
+                <div className="space-y-1">
+                  <span className="font-bold text-white block flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Reliable Communication &amp; IT Support
+                  </span>
+                  <p className="text-slate-400 text-xs leading-relaxed pl-3 font-normal">
+                    Honed during enterprise IT operations at Concentrix, ensuring clear documentation, fast responses, and structured work ownership.
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-navy-800">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block mb-2 font-bold">
+                  Core Professional Qualities
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    'AI Automation',
+                    'Full-Stack Developer',
+                    'Security-Minded',
+                    'Clean Code Writer',
+                    'Fast Learner',
+                    'Remote-Ready'
+                  ].map((tag) => (
+                    <span key={tag} className="text-xs font-semibold px-2.5 py-1 bg-navy-900 text-slate-300 border border-navy-800 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -574,37 +622,37 @@ export const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
           {[
             {
-              title: 'Laravel & PHP Expertise',
-              desc: 'Deep capabilities in Laravel routing models, database migrations, controllers, middleware validation, and multi-tenant separations.',
+              title: 'AI & Workflow Automation',
+              desc: 'Building production-style n8n automation pipelines, Google Gemini LLM integrations, webhooks, Gmail alert ingestion, and structured output validation.',
+              icon: <Workflow className="w-5 h-5 text-emerald-400" />
+            },
+            {
+              title: 'Full-Stack Web Development',
+              desc: 'Designing responsive React + TypeScript interfaces backed by Express microservices, Node.js REST APIs, and clean modular code architecture.',
               icon: <Code className="w-5 h-5 text-emerald-400" />
             },
             {
-              title: 'MERN Stack Proficiency',
-              desc: 'Proficient building Javascript applications using React frontend, Node/Express server APIs, and unstructured MongoDB databases.',
-              icon: <Layers className="w-5 h-5 text-emerald-400" />
+              title: 'Relational & NoSQL Databases',
+              desc: 'Experienced with PostgreSQL, Supabase Row Level Security (RLS), MySQL schemas alongside MongoDB and Firebase Firestore setups.',
+              icon: <Database className="w-5 h-5 text-emerald-400" />
             },
             {
-              title: 'CCNA Security Mindset',
-              desc: 'Certified enterprise networking knowledge means I secure APIs, database tables, and routes from day one, not as an afterthought.',
+              title: 'CCNA Enterprise Security',
+              desc: 'Certified networking background ensures OSPF routing, VLAN segmentation, JWT auth layers, and zero frontend secret leaks from day one.',
               icon: <ShieldCheck className="w-5 h-5 text-emerald-400" />
             },
             {
-              title: 'Problem Solving & Clean Code',
-              desc: 'I write well-documented, clean, refactor-friendly code with clear variables so your team can maintain it easily.',
-              icon: <Sparkles className="w-5 h-5 text-emerald-400" />
+              title: 'Multi-Tenant SaaS & IoT Architecture',
+              desc: 'Experience implementing Laravel Tenancy client database schema isolation, subdomain routing, and physical IoT MQTT sensor networks.',
+              icon: <Layers className="w-5 h-5 text-emerald-400" />
             },
             {
-              title: 'Timezone-Flexible Communication',
-              desc: 'Available between 11:00 AM and 12:00 PM PHT. I coordinate remotely and respond to emails or messages within 24 hours.',
-              icon: <Clock className="w-5 h-5 text-emerald-400" />
-            },
-            {
-              title: 'Full Stack + Virtual Assistance',
-              desc: 'I can design databases, build APIs, code web dashboards, and manage operational emails/data organization simultaneously.',
+              title: 'Reliable Communication & Ownership',
+              desc: 'Honed through IT operations at Concentrix. I deliver clean code, fast turnarounds, structured data validation, and dedicated remote support.',
               icon: <HeartHandshake className="w-5 h-5 text-emerald-400" />
             }
           ].map((item) => (
-            <div key={item.title} className="bg-navy-800/30 border border-navy-700/50 p-6 rounded-lg text-left">
+            <div key={item.title} className="bg-navy-800/30 border border-navy-700/50 p-6 rounded-lg text-left hover:border-emerald-500/30 transition-all duration-300">
               <div className="p-2 bg-navy-900 border border-navy-800/50 rounded-md w-fit mb-4">
                 {item.icon}
               </div>
