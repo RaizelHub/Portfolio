@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Shield, CheckCircle2, AlertTriangle, Workflow, Cpu, Database,
-  Lock, RefreshCw, Zap, ArrowRight, Layers, Check, Mail,
+  Lock, RefreshCw, Zap, Layers, Check, Mail,
   Sparkles, FileCode2, Eye, Layout, Clock, ExternalLink
 } from 'lucide-react';
 import { Badge } from './Badge';
@@ -54,8 +54,7 @@ export const JobRadarCaseStudy: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="emerald">Full-Stack Development / AI Automation / n8n</Badge>
-            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center">
               Active Development
             </span>
             <span className="px-2.5 py-0.5 text-xs font-mono text-slate-400 bg-navy-900 border border-navy-800 rounded-full">
@@ -94,7 +93,7 @@ export const JobRadarCaseStudy: React.FC = () => {
         {/* Action Buttons */}
         <div className="pt-2 flex flex-wrap items-center gap-3">
           <a
-            href="https://job-radar-ai-frontend-80jdtu9ov-janmarkking-1934s-projects.vercel.app/demo"
+            href="https://job-radar-ai-frontend.vercel.app/demo"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-navy-950 font-bold rounded-md text-xs sm:text-sm transition-all duration-200 shadow-md shadow-emerald-500/10"
@@ -240,37 +239,43 @@ export const JobRadarCaseStudy: React.FC = () => {
           </p>
         </div>
 
-        {/* 1. Core Ingestion Flow */}
-        <div className="space-y-3">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block">
-            1. Core Ingestion &amp; Automation Flow
+        {/* 1. Core Ingestion & Architecture Flow Chart */}
+        <div className="space-y-4">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400 block">
+            1. System Topology &amp; End-to-End Pipeline
           </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-2 text-center text-xs font-mono">
-            <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg flex flex-col justify-center items-center gap-1.5">
-              <Mail className="w-4 h-4 text-emerald-400" />
-              <span className="text-slate-200 font-semibold">Job APIs &amp; Official Emails</span>
-              <span className="text-[10px] text-slate-500">Remotive, LinkedIn, OnlineJobs</span>
-            </div>
-            <div className="hidden md:flex items-center justify-center text-slate-600">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-            <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg flex flex-col justify-center items-center gap-1.5">
-              <Workflow className="w-4 h-4 text-blue-400" />
-              <span className="text-slate-200 font-semibold">n8n Ingestion</span>
-              <span className="text-[10px] text-slate-500">Fetch, Normalize, Deduplicate</span>
-            </div>
-            <div className="hidden md:flex items-center justify-center text-slate-600">
-              <ArrowRight className="w-4 h-4" />
-            </div>
-            <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg flex flex-col justify-center items-center gap-1.5">
-              <Database className="w-4 h-4 text-emerald-400" />
-              <span className="text-slate-200 font-semibold">Supabase PostgreSQL</span>
-              <span className="text-[10px] text-slate-500">Jobs, Matches, RLS</span>
-            </div>
-            <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg flex flex-col justify-center items-center gap-1.5">
-              <Cpu className="w-4 h-4 text-purple-400" />
-              <span className="text-slate-200 font-semibold">Gemini AI &amp; Alerts</span>
-              <span className="text-[10px] text-slate-500">Scoring &amp; Email Dispatch</span>
+
+          <div className="bg-navy-950 p-5 rounded-xl border border-navy-800 space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-center text-xs font-mono">
+              <div className="bg-navy-900 border border-emerald-500/30 p-3.5 rounded-lg flex flex-col justify-between items-center gap-2 shadow-lg">
+                <Mail className="w-5 h-5 text-emerald-400" />
+                <span className="text-white font-bold block">1. Ingestion Feeds</span>
+                <span className="text-[10px] text-slate-400 leading-tight">Remotive API &amp; Gmail Alerts</span>
+              </div>
+
+              <div className="bg-navy-900 border border-blue-500/30 p-3.5 rounded-lg flex flex-col justify-between items-center gap-2 shadow-lg">
+                <Workflow className="w-5 h-5 text-blue-400" />
+                <span className="text-white font-bold block">2. n8n Orchestrator</span>
+                <span className="text-[10px] text-slate-400 leading-tight">Normalize &amp; Hash Hashing</span>
+              </div>
+
+              <div className="bg-navy-900 border border-purple-500/30 p-3.5 rounded-lg flex flex-col justify-between items-center gap-2 shadow-lg">
+                <Cpu className="w-5 h-5 text-purple-400" />
+                <span className="text-white font-bold block">3. Gemini 1.5 LLM</span>
+                <span className="text-[10px] text-slate-400 leading-tight">Structured Zod JSON Scoring</span>
+              </div>
+
+              <div className="bg-navy-900 border border-amber-500/30 p-3.5 rounded-lg flex flex-col justify-between items-center gap-2 shadow-lg">
+                <Database className="w-5 h-5 text-amber-400" />
+                <span className="text-white font-bold block">4. Supabase DB</span>
+                <span className="text-[10px] text-slate-400 leading-tight">PostgreSQL &amp; RLS Policies</span>
+              </div>
+
+              <div className="bg-navy-900 border border-emerald-500/30 p-3.5 rounded-lg flex flex-col justify-between items-center gap-2 shadow-lg">
+                <Layers className="w-5 h-5 text-emerald-400" />
+                <span className="text-white font-bold block">5. React CRM</span>
+                <span className="text-[10px] text-slate-400 leading-tight">TanStack Query Dashboard</span>
+              </div>
             </div>
           </div>
         </div>
@@ -278,24 +283,24 @@ export const JobRadarCaseStudy: React.FC = () => {
         {/* 2. Secure Trigger Path */}
         <div className="space-y-3 pt-4 border-t border-navy-850">
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 block">
-            2. Secure Manual-Trigger Control Flow
+            2. Secure Webhook &amp; Authentication Control Flow
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs font-mono">
             <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg text-center space-y-1">
-              <span className="text-emerald-400 font-bold block">React Frontend</span>
-              <span className="text-[10px] text-slate-400">Authenticated user clicks run</span>
+              <span className="text-emerald-400 font-bold block">React Dashboard</span>
+              <span className="text-[10px] text-slate-400">Authenticated trigger invocation</span>
             </div>
             <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg text-center space-y-1">
-              <span className="text-blue-400 font-bold block">Express API Proxy</span>
+              <span className="text-blue-400 font-bold block">Express Proxy</span>
               <span className="text-[10px] text-slate-400">Verifies Supabase JWT Token</span>
             </div>
             <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg text-center space-y-1">
-              <span className="text-purple-400 font-bold block">Protected n8n Webhook</span>
-              <span className="text-[10px] text-slate-400">Server secret header authentication</span>
+              <span className="text-purple-400 font-bold block">n8n Protected Webhook</span>
+              <span className="text-[10px] text-slate-400">Secret header authentication</span>
             </div>
             <div className="bg-navy-900 border border-navy-800 p-3 rounded-lg text-center space-y-1">
-              <span className="text-emerald-400 font-bold block">Supabase Sync</span>
-              <span className="text-[10px] text-slate-400">Updates job matching records</span>
+              <span className="text-emerald-400 font-bold block">Supabase Realtime Sync</span>
+              <span className="text-[10px] text-slate-400">Updates application stage pipeline</span>
             </div>
           </div>
         </div>

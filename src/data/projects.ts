@@ -47,7 +47,7 @@ export const projects: Project[] = [
       'img/JobRadar AI — Remote Job Collector — Production.png',
       'img/JobRadar — Email Job Collector.png'
     ],
-    liveUrl: 'https://job-radar-ai-frontend-80jdtu9ov-janmarkking-1934s-projects.vercel.app/demo',
+    liveUrl: 'https://job-radar-ai-frontend.vercel.app/demo',
     accessNote: 'Flagship Project: Personal single-user automation platform in active development. Live demo environment active.',
     featured: true
   },
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     title: 'LeadFlow AI',
     category: 'AI',
     description: 'An AI-powered lead intelligence and automation platform that automatically receives customer messages, analyzes them with Gemini AI, and stores structured results in Supabase PostgreSQL.',
-    longDescription: 'LeadFlow AI is an automated lead intelligence platform designed to help businesses transform unstructured customer messages into actionable sales and support data. Instead of manually reading and categorizing every incoming customer inquiry, the system automatically analyzes each message using Gemini AI and generates structured insights (intent, score, priority, summary) for business teams. The platform combines a React dashboard, n8n workflow automation, Gemini AI, and Supabase PostgreSQL into a complete end-to-end automation pipeline. This project serves as my first practice AI automation.',
+    longDescription: 'LeadFlow AI is an automated lead intelligence platform designed to help businesses transform unstructured customer messages into actionable sales and support data. Instead of manually reading and categorizing every incoming customer inquiry, the system automatically analyzes each message using Gemini AI and generates structured insights — intent classification, lead score, priority level, and an executive summary — for business teams. The platform combines a React dashboard, n8n workflow automation, Gemini AI, and Supabase PostgreSQL into a complete end-to-end automation pipeline, with a webhook-based architecture that makes it compatible with website forms, mobile apps, CRMs, and external APIs.',
     problem: 'Businesses receive large volumes of customer messages through forms, websites, and communication channels. Manually reviewing each message creates several problems: slow lead processing, inconsistent lead classification, missed high-value opportunities, lack of standardized lead scoring, manual data entry, and poor visibility into customer intent.',
     solution: 'Engineered an AI-powered automation pipeline that processes customer messages automatically. When a new customer inquiry is submitted, the React application sends the message to an n8n webhook, which routes it through an automation workflow. Gemini AI analyzes the message to classify intent, generate a lead score, set priority levels, and write a summary. The structured results are stored in Supabase PostgreSQL and displayed on the React AI dashboard.',
     technologies: ['React', 'Vite', 'n8n', 'Gemini AI', 'Supabase', 'PostgreSQL', 'REST APIs', 'Webhooks'],
@@ -124,7 +124,7 @@ export const projects: Project[] = [
     process: 'Developed using an integration-first architecture: designed the PostgreSQL schema in Supabase, built the n8n webhook receiver workflow, integrated Gemini AI prompts with structured JSON instructions, established validation steps, and connected the React frontend to the webhooks and Supabase client.',
     image: 'img/AiAuto.png',
     images: ['img/AiAuto.png', 'img/Workflow.png'],
-    accessNote: 'Note: This is my first practice AI automation project, designed to explore end-to-end automation workflows, prompt engineering, and real-time database state sync.',
+    accessNote: 'Architecture note: This project demonstrates a webhook-driven AI pipeline using Gemini for structured output generation with strict JSON schema validation before any database write — preventing malformed AI responses from corrupting records.',
     featured: true,
     githubUrl: 'https://github.com/RaizelHub',
     liveUrl: 'https://ai-automation-lead-hazel.vercel.app/'

@@ -18,12 +18,12 @@ export const Footer: React.FC = () => {
     <footer className="bg-navy-950 border-t border-navy-800/60 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4">
-          
+
           {/* Brand info */}
           <div className="text-center md:text-left">
             <span className="text-base font-bold text-white block">Janmark M. Suelto</span>
             <span className="text-xs text-slate-400 mt-1 block">
-              Full Stack Web Developer &amp; Virtual Assistant · Bukidnon, PH
+              Full Stack Web Developer &amp; AI Automation Specialist · Bukidnon, PH
             </span>
           </div>
 
@@ -73,7 +73,7 @@ export const Footer: React.FC = () => {
             <a
               href="#"
               onClick={handleBackToTop}
-              className="p-2 bg-navy-900 hover:bg-navy-850 border border-navy-800 text-slate-400 hover:text-white rounded-md transition-colors"
+              className="p-2 bg-navy-900 hover:bg-navy-800 border border-navy-800 text-slate-400 hover:text-white rounded-md transition-colors"
               title="Back to Top"
             >
               <ArrowUp className="w-3.5 h-3.5" />

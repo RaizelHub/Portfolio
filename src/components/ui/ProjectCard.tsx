@@ -25,26 +25,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     <div className="group relative bg-navy-800/40 border border-navy-700/50 hover:border-emerald-500/30 rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-300">
       <div>
         {/* Project Thumbnail — live iframe or static image */}
+        {/* Project Thumbnail — static preview image or stylized card background */}
         <div className="relative aspect-video overflow-hidden bg-navy-950 border-b border-navy-700/30">
-          {project.liveUrl ? (
-            <>
-              <iframe
-                src={project.liveUrl}
-                title={`${project.title} live preview`}
-                className="absolute top-0 left-0 pointer-events-none select-none"
-                style={{
-                  width: '400%',
-                  height: '400%',
-                  transform: 'scale(0.25)',
-                  transformOrigin: 'top left',
-                  border: 'none',
-                }}
-                loading="lazy"
-                sandbox="allow-scripts allow-same-origin"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </>
-          ) : project.image ? (
+          {project.image ? (
             <img
               src={`/${project.image}`}
               alt={`${project.title} Preview`}
@@ -52,8 +35,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-navy-950 to-navy-900 select-none">
-              <span className="text-xs font-mono text-slate-500">{project.category} System</span>
+            <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-navy-950 via-navy-900 to-emerald-950/20 select-none">
+              <span className="text-2xl mb-1">{project.emoji || '💻'}</span>
+              <span className="text-xs font-mono text-slate-400 font-semibold">{project.category} System</span>
             </div>
           )}
 

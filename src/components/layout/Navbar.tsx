@@ -58,7 +58,7 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll(); // Trigger initial call
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location]);
+  }, [location, navLinks]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, link: NavLink) => {
     e.preventDefault();
