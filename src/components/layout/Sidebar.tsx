@@ -28,10 +28,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
   const navigate = useNavigate();
 
   const navLinks: NavLink[] = [
-    { label: 'Home', href: '/', sectionId: 'home' },
     { label: 'About', href: '/#about', sectionId: 'about' },
-    { label: 'Skills', href: '/#skills', sectionId: 'skills' },
-    { label: 'Services', href: '/#services', sectionId: 'services' },
     { label: 'Projects', href: '/#projects', sectionId: 'projects' },
     { label: 'Experience', href: '/#experience', sectionId: 'experience' },
     { label: 'Certifications', href: '/#certifications', sectionId: 'certifications' },
