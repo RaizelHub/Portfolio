@@ -1,29 +1,17 @@
-import { Server, Layout, Database, Network, Cpu, Wrench } from 'lucide-react';
-import type { Skill } from '../../types';
+import { Server } from 'lucide-react';
+import type { SkillGroup, SkillItem } from '../../types';
 
 interface SkillCardProps {
-  skill: Skill;
+  skill: SkillGroup;
 }
 
 export const SkillCard = ({ skill }: SkillCardProps) => {
-  const getIcon = (iconName: string) => {
-    switch (iconName.toLowerCase()) {
-      case 'server': return <Server className="w-6 h-6 text-emerald-400" />;
-      case 'layout': return <Layout className="w-6 h-6 text-emerald-400" />;
-      case 'database': return <Database className="w-6 h-6 text-emerald-400" />;
-      case 'network': return <Network className="w-6 h-6 text-emerald-400" />;
-      case 'cpu': return <Cpu className="w-6 h-6 text-emerald-400" />;
-      case 'wrench': return <Wrench className="w-6 h-6 text-emerald-400" />;
-      default: return <Wrench className="w-6 h-6 text-emerald-400" />;
-    }
-  };
-
   return (
-    <div className="bg-navy-800/30 border border-navy-700/40 hover:border-emerald-500/20 p-6 rounded-lg transition-all duration-300 flex flex-col justify-between hover:translate-y-[-2px]">
+    <div className="bg-navy-800/30 border border-navy-700/40 hover:border-emerald-500/20 p-6 rounded-lg transition-all duration-300 flex flex-col justify-between">
       <div>
         <div className="flex items-center gap-3 mb-4">
           <div className="p-2.5 bg-navy-900 rounded-md border border-navy-700/50">
-            {getIcon(skill.icon)}
+            <Server className="w-6 h-6 text-emerald-400" />
           </div>
           <h3 className="font-bold text-white text-base sm:text-lg">{skill.category}</h3>
         </div>
@@ -34,17 +22,17 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {skill.items.map((item) => {
-          const isAccent = skill.accentItems?.includes(item);
+        {skill.items.map((item: string | SkillItem) => {
+          const itemName = typeof item === 'string' ? item : item.name;
+          const projectConn = typeof item === 'object' ? item.projectConnection : undefined;
+
           return (
             <span
-              key={item}
-              className={`text-xs font-mono px-2.5 py-1 rounded transition-colors duration-200 select-none ${isAccent
-                  ? 'bg-emerald-950/50 text-emerald-300 border border-emerald-800/40 font-semibold'
-                  : 'bg-navy-900 text-slate-400 border border-transparent'
-                }`}
+              key={itemName}
+              className="text-xs font-mono px-2.5 py-1 rounded bg-navy-900 text-slate-300 border border-navy-800 flex items-center gap-1.5"
             >
-              {item}
+              <span>{itemName}</span>
+              {projectConn && <span className="text-emerald-400 text-[10px]">&rarr; {projectConn}</span>}
             </span>
           );
         })}

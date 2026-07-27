@@ -1,17 +1,18 @@
 import type { Profile } from '../types/profile';
 
 export const profile: Profile = {
-  name: 'Janmark M. Suelto',
-  title: 'Full-Stack Developer & AI Automation Specialist',
+  name: 'Janmark Suelto',
+  title: 'Full-Stack Developer focused on Web Applications and Workflow Automation',
   location: 'Bukidnon, Philippines',
-  timezone: '11:00 AM – 12:00 AM PHT',
-  bio: 'Full-stack developer building practical web applications using React, TypeScript, Node.js, Supabase, Firebase, and REST APIs. Experienced in n8n automation, IoT systems, and workflow integration.',
+  timezone: 'Open to Remote Opportunities',
+  bio: 'I build React and TypeScript applications connected to APIs, databases, n8n workflows, and AI services. My projects include lead-management systems, job-discovery tools, order-processing automations, administrative applications, and IoT monitoring systems.',
   email: 'janmarkking@gmail.com',
   phone: '+63 969 022 1571',
   githubUrl: 'https://github.com/RaizelHub',
   linkedinUrl: 'https://www.linkedin.com/in/janmark-suelto-4ba21a400/',
   facebookUrl: 'https://www.facebook.com/Raizelxdarriii90/',
   whatsappUrl: 'https://wa.me/qr/YHP7U5VEMH5IP1',
-  resumeUrl: '/Janmark_Suelto_Resume.pdf',
+  resumeUrl: '/Janmark-Suelto-Resume.pdf',
   profileImage: '/img/Profile.jpg',
+  gooberImage: '/img/goober.jpg',
 };

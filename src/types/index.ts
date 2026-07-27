@@ -1,5 +1,5 @@
-export type { Project } from './project';
-export type { Skill } from './skill';
+export type { Project, ProjectStatus } from './project';
+export type { Skill, SkillGroup, SkillItem } from './skill';
 export type { Service } from './service';
 export type { Experience } from './experience';
 export type { Education } from './education';

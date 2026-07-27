@@ -57,8 +57,8 @@ export const JobRadarCaseStudy: React.FC = () => {
             <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center">
               Active Development
             </span>
-            <span className="px-2.5 py-0.5 text-xs font-mono text-slate-400 bg-navy-900 border border-navy-800 rounded-full">
-              Personal Single-User Platform
+            <span className="px-2.5 py-0.5 text-xs font-mono text-amber-300 bg-amber-950/40 border border-amber-900/40 rounded-full">
+              Personal single-user application
             </span>
           </div>
         </div>

@@ -199,7 +199,6 @@ export const Sidebar: React.FC = () => {
                     }`}
                 >
                   <span>{link.label}</span>
-                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
                 </a>
               );
             })}
