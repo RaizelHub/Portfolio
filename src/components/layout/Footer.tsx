@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-navy-900 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 rounded-md transition-all duration-200"
-              title="GitHub"
+              aria-label="GitHub Profile"
             >
               <Github className="w-4 h-4" />
             </a>
@@ -43,7 +43,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-navy-900 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 rounded-md transition-all duration-200"
-              title="LinkedIn"
+              aria-label="LinkedIn Profile"
             >
               <Linkedin className="w-4 h-4" />
             </a>
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-navy-900 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 rounded-md transition-all duration-200"
-              title="Facebook"
+              aria-label="Facebook Profile"
             >
               <Facebook className="w-4 h-4" />
             </a>
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 bg-navy-900 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 rounded-md transition-all duration-200"
-              title="WhatsApp"
+              aria-label="WhatsApp Chat"
             >
               <MessageSquare className="w-4 h-4" />
             </a>
@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
 
           {/* Back to top & copyright */}
           <div className="flex items-center gap-6 text-xs text-slate-500 select-none">
-            <span>&copy; {new Date().getFullYear()} · Frontend Stack</span>
+            <span>&copy; {new Date().getFullYear()} · Built with React</span>
             <a
               href="#"
               onClick={handleBackToTop}

@@ -1,6 +1,10 @@
-import { Github, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Github, ArrowRight, Loader2 } from 'lucide-react';
 
 export const GitHubChart = () => {
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
+
   return (
     <div className="bg-navy-950 border border-navy-800 rounded-lg overflow-hidden shadow-2xl relative transition-all duration-500 hover:border-emerald-500/30 hover:shadow-emerald-500/5">
       <div className="px-4 py-3 bg-navy-900 border-b border-navy-800 flex items-center justify-between">
@@ -26,10 +30,22 @@ export const GitHubChart = () => {
 
         <div className="w-full overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-navy-800 scrollbar-track-transparent">
           <div className="min-w-[720px] max-w-4xl mx-auto py-2">
+            {!imgLoaded && !imgError && (
+              <div className="flex items-center justify-center h-32 text-slate-500">
+                <Loader2 className="w-5 h-5 animate-spin" />
+              </div>
+            )}
+            {imgError && (
+              <div className="flex items-center justify-center h-32 text-slate-500 text-xs">
+                GitHub contribution chart unavailable.
+              </div>
+            )}
             <img
               src="https://ghchart.rshah.org/10b981/RaizelHub"
               alt="RaizelHub GitHub Contributions"
-              className="w-full h-auto select-none contrast-[1.1] brightness-[1.05]"
+              className={`w-full h-auto select-none contrast-[1.1] brightness-[1.05] ${imgLoaded ? 'block' : 'hidden'}`}
+              onLoad={() => setImgLoaded(true)}
+              onError={() => setImgError(true)}
             />
           </div>
         </div>

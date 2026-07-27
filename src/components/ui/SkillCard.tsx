@@ -27,7 +27,7 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
           </div>
           <h3 className="font-bold text-white text-base sm:text-lg">{skill.category}</h3>
         </div>
-        
+
         <p className="text-xs sm:text-sm text-slate-400 mb-5 leading-relaxed">
           {skill.description}
         </p>
@@ -39,11 +39,10 @@ export const SkillCard = ({ skill }: SkillCardProps) => {
           return (
             <span
               key={item}
-              className={`text-xs font-mono px-2.5 py-1 rounded transition-colors duration-200 select-none ${
-                isAccent
+              className={`text-xs font-mono px-2.5 py-1 rounded transition-colors duration-200 select-none ${isAccent
                   ? 'bg-emerald-950/50 text-emerald-300 border border-emerald-800/40 font-semibold'
                   : 'bg-navy-900 text-slate-400 border border-transparent'
-              }`}
+                }`}
             >
               {item}
             </span>

@@ -10,19 +10,19 @@ export const About = () => {
       <SectionHeading
         tag="01 / About Me"
         title="Building practical web applications and reliable automation systems."
-        subtitle="BSIT Graduate · CCNA · Focused on clean web development &amp; workflow automation."
+        subtitle="Full-stack developer building practical apps and automation pipelines."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
         <div className="lg:col-span-7 space-y-6 text-slate-400 text-sm sm:text-base leading-relaxed">
           <p>
-            I'm <strong className="text-white">Janmark Suelto</strong>, a Full-Stack Developer and Automation Specialist from Bukidnon, Philippines. I specialize in building web applications, n8n automation pipelines, and REST APIs that solve real problems.
+            I'm <strong className="text-white">Janmark Suelto</strong>, a full-stack developer based in Bukidnon, Philippines. I build practical web applications using React, TypeScript, Node.js, Supabase, Firebase, and REST APIs.
           </p>
           <p>
-            With my <strong className="text-white">CCNA</strong> background, I design secure database structures, clean API access controls, and reliable server routes from day one. I view network security and clean infrastructure as core components of good software.
+            I also have experience creating n8n automation workflows, integrating webhooks and APIs, processing data with AI tools, and developing IoT-based systems. My projects include job discovery platforms, lead-management systems, order-processing workflows, student-management applications, and water-quality monitoring solutions.
           </p>
           <p>
-            I also have hands-on experience in IT operations, technical support, asset inventory, workstation monitoring, enterprise system maintenance, and remote collaboration, honed during my On-the-Job Training with Concentrix.
+            I am currently improving my skills in backend development, workflow automation, testing, deployment, and system design. I am open to remote junior developer, automation developer, and technical support opportunities where I can contribute, learn, and grow professionally.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 text-xs sm:text-sm">
@@ -56,20 +56,20 @@ export const About = () => {
             <div className="space-y-4 text-xs sm:text-sm">
               {[
                 {
-                  title: 'Full-Stack & Workflow Automation',
-                  desc: 'Building custom n8n workflows, React dashboards, Express microservices, and PostgreSQL/Supabase databases that streamline operations.',
+                  title: 'React + Supabase + n8n Pipeline',
+                  desc: 'Built a job discovery platform that collects remote opportunities from multiple sources, evaluates fit with Gemini AI, and sends high-match alerts.',
                 },
                 {
-                  title: 'Network Security & Infrastructure',
-                  desc: 'Planning for clean routing, VLAN segmentation, JWT authentication, and zero frontend API secret exposure from day one.',
+                  title: 'Six Connected n8n Workflows',
+                  desc: 'Designed an e-commerce automation hub handling order processing, AI support triage, inventory sync, content generation, and daily reporting.',
                 },
                 {
-                  title: 'Multi-Tenant SaaS & Systems Architecture',
-                  desc: 'Experience implementing Laravel Tenancy client isolation, relational PostgreSQL/MySQL schemas, and physical IoT MQTT networks.',
+                  title: 'Laravel Multi-Tenant SaaS',
+                  desc: 'Developed a tenant-isolated review platform with dynamic subdomain routing, cutting hosting costs and reducing branch setup to one click.',
                 },
                 {
-                  title: 'Reliable Communication & IT Support',
-                  desc: 'Honed during enterprise IT operations at Concentrix, ensuring clear documentation, fast responses, and structured work ownership.',
+                  title: 'ESP32 + MQTT IoT System',
+                  desc: 'Built a water quality monitoring capstone with real-time sensor data, Firebase sync, and SMS alerts — detecting leaks within 3m accuracy.',
                 },
               ].map((item) => (
                 <div key={item.title} className="space-y-1">

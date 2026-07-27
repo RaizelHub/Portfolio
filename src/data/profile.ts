@@ -5,7 +5,7 @@ export const profile: Profile = {
   title: 'Full-Stack Developer & AI Automation Specialist',
   location: 'Bukidnon, Philippines',
   timezone: '11:00 AM – 12:00 AM PHT',
-  bio: 'I build full-stack web applications, n8n AI workflows, and scalable APIs. Focused on clean architecture, database security, and practical business automation.',
+  bio: 'Full-stack developer building practical web applications using React, TypeScript, Node.js, Supabase, Firebase, and REST APIs. Experienced in n8n automation, IoT systems, and workflow integration.',
   email: 'janmarkking@gmail.com',
   phone: '+63 969 022 1571',
   githubUrl: 'https://github.com/RaizelHub',
@@ -14,5 +14,4 @@ export const profile: Profile = {
   whatsappUrl: 'https://wa.me/qr/YHP7U5VEMH5IP1',
   resumeUrl: '/Janmark_Suelto_Resume.pdf',
   profileImage: '/img/Profile.jpg',
-  gooberImage: '/img/goober.jpg',
 };

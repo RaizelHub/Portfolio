@@ -54,7 +54,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors duration-200 truncate">
             {project.title}
           </h3>
-          
+
           <p className="mt-2.5 text-xs sm:text-sm text-slate-400 line-clamp-3 leading-relaxed">
             {project.description}
           </p>

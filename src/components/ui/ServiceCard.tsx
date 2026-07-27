@@ -46,7 +46,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         <h3 className="text-base sm:text-lg font-bold text-white mb-2.5 group-hover:text-emerald-400 transition-colors duration-200">
           {service.title}
         </h3>
-        
+
         <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
           {service.description}
         </p>
@@ -57,9 +57,8 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
         {service.tools.map((tool) => (
           <span
             key={tool}
-            className={`text-[10px] font-mono px-2 py-0.5 rounded-md border ${
-              toolColorMap[service.toolColor] || toolColorMap.emerald
-            }`}
+            className={`text-[10px] font-mono px-2 py-0.5 rounded-md border ${toolColorMap[service.toolColor] || toolColorMap.emerald
+              }`}
           >
             {tool}
           </span>

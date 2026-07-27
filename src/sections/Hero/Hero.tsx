@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, MapPin, Clock, Sparkles, Workflow, ShieldCheck, Zap } from 'lucide-react';
+import { ArrowRight, MapPin, Clock, Code2, Workflow, ShieldCheck } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 
 export const Hero = () => {
-  const [isProfileHovered, setIsProfileHovered] = useState(false);
-
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -39,21 +36,21 @@ export const Hero = () => {
           <div className="grid grid-cols-3 gap-3 pt-1 border-y border-navy-800/80 py-4 max-w-xl">
             <div className="flex flex-col">
               <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
-                <Workflow className="w-3.5 h-3.5" /> 15+ Workflows
+                <Code2 className="w-3.5 h-3.5" /> 7 Projects
               </span>
-              <span className="text-[11px] text-slate-400 mt-0.5">n8n Automation Pipelines</span>
+              <span className="text-[11px] text-slate-400 mt-0.5">Full-Stack Applications Built</span>
+            </div>
+            <div className="flex flex-col border-l border-navy-800/80 pl-3">
+              <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+                <Workflow className="w-3.5 h-3.5" /> n8n
+              </span>
+              <span className="text-[11px] text-slate-400 mt-0.5">Automation Pipelines</span>
             </div>
             <div className="flex flex-col border-l border-navy-800/80 pl-3">
               <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5" /> CCNA
               </span>
               <span className="text-[11px] text-slate-400 mt-0.5">Network &amp; API Security</span>
-            </div>
-            <div className="flex flex-col border-l border-navy-800/80 pl-3">
-              <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5" /> End-to-End
-              </span>
-              <span className="text-[11px] text-slate-400 mt-0.5">Workflow Monitoring</span>
             </div>
           </div>
 
@@ -90,26 +87,14 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            onMouseEnter={() => setIsProfileHovered(true)}
-            onMouseLeave={() => setIsProfileHovered(false)}
-            className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden border border-navy-800 shadow-2xl cursor-pointer ring-1 ring-white/10 hover:border-emerald-500/50 hover:shadow-emerald-500/10 transition-all duration-500"
+            className="relative w-full max-w-sm aspect-square rounded-2xl overflow-hidden border border-navy-800 shadow-2xl ring-1 ring-white/10 hover:border-emerald-500/50 hover:shadow-emerald-500/10 transition-all duration-500"
           >
             <img
               src={profile.profileImage}
-              alt="Janmark M. Suelto (Profile)"
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? 'scale-105 opacity-0' : 'scale-100 opacity-100'}`}
-            />
-            <img
-              src={profile.gooberImage}
-              alt="Janmark M. Suelto (Goober)"
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${isProfileHovered ? 'scale-100 opacity-100' : 'scale-105 opacity-0'}`}
+              alt="Janmark M. Suelto"
+              className="absolute inset-0 w-full h-full object-cover"
             />
           </motion.div>
-
-          <div className="flex items-center gap-2 text-xs font-mono text-slate-500 select-none mt-4">
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Hover to see the person behind the code.</span>
-          </div>
         </div>
       </div>
     </SectionContainer>

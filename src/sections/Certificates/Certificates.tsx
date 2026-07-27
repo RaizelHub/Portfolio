@@ -32,9 +32,8 @@ export const Certificates = () => {
             <div
               key={cert.id}
               onClick={() => hasImage && setActiveCert(cert)}
-              className={`group relative bg-navy-800/20 border border-navy-700/50 rounded-xl overflow-hidden flex flex-col transition-all duration-300 ${
-                hasImage ? 'cursor-pointer hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-0.5' : 'cursor-default hover:border-navy-600/60'
-              }`}
+              className={`group relative bg-navy-800/20 border border-navy-700/50 rounded-xl overflow-hidden flex flex-col transition-all duration-300 ${hasImage ? 'cursor-pointer hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-0.5' : 'cursor-default hover:border-navy-600/60'
+                }`}
             >
               {hasImage ? (
                 <div className="relative overflow-hidden bg-navy-950 border-b border-navy-700/40" style={{ height: '160px' }}>

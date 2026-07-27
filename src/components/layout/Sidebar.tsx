@@ -6,7 +6,6 @@ import {
   Linkedin,
   Menu,
   X,
-  Search,
   Mail,
 } from 'lucide-react';
 import { profile } from '../../data/profile';
@@ -17,11 +16,7 @@ interface NavLink {
   sectionId: string;
 }
 
-interface SidebarProps {
-  onOpenSearch?: () => void;
-}
-
-export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
+export const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const location = useLocation();
@@ -124,7 +119,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
           <button
             onClick={handleDownloadResume}
             className="p-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md text-xs font-mono font-semibold"
-            title="Download Resume"
+            aria-label="Download Resume"
           >
             <Download className="w-4 h-4" />
           </button>
@@ -181,32 +176,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
             <button
               onClick={() => setIsOpen(false)}
               className="lg:hidden text-slate-400 hover:text-white p-1"
+              aria-label="Close navigation"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Quick Search Button */}
-          {onOpenSearch && (
-            <button
-              onClick={onOpenSearch}
-              className="w-full mb-3 px-3 py-2 bg-navy-900 hover:bg-navy-800 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-slate-200 rounded-lg text-xs font-mono flex items-center justify-between transition-all duration-200 group"
-            >
-              <span className="flex items-center gap-2">
-                <Search className="w-3.5 h-3.5 text-emerald-400" /> Search...
-              </span>
-              <kbd className="px-1.5 py-0.5 text-[10px] bg-navy-950 border border-navy-800 rounded text-slate-400 group-hover:text-emerald-400">
-                ⌘K
-              </kbd>
-            </button>
-          )}
 
-          {/* Availability Status Badge */}
-          <div className="mb-5 p-3 rounded-lg bg-emerald-950/30 border border-emerald-900/40 flex items-center justify-center">
-            <span className="text-xs font-mono font-semibold text-emerald-300 leading-tight">
-              Available for Full-Time &amp; Projects
-            </span>
-          </div>
 
           {/* Navigation Links (Clean Text Only) */}
           <nav className="space-y-1">
@@ -247,7 +223,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-                title="GitHub Profile"
+                aria-label="GitHub Profile"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -258,7 +234,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-                title="LinkedIn Profile"
+                aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -266,7 +242,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenSearch }) => {
             <a
               href={`mailto:${profile.email}`}
               className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-              title="Email Me"
+              aria-label="Email Me"
             >
               <Mail className="w-4 h-4" />
             </a>

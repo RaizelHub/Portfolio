@@ -54,8 +54,8 @@ export const Projects = () => {
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-md font-mono transition-all duration-200 select-none ${activeCategory === cat
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold'
-                    : 'text-slate-400 hover:text-white border border-transparent'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold'
+                  : 'text-slate-400 hover:text-white border border-transparent'
                   }`}
               >
                 {cat}

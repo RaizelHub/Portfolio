@@ -74,3 +74,40 @@
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-emerald-500;
 }
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  nav, footer, aside, .fixed, [class*="backdrop"] {
+    display: none !important;
+  }
+
+  [class*="pl-64"] {
+    padding-left: 0 !important;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+    color: black !important;
+  }
+
+  p, li {
+    color: #333 !important;
+  }
+}

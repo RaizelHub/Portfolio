@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Copy } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { SectionHeading } from '../../components/ui/SectionHeading';
@@ -15,6 +15,13 @@ export const Contact = () => {
   });
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(profile.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,33 +49,24 @@ export const Contact = () => {
     setFormStatus('loading');
 
     try {
-      const WEB3FORMS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+      const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
 
-      if (WEB3FORMS_KEY === 'YOUR_WEB3FORMS_ACCESS_KEY') {
-        const subject = encodeURIComponent(`Inquiry from ${formData.name}: ${formData.service}`);
-        const body = encodeURIComponent(
-          `Name: ${formData.name}\nEmail: ${formData.email}\nService Requested: ${formData.service}\n\nMessage:\n${formData.message}`
-        );
-        window.open(`mailto:${profile.email}?subject=${subject}&body=${body}`, '_blank');
-        setFormStatus('success');
-      } else {
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_KEY,
-            name: formData.name,
-            email: formData.email,
-            subject: `Portfolio Inquiry: ${formData.service} — from ${formData.name}`,
-            message: formData.message,
-            service: formData.service,
-            from_name: 'Portfolio Contact Form',
-          }),
-        });
-        const result = await response.json();
-        if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed');
-        setFormStatus('success');
-      }
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: `Portfolio Inquiry: ${formData.service} — from ${formData.name}`,
+          message: formData.message,
+          service: formData.service,
+          from_name: 'Portfolio Contact Form',
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed');
+      setFormStatus('success');
 
       setFormData({ name: '', email: '', service: 'Web Development', message: '' });
       setTimeout(() => setFormStatus('idle'), 5000);
@@ -93,18 +91,27 @@ export const Contact = () => {
               <Mail className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div>
                 <span className="text-xs text-slate-500 font-mono block">Email</span>
-                <a href={`mailto:${profile.email}`} className="text-sm font-bold text-white hover:text-emerald-400 transition-colors">
-                  {profile.email}
-                </a>
+                <div className="flex items-center gap-2">
+                  <a href={`mailto:${profile.email}`} className="text-sm font-bold text-white hover:text-emerald-400 transition-colors">
+                    {profile.email}
+                  </a>
+                  <button
+                    onClick={handleCopyEmail}
+                    className="p-1 rounded text-slate-500 hover:text-emerald-400 hover:bg-navy-800 transition-colors"
+                    aria-label="Copy email address"
+                  >
+                    {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  </button>
+                </div>
               </div>
             </div>
 
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
               <div>
-                <span className="text-xs text-slate-500 font-mono block">Phone / WhatsApp</span>
-                <a href={`tel:${profile.phone}`} className="text-sm font-bold text-white hover:text-emerald-400 transition-colors">
-                  {profile.phone}
+                <span className="text-xs text-slate-500 font-mono block">WhatsApp</span>
+                <a href={profile.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-emerald-400 transition-colors">
+                  Chat on WhatsApp
                 </a>
               </div>
             </div>
@@ -201,8 +208,6 @@ export const Contact = () => {
                 <option>Database Development</option>
                 <option>API Development</option>
                 <option>Multi-Tenant SaaS Solutions</option>
-                <option>Data Entry &amp; Organization</option>
-                <option>Virtual Assistance &amp; Email Support</option>
               </select>
             </div>
 

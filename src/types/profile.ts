@@ -12,5 +12,4 @@ export interface Profile {
   whatsappUrl: string;
   resumeUrl: string;
   profileImage: string;
-  gooberImage: string;
 }
