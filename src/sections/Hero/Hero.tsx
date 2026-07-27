@@ -45,7 +45,7 @@ export const Hero = () => {
             </div>
             <div className="flex flex-col border-l border-navy-800/80 pl-3">
               <span className="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" /> CCNA Certified
+                <ShieldCheck className="w-3.5 h-3.5" /> CCNA
               </span>
               <span className="text-[11px] text-slate-400 mt-0.5">Network &amp; API Security</span>
             </div>

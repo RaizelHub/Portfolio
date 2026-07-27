@@ -10,7 +10,7 @@ export const About = () => {
       <SectionHeading
         tag="01 / About Me"
         title="Building practical web applications and reliable automation systems."
-        subtitle="BSIT Graduate · CCNA Certified · Focused on clean web development &amp; workflow automation."
+        subtitle="BSIT Graduate · CCNA · Focused on clean web development &amp; workflow automation."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 items-start">
@@ -19,7 +19,7 @@ export const About = () => {
             I'm <strong className="text-white">Janmark Suelto</strong>, a Full-Stack Developer and Automation Specialist from Bukidnon, Philippines. I specialize in building web applications, n8n automation pipelines, and REST APIs that solve real problems.
           </p>
           <p>
-            With my <strong className="text-white">CCNA Certification</strong>, I design secure database structures, clean API access controls, and reliable server routes from day one. I view network security and clean infrastructure as core components of good software.
+            With my <strong className="text-white">CCNA</strong> background, I design secure database structures, clean API access controls, and reliable server routes from day one. I view network security and clean infrastructure as core components of good software.
           </p>
           <p>
             I also have hands-on experience in IT operations, technical support, asset inventory, workstation monitoring, enterprise system maintenance, and remote collaboration, honed during my On-the-Job Training with Concentrix.
