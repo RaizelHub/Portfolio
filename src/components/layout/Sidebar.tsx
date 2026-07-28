@@ -111,7 +111,7 @@ export const Sidebar: React.FC = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-bold text-white text-sm leading-tight">Janmark Suelto</span>
-            <span className="text-[10px] font-mono text-emerald-400">Full-Stack &amp; AI Engineer</span>
+            <span className="text-[10px] font-mono text-emerald-400">Full-Stack &amp; AI Automation Specialist</span>
           </div>
         </a>
 
