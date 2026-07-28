@@ -86,8 +86,8 @@ export const Sidebar: React.FC = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Janmark_Suelto_Resume.pdf';
-    link.download = 'Janmark_Suelto_Resume.pdf';
+    link.href = profile.resumeUrl;
+    link.download = 'Janmark-Suelto-Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

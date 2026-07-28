@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Download } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { profile } from '../../data/profile';
 
 interface NavLink {
   label: string;
@@ -95,8 +96,8 @@ export const Navbar = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Janmark_Suelto_Resume.pdf';
-    link.download = 'Janmark_Suelto_Resume.pdf';
+    link.href = profile.resumeUrl;
+    link.download = 'Janmark-Suelto-Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
