@@ -98,8 +98,6 @@ export const projects: Project[] = [
     currentLimitations: 'Operates as a physical hardware prototype built for laboratory capstone demonstration.',
     results: 'Successfully demonstrated immediate leak detection and real-time water quality tracking across simulated pipe junction test rigs.',
     process: 'Wrote ESP32 C++ firmware -> Configured MQTT broker -> Built Firebase syncing logic -> Developed React monitoring interface.',
-    image: 'img/Posphoto.png',
-    images: ['img/Posphoto.png'],
     apkUrl: 'file/SmatPipe.apk',
     featured: true
   },
