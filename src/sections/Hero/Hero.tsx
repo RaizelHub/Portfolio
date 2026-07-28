@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Mail, MapPin } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
@@ -6,8 +5,6 @@ import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 
 export const Hero = () => {
-  const [isProfileHovered, setIsProfileHovered] = useState(false);
-
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -92,25 +89,14 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            onMouseEnter={() => setIsProfileHovered(true)}
-            onMouseLeave={() => setIsProfileHovered(false)}
-            className="relative w-full max-w-xs sm:max-w-sm aspect-square rounded-2xl overflow-hidden border border-navy-800 shadow-2xl cursor-pointer hover:border-emerald-500/40 transition-all duration-300"
+            className="relative w-full max-w-xs sm:max-w-sm aspect-square rounded-2xl overflow-hidden border border-navy-800 shadow-2xl transition-all duration-300"
           >
             <img
               src={profile.profileImage}
               alt="Janmark Suelto"
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${isProfileHovered ? 'scale-105 opacity-0' : 'scale-100 opacity-100'}`}
-            />
-            <img
-              src={profile.gooberImage}
-              alt="Janmark Suelto (Alternate)"
-              className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${isProfileHovered ? 'scale-100 opacity-100' : 'scale-105 opacity-0'}`}
+              className="w-full h-full object-cover"
             />
           </motion.div>
-
-          <span className="text-[11px] font-mono text-slate-500 mt-3">
-            Hover photo for alternate view
-          </span>
         </div>
       </div>
     </SectionContainer>

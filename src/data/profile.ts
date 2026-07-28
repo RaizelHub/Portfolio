@@ -14,5 +14,4 @@ export const profile: Profile = {
   whatsappUrl: 'https://wa.me/qr/YHP7U5VEMH5IP1',
   resumeUrl: '/Janmark-Suelto-Resume.pdf',
   profileImage: '/img/Profile.jpg',
-  gooberImage: '/img/goober.jpg',
 };
