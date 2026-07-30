@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Github, ExternalLink, Smartphone,
   CheckCircle2, Key, Info, HelpCircle, Shield,
-  Workflow, CheckCircle, ListTodo
+  Workflow, CheckCircle, ListTodo, X, ChevronLeft, ChevronRight
 } from 'lucide-react';
 import { projects } from '../data/projects';
 import { Badge } from '../components/ui/Badge';
@@ -23,6 +23,7 @@ export const ProjectDetails = () => {
 
   // Gallery state
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (!project) {
     return (
@@ -42,6 +43,18 @@ export const ProjectDetails = () => {
   }
 
   const galleryImages = project.images || (project.image ? [project.image] : []);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxOpen(false);
+      if (e.key === 'ArrowLeft') setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+      if (e.key === 'ArrowRight') setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxOpen, galleryImages.length]);
 
   return (
     <main className="min-h-screen pt-28 pb-20 bg-navy-900">
@@ -88,12 +101,20 @@ export const ProjectDetails = () => {
                 {/* Gallery — high-resolution screenshot viewer */}
                 {galleryImages.length > 0 && (
                   <div className="space-y-3 bg-navy-950 border border-navy-800 p-2.5 rounded-lg">
-                    <div className="relative aspect-video rounded overflow-hidden bg-navy-900 border border-navy-850">
+                    <div
+                      className="relative aspect-video rounded overflow-hidden bg-navy-900 border border-navy-850 cursor-pointer group"
+                      onClick={() => setLightboxOpen(true)}
+                    >
                       <img
                         src={`/${galleryImages[activeImageIndex]}`}
                         alt={`${project.title} screenshot ${activeImageIndex + 1}`}
                         className="w-full h-full object-cover object-top"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                        <span className="text-white/0 group-hover:text-white/80 text-xs font-mono font-semibold transition-colors">
+                          Click to view full size
+                        </span>
+                      </div>
                     </div>
                     {/* Thumbnails grid */}
                     {galleryImages.length > 1 && (
@@ -101,7 +122,10 @@ export const ProjectDetails = () => {
                         {galleryImages.map((img, i) => (
                           <button
                             key={i}
-                            onClick={() => setActiveImageIndex(i)}
+                            onClick={() => {
+                              setActiveImageIndex(i);
+                              setLightboxOpen(true);
+                            }}
                             className={`relative w-20 aspect-video rounded overflow-hidden border transition-all shrink-0 ${activeImageIndex === i
                               ? 'border-emerald-500 ring-1 ring-emerald-500/30'
                               : 'border-navy-700/60 hover:border-slate-500'
@@ -298,6 +322,58 @@ export const ProjectDetails = () => {
           </>
         )}
       </div>
+
+      {/* Lightbox */}
+      {lightboxOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            onClick={() => setLightboxOpen(false)}
+            className="absolute top-4 right-4 p-2 text-white/60 hover:text-white z-10"
+            aria-label="Close lightbox"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {galleryImages.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+                }}
+                className="absolute left-4 p-2 text-white/60 hover:text-white z-10"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+                }}
+                className="absolute right-4 p-2 text-white/60 hover:text-white z-10"
+                aria-label="Next image"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+            </>
+          )}
+
+          <img
+            src={`/${galleryImages[activeImageIndex]}`}
+            alt={`${project.title} screenshot ${activeImageIndex + 1}`}
+            className="max-w-[90vw] max-h-[90vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          <div className="absolute bottom-4 text-xs text-white/40 font-mono">
+            {activeImageIndex + 1} / {galleryImages.length}
+          </div>
+        </div>
+      )}
     </main>
   );
 };
