@@ -7,6 +7,7 @@ import {
   Menu,
   X,
   Mail,
+  MessageSquare,
 } from 'lucide-react';
 import { profile } from '../../data/profile';
 
@@ -236,6 +237,17 @@ export const Sidebar: React.FC = () => {
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-4 h-4" />
+              </a>
+            )}
+            {profile.messengerUrl && (
+              <a
+                href={profile.messengerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
+                aria-label="Messenger Chat"
+              >
+                <MessageSquare className="w-4 h-4" />
               </a>
             )}
             <a

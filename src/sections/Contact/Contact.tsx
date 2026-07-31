@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Copy } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, Copy, MessageSquare } from 'lucide-react';
 import { Button } from '../../components/ui/Button';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { SectionHeading } from '../../components/ui/SectionHeading';
@@ -113,6 +113,16 @@ export const Contact = () => {
                     {copied ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   </button>
                 </div>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <MessageSquare className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <span className="text-xs text-slate-500 font-mono block">Messenger</span>
+                <a href={profile.messengerUrl || 'https://m.me/Raizelxdarriii90'} target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-emerald-400 transition-colors">
+                  Chat on Messenger
+                </a>
               </div>
             </div>
 

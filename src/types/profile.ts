@@ -10,6 +10,7 @@ export interface Profile {
   linkedinUrl: string;
   facebookUrl: string;
   whatsappUrl: string;
+  messengerUrl?: string;
   resumeUrl: string;
   profileImage: string;
   gooberImage?: string;

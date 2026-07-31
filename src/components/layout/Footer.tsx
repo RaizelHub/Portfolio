@@ -57,6 +57,15 @@ export const Footer: React.FC = () => {
               <Facebook className="w-4 h-4" />
             </a>
             <a
+              href="https://m.me/Raizelxdarriii90"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 bg-navy-900 border border-navy-800 hover:border-emerald-500/30 text-slate-400 hover:text-emerald-400 rounded-md transition-all duration-200"
+              aria-label="Messenger Chat"
+            >
+              <MessageSquare className="w-4 h-4" />
+            </a>
+            <a
               href="https://wa.me/qr/YHP7U5VEMH5IP1"
               target="_blank"
               rel="noopener noreferrer"
