@@ -10,7 +10,7 @@ export const technologies: TechItem[] = [
     description: 'Declarative, component-based UI library with hooks, virtual DOM, and client-side state routing.',
     experience: '2+ yrs',
     proficiency: 88,
-    projects: ['JobRadar AI', 'LeadFlow AI', 'POS System', 'Smartpipe'],
+    projects: ['CollabCanvas', 'JobRadar AI', 'LeadFlow AI', 'POS System', 'Smartpipe'],
   },
   {
     id: 'typescript',
@@ -21,7 +21,7 @@ export const technologies: TechItem[] = [
     description: 'Typed superset of JavaScript that catches bugs at compile time and improves software quality.',
     experience: '2+ yrs',
     proficiency: 85,
-    projects: ['JobRadar AI', 'Portfolio', 'POS System'],
+    projects: ['CollabCanvas', 'JobRadar AI', 'Portfolio', 'POS System'],
   },
   {
     id: 'tailwind',
@@ -32,7 +32,7 @@ export const technologies: TechItem[] = [
     description: 'Utility-first CSS framework for rapidly building custom, modern responsive interfaces.',
     experience: '2+ yrs',
     proficiency: 92,
-    projects: ['Portfolio', 'JobRadar AI', 'OmniCommerce AI'],
+    projects: ['CollabCanvas', 'Portfolio', 'JobRadar AI', 'OmniCommerce AI'],
   },
   {
     id: 'javascript',
@@ -54,7 +54,7 @@ export const technologies: TechItem[] = [
     description: 'Next-generation frontend tooling offering instant dev server startup and hot module replacement.',
     experience: '2+ yrs',
     proficiency: 85,
-    projects: ['Portfolio', 'JobRadar AI', 'POS System'],
+    projects: ['CollabCanvas', 'Portfolio', 'JobRadar AI', 'POS System'],
   },
   {
     id: 'framer',
@@ -142,7 +142,7 @@ export const technologies: TechItem[] = [
     description: 'PostgreSQL BaaS with Row Level Security, Auth, real-time database sync, and storage.',
     experience: '1+ yr',
     proficiency: 83,
-    projects: ['JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
+    projects: ['CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
   },
   {
     id: 'postgresql',
@@ -153,7 +153,7 @@ export const technologies: TechItem[] = [
     description: 'Relational database used for structured storage, canonical hashing, and Row Level Security.',
     experience: '2+ yrs',
     proficiency: 80,
-    projects: ['JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
+    projects: ['CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
   },
   {
     id: 'mongodb',

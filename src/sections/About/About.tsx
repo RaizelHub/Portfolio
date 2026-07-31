@@ -8,7 +8,7 @@ export const About = () => {
     <SectionContainer id="about">
       <SectionHeading
         tag="01 / About Me"
-        title="Full-Stack &amp; Automation Specialist"
+        title="Full-Stack Dev &amp; AI Automation Specialist"
         subtitle="BSIT Graduate &middot; Focused on clean web development and workflow automation."
       />
 
