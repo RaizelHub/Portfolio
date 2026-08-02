@@ -66,7 +66,7 @@ export const Hero = () => {
             
             <h1 className="hero-title uppercase text-[#171717]">
               JANMARK SUELTO <br />
-              <span className="text-[#C7462D]">AUTOMATION</span> &amp; WEB ARCHITECTURE
+              <span className="text-[#C7462D]">FULL-STACK</span> &amp; AUTOMATION SPECIALIST
             </h1>
 
             <p className="text-lg sm:text-xl text-[#171717] font-medium leading-snug pt-2">
