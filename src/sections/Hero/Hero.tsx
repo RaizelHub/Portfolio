@@ -33,13 +33,16 @@ export const Hero = () => {
           </div>
 
           {/* Name & Role Heading */}
-          <div className="space-y-3">
-            <span className="text-sm font-mono font-bold text-emerald-400 uppercase tracking-widest block">
-              Janmark Suelto
+          <div className="space-y-2">
+            <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest block">
+              Full-Stack Developer &amp; AI Automation Specialist
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
-              Full-Stack Developer focused on Web Applications and Workflow Automation
+            <h1 className="hero-title text-white uppercase">
+              Janmark Suelto
             </h1>
+            <p className="text-base sm:text-lg text-slate-200 font-medium tracking-tight pt-1">
+              Focused on Web Applications and Workflow Automation
+            </p>
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl pt-1">
               I build React and TypeScript applications connected to APIs, databases, n8n workflows, and AI services. My projects include lead-management systems, job-discovery tools, order-processing automations, administrative applications, and IoT monitoring systems.
             </p>
@@ -83,18 +86,18 @@ export const Hero = () => {
           </div>
         </div>
 
-        {/* Profile Image */}
+        {/* Clean Profile Image — No Card Wrapper */}
         <div className="lg:col-span-5 w-full flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="relative w-full max-w-xs sm:max-w-sm aspect-square rounded-2xl overflow-hidden border border-navy-800 shadow-2xl transition-all duration-300"
+            className="relative w-full max-w-xs sm:max-w-sm aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 group"
           >
             <img
               src={profile.profileImage}
               alt="Janmark Suelto"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
             />
           </motion.div>
         </div>

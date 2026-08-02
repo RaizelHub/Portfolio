@@ -85,7 +85,7 @@ export const ProjectDetails = () => {
               <div className="flex items-center gap-2 mb-3">
                 <Badge variant="emerald">{project.category}</Badge>
               </div>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight">
+              <h1 className="section-title text-white font-normal">
                 {project.title}
               </h1>
               <p className="mt-3 text-sm sm:text-base text-slate-400 max-w-4xl leading-relaxed">

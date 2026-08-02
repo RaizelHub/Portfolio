@@ -33,7 +33,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3"
+        className="section-title text-white mb-3 font-normal"
       >
         {title}
       </motion.h2>

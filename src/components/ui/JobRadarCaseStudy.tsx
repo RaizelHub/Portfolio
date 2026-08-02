@@ -64,7 +64,7 @@ export const JobRadarCaseStudy: React.FC = () => {
         </div>
 
         <div>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="section-title text-white font-normal">
             JobRadar AI — Intelligent Job Discovery and Application Automation Platform
           </h1>
           <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-4xl">
