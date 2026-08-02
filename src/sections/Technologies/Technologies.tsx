@@ -23,7 +23,7 @@ import {
   SiGit,
   SiPython,
 } from 'react-icons/si';
-import { X, Sparkles, Layers } from 'lucide-react';
+import { X, Sparkles } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import type { TechItem } from '../../types/technology';
@@ -89,34 +89,107 @@ export const Technologies = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const row1Items = [...ROW_1, ...ROW_1, ...ROW_1];
-  const row2Items = [...ROW_2, ...ROW_2, ...ROW_2];
+  const row1Items = [...ROW_1, ...ROW_1];
+  const row2Items = [...ROW_2, ...ROW_2];
 
   return (
-    <SectionContainer id="skills">
+    <SectionContainer id="technologies" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
-        tag="02 / Technical Skills"
-        title="Technologies &amp; Infrastructure"
-        subtitle="The frameworks, databases, and automation tools I build with every day."
+        tag="02 // TECHNICAL TAXONOMY"
+        title="Engineering Expertise &amp; Stack"
+        subtitle="Core frameworks, backend architecture, databases, and workflow automation tools."
       />
 
-      <div className="mt-8 space-y-6 select-none relative">
-        <div className="flex items-center justify-between px-2 text-xs font-mono text-slate-400">
-          <span className="flex items-center gap-1.5 text-emerald-400">
-            <Sparkles className="w-3.5 h-3.5" /> Hover to pause &middot; Click icon for details
-          </span>
-          <span className="hidden sm:inline text-slate-500">24+ Infrastructure &amp; Stack Technologies</span>
+      {/* Structured Category Columns (Manual Index Style) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px]">
+          <div className="font-mono text-xs font-bold text-[#C7462D] mb-2 uppercase flex justify-between border-b border-[#D5D0C7] pb-2">
+            <span>01 // FRONTEND &amp; UI ENGINE</span>
+          </div>
+          <ul className="space-y-2 font-mono text-xs text-[#171717]">
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>React 19 / TypeScript</span>
+              <span className="text-[#6B6862]">EXPERT</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>TailwindCSS v4 / CSS3</span>
+              <span className="text-[#6B6862]">EXPERT</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>Vite / Next.js Tooling</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+            <li className="flex justify-between py-1">
+              <span>Framer Motion / UI Physics</span>
+              <span className="text-[#6B6862]">INTERMEDIATE</span>
+            </li>
+          </ul>
         </div>
 
-        <div className="relative overflow-hidden py-4 rounded-2xl bg-navy-950/60 border border-navy-800/80 shadow-2xl backdrop-blur-xl">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-navy-950 via-navy-950/80 to-transparent z-20" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-navy-950 via-navy-950/80 to-transparent z-20" />
+        <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px]">
+          <div className="font-mono text-xs font-bold text-[#C7462D] mb-2 uppercase flex justify-between border-b border-[#D5D0C7] pb-2">
+            <span>02 // BACKEND &amp; DATA PIPELINES</span>
+          </div>
+          <ul className="space-y-2 font-mono text-xs text-[#171717]">
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>Node.js / Express APIs</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>Laravel / PHP Engine</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>PostgreSQL / Supabase</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+            <li className="flex justify-between py-1">
+              <span>MongoDB / MySQL / Redis</span>
+              <span className="text-[#6B6862]">INTERMEDIATE</span>
+            </li>
+          </ul>
+        </div>
 
-          <div className="overflow-hidden flex mb-4 group">
+        <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px]">
+          <div className="font-mono text-xs font-bold text-[#C7462D] mb-2 uppercase flex justify-between border-b border-[#D5D0C7] pb-2">
+            <span>03 // AUTOMATION &amp; DEVOPS</span>
+          </div>
+          <ul className="space-y-2 font-mono text-xs text-[#171717]">
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>n8n Workflow Automation</span>
+              <span className="text-[#6B6862]">EXPERT</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>Gemini AI / LLM Integrations</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+            <li className="flex justify-between py-1 border-b border-[#D5D0C7]/40">
+              <span>Git / GitHub Workflows</span>
+              <span className="text-[#6B6862]">EXPERT</span>
+            </li>
+            <li className="flex justify-between py-1">
+              <span>REST / Webhooks / Sockets</span>
+              <span className="text-[#6B6862]">ADVANCED</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Marquee Row */}
+      <div className="mt-8 space-y-4 select-none relative">
+        <div className="flex items-center justify-between px-1 text-xs font-mono text-[#6B6862]">
+          <span className="flex items-center gap-1.5 text-[#171717]">
+            <Sparkles className="w-3.5 h-3.5 text-[#C7462D]" /> CLICK ANY TOOL FOR SPECIFICATIONS
+          </span>
+          <span className="hidden sm:inline">24+ SYSTEM LIBRARIES</span>
+        </div>
+
+        <div className="relative overflow-hidden py-3 bg-[#EFEBE4] border border-[#D5D0C7] rounded-[2px]">
+          <div className="overflow-hidden flex mb-3 group">
             <motion.div
-              className="flex gap-4 shrink-0 pr-4 group-hover:[animation-play-state:paused]"
-              animate={{ x: ['0%', '-33.333%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 35, ease: 'linear' } }}
+              className="flex gap-3 shrink-0 pr-3 group-hover:[animation-play-state:paused]"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 30, ease: 'linear' } }}
             >
               {row1Items.map((tech, idx) => {
                 const Icon = ICON_MAP[tech.icon];
@@ -124,12 +197,10 @@ export const Technologies = () => {
                   <div
                     key={`r1-${tech.id}-${idx}`}
                     onClick={() => setSelectedTech(tech)}
-                    className="group/card relative flex items-center gap-3 px-4 py-3 rounded-xl bg-navy-900/60 border border-navy-800/80 hover:border-emerald-500/50 hover:bg-navy-850/90 transition-all duration-300 cursor-pointer shrink-0 shadow-md hover:shadow-emerald-500/10 hover:scale-105"
+                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-[2px] bg-[#F4F1EA] border border-[#D5D0C7] hover:border-[#171717] transition-all cursor-pointer shrink-0 font-mono text-xs text-[#171717]"
                   >
-                    <div className="p-2 rounded-lg transition-transform duration-300 group-hover/card:scale-110" style={{ backgroundColor: `${tech.color}15`, border: `1px solid ${tech.color}30` }}>
-                      <Icon className="w-5 h-5" style={{ color: tech.color }} />
-                    </div>
-                    <span className="text-xs font-semibold text-slate-200 group-hover/card:text-white transition-colors">{tech.name}</span>
+                    {Icon && <Icon className="w-4 h-4 text-[#171717]" />}
+                    <span className="font-semibold">{tech.name}</span>
                   </div>
                 );
               })}
@@ -138,9 +209,9 @@ export const Technologies = () => {
 
           <div className="overflow-hidden flex group">
             <motion.div
-              className="flex gap-4 shrink-0 pr-4 group-hover:[animation-play-state:paused]"
-              animate={{ x: ['-33.333%', '0%'] }}
-              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 40, ease: 'linear' } }}
+              className="flex gap-3 shrink-0 pr-3 group-hover:[animation-play-state:paused]"
+              animate={{ x: ['-50%', '0%'] }}
+              transition={{ x: { repeat: Infinity, repeatType: 'loop', duration: 35, ease: 'linear' } }}
             >
               {row2Items.map((tech, idx) => {
                 const Icon = ICON_MAP[tech.icon];
@@ -148,12 +219,10 @@ export const Technologies = () => {
                   <div
                     key={`r2-${tech.id}-${idx}`}
                     onClick={() => setSelectedTech(tech)}
-                    className="group/card relative flex items-center gap-3 px-4 py-3 rounded-xl bg-navy-900/60 border border-navy-800/80 hover:border-emerald-500/50 hover:bg-navy-850/90 transition-all duration-300 cursor-pointer shrink-0 shadow-md hover:shadow-emerald-500/10 hover:scale-105"
+                    className="flex items-center gap-2.5 px-3.5 py-2 rounded-[2px] bg-[#F4F1EA] border border-[#D5D0C7] hover:border-[#171717] transition-all cursor-pointer shrink-0 font-mono text-xs text-[#171717]"
                   >
-                    <div className="p-2 rounded-lg transition-transform duration-300 group-hover/card:scale-110" style={{ backgroundColor: `${tech.color}15`, border: `1px solid ${tech.color}30` }}>
-                      <Icon className="w-5 h-5" style={{ color: tech.color }} />
-                    </div>
-                    <span className="text-xs font-semibold text-slate-200 group-hover/card:text-white transition-colors">{tech.name}</span>
+                    {Icon && <Icon className="w-4 h-4 text-[#171717]" />}
+                    <span className="font-semibold">{tech.name}</span>
                   </div>
                 );
               })}
@@ -161,6 +230,7 @@ export const Technologies = () => {
           </div>
         </div>
 
+        {/* Technical Detail Modal */}
         <AnimatePresence>
           {selectedTech && (
             <motion.div
@@ -168,61 +238,45 @@ export const Technologies = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6 bg-navy-950/80 backdrop-blur-md"
+              className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-[#171717]/60 backdrop-blur-sm"
               onClick={() => setSelectedTech(null)}
             >
               <motion.div
-                initial={{ scale: 0.9, opacity: 0, y: 10 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.9, opacity: 0, y: 10 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-                className="relative max-w-md w-full bg-navy-900 border border-navy-700/80 rounded-2xl p-6 shadow-2xl space-y-5"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="relative max-w-md w-full bg-[#F4F1EA] border-2 border-[#171717] rounded-[2px] p-6 shadow-2xl space-y-4"
                 onClick={(e) => e.stopPropagation()}
-                style={{ boxShadow: `0 0 40px ${selectedTech.color}20, 0 10px 40px rgba(0,0,0,0.8)` }}
               >
-                <button onClick={() => setSelectedTech(null)} className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-navy-800 transition-colors" aria-label="Close detail modal">
+                <button
+                  onClick={() => setSelectedTech(null)}
+                  className="absolute top-4 right-4 p-1 rounded border border-[#D5D0C7] text-[#171717] hover:bg-[#EFEBE4]"
+                  aria-label="Close modal"
+                >
                   <X className="w-4 h-4" />
                 </button>
 
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-lg" style={{ backgroundColor: `${selectedTech.color}20`, border: `1.5px solid ${selectedTech.color}50` }}>
-                    {(() => {
-                      const Icon = ICON_MAP[selectedTech.icon];
-                      return Icon ? <Icon className="w-8 h-8" style={{ color: selectedTech.color }} /> : null;
-                    })()}
+                <div className="flex items-center gap-3 border-b border-[#D5D0C7] pb-3">
+                  <div className="w-10 h-10 rounded-[2px] bg-[#171717] text-[#F4F1EA] flex items-center justify-center font-mono font-bold text-base">
+                    {selectedTech.name.substring(0, 2).toUpperCase()}
                   </div>
                   <div>
-                    <h3 className="text-xl font-extrabold text-white tracking-tight">{selectedTech.name}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="px-2 py-0.5 text-[10px] font-mono font-bold rounded-full uppercase" style={{ backgroundColor: `${selectedTech.color}20`, color: selectedTech.color, border: `1px solid ${selectedTech.color}40` }}>
-                        {selectedTech.category}
-                      </span>
-                      <span className="text-xs font-mono text-slate-400">{selectedTech.experience} experience</span>
-                    </div>
+                    <h3 className="text-lg font-bold text-[#171717]">{selectedTech.name}</h3>
+                    <span className="font-mono text-xs text-[#C7462D]">{selectedTech.category} // {selectedTech.experience} EXPERIENCE</span>
                   </div>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{selectedTech.description}</p>
+                <p className="text-xs sm:text-sm text-[#171717] leading-relaxed">{selectedTech.description}</p>
 
-                <div className="p-3 bg-navy-950/60 rounded-lg border border-navy-800/80 flex items-center justify-between text-xs font-mono">
-                  <span className="text-slate-400 font-medium">Hands-On Experience</span>
-                  <span className="font-bold text-emerald-400">{selectedTech.experience} Active Usage</span>
-                </div>
-
-                <div className="space-y-2 pt-1 border-t border-navy-800">
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                    <Layers className="w-3 h-3 text-emerald-400" /> Applied In Projects
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
+                <div className="p-3 bg-[#EFEBE4] border border-[#D5D0C7] font-mono text-xs space-y-1">
+                  <span className="text-[#6B6862] block text-[10px]">APPLIED IN PROJECTS:</span>
+                  <div className="flex flex-wrap gap-1.5 pt-1">
                     {selectedTech.projects.map((proj) => (
-                      <span key={proj} className="px-2.5 py-1 text-xs font-mono rounded-md bg-navy-950 text-slate-300 border border-navy-800">{proj}</span>
+                      <span key={proj} className="px-2 py-0.5 bg-[#F4F1EA] border border-[#D5D0C7] text-[#171717]">
+                        {proj}
+                      </span>
                     ))}
                   </div>
-                </div>
-
-                <div className="pt-2 text-center text-[11px] font-mono text-slate-500">
-                  Press <kbd className="px-1.5 py-0.5 rounded bg-navy-950 border border-navy-800 text-slate-400">Esc</kbd> or click outside to dismiss
                 </div>
               </motion.div>
             </motion.div>

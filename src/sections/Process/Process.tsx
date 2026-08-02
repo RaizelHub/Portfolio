@@ -72,10 +72,10 @@ export const Process = () => {
   ];
 
   return (
-    <SectionContainer id="process">
+    <SectionContainer id="process" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
-        tag="08 / Engineering Methodology"
-        title="Development &amp; Automation Lifecycle"
+        tag="07 // METHODOLOGY & LIFECYCLE"
+        title="Development &amp; Automation Process"
         subtitle="A disciplined, engineering-first approach that turns requirements into high-performance web applications and automated workflows."
       />
 
@@ -85,48 +85,48 @@ export const Process = () => {
           return (
             <div
               key={item.step}
-              className="group bg-navy-800/30 border border-navy-700/50 hover:border-emerald-500/30 rounded-xl p-6 sm:p-7 transition-all duration-300 shadow-xl flex flex-col justify-between"
+              className="group bg-[#EFEBE4] border border-[#D5D0C7] hover:border-[#171717] rounded-[2px] p-6 sm:p-7 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Header */}
-                <div className="flex items-center justify-between mb-4 border-b border-navy-700/40 pb-4">
+                <div className="flex items-center justify-between mb-4 border-b border-[#D5D0C7] pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-emerald-950/40 border border-emerald-900/40 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-9 h-9 rounded-[1px] bg-[#171717] text-[#F4F1EA] flex items-center justify-center font-mono">
+                      <Icon className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="font-mono text-xs font-bold text-emerald-400 block">
-                        STEP {item.step}
+                      <span className="font-mono text-xs font-bold text-[#C7462D] block">
+                        PHASE // {item.step}
                       </span>
-                      <span className="text-xs text-slate-400 font-medium">
+                      <span className="text-xs text-[#6B6862] font-mono">
                         {item.subtitle}
                       </span>
                     </div>
                   </div>
                   {index < steps.length - 1 && (
-                    <ArrowRight className="w-4 h-4 text-slate-600 hidden lg:block" />
+                    <ArrowRight className="w-4 h-4 text-[#6B6862] hidden lg:block" />
                   )}
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="text-lg font-bold text-white mb-2.5 group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-lg font-bold text-[#171717] mb-2 group-hover:text-[#C7462D] transition-colors uppercase">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mb-5">
+                <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed mb-5 font-normal">
                   {item.description}
                 </p>
               </div>
 
               {/* Deliverables Badges */}
-              <div className="pt-3 border-t border-navy-700/30">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-slate-500 block mb-2 font-semibold">
-                  Key Deliverables:
+              <div className="pt-3 border-t border-[#D5D0C7]">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[#6B6862] block mb-2 font-semibold">
+                  DELIVERABLES:
                 </span>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1.5 font-mono">
                   {item.deliverables.map((del) => (
                     <span
                       key={del}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-navy-900 text-slate-300 border border-navy-700/50"
+                      className="text-[10px] px-2 py-0.5 rounded-[1px] bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7]"
                     >
                       {del}
                     </span>

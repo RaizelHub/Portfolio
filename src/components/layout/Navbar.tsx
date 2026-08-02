@@ -14,7 +14,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -104,11 +104,10 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-navy-950/80 backdrop-blur-md border-b border-navy-800/60 py-3 shadow-lg' 
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? 'bg-navy-950/80 backdrop-blur-md border-b border-navy-800/60 py-3 shadow-lg'
         : 'bg-transparent py-5'
-    }`}>
+      }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -135,11 +134,10 @@ export const Navbar = () => {
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkClick(e, link)}
-                      className={`px-3 py-1.5 rounded-md text-xs lg:text-sm font-medium transition-all duration-200 select-none ${
-                        isActive
+                      className={`px-3 py-1.5 rounded-md text-xs lg:text-sm font-medium transition-all duration-200 select-none ${isActive
                           ? 'text-emerald-400 bg-emerald-950/30'
                           : 'text-slate-400 hover:text-white hover:bg-navy-800/40'
-                      }`}
+                        }`}
                     >
                       {link.label}
                     </a>
@@ -193,11 +191,10 @@ export const Navbar = () => {
                   <a
                     href={link.href}
                     onClick={(e) => handleLinkClick(e, link)}
-                    className={`block px-4 py-2.5 rounded-md text-sm font-semibold transition-colors ${
-                      isActive
+                    className={`block px-4 py-2.5 rounded-md text-sm font-semibold transition-colors ${isActive
                         ? 'text-emerald-400 bg-emerald-950/30'
                         : 'text-slate-400 hover:text-white hover:bg-navy-800/40'
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </a>

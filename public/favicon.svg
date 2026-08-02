@@ -1,31 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="100%" stop-color="#059669" />
-    </linearGradient>
-    
-    <!-- Text Drop Shadow for depth -->
-    <filter id="shadow" x="-10%" y="-10%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#022c22" flood-opacity="0.25" />
-    </filter>
-  </defs>
+  <!-- Background near-black surface -->
+  <rect width="512" height="512" rx="48" fill="#171717" />
+  
+  <!-- Outer technical border line -->
+  <rect x="24" y="24" width="464" height="464" rx="32" fill="none" stroke="#D5D0C7" stroke-width="12" />
 
-  <!-- Main rounded square base with gradient -->
-  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
+  <!-- Accent square dot top right -->
+  <rect x="400" y="72" width="40" height="40" rx="4" fill="#C7462D" />
 
-  <!-- Monogram text with drop shadow -->
+  <!-- Monogram text "JS" -->
   <text
     x="50%"
-    y="52%"
-    font-family="system-ui, -apple-system, 'SF Pro Display', Roboto, Helvetica, sans-serif"
+    y="54%"
+    font-family="'JetBrains Mono', 'Courier New', monospace"
     font-weight="800"
-    font-size="260"
-    fill="#020617"
+    font-size="240"
+    fill="#F4F1EA"
     text-anchor="middle"
     dominant-baseline="middle"
-    filter="url(#shadow)"
-    letter-spacing="-8"
-  >JM</text>
+    letter-spacing="-6"
+  >JS</text>
 </svg>

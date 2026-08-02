@@ -10,14 +10,14 @@ export const ProjectsSection = () => {
   const additionalProjects = projects.filter((p) => !p.featured);
 
   return (
-    <SectionContainer id="projects">
+    <SectionContainer id="projects" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
-        tag="03 / Projects"
-        title="Featured Projects"
-        subtitle="Practical web applications, IoT hardware monitoring, and workflow automation systems."
+        tag="03 // CASE STUDIES & ARCHITECTURE"
+        title="Featured Engineering Projects"
+        subtitle="Full-stack web systems, IoT hardware telemetry, and automated workflow pipelines."
       />
 
-      {/* Featured Projects Grid (OmniFlow AI, Smart Pipe, JobRadar AI) */}
+      {/* Featured Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {featuredProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
@@ -26,21 +26,21 @@ export const ProjectsSection = () => {
 
       {/* Additional Work Sub-Section */}
       {additionalProjects.length > 0 && (
-        <div className="mt-16 border-t border-navy-800 pt-12">
-          <div className="flex items-center justify-between mb-6">
+        <div className="mt-14 border-t border-[#D5D0C7] pt-10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Layers className="w-4 h-4 text-emerald-400" /> Additional Work
+              <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
+                <Layers className="w-4 h-4 text-[#C7462D]" /> ADDITIONAL ENGINEERING REPOSITORIES
               </h3>
-              <p className="text-xs text-slate-400 mt-1">
-                Other functional prototypes, desktop applications, mobile tools, and automation workflows.
+              <p className="text-xs text-[#6B6862] font-mono mt-1">
+                Functional prototypes, administrative applications, and automation tools.
               </p>
             </div>
             <Link
               to="/projects"
-              className="text-xs font-mono font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 shrink-0"
+              className="text-xs font-mono font-semibold text-[#171717] hover:text-[#C7462D] flex items-center gap-1 shrink-0 uppercase border border-[#D5D0C7] px-3 py-1.5 rounded-[2px] bg-[#EFEBE4]"
             >
-              All Projects Directory ({projects.length}) <ArrowRight className="w-3.5 h-3.5" />
+              All Projects Directory ({projects.length}) <ArrowRight className="w-3.5 h-3.5 text-[#C7462D]" />
             </Link>
           </div>
 

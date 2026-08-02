@@ -1,55 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Github, ExternalLink, ArrowRight, Smartphone } from 'lucide-react';
-import type { Project, ProjectStatus } from '../../types';
-import { Badge } from './Badge';
+import type { Project } from '../../types';
 
 interface ProjectCardProps {
   project: Project;
   compact?: boolean;
 }
 
-const getStatusBadgeVariant = (status: ProjectStatus) => {
-  switch (status) {
-    case 'Live': return 'emerald';
-    case 'Working Prototype': return 'blue';
-    case 'Hardware Prototype': return 'amber';
-    case 'Academic Project': return 'purple';
-    case 'In Development': return 'pink';
-    case 'Frontend Demo': return 'blue';
-    default: return 'slate';
-  }
-};
-
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = false }) => {
   const showCustomBadge = project.badge && project.badge !== project.status;
 
   return (
-    <div className={`group relative bg-navy-800/30 border border-navy-700/50 hover:border-emerald-500/30 rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 ${compact ? 'p-5' : ''}`}>
+    <div className={`group relative bg-[#EFEBE4] border border-[#D5D0C7] hover:border-[#171717] rounded-[2px] overflow-hidden flex flex-col justify-between transition-all duration-200 ${compact ? 'p-5' : ''}`}>
       <div>
         {!compact && (
-          <div className="relative aspect-video overflow-hidden bg-navy-950 border-b border-navy-700/40">
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#F4F1EA] border-b border-[#D5D0C7]">
             {project.image ? (
               <img
                 src={`/${project.image}`}
                 alt={`${project.title} Preview`}
                 loading="lazy"
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-all duration-500"
               />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-navy-950 select-none">
-                <span className="text-3xl mb-1">{project.emoji || '💻'}</span>
-                <span className="text-xs font-mono text-slate-400 font-semibold">{project.category}</span>
+              <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-[#EFEBE4] select-none font-mono">
+                <span className="text-2xl mb-1">{project.emoji || '⚙️'}</span>
+                <span className="text-xs text-[#6B6862] font-semibold uppercase">{project.category}</span>
               </div>
             )}
 
-            {/* Top Badges */}
-            <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap pointer-events-none">
-              <Badge variant={getStatusBadgeVariant(project.status)} className="text-[10px]">
+            {/* Top Index Tag */}
+            <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 pointer-events-none">
+              <span className="text-[10px] font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase tracking-wider">
                 {project.status}
-              </Badge>
+              </span>
               {showCustomBadge && (
-                <span className="text-[10px] font-mono font-bold bg-navy-950/90 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded shadow">
+                <span className="text-[10px] font-mono font-bold bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase tracking-wider">
                   {project.badge}
                 </span>
               )}
@@ -59,44 +46,44 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = fal
 
         {/* Content Body */}
         <div className={compact ? '' : 'p-5'}>
-          <div className="flex items-start justify-between gap-2 mb-1.5">
-            <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-emerald-400 transition-colors duration-200">
+          <div className="flex items-start justify-between gap-2 mb-1">
+            <h3 className="text-base sm:text-lg font-bold text-[#171717] group-hover:text-[#C7462D] transition-colors duration-200 uppercase">
               {project.title}
             </h3>
           </div>
 
           {project.role && (
-            <span className="text-xs font-mono text-emerald-400 block mb-2 font-medium">
-              Role: {project.role}
+            <span className="text-xs font-mono text-[#C7462D] block mb-2 font-medium">
+              ROLE: {project.role}
             </span>
           )}
 
           {compact && (
             <div className="flex items-center gap-2 mb-2 flex-wrap">
-              <Badge variant={getStatusBadgeVariant(project.status)} className="text-[10px]">
+              <span className="text-[10px] font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase">
                 {project.status}
-              </Badge>
+              </span>
               {showCustomBadge && (
-                <span className="text-[10px] font-mono text-amber-300 bg-amber-950/40 border border-amber-900/30 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-bold bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase">
                   {project.badge}
                 </span>
               )}
             </div>
           )}
 
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+          <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed line-clamp-3 font-normal">
             {project.description}
           </p>
 
-          {/* Technology Stack */}
-          <div className="mt-4 flex flex-wrap gap-1.5">
+          {/* Technology Stack Tags */}
+          <div className="mt-4 flex flex-wrap gap-1">
             {project.technologies.slice(0, compact ? 4 : 5).map((tech) => (
-              <span key={tech} className="text-[10px] font-mono px-2 py-0.5 bg-navy-900 text-slate-400 border border-navy-800 rounded">
+              <span key={tech} className="text-[10px] font-mono px-2 py-0.5 bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7] rounded-[1px]">
                 {tech}
               </span>
             ))}
             {project.technologies.length > (compact ? 4 : 5) && (
-              <span className="text-[10px] font-mono px-2 py-0.5 bg-navy-950 text-slate-500 rounded">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-[#F4F1EA] text-[#6B6862] border border-[#D5D0C7] rounded-[1px]">
                 +{project.technologies.length - (compact ? 4 : 5)}
               </span>
             )}
@@ -105,12 +92,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = fal
       </div>
 
       {/* Footer Links */}
-      <div className={`pt-3 mt-4 border-t border-navy-700/30 flex items-center justify-between gap-3 ${compact ? '' : 'px-5 pb-5'}`}>
+      <div className={`pt-3 mt-4 border-t border-[#D5D0C7] flex items-center justify-between gap-3 ${compact ? '' : 'px-5 pb-5'}`}>
         <Link
           to={`/projects/${project.slug}`}
-          className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1.5 transition-colors duration-200"
+          className="text-xs font-mono font-semibold text-[#171717] hover:text-[#C7462D] inline-flex items-center gap-1 transition-colors uppercase"
         >
-          View Case Study <ArrowRight className="w-3.5 h-3.5" />
+          <span>Explore Case Study</span>
+          <ArrowRight className="w-3.5 h-3.5 text-[#C7462D]" />
         </Link>
 
         <div className="flex items-center gap-2.5">
@@ -119,7 +107,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = fal
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-emerald-400 transition-colors"
+              className="text-[#6B6862] hover:text-[#171717] transition-colors"
               title="Source Code"
             >
               <Github className="w-4 h-4" />
@@ -130,7 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = fal
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-emerald-400 transition-colors"
+              className="text-[#6B6862] hover:text-[#171717] transition-colors"
               title="Live Demo"
             >
               <ExternalLink className="w-4 h-4" />
@@ -140,7 +128,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, compact = fal
             <a
               href={`/${project.apkUrl}`}
               download
-              className="text-slate-400 hover:text-emerald-400 transition-colors"
+              className="text-[#6B6862] hover:text-[#171717] transition-colors"
               title="Download Android APK"
             >
               <Smartphone className="w-4 h-4" />

@@ -4,7 +4,7 @@ import {
   Lock, RefreshCw, Zap, Layers, Check, Mail,
   Sparkles, FileCode2, Eye, Layout, Clock, ExternalLink
 } from 'lucide-react';
-import { Badge } from './Badge';
+
 
 export const JobRadarCaseStudy: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'screenshots' | 'placeholders'>('screenshots');
@@ -50,40 +50,39 @@ export const JobRadarCaseStudy: React.FC = () => {
   return (
     <div className="space-y-12 text-left">
       {/* SECTION 1: HERO OVERVIEW */}
-      <section className="bg-navy-950/60 border border-navy-800/80 rounded-xl p-6 sm:p-8 space-y-6">
+      <section className="bg-[#EFEBE4] border border-[#D5D0C7] rounded-[2px] p-6 sm:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="emerald">Full-Stack Development / AI Automation / n8n</Badge>
-            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center">
-              Active Development
+            <span className="text-xs font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2.5 py-0.5 rounded-[1px] uppercase">
+              Full-Stack Development / AI Automation / n8n
             </span>
-            <span className="px-2.5 py-0.5 text-xs font-mono text-amber-300 bg-amber-950/40 border border-amber-900/40 rounded-full">
-              Personal single-user application
+            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-[#F4F1EA] text-[#C7462D] border border-[#D5D0C7] rounded-[1px] flex items-center">
+              Active Development
             </span>
           </div>
         </div>
 
         <div>
-          <h1 className="section-title text-white font-normal">
-            JobRadar AI — Intelligent Job Discovery and Application Automation Platform
+          <h1 className="section-title text-[#171717] uppercase">
+            JobRadar AI — Job Discovery &amp; Application Automation Platform
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed max-w-4xl">
+          <p className="mt-3 text-sm sm:text-base text-[#171717] leading-relaxed max-w-4xl font-medium">
             A full-stack job-search automation platform that collects remote job opportunities, removes duplicates, evaluates candidate-job compatibility with AI, sends high-match email alerts, and tracks applications through a visual CRM pipeline.
           </p>
         </div>
 
         {/* Technology Stack Badges */}
         <div className="space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#6B6862]">
             Technology Stack &amp; Tools Applied
           </span>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {[
               'React', 'TypeScript', 'Vite', 'Tailwind CSS', 'TanStack Query', 'React Router', 'Recharts',
               'Node.js', 'Express', 'Zod', 'Supabase', 'PostgreSQL', 'Supabase Auth', 'Row Level Security',
               'n8n', 'Google Gemini', 'Gmail Integration', 'Webhooks', 'Vercel'
             ].map((tech) => (
-              <span key={tech} className="px-2.5 py-1 text-xs font-mono bg-navy-900 text-slate-300 border border-navy-800 rounded">
+              <span key={tech} className="px-2.5 py-1 text-xs font-mono bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7] rounded-[1px]">
                 {tech}
               </span>
             ))}
@@ -91,18 +90,18 @@ export const JobRadarCaseStudy: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="pt-2 flex flex-wrap items-center gap-3">
+        <div className="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
           <a
             href="https://job-radar-ai-frontend.vercel.app/demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-navy-950 font-bold rounded-md text-xs sm:text-sm transition-all duration-200 shadow-md shadow-emerald-500/10"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-[1px] transition-all tracking-wider uppercase"
           >
             <ExternalLink className="w-4 h-4" />
-            <span>Launch Live Demo</span>
+            <span>Launch Live Demo ↗</span>
           </a>
-          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-navy-900/80 border border-navy-800 rounded-md text-xs text-slate-400">
-            <Lock className="w-3.5 h-3.5 text-slate-500" />
+          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-[1px] text-xs text-[#6B6862]">
+            <Lock className="w-3.5 h-3.5 text-[#C7462D]" />
             <span>Source Code: Private / Available upon request</span>
           </div>
         </div>
@@ -110,44 +109,44 @@ export const JobRadarCaseStudy: React.FC = () => {
 
       {/* GALLERY & SCREENSHOT / PLACEHOLDER VIEWER */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-navy-800 pb-3">
-          <h3 className="text-lg font-bold text-white flex items-center gap-2">
-            <Eye className="w-4.5 h-4.5 text-emerald-400" /> System Visuals &amp; Workflow Execution Screenshots
+        <div className="flex items-center justify-between border-b border-[#D5D0C7] pb-3">
+          <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
+            <Eye className="w-4 h-4 text-[#C7462D]" /> Production Screenshots &amp; Workflow Execution
           </h3>
-          <div className="flex bg-navy-950 p-1 rounded-lg border border-navy-800 text-xs">
+          <div className="flex bg-[#EFEBE4] p-1 rounded-[2px] border border-[#D5D0C7] text-xs font-mono">
             <button
               onClick={() => setActiveTab('screenshots')}
-              className={`px-3 py-1 rounded-md font-medium transition-all ${
+              className={`px-3 py-1 rounded-[1px] font-medium transition-all ${
                 activeTab === 'screenshots'
-                  ? 'bg-emerald-500/20 text-emerald-400 font-semibold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#171717] text-[#F4F1EA] font-semibold'
+                  : 'text-[#6B6862] hover:text-[#171717]'
               }`}
             >
-              Production Workflows ({realScreenshots.length})
+              Workflows ({realScreenshots.length})
             </button>
             <button
               onClick={() => setActiveTab('placeholders')}
-              className={`px-3 py-1 rounded-md font-medium transition-all ${
+              className={`px-3 py-1 rounded-[1px] font-medium transition-all ${
                 activeTab === 'placeholders'
-                  ? 'bg-emerald-500/20 text-emerald-400 font-semibold'
-                  : 'text-slate-400 hover:text-white'
+                  ? 'bg-[#171717] text-[#F4F1EA] font-semibold'
+                  : 'text-[#6B6862] hover:text-[#171717]'
               }`}
             >
-              Pending Screen Specs ({pendingPlaceholders.length})
+              Specs ({pendingPlaceholders.length})
             </button>
           </div>
         </div>
 
         {activeTab === 'screenshots' ? (
-          <div className="bg-navy-950 border border-navy-800 p-4 rounded-xl space-y-4">
-            <div className="relative aspect-video rounded-lg overflow-hidden bg-navy-900 border border-navy-850">
+          <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-[2px] space-y-4">
+            <div className="relative aspect-video rounded-[1px] overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7]">
               <img
                 src={realScreenshots[activeImageIndex].src}
                 alt={realScreenshots[activeImageIndex].title}
                 className="w-full h-full object-cover object-top"
               />
-              <div className="absolute bottom-0 inset-x-0 bg-navy-950/90 backdrop-blur-sm p-3 border-t border-navy-800">
-                <span className="text-xs font-mono font-bold text-emerald-400 block">
+              <div className="absolute bottom-0 inset-x-0 bg-[#171717]/95 text-[#F4F1EA] backdrop-blur-sm p-3 border-t border-[#D5D0C7]">
+                <span className="text-xs font-mono font-bold text-[#C7462D] block">
                   {realScreenshots[activeImageIndex].title}
                 </span>
                 <p className="text-xs text-slate-300 font-normal">

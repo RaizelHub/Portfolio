@@ -5,11 +5,11 @@ import { services } from '../../data/services';
 
 export const Services = () => {
   return (
-    <SectionContainer id="services">
+    <SectionContainer id="services" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
-        tag="03 / Services"
-        title="Services &amp; Technical Solutions"
-        subtitle="Specialized full-stack software development, AI automation workflows, database architectures, and IT infrastructure support."
+        tag="06 // SERVICES & SOLUTIONS"
+        title="Engineering Services"
+        subtitle="Full-stack web application development, n8n automation pipelines, REST APIs, and database engineering."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">

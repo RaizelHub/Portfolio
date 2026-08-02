@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import {
-  Download,
-  Github,
-  Linkedin,
-  Menu,
-  X,
-  Mail,
-  MessageSquare,
-} from 'lucide-react';
+import { Download, Menu, X, ArrowUpRight } from 'lucide-react';
 import { profile } from '../../data/profile';
 
 interface NavLink {
@@ -24,11 +16,11 @@ export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
 
   const navLinks: NavLink[] = [
-    { label: 'About', href: '/#about', sectionId: 'about' },
-    { label: 'Projects', href: '/#projects', sectionId: 'projects' },
-    { label: 'Experience', href: '/#experience', sectionId: 'experience' },
-    { label: 'Certifications', href: '/#certifications', sectionId: 'certifications' },
-    { label: 'Contact', href: '/#contact', sectionId: 'contact' },
+    { label: 'PROJECTS', href: '/#projects', sectionId: 'projects' },
+    { label: 'EXPERTISE', href: '/#technologies', sectionId: 'technologies' },
+    { label: 'EXPERIENCE', href: '/#experience', sectionId: 'experience' },
+    { label: 'CERTIFICATIONS', href: '/#certifications', sectionId: 'certifications' },
+    { label: 'CONTACT', href: '/#contact', sectionId: 'contact' },
   ];
 
   useEffect(() => {
@@ -39,7 +31,7 @@ export const Sidebar: React.FC = () => {
           const el = document.getElementById(link.sectionId);
           if (el) {
             const rect = el.getBoundingClientRect();
-            if (rect.top <= 160) {
+            if (rect.top <= 200) {
               current = link.sectionId;
             }
           }
@@ -62,6 +54,11 @@ export const Sidebar: React.FC = () => {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, link: NavLink) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (link.sectionId === 'contact') {
+      window.dispatchEvent(new CustomEvent('open-contact-modal'));
+      return;
+    }
 
     if (location.pathname === '/') {
       if (link.sectionId === 'home') {
@@ -95,9 +92,10 @@ export const Sidebar: React.FC = () => {
   };
 
   return (
-    <>
-      {/* Mobile Top Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-navy-950/90 backdrop-blur-md border-b border-navy-800/80 z-50 flex items-center justify-between px-4 shadow-lg">
+    <header className="fixed top-0 left-0 right-0 h-16 lg:h-20 bg-[#F4F1EA]/95 backdrop-blur-sm border-b border-[#D5D0C7] z-50 transition-all duration-200">
+      <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        
+        {/* Brand / Monospace Technical ID */}
         <a
           href="/"
           onClick={(e) => {
@@ -105,28 +103,66 @@ export const Sidebar: React.FC = () => {
             navigate('/');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          className="flex items-center gap-2.5"
+          className="flex items-center gap-3 group"
         >
-          <div className="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center font-mono font-bold text-navy-950 text-sm shadow-md">
+          <div className="w-8 h-8 rounded-[2px] bg-[#171717] text-[#F4F1EA] flex items-center justify-center font-mono font-bold text-xs tracking-wider group-hover:bg-[#C7462D] transition-colors">
             JS
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-white text-sm leading-tight">Janmark Suelto</span>
-            <span className="text-[10px] font-mono text-emerald-400">Full-Stack &amp; AI Automation Specialist</span>
+            <span className="font-mono font-bold text-sm text-[#171717] tracking-wider uppercase group-hover:text-[#C7462D] transition-colors">
+              Janmark Suelto
+            </span>
+            <span className="text-[10px] font-mono text-[#6B6862]">
+              Full-Stack Dev &amp; AI Automation Specialist
+            </span>
           </div>
         </a>
 
-        <div className="flex items-center gap-2">
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center space-x-6 font-mono text-xs tracking-wider">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.sectionId;
+            return (
+              <a
+                key={link.sectionId}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link)}
+                className={`relative py-1 flex items-center transition-colors ${
+                  isActive ? 'text-[#171717] font-bold' : 'text-[#6B6862] hover:text-[#171717]'
+                }`}
+              >
+                <span>{link.label}</span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#C7462D]" />
+                )}
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Action Button & Mobile Toggle */}
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent('open-typing-game-modal'))}
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] font-mono text-xs font-semibold rounded-[2px] transition-all tracking-wider uppercase group"
+            aria-label="Open Typing Game"
+          >
+            <span>TYPING GAME</span>
+          </button>
+
           <button
             onClick={handleDownloadResume}
-            className="p-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-md text-xs font-mono font-semibold"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 border border-[#D5D0C7] hover:border-[#171717] bg-transparent text-[#171717] hover:text-[#C7462D] font-mono text-xs font-semibold rounded-[2px] transition-all"
             aria-label="Download Resume"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-3.5 h-3.5" />
+            <span>RESUME</span>
+            <ArrowUpRight className="w-3 h-3 text-[#C7462D]" />
           </button>
+
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 bg-navy-800 text-slate-300 hover:text-white rounded-md transition-colors"
+            className="lg:hidden p-2 border border-[#D5D0C7] text-[#171717] hover:bg-[#EFEBE4] rounded-[2px] transition-colors"
             aria-label="Toggle Navigation"
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -134,59 +170,10 @@ export const Sidebar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Backdrop & Drawer */}
+      {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div
-          className="lg:hidden fixed inset-0 bg-navy-950/80 backdrop-blur-sm z-40 transition-opacity"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Sidebar Container (Fixed desktop / Drawer mobile) */}
-      <aside
-        className={`fixed top-0 bottom-0 left-0 w-64 bg-navy-950 border-r border-navy-800/80 z-50 flex flex-col justify-between p-5 transition-transform duration-300 ease-in-out overflow-y-auto ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-          }`}
-      >
-        {/* Top Profile Card */}
-        <div>
-          <div className="flex items-center justify-between pb-5 border-b border-navy-800/80 mb-5">
-            <a
-              href="/"
-              onClick={(e) => {
-                e.preventDefault();
-                navigate('/');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                setIsOpen(false);
-              }}
-              className="flex items-center gap-3 group cursor-pointer"
-            >
-              <div className="relative">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center font-mono font-bold text-navy-950 text-base shadow-lg group-hover:scale-105 transition-transform duration-200">
-                  JS
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-white text-base tracking-tight group-hover:text-emerald-400 transition-colors">
-                  Janmark Suelto
-                </span>
-                <span className="text-xs font-mono text-emerald-400 font-semibold">
-                  Full-Stack &amp; AI Automation Specialist
-                </span>
-              </div>
-            </a>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="lg:hidden text-slate-400 hover:text-white p-1"
-              aria-label="Close navigation"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-
-
-          {/* Navigation Links (Clean Text Only) */}
-          <nav className="space-y-1">
+        <div className="lg:hidden fixed inset-x-0 top-16 bg-[#F4F1EA] border-b border-[#D5D0C7] p-6 shadow-lg space-y-4">
+          <nav className="flex flex-col space-y-3 font-mono text-sm">
             {navLinks.map((link) => {
               const isActive = activeSection === link.sectionId;
               return (
@@ -194,72 +181,41 @@ export const Sidebar: React.FC = () => {
                   key={link.sectionId}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold font-mono transition-all duration-200 ${isActive
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm'
-                    : 'text-slate-400 hover:text-white hover:bg-navy-800/40 border border-transparent'
-                    }`}
+                  className={`flex items-center justify-between py-2 px-3 border border-[#D5D0C7] rounded-[2px] ${
+                    isActive ? 'bg-[#EFEBE4] text-[#171717] font-bold border-[#C7462D]' : 'text-[#6B6862]'
+                  }`}
                 >
                   <span>{link.label}</span>
+                  {isActive && <span className="text-[#C7462D]">ACTIVE</span>}
                 </a>
               );
             })}
-          </nav>
-        </div>
 
-        {/* Sidebar Footer: Resume & Socials */}
-        <div className="pt-5 border-t border-navy-800/80 space-y-4">
-          <button
-            onClick={handleDownloadResume}
-            className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-navy-950 font-mono text-xs font-bold rounded-lg transition-colors duration-200 shadow-md shadow-emerald-500/10"
-          >
-            <Download className="w-4 h-4" />
-            <span>Download Resume</span>
-          </button>
-
-          <div className="flex items-center justify-center gap-3">
-            {profile.githubUrl && (
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-                aria-label="GitHub Profile"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-            )}
-            {profile.linkedinUrl && (
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            )}
-            {profile.messengerUrl && (
-              <a
-                href={profile.messengerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-                aria-label="Messenger Chat"
-              >
-                <MessageSquare className="w-4 h-4" />
-              </a>
-            )}
-            <a
-              href={`mailto:${profile.email}`}
-              className="p-2 bg-navy-900 text-slate-400 hover:text-emerald-400 hover:bg-navy-800 border border-navy-800 rounded-lg transition-colors"
-              aria-label="Email Me"
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                window.dispatchEvent(new CustomEvent('open-typing-game-modal'));
+              }}
+              className="flex items-center justify-between py-2 px-3 border border-[#171717] bg-[#171717] text-[#F4F1EA] rounded-[2px] font-bold"
             >
-              <Mail className="w-4 h-4" />
-            </a>
+              <div className="flex items-center gap-2">
+                <span>TYPING GAME</span>
+              </div>
+              <span className="text-[10px] text-[#C7462D] font-bold">FULLSCREEN ↗</span>
+            </button>
+          </nav>
+          <div className="pt-2 border-t border-[#D5D0C7]">
+            <button
+              onClick={handleDownloadResume}
+              className="w-full flex items-center justify-center gap-2 py-2.5 border border-[#D5D0C7] bg-[#EFEBE4] text-[#171717] font-mono text-xs font-semibold rounded-[2px] hover:border-[#171717] transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              <span>DOWNLOAD RESUME PDF ↗</span>
+            </button>
           </div>
         </div>
-      </aside>
-    </>
+      )}
+    </header>
   );
 };
+

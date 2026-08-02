@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, Github, ExternalLink, Smartphone,
-  CheckCircle2, Key, Info, HelpCircle, Shield,
-  Workflow, CheckCircle, ListTodo, X, ChevronLeft, ChevronRight
+  ArrowLeft, Github, ExternalLink,
+  CheckCircle2, Info, HelpCircle, Shield,
+  Workflow, CheckCircle, ListTodo, X
 } from 'lucide-react';
 import { projects } from '../data/projects';
-import { Badge } from '../components/ui/Badge';
-import { Button } from '../components/ui/Button';
 import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
 
 export const ProjectDetails = () => {
@@ -27,16 +25,19 @@ export const ProjectDetails = () => {
 
   if (!project) {
     return (
-      <main className="min-h-screen pt-28 flex items-center justify-center bg-navy-900 px-4">
-        <div className="text-center bg-navy-800/20 border border-navy-800 p-8 rounded-lg max-w-md w-full">
-          <HelpCircle className="w-12 h-12 text-rose-500 mx-auto mb-3" />
-          <h2 className="text-lg font-bold text-white mb-2">Project Not Found</h2>
-          <p className="text-sm text-slate-400 mb-6 leading-relaxed">
-            The project path you requested does not exist. It may have been moved or renamed.
+      <main className="min-h-screen pt-20 flex items-center justify-center bg-[#F4F1EA] px-4 font-mono">
+        <div className="text-center bg-[#EFEBE4] border border-[#D5D0C7] p-8 rounded-[2px] max-w-md w-full">
+          <HelpCircle className="w-12 h-12 text-[#C7462D] mx-auto mb-3" />
+          <h2 className="text-lg font-bold text-[#171717] mb-2 uppercase">REPOSITORY NOT FOUND</h2>
+          <p className="text-xs text-[#6B6862] mb-6 leading-relaxed">
+            The requested project path does not exist.
           </p>
-          <Button variant="primary" onClick={() => navigate('/#projects')}>
-            Return to Work
-          </Button>
+          <button
+            onClick={() => navigate('/#projects')}
+            className="px-4 py-2 bg-[#171717] text-[#F4F1EA] hover:bg-[#C7462D] text-xs font-bold rounded-[2px]"
+          >
+            RETURN TO CASE STUDIES
+          </button>
         </div>
       </main>
     );
@@ -57,22 +58,22 @@ export const ProjectDetails = () => {
   }, [lightboxOpen, galleryImages.length]);
 
   return (
-    <main className="min-h-screen pt-28 pb-20 bg-navy-900">
+    <main className="min-h-screen pt-12 pb-20 bg-[#F4F1EA] text-[#171717]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Back navigation */}
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 flex items-center justify-between font-mono text-xs">
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-400 hover:text-emerald-400 transition-colors duration-200"
+            className="inline-flex items-center gap-1.5 font-semibold text-[#171717] hover:text-[#C7462D] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+            <ArrowLeft className="w-4 h-4 text-[#C7462D]" /> RETURN TO DASHBOARD
           </Link>
           <Link
             to="/projects"
-            className="text-xs font-semibold text-emerald-400 hover:underline"
+            className="font-semibold text-[#C7462D] hover:underline"
           >
-            View Projects Directory
+            VIEW ALL REPOSITORIES ↗
           </Link>
         </div>
 
@@ -81,103 +82,88 @@ export const ProjectDetails = () => {
         ) : (
           <>
             {/* Title Block Banner */}
-            <div className="border-b border-navy-800 pb-8 mb-8 text-left">
-              <div className="flex items-center gap-2 mb-3">
-                <Badge variant="emerald">{project.category}</Badge>
+            <div className="border-b border-[#D5D0C7] pb-6 mb-8 text-left">
+              <div className="flex items-center gap-2 mb-2 font-mono">
+                <span className="text-xs font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase">
+                  {project.category}
+                </span>
+                <span className="text-xs text-[#C7462D] font-semibold uppercase">
+                  {project.status}
+                </span>
               </div>
-              <h1 className="section-title text-white font-normal">
+              <h1 className="section-title text-[#171717] uppercase">
                 {project.title}
               </h1>
-              <p className="mt-3 text-sm sm:text-base text-slate-400 max-w-4xl leading-relaxed">
+              <p className="mt-2 text-sm sm:text-base text-[#6B6862] max-w-4xl leading-relaxed">
                 {project.description}
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-              {/* LEFT: Case Study Writing (8 cols) */}
+              {/* LEFT: Case Study Writing */}
               <div className="lg:col-span-8 space-y-8 text-left">
 
-                {/* Gallery — high-resolution screenshot viewer */}
+                {/* Gallery */}
                 {galleryImages.length > 0 && (
-                  <div className="space-y-3 bg-navy-950 border border-navy-800 p-2.5 rounded-lg">
+                  <div className="space-y-3 bg-[#EFEBE4] border border-[#D5D0C7] p-2.5 rounded-[2px]">
                     <div
-                      className="relative aspect-video rounded overflow-hidden bg-navy-900 border border-navy-850 cursor-pointer group"
+                      className="relative aspect-video rounded-[1px] overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7] cursor-pointer group"
                       onClick={() => setLightboxOpen(true)}
                     >
                       <img
                         src={`/${galleryImages[activeImageIndex]}`}
                         alt={`${project.title} screenshot ${activeImageIndex + 1}`}
-                        className="w-full h-full object-cover object-top"
+                        className="w-full h-full object-cover object-top transition-all duration-300"
                       />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                        <span className="text-white/0 group-hover:text-white/80 text-xs font-mono font-semibold transition-colors">
-                          Click to view full size
+                      <div className="absolute inset-0 bg-[#171717]/0 group-hover:bg-[#171717]/40 transition-colors flex items-center justify-center">
+                        <span className="text-[#F4F1EA] opacity-0 group-hover:opacity-100 text-xs font-mono font-semibold transition-opacity bg-[#C7462D] px-3 py-1 rounded-[1px]">
+                          EXPAND FULL SCREEN ↗
                         </span>
                       </div>
                     </div>
-                    {/* Thumbnails grid */}
-                    {galleryImages.length > 1 && (
-                      <div className="flex gap-2 overflow-x-auto pb-1.5">
-                        {galleryImages.map((img, i) => (
-                          <button
-                            key={i}
-                            onClick={() => {
-                              setActiveImageIndex(i);
-                              setLightboxOpen(true);
-                            }}
-                            className={`relative w-20 aspect-video rounded overflow-hidden border transition-all shrink-0 ${activeImageIndex === i
-                              ? 'border-emerald-500 ring-1 ring-emerald-500/30'
-                              : 'border-navy-700/60 hover:border-slate-500'
-                              }`}
-                          >
-                            <img src={`/${img}`} alt="thumbnail" className="w-full h-full object-cover" />
-                          </button>
-                        ))}
-                      </div>
-                    )}
                   </div>
                 )}
 
                 {/* Overview / Background */}
                 <section className="space-y-3">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-navy-800 pb-2">
-                    <Info className="w-4.5 h-4.5 text-emerald-400" /> System Overview
+                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
+                    <Info className="w-4 h-4 text-[#C7462D]" /> SYSTEM OVERVIEW &amp; CONTEXT
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-[#171717] leading-relaxed font-normal">
                     {project.longDescription}
                   </p>
                 </section>
 
                 {/* Problem & Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-rose-950/15 border border-rose-900/25 p-5 rounded-lg space-y-2">
-                    <h4 className="font-bold text-rose-300 text-sm sm:text-base flex items-center gap-1.5">
-                      <Shield className="w-4 h-4" /> The Problem
+                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px] space-y-2">
+                    <h4 className="font-mono font-bold text-[#C7462D] text-xs uppercase flex items-center gap-1.5">
+                      <Shield className="w-4 h-4" /> THE PROBLEM SPECIFICATION
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
                       {project.problem}
                     </p>
                   </div>
-                  <div className="bg-emerald-950/15 border border-emerald-900/25 p-5 rounded-lg space-y-2">
-                    <h4 className="font-bold text-emerald-300 text-sm sm:text-base flex items-center gap-1.5">
-                      <CheckCircle className="w-4 h-4" /> The Solution
+                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px] space-y-2">
+                    <h4 className="font-mono font-bold text-[#171717] text-xs uppercase flex items-center gap-1.5">
+                      <CheckCircle className="w-4 h-4 text-[#C7462D]" /> THE ARCHITECTURAL SOLUTION
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
                       {project.solution}
                     </p>
                   </div>
                 </div>
 
-                {/* Features checkmarks */}
-                <section className="space-y-4">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-navy-800 pb-2">
-                    <ListTodo className="w-4.5 h-4.5 text-emerald-400" /> Core Features
+                {/* Core Features */}
+                <section className="space-y-3">
+                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
+                    <ListTodo className="w-4 h-4 text-[#C7462D]" /> CORE FEATURES &amp; CAPABILITIES
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-400">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#171717]">
                     {project.features.map((feat) => (
                       <div key={feat} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -186,66 +172,32 @@ export const ProjectDetails = () => {
 
                 {/* Development Process */}
                 <section className="space-y-3">
-                  <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-navy-800 pb-2">
-                    <Workflow className="w-4.5 h-4.5 text-emerald-400" /> Development Process
+                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
+                    <Workflow className="w-4 h-4 text-[#C7462D]" /> ENGINEERING PROCESS &amp; WORKFLOW
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
                     {project.process}
                   </p>
                 </section>
-
-                {/* Challenges & Results Side-by-Side */}
-                <div className="border-t border-navy-800 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <h4 className="font-bold text-white text-sm sm:text-base">Key Challenge</h4>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                      {project.challenges}
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="font-bold text-white text-sm sm:text-base">Project Outcome</h4>
-                    <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                      {project.results}
-                    </p>
-                  </div>
-                </div>
-
               </div>
 
-              {/* RIGHT: Tech Specs & Links Sidebar (4 cols) */}
+              {/* RIGHT: Tech Specs & Links Sidebar */}
               <div className="lg:col-span-4 space-y-6">
-
-                {/* Project Access Note if POS */}
-                {project.accessNote && (
-                  <div className="bg-amber-950/20 border border-amber-900/30 p-5 rounded-lg flex items-start gap-3">
-                    <Key className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                    <div className="text-left">
-                      <span className="text-xs font-mono font-bold text-amber-400 uppercase tracking-widest block mb-1">
-                        Credentials Note
-                      </span>
-                      <p className="text-xs text-slate-300 leading-relaxed font-normal">
-                        {project.accessNote}
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Technical specs card */}
-                <div className="bg-navy-800/20 border border-navy-700/40 p-6 rounded-lg text-left space-y-5">
-                  <h3 className="font-bold text-white border-b border-navy-800 pb-2.5 text-sm sm:text-base">
-                    Technical Specifications
+                <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-[2px] text-left space-y-5">
+                  <h3 className="font-mono font-bold text-[#171717] border-b border-[#D5D0C7] pb-2 text-xs uppercase flex justify-between">
+                    <span>TECHNICAL SPECIFICATIONS</span>
                   </h3>
 
                   {/* Stack badges */}
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500 block font-bold">
-                      Technologies Applied
+                  <div className="space-y-2 font-mono">
+                    <span className="text-[10px] uppercase text-[#6B6862] block font-bold">
+                      TECHNOLOGIES APPLIED
                     </span>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs font-mono px-2 py-0.5 bg-navy-900 text-slate-300 rounded border border-navy-800"
+                          className="text-xs px-2 py-0.5 bg-[#F4F1EA] text-[#171717] rounded-[1px] border border-[#D5D0C7]"
                         >
                           {tech}
                         </span>
@@ -253,22 +205,17 @@ export const ProjectDetails = () => {
                     </div>
                   </div>
 
-                  {/* Call-to-action repository link integrations */}
-                  <div className="space-y-3 pt-3">
+                  {/* Repository Links */}
+                  <div className="space-y-2 pt-3 font-mono text-xs">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full"
+                        className="w-full py-2.5 px-4 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-[1px] transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
                       >
-                        <Button
-                          variant="primary"
-                          className="w-full text-xs font-semibold"
-                          leftIcon={<ExternalLink className="w-3.5 h-3.5" />}
-                        >
-                          Visit Live Site
-                        </Button>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>VISIT LIVE DEMO ↗</span>
                       </a>
                     )}
 
@@ -277,48 +224,17 @@ export const ProjectDetails = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full block"
+                        className="w-full py-2.5 px-4 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold rounded-[1px] transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
                       >
-                        <Button
-                          variant="secondary"
-                          className="w-full text-xs"
-                          leftIcon={<Github className="w-3.5 h-3.5" />}
-                        >
-                          {project.githubLabel || 'Inspect Source Code'}
-                        </Button>
-                      </a>
-                    )}
-
-                    {project.apkUrl && (
-                      <a
-                        href={`/${project.apkUrl}`}
-                        download
-                        className="w-full block"
-                      >
-                        <Button
-                          variant="secondary"
-                          className="w-full text-xs text-emerald-400 hover:text-emerald-300 border-emerald-800/40 hover:border-emerald-500/40"
-                          leftIcon={<Smartphone className="w-3.5 h-3.5" />}
-                        >
-                          Download Android APK
-                        </Button>
+                        <Github className="w-4 h-4" />
+                        <span>INSPECT SOURCE CODE ↗</span>
                       </a>
                     )}
                   </div>
                 </div>
-
-                {/* Quick availability reference */}
-                <div className="bg-navy-800/10 border border-navy-850 p-5 rounded-lg text-left">
-                  <span className="text-xs font-bold text-white block mb-1">Timezone / Location Ready</span>
-                  <p className="text-xs text-slate-400 leading-relaxed">
-                    This project was created and compiled by Janmark M. Suelto. He is available for remote opportunities on similar stacks.
-                  </p>
-                </div>
-
               </div>
 
             </div>
-
           </>
         )}
       </div>
@@ -326,52 +242,23 @@ export const ProjectDetails = () => {
       {/* Lightbox */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center"
+          className="fixed inset-0 z-[100] bg-[#171717]/90 backdrop-blur-sm flex items-center justify-center"
           onClick={() => setLightboxOpen(false)}
         >
           <button
             onClick={() => setLightboxOpen(false)}
-            className="absolute top-4 right-4 p-2 text-white/60 hover:text-white z-10"
+            className="absolute top-4 right-4 p-2 text-[#F4F1EA] hover:text-[#C7462D]"
             aria-label="Close lightbox"
           >
             <X className="w-6 h-6" />
           </button>
 
-          {galleryImages.length > 1 && (
-            <>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
-                }}
-                className="absolute left-4 p-2 text-white/60 hover:text-white z-10"
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="w-8 h-8" />
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-                }}
-                className="absolute right-4 p-2 text-white/60 hover:text-white z-10"
-                aria-label="Next image"
-              >
-                <ChevronRight className="w-8 h-8" />
-              </button>
-            </>
-          )}
-
           <img
             src={`/${galleryImages[activeImageIndex]}`}
             alt={`${project.title} screenshot ${activeImageIndex + 1}`}
-            className="max-w-[90vw] max-h-[90vh] object-contain"
+            className="max-w-[90vw] max-h-[90vh] object-contain border-2 border-[#D5D0C7]"
             onClick={(e) => e.stopPropagation()}
           />
-
-          <div className="absolute bottom-4 text-xs text-white/40 font-mono">
-            {activeImageIndex + 1} / {galleryImages.length}
-          </div>
         </div>
       )}
     </main>
