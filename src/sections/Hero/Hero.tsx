@@ -100,7 +100,7 @@ export const Hero = () => {
               onClick={() => scrollToSection('projects')}
               className="px-5 py-3 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
             >
-              <span>View Case Studies</span>
+              <span>View Projects</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 

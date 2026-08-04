@@ -2,37 +2,49 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, Trophy, Play, Mail, Maximize2, Minimize2, X } from 'lucide-react';
 
-interface Snippet {
+interface Paragraph {
   id: string;
   title: string;
   category: string;
-  code: string;
+  text: string;
 }
 
-const SNIPPETS: Snippet[] = [
+const PARAGRAPHS: Paragraph[] = [
   {
-    id: 'ts-interface',
-    title: 'TypeScript Interface Spec',
-    category: 'TYPESCRIPT',
-    code: 'const dev = { name: "Janmark", stack: ["React", "TypeScript", "n8n"], status: "Available" };',
+    id: 'fullstack-arch',
+    title: 'Full-Stack Systems Architecture',
+    category: 'ARCHITECTURE',
+    text: 'Modern web applications require clean component boundaries, resilient data pipelines, and seamless user experience. By combining React frontend architecture with automated backend workflows, we build scalable software solutions that deliver high performance under peak loads.',
   },
   {
-    id: 'n8n-workflow',
-    title: 'n8n Webhook Pipeline Trigger',
+    id: 'automation-ai',
+    title: 'AI & Automation Workflows',
     category: 'AUTOMATION',
-    code: 'async function triggerPipeline(payload) { return await fetch("/api/n8n/webhook", { method: "POST", body: payload }); }',
+    text: 'Automation is the cornerstone of engineering efficiency. Building custom n8n webhooks and AI-driven background tasks eliminates repetitive manual operations, allowing development teams to focus on complex problem solving and business value.',
   },
   {
-    id: 'react-state',
-    title: 'React Custom Hook Query',
+    id: 'software-craft',
+    title: 'Software Craftsmanship',
+    category: 'ENGINEERING',
+    text: 'Writing maintainable code is an iterative craft. Prioritizing clear type definitions, modular state management, and robust error handling ensures software remains adaptable and dependable as system demands grow over time.',
+  },
+  {
+    id: 'web-perf',
+    title: 'Web Performance & User Experience',
     category: 'FRONTEND',
-    code: 'const useJobRadar = () => { const [data, setData] = useState(null); useEffect(() => { fetchJobs().then(setData); }, []); return data; };',
+    text: 'Delivering exceptional web experiences requires sub-second interaction speed, clear visual hierarchies, and accessible design principles. Optimizing asset bundles and server response times ensures smooth performance across all devices.',
   },
   {
-    id: 'api-route',
-    title: 'Express REST Endpoint',
-    category: 'BACKEND',
-    code: 'app.get("/api/v1/projects", (req, res) => { res.json({ success: true, count: 12, author: "Janmark Suelto" }); });',
+    id: 'telemetry-iot',
+    title: 'Hardware & Telemetry Integration',
+    category: 'IOT & CLOUD',
+    text: 'Connecting IoT devices to cloud services bridges the physical and digital worlds. Real-time telemetry monitoring, sensor data ingestion, and instant alert dispatching keep critical systems operational around the clock.',
+  },
+  {
+    id: 'continuous-learning',
+    title: 'Continuous Innovation & Growth',
+    category: 'CAREER',
+    text: 'Technology evolves at a rapid pace, making continuous learning essential for software engineers. Exploring new framework capabilities, experimenting with AI models, and optimizing algorithms drives continuous personal and technical growth.',
   },
 ];
 
@@ -41,7 +53,7 @@ interface TypingGameProps {
 }
 
 export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false }) => {
-  const [snippetIndex, setSnippetIndex] = useState(0);
+  const [snippetIndex, setSnippetIndex] = useState(() => Math.floor(Math.random() * PARAGRAPHS.length));
   const [input, setInput] = useState('');
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
@@ -54,7 +66,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
   const [mistakeCount, setMistakeCount] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
-  const currentSnippet = SNIPPETS[snippetIndex];
+  const currentParagraph = PARAGRAPHS[snippetIndex];
 
   // Listen for global open event
   useEffect(() => {
@@ -94,8 +106,12 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
     setIsCompleted(false);
   };
 
-  const handleNextSnippet = () => {
-    setSnippetIndex((prev) => (prev + 1) % SNIPPETS.length);
+  const handleNextParagraph = () => {
+    setSnippetIndex((prev) => {
+      let next = Math.floor(Math.random() * PARAGRAPHS.length);
+      if (next === prev) next = (prev + 1) % PARAGRAPHS.length;
+      return next;
+    });
     handleReset();
   };
 
@@ -111,14 +127,14 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
     if (val.length > input.length) {
       const addedCharIndex = val.length - 1;
       setTotalKeystrokes((prev) => prev + 1);
-      if (val[addedCharIndex] !== currentSnippet.code[addedCharIndex]) {
+      if (val[addedCharIndex] !== currentParagraph.text[addedCharIndex]) {
         setMistakeCount((prev) => prev + 1);
       }
     }
 
     setInput(val);
 
-    if (val.length >= currentSnippet.code.length) {
+    if (val.length >= currentParagraph.text.length) {
       setEndTime(Date.now());
       setIsActive(false);
       setIsCompleted(true);
@@ -132,7 +148,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
 
   let correctChars = 0;
   for (let i = 0; i < input.length; i++) {
-    if (input[i] === currentSnippet.code[i]) correctChars++;
+    if (input[i] === currentParagraph.text[i]) correctChars++;
   }
 
   // Real Accuracy % based on total keystrokes & typos made
@@ -161,19 +177,19 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5D0C7] pb-4">
         <div className="flex items-center gap-2">
           <span className="font-bold text-sm uppercase tracking-wider text-[#171717]">
-            DEV_SPEED // CODE TYPING TEST
+            DEV_SPEED // TYPING SPEED TEST
           </span>
           <span className="text-[10px] bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] font-bold uppercase">
-            {currentSnippet.category}
+            {currentParagraph.category}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
           <button
-            onClick={handleNextSnippet}
+            onClick={handleNextParagraph}
             className="px-3 py-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-[1px] transition-colors uppercase text-[11px]"
           >
-            CHANGE SNIPPET ({snippetIndex + 1}/{SNIPPETS.length})
+            RANDOM PARAGRAPH ({snippetIndex + 1}/{PARAGRAPHS.length})
           </button>
           
           <button
@@ -204,12 +220,12 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
         <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-[1px]">
           <span className="text-[10px] text-[#6B6862] block uppercase font-bold">PROGRESS</span>
           <span className="text-xl font-bold text-[#C7462D]">
-            {input.length}/{currentSnippet.code.length}
+            {input.length}/{currentParagraph.text.length}
           </span>
         </div>
       </div>
 
-      {/* Code Display Container */}
+      {/* Paragraph Display Container */}
       <div
         onClick={() => inputRef.current?.focus()}
         className={`relative bg-[#F4F1EA] border p-5 rounded-[1px] font-mono text-sm sm:text-base leading-relaxed tracking-wide min-h-[100px] cursor-text select-none ${
@@ -217,13 +233,13 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
         }`}
       >
         <div className="mb-2 text-[11px] text-[#6B6862] font-bold uppercase flex justify-between">
-          <span>{currentSnippet.title}</span>
+          <span>{currentParagraph.title}</span>
           <span>CLICK BOX OR PRESS START TO TYPE</span>
         </div>
 
-        {/* Formatted Code Character Stream */}
-        <div className="break-all font-mono">
-          {currentSnippet.code.split('').map((char, index) => {
+        {/* Formatted Text Character Stream */}
+        <div className="break-words font-mono">
+          {currentParagraph.text.split('').map((char, index) => {
             let color = 'text-[#6B6862]'; // untyped
             let bg = 'bg-transparent';
 
