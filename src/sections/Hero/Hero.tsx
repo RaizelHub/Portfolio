@@ -12,7 +12,7 @@ export const Hero = () => {
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = profile.resumeUrl;
-    link.download = 'Janmark-Suelto-Resume.pdf';
+    link.download = 'Suelto-Janmark-Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -117,7 +117,7 @@ export const Hero = () => {
               className="px-5 py-3 bg-transparent hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
             >
               <Mail className="w-4 h-4 text-[#C7462D]" />
-              <span>Contact</span>
+              <span>Let's Talk?</span>
             </button>
           </div>
         </div>

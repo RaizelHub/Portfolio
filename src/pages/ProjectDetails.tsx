@@ -122,6 +122,30 @@ export const ProjectDetails = () => {
                         </span>
                       </div>
                     </div>
+
+                    {/* Gallery Thumbnails */}
+                    {galleryImages.length > 1 && (
+                      <div className="flex gap-2 pt-1 overflow-x-auto">
+                        {galleryImages.map((img, idx) => (
+                          <button
+                            key={img}
+                            onClick={() => setActiveImageIndex(idx)}
+                            className={`relative w-24 h-16 rounded-[1px] overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${
+                              activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
+                            }`}
+                          >
+                            <img
+                              src={`/${img}`}
+                              alt={`Thumbnail ${idx + 1}`}
+                              className="w-full h-full object-cover object-top"
+                            />
+                            <span className="absolute bottom-0 right-0 bg-[#171717]/80 text-[#F4F1EA] px-1 py-0.2">
+                              {idx + 1}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -170,14 +194,32 @@ export const ProjectDetails = () => {
                   </div>
                 </section>
 
-                {/* Development Process */}
-                <section className="space-y-3">
+                {/* Development Process & Architecture Diagram */}
+                <section className="space-y-4">
                   <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
                     <Workflow className="w-4 h-4 text-[#C7462D]" /> ENGINEERING PROCESS &amp; WORKFLOW
                   </h3>
                   <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
                     {project.process}
                   </p>
+
+                  {/* Dedicated Architecture Workflow Diagram Image Display */}
+                  {project.architectureDiagramUrl && (
+                    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-3 rounded-[2px] space-y-2">
+                      <div className="flex items-center justify-between text-xs font-mono text-[#6B6862]">
+                        <span className="font-bold text-[#171717] uppercase flex items-center gap-1.5">
+                          <Workflow className="w-3.5 h-3.5 text-[#C7462D]" /> SYSTEM ARCHITECTURE &amp; WORKFLOW DIAGRAM
+                        </span>
+                      </div>
+                      <div className="overflow-hidden rounded-[1px] border border-[#D5D0C7] bg-[#F4F1EA]">
+                        <img
+                          src={`/${project.architectureDiagramUrl}`}
+                          alt={`${project.title} Architecture Workflow Diagram`}
+                          className="w-full h-auto object-contain max-h-[500px]"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </section>
               </div>
 

@@ -2,6 +2,61 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'restaurant-ai-ops',
+    slug: 'restaurant-ai-ops',
+    emoji: '🍽️',
+    title: 'Restaurant AI Ops — Enterprise AI & Real-Time Alerting Platform',
+    category: 'Web',
+    role: 'Full-Stack Developer & AI Systems Architect',
+    status: 'Working Prototype',
+    badge: 'Enterprise AI & Alerting',
+    description: 'An event-driven restaurant operations management platform built with React 19, Supabase Edge Functions (Deno), AI Feedback Analysis (Gemini/OpenAI), and WhatsApp Business Cloud API integrations.',
+    longDescription: 'Restaurant AI Ops is an enterprise-grade, event-driven restaurant operations platform built to monitor kitchen delay thresholds in real time, analyze customer review sentiment using AI (Gemini / OpenAI), and automatically dispatch escalation alerts via Meta WhatsApp Business Cloud API. Built with React 19, TypeScript, Tailwind CSS v4, and Supabase Edge Functions (Deno), the system incorporates strict PostgreSQL Row Level Security policies (6 migration scripts), transactional & freeform messaging with HMAC-SHA256 signature verification, exponential retry logic, and a switchable mock mode for zero-cost sandbox testing.',
+    problem: 'Restaurant chains often suffer from communication delays between kitchen preparation bottlenecks and store management, leading to unhandled order SLA breaches, poor customer sentiment, and fragmented operational oversight.',
+    solution: 'Engineered an automated serverless operational pipeline connecting kitchen order status monitoring to Deno Edge Functions, Google Gemini & OpenAI for sentiment categorization, and Meta WhatsApp Cloud API for instant escalation alerts with strict PostgreSQL RLS multi-tenant security.',
+    technologies: [
+      'React 19',
+      'TypeScript',
+      'Supabase',
+      'Deno Edge Functions',
+      'Tailwind CSS v4',
+      'PostgreSQL',
+      'Google Gemini',
+      'OpenAI',
+      'WhatsApp Cloud API',
+      'n8n',
+      'Vite'
+    ],
+    features: [
+      'Flexible multi-provider AI sentiment analysis engine supporting Google Gemini 1.5 Pro and OpenAI in Supabase Edge Functions.',
+      'Automated background order monitoring (check-delayed-orders cron) scanning active tickets against custom SLA constraints (ORDER_DELAY_THRESHOLD_MINUTES).',
+      'Meta WhatsApp Business Cloud API integration with transient error handling, exponential backoff retries, and switchable mock mode.',
+      'Secure webhook receiver endpoint (whatsapp-webhook) featuring HMAC-SHA256 payload signature validation and idempotency checks.',
+      'Enterprise security & RBAC with 6 PostgreSQL Row Level Security migration scripts enforcing multi-tenant isolation (Admins, Managers, Staff).',
+      'Comprehensive audit logging (AuditPage) for tracking critical operational actions and delivery statuses.',
+      '15-page responsive single-page executive dashboard SPA built with React 19, TypeScript, Vite, Tailwind CSS v4, and Lucide React.',
+      'Real-time operational feeds, interactive alert detail views, feedback sentiment hub, and team access configuration.'
+    ],
+    whatWorks: [
+      'Real-time kitchen order SLA delay detection under 15 minutes.',
+      'Automated WhatsApp escalation alert dispatching with HMAC-SHA256 payload verification.',
+      'Multi-provider AI review sentiment scoring (Gemini 1.5 Pro / OpenAI).',
+      'Multi-tenant data isolation & team RBAC via 6 custom PostgreSQL RLS policies.',
+      'Zero-cost local sandbox testing via switchable mock WhatsApp mode.'
+    ],
+    architecture: 'React 19 Executive Dashboard → Supabase PostgreSQL (RLS) ← Check Delayed Orders Cron (Deno) → WhatsApp Alert Function → Meta WhatsApp Cloud API / Webhook Handler & n8n Sync',
+    technicalDecisions: 'Built a provider-agnostic AI pipeline in Supabase Edge Functions (Deno) to prevent vendor lock-in and enable seamless fallback between Google Gemini and OpenAI. Decoupled SLA monitoring into background cron edge functions to guarantee sub-15 minute alert dispatches without client-side execution dependencies.',
+    challenges: 'Handling transient delivery failures and preventing duplicate alert dispatches while validating payload authenticity from Meta WhatsApp webhooks. Solved by implementing HMAC-SHA256 signature verification, idempotency checks, and exponential backoff retry algorithms within serverless Deno Edge Functions.',
+    lessonsLearned: 'Decoupling client state from background cron SLA monitors and multi-provider AI evaluation pipelines delivers low-latency enterprise operations with robust fallback safety.',
+    currentLimitations: 'Mock WhatsApp mode enabled by default for zero-cost sandbox testing; requires production Meta Business Cloud API configuration and phone number verification for live broadcast deployment.',
+    results: 'Created a full-stack executive operations platform featuring 15 administrative views, automated order delay detection under 15 minutes, and zero-downtime message delivery with built-in mock testing capabilities.',
+    process: 'Designed multi-tenant PostgreSQL database schemas with strict RLS policies (001-006 migrations) -> Implemented Deno Edge Functions for order monitoring & WhatsApp alerts -> Integrated Gemini & OpenAI AI feedback sentiment pipeline -> Built 15-page React 19 executive dashboard with Tailwind CSS v4.',
+    image: 'img/restaurantdahboard.png',
+    images: ['img/restaurantdahboard.png', 'img/restaurant-ai workflow.png'],
+    architectureDiagramUrl: 'img/restaurant-ai workflow.png',
+    featured: true
+  },
+  {
     id: 'collabcanvas',
     slug: 'collabcanvas',
     emoji: '🎨',

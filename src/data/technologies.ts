@@ -76,7 +76,7 @@ export const technologies: TechItem[] = [
     description: "Google's multimodal LLM leveraged for structured JSON output generation, suitability scoring, and triage.",
     experience: '1+ yr',
     proficiency: 80,
-    projects: ['JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
+    projects: ['Restaurant AI Ops', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
   },
   {
     id: 'n8n',
@@ -87,7 +87,7 @@ export const technologies: TechItem[] = [
     description: 'Workflow automation engine for multi-step AI pipelines, webhook integrations, and email alerts.',
     experience: '1+ yr',
     proficiency: 87,
-    projects: ['OmniCommerce AI', 'JobRadar AI', 'LeadFlow AI'],
+    projects: ['Restaurant AI Ops', 'OmniCommerce AI', 'JobRadar AI', 'LeadFlow AI'],
   },
   {
     id: 'nodejs',
@@ -142,7 +142,7 @@ export const technologies: TechItem[] = [
     description: 'PostgreSQL BaaS with Row Level Security, Auth, real-time database sync, and storage.',
     experience: '1+ yr',
     proficiency: 83,
-    projects: ['CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
+    projects: ['Restaurant AI Ops', 'CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
   },
   {
     id: 'postgresql',
@@ -153,7 +153,7 @@ export const technologies: TechItem[] = [
     description: 'Relational database used for structured storage, canonical hashing, and Row Level Security.',
     experience: '2+ yrs',
     proficiency: 80,
-    projects: ['CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
+    projects: ['Restaurant AI Ops', 'CollabCanvas', 'JobRadar AI', 'OmniCommerce AI', 'LeadFlow AI'],
   },
   {
     id: 'mongodb',
