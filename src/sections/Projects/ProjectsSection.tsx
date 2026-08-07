@@ -13,7 +13,7 @@ export const ProjectsSection = () => {
     <SectionContainer id="projects" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
         tag="03 // CASE STUDIES & ARCHITECTURE"
-        title="Featured Engineering Projects"
+        title="Featured Projects"
         subtitle="Full-stack web systems, IoT hardware telemetry, and automated workflow pipelines."
       />
 
@@ -30,7 +30,7 @@ export const ProjectsSection = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
               <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
-                <Layers className="w-4 h-4 text-[#C7462D]" /> ADDITIONAL ENGINEERING REPOSITORIES
+                <Layers className="w-4 h-4 text-[#C7462D]" /> ADDITIONAL REPOSITORIES
               </h3>
               <p className="text-xs text-[#6B6862] font-mono mt-1">
                 Functional prototypes, administrative applications, and automation tools.

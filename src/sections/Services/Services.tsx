@@ -8,8 +8,8 @@ export const Services = () => {
     <SectionContainer id="services" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
         tag="06 // SERVICES & SOLUTIONS"
-        title="Engineering Services"
-        subtitle="Full-stack web application development, n8n automation pipelines, REST APIs, and database engineering."
+        title="Development Services"
+        subtitle="Full-stack web application development, n8n automation pipelines, REST APIs, and database architecture."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">

@@ -20,12 +20,12 @@ const PARAGRAPHS: Paragraph[] = [
     id: 'automation-ai',
     title: 'AI & Automation Workflows',
     category: 'AUTOMATION',
-    text: 'Automation is the cornerstone of engineering efficiency. Building custom n8n webhooks and AI-driven background tasks eliminates repetitive manual operations, allowing development teams to focus on complex problem solving and business value.',
+    text: 'Automation is the cornerstone of operational efficiency. Building custom n8n webhooks and AI-driven background tasks eliminates repetitive manual operations, allowing development teams to focus on complex problem solving and business value.',
   },
   {
     id: 'software-craft',
     title: 'Software Craftsmanship',
-    category: 'ENGINEERING',
+    category: 'DEVELOPMENT',
     text: 'Writing maintainable code is an iterative craft. Prioritizing clear type definitions, modular state management, and robust error handling ensures software remains adaptable and dependable as system demands grow over time.',
   },
   {

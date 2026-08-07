@@ -20,7 +20,7 @@ export const Contact = () => {
               Let's Work Together
             </h2>
             <p className="text-sm sm:text-base text-[#6B6862] font-normal leading-relaxed max-w-2xl">
-              Open for full-stack engineering, n8n automation pipelines, web development, backend integrations, and remote software developer roles.
+              Open for full-stack development, n8n automation pipelines, web development, backend integrations, and remote software developer roles.
             </p>
           </div>
 

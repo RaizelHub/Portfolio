@@ -43,7 +43,7 @@ export const Process = () => {
     },
     {
       step: '03',
-      title: 'Full-Stack & Automation Engineering',
+      title: 'Full-Stack & Automation Development',
       subtitle: 'React, Express & n8n Workflow Pipelines',
       icon: Workflow,
       description:
@@ -76,7 +76,7 @@ export const Process = () => {
       <SectionHeading
         tag="07 // METHODOLOGY & LIFECYCLE"
         title="Development &amp; Automation Process"
-        subtitle="A disciplined, engineering-first approach that turns requirements into high-performance web applications and automated workflows."
+        subtitle="A disciplined approach that turns requirements into high-performance web applications and automated workflows."
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">

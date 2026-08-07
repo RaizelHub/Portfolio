@@ -524,7 +524,7 @@ export const JobRadarCaseStudy: React.FC = () => {
       {/* SECTION 10: CHALLENGES & SOLUTIONS */}
       <section className="space-y-4">
         <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-navy-800 pb-3">
-          <FileCode2 className="w-5 h-5 text-emerald-400" /> Engineering Challenges &amp; Technical Solutions
+          <FileCode2 className="w-5 h-5 text-emerald-400" /> Technical Challenges &amp; Solutions
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[

@@ -9,7 +9,7 @@ export const Experience = () => {
       <SectionHeading
         tag="04 // OPERATIONAL RECORD"
         title="Work &amp; Practical Experience"
-        subtitle="Hands-on experience in IT operations, enterprise technical support, system diagnostics, and collaborative engineering."
+        subtitle="Hands-on experience in IT operations, enterprise technical support, system diagnostics, and collaborative development."
       />
 
       <div className="mt-8 space-y-6">

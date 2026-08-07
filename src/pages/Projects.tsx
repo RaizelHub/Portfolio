@@ -41,7 +41,7 @@ export const Projects = () => {
         {/* Section Heading */}
         <SectionHeading
           tag="00 // PROJECT DIRECTORY"
-          title="All Engineering Repositories"
+          title="All Repositories"
           subtitle="Explore the complete collection of full stack platforms, database designs, networks, and hardware systems."
         />
 

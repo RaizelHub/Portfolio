@@ -96,7 +96,7 @@ export const Technologies = () => {
     <SectionContainer id="technologies" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
         tag="02 // TECHNICAL TAXONOMY"
-        title="Engineering Expertise &amp; Stack"
+        title="Technical Expertise &amp; Stack"
         subtitle="Core frameworks, backend architecture, databases, and workflow automation tools."
       />
 

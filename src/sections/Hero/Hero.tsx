@@ -74,7 +74,7 @@ export const Hero = () => {
             </p>
 
             <p className="text-sm sm:text-base text-[#6B6862] leading-relaxed max-w-2xl">
-              Specialized in lead-management platforms, job discovery systems, automated order processing, administrative tools, and real-time IoT monitoring solutions with engineering precision.
+              Specialized in lead-management platforms, job discovery systems, automated order processing, administrative tools, and real-time IoT monitoring solutions with technical precision.
             </p>
           </div>
 

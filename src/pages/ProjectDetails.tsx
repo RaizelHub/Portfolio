@@ -197,7 +197,7 @@ export const ProjectDetails = () => {
                 {/* Development Process & Architecture Diagram */}
                 <section className="space-y-4">
                   <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
-                    <Workflow className="w-4 h-4 text-[#C7462D]" /> ENGINEERING PROCESS &amp; WORKFLOW
+                    <Workflow className="w-4 h-4 text-[#C7462D]" /> DEVELOPMENT PROCESS &amp; WORKFLOW
                   </h3>
                   <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
                     {project.process}
