@@ -113,7 +113,7 @@ export const Sidebar: React.FC = () => {
               Janmark Suelto
             </span>
             <span className="text-[10px] font-mono text-[#6B6862]">
-              Full-Stack Dev &amp; AI Automation Specialist
+              Junior Full-Stack Dev &amp; Automation Specialist
             </span>
           </div>
         </a>
