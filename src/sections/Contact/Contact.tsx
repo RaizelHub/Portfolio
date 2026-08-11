@@ -30,7 +30,7 @@ export const Contact = () => {
               className="px-6 py-4 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold uppercase rounded-[1px] transition-colors flex items-center justify-center gap-2.5 tracking-wider text-xs shadow-lg"
             >
               <Mail className="w-4 h-4" />
-              <span>LET'S TALK? ↗</span>
+              <span>CONTACT ME? ↗</span>
             </button>
 
             <a

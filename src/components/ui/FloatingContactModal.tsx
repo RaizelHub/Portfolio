@@ -107,7 +107,7 @@ export const FloatingContactModal: React.FC = () => {
             aria-label="Open Floating Contact"
           >
             <Mail className="w-4 h-4 text-[#C7462D] group-hover:text-[#F4F1EA] transition-colors" />
-            <span>LET'S TALK?</span>
+            <span>CONTACT ME?</span>
           </motion.button>
         )}
       </AnimatePresence>

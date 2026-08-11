@@ -117,7 +117,7 @@ export const Hero = () => {
               className="px-5 py-3 bg-transparent hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
             >
               <Mail className="w-4 h-4 text-[#C7462D]" />
-              <span>Let's Talk?</span>
+              <span>Contact Me?</span>
             </button>
           </div>
         </div>
