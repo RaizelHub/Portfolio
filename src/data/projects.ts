@@ -2,6 +2,61 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'careeros',
+    slug: 'careeros',
+    emoji: '💼',
+    title: 'CareerOS — Local-First Windows Career Operating System',
+    category: 'Desktop',
+    role: 'Lead Software Architect & Full-Stack Desktop Engineer',
+    status: 'Working Prototype',
+    badge: 'Tauri 2 / SQLite / Groq AI',
+    description: 'A privacy-centric, desktop career management engine powered by Tauri 2, React 19, SQLite, and Context-Aware Groq Llama-3.3 AI.',
+    longDescription: 'CareerOS is a privacy-first, desktop application built with Tauri 2, React 19, TypeScript, and SQLite. Designed to replace disconnected job search spreadsheets and online AI tools, CareerOS unifies job application CRM tracking (with an interactive 11-stage Kanban drag-and-drop board), local PDF/DOCX resume text extraction, STAR-methodology mock interview coaching, and context-aware Groq AI conversation trees—all while keeping 100% of user data stored locally on the user\'s PC.',
+    problem: 'Job seekers traditionally juggle disconnected tools—spreadsheets for job tracking, external web tools for resume formatting, generic ChatGPT windows for interview prep, and text files for skill gaps. This workflow causes severe data re-entry friction, context-blind AI interactions, and privacy risks when uploading raw resume files to third-party cloud tools.',
+    solution: 'CareerOS unifies career management into one connected desktop operating system: connected domain workflows (skill gaps populate Learning Goals, Offer/Hired status records Timeline milestones), context-aware AI assistant with explicit record attachment chips ([ Job ], [ Resume ]), and 100% local processing where all application records and document extractions remain inside a local SQLite database (careeros.db) on the user\'s PC.',
+    technologies: [
+      'Tauri 2',
+      'Rust',
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'SQLite',
+      '@tauri-apps/plugin-sql',
+      'Tauri Stronghold',
+      'Groq Llama-3.3 70B',
+      'HTML5 Drag & Drop',
+      'Vanilla CSS'
+    ],
+    features: [
+      'Interactive 11-stage Kanban drag-and-drop application board with native HTML5 drag events & instant database error rollback.',
+      'Zero-cloud local PDF & DOCX resume text extraction via client-side ArrayBuffer text stream decoding & word/document.xml parsing.',
+      'Context-aware Groq Llama-3.3 70B AI conversation trees featuring explicit record attachment chips ([Job], [Resume]).',
+      'Prompt injection defense with explicit XML security boundaries (<career_context_data>) & schema validation (aiSchemaValidator).',
+      'Encrypted API key storage using Tauri Stronghold AES-256-GCM encrypted native desktop vault.',
+      'Lightweight typed event bus (dataEventBus.ts) for cross-module live SQLite data invalidation without global state bloat.',
+      'PRAGMA user_version database migrations & ErrorBoundary UI recovery with 1-click JSON backup export.',
+      'STAR-methodology mock interview coaching engine with connected Learning Goals & Career Timeline tracking.'
+    ],
+    whatWorks: [
+      'App initializes local SQLite database in under 50ms with sub-9s frontend Vite build times.',
+      '100% local document text extraction from raw PDF and DOCX files without cloud parsing APIs.',
+      'AES-256-GCM encrypted API key storage in native desktop vault via Tauri Stronghold.',
+      '11-stage Kanban application board with HTML5 drag-and-drop and database rollback.',
+      'Context-aware AI chat with XML security boundaries and strict schema validation.'
+    ],
+    architecture: 'Tauri 2 Desktop Shell (Rust IPC / Win32) → React 19 Frontend UI (Typed Event Bus) → SQLite Database (careeros.db via @tauri-apps/plugin-sql) & Tauri Stronghold Vault ↔ Groq Llama-3.3 70B API (Context Resolver & XML Security Boundaries)',
+    technicalDecisions: 'Integrated Tauri Stronghold for AES-256-GCM encrypted native key vault storage to prevent API key exposure in localStorage or React state. Designed a typed event bus (dataEventBus) for reactive SQLite cache invalidation across Dashboard, Timeline, and Job Tracker modules without Redux bloat. Built local ArrayBuffer stream decoding for PDF/DOCX files to guarantee 100% offline document parsing.',
+    challenges: 'Preventing prompt injection attacks from malicious job descriptions and decoding raw binary document streams locally. Solved by constructing contextResolverService.ts to enforce XML tags (<career_context_data>) with character limits (3,000 for Jobs, 6,000 for Resumes), and developing resumeTextExtractor.ts to decompress DOCX zip containers in memory and decode PDF Tj/TJ operators offline.',
+    lessonsLearned: 'Combining native Win32/Tauri desktop capabilities with offline-first SQLite databases and context-aware LLMs creates ultra-responsive, privacy-preserving desktop software that outpaces traditional web-based tools.',
+    currentLimitations: 'Local-first desktop application built for Windows desktop operating systems.',
+    results: 'Delivered a high-performance desktop career operating system with sub-50ms SQLite startup, 0 unhandled render crashes, sub-9s build times, and zero third-party cloud data leakage for user profile and resume data.',
+    process: 'Architected Tauri 2 Rust desktop shell & SQLite migration scripts -> Developed resumeTextExtractor for client-side ArrayBuffer PDF/DOCX parsing -> Integrated Tauri Stronghold for AES-256-GCM API key encryption -> Implemented dataEventBus typed event bus -> Built 11-stage Kanban drag-and-drop application board -> Engineered Groq AI contextResolverService with XML security boundaries.',
+    image: 'img/Os.png',
+    images: ['img/Os.png', 'img/os1.png', 'img/os2.png'],
+    githubUrl: 'https://github.com/RaizelHub/careeros',
+    featured: true
+  },
+  {
     id: 'restaurant-ai-ops',
     slug: 'restaurant-ai-ops',
     emoji: '🍽️',
@@ -538,5 +593,441 @@ export const projects: Project[] = [
     process: 'Wrote python-telegram-bot logic -> Configured SQLite schema -> Integrated Ollama HTTP endpoints.',
     githubUrl: 'https://github.com/RaizelHub',
     featured: false
-  }
+  },
+  {
+    id: 'omniflow-ai',
+    slug: 'omniflow-ai',
+      emoji: '⚡',
+        title: 'OmniFlow AI',
+          category: 'AI',
+            role: 'Full-Stack Developer',
+              status: 'Working Prototype',
+                badge: 'Automation & Lead Intake',
+                  summary: 'A lead-intake automation pipeline that processes web dispatches, evaluates intent and priority using Gemini AI, and stores structured records in Supabase.',
+                    description: 'A lead-intake and automation system that sends website submissions through an n8n workflow, analyzes each lead using an AI model, assigns intent, priority, score, and summary information, and stores the structured result in Supabase.',
+                      longDescription: 'OmniFlow AI is an automated lead intake and categorization engine designed to eliminate manual inquiry sorting. When a potential client submits a website form, the payload is immediately dispatched to an n8n webhook listener. The workflow invokes Google Gemini AI using structured JSON schema rules to evaluate commercial intent, compute a numeric lead score (1–100), assign priority (Low, Medium, High, Urgent), and generate an executive summary. The result is stored in Supabase PostgreSQL and surfaced instantly on a React dashboard.',
+                        problem: 'Businesses receive raw client inquiries across multiple web forms. Manually reading and prioritizing each submission causes response delays to high-value leads and inconsistent inquiry tagging.',
+                          solution: 'Built an automated lead intake pipeline connecting website submission forms to n8n webhooks, Gemini AI for structured intent evaluation, and Supabase PostgreSQL for persistent storage and priority dashboard reporting.',
+                            systemFlow: [
+                              'Client Submits Contact Form on Website',
+                              'HTTP Webhook Dispatched to n8n Workflow Listener',
+                              'Payload Validation & Email Canonical Deduplication',
+                              'n8n Formats Prompt with Strict JSON Schema Rules',
+                              'Google Gemini AI Evaluates Intent, Priority & Generates Summary',
+                              'Structured Payload Parsed & Written to Supabase PostgreSQL',
+                              'React Dashboard Updates Lead Queue Sorted by Priority'
+                            ],
+                              technologies: [
+                                'React',
+                                'TypeScript',
+                                'Node.js',
+                                'n8n',
+                                'Supabase',
+                                'PostgreSQL',
+                                'Gemini AI',
+                                'Webhooks',
+                                'REST APIs'
+                              ],
+                                features: [
+                                  'Lead form submission listener via HTTP Webhooks.',
+                                  'n8n workflow pipeline executing asynchronous processing.',
+                                  'Gemini AI intent classification (Sales, Support, Partnership, Spam).',
+                                  'Automated numeric lead score calculation and priority badge assignment.',
+                                  'Supabase PostgreSQL structured table storage with RLS policies.',
+                                  'React monitoring dashboard with lead status updates.',
+                                  'Canonical email deduplication preventing repeated lead entries.'
+                                ],
+                                  architecture: 'React Contact Form → n8n Webhook Listener → Gemini AI Intent Evaluator → Supabase PostgreSQL → Priority Lead Dashboard',
+                                    architectureDetails: [
+                                      {
+                                        layer: 'React Contact Form',
+                                        responsibilities: 'Client-side input validation and HTTP POST webhook dispatch.'
+                                      },
+                                      {
+                                        layer: 'n8n Workflow Engine',
+                                        responsibilities: 'Payload receiving, deduplication checks, AI prompt formatting, JSON parsing, and database dispatches.'
+                                      },
+                                      {
+                                        layer: 'Google Gemini API',
+                                        responsibilities: 'Structured evaluation returning intent category, score, priority badge, and executive summary.'
+                                      },
+                                      {
+                                        layer: 'Supabase PostgreSQL',
+                                        responsibilities: 'Persistent lead record storage with Row Level Security isolation.'
+                                      }
+                                    ],
+                                      technicalDecisions: [
+                                        {
+                                          decision: 'Decoupled n8n workflow engine for lead evaluation',
+                                          reason: 'Keeps website form dispatches instantaneous for visitors while heavy AI evaluation runs asynchronously in the background.'
+                                        },
+                                        {
+                                          decision: 'Strict JSON schema enforcement on AI responses',
+                                          reason: 'Guarantees AI outputs fit PostgreSQL column types (e.g. converting lead score text to integers).'
+                                        }
+                                      ],
+                                        challenges: [
+                                          {
+                                            challenge: 'Ensuring LLM text output strictly conforms to PostgreSQL enum and integer column types.',
+                                            approach: 'Added strict JSON validation nodes inside n8n before database insertion dispatches.',
+                                            result: 'Eliminated database write errors from unformatted AI responses.'
+                                          }
+                                        ],
+                                          failureHandling: [
+                                            'Fallback routing to a manual review queue if AI JSON parsing fails.',
+                                            'Canonical deduplication blocking repeated form spam.'
+                                          ],
+                                            whatWorks: [
+                                              'Webhook submission ingestion from React forms.',
+                                              'Structured Gemini AI output generation with JSON validation.',
+                                              'Database storage of intent, score, priority, and summary in Supabase.',
+                                              'Dashboard view displaying incoming leads sorted by priority.'
+                                            ],
+                                              currentLimitations: 'Configured with demonstration lead inputs. Production setup connects live domain forms.',
+                                                limitations: [
+                                                  'Demonstration setup uses simulated lead submission inputs.',
+                                                  'Production SMS/Email dispatches require connected gateway credentials.'
+                                                ],
+                                                  results: 'Demonstrates a complete lead intake automation architecture reducing manual lead triage effort while keeping data structured.',
+                                                    outcome: 'Automates lead intake, intent evaluation, priority scoring, and dashboard sorting.',
+                                                      process: 'Designed Supabase tables → Built n8n webhook workflow → Formatted Gemini JSON prompts → Developed React dashboard.',
+                                                        lessonsLearned: 'Decoupling heavy AI scoring into asynchronous workflows keeps frontend interactions fast and reliable.',
+                                                          lessonsLearnedList: [
+                                                            'Decouple heavy background tasks from user-facing HTTP request paths.',
+                                                            'Strict JSON schemas are necessary when piping LLM output to relational databases.'
+                                                          ],
+                                                            nextSteps: [
+                                                              'Add SMS notification dispatches for leads flagged as Urgent priority.',
+                                                              'Integrate CRM sync (HubSpot / Salesforce).'
+                                                            ],
+                                                              image: 'img/AiAuto.png',
+                                                                images: ['img/AiAuto.png', 'img/Workflow.png'],
+                                                                  liveUrl: 'https://ai-automation-lead-hazel.vercel.app/',
+                                                                    githubUrl: 'https://github.com/RaizelHub/OmniEcommerce-ai',
+                                                                      featured: true
+},
+{
+  id: 'careeros',
+    slug: 'careeros',
+      emoji: '💼',
+        title: 'CareerOS',
+          category: 'Desktop',
+            role: 'Full-Stack Desktop Engineer',
+              status: 'Working Prototype',
+                badge: 'Tauri 2 / SQLite / Groq AI',
+                  summary: 'A privacy-first Windows desktop app for tracking job applications, parsing resumes locally, and conducting mock AI interviews.',
+                    description: 'A desktop application built with Tauri 2, React 19, SQLite, and Groq Llama AI for tracking applications and preparing interview responses locally.',
+                      longDescription: 'CareerOS is a privacy-first desktop application built with Tauri 2, React 19, TypeScript, and SQLite. Designed to replace disconnected job search spreadsheets, CareerOS unifies job application CRM tracking (with an 11-stage Kanban drag-and-drop board), local PDF/DOCX resume text extraction, STAR-methodology mock interview coaching, and context-aware Groq AI conversation trees—all while keeping user data stored locally on the user\'s PC.',
+                        problem: 'Job seekers juggle disconnected tools—spreadsheets for tracking, external web tools for resume processing, and web AI interfaces for interview prep—causing data re-entry friction and privacy risks when uploading resumes to third-party cloud servers.',
+                          solution: 'Engineered a unified desktop application where all application records and document text extractions remain inside a local SQLite database on the user\'s PC, protected by Tauri Stronghold encrypted vault storage.',
+                            technologies: [
+                              'Tauri 2',
+                              'Rust',
+                              'React 19',
+                              'TypeScript',
+                              'Vite',
+                              'SQLite',
+                              'Tauri Stronghold',
+                              'Groq Llama-3.3'
+                            ],
+                              features: [
+                                'Interactive 11-stage Kanban application board with HTML5 drag-and-drop.',
+                                'Zero-cloud local PDF & DOCX resume text extraction.',
+                                'Context-aware Groq AI interview preparation trees.',
+                                'Encrypted API key storage using Tauri Stronghold native vault.'
+                              ],
+                                whatWorks: [
+                                  'Local SQLite database initialization.',
+                                  'Local document text extraction from raw PDF and DOCX files without cloud APIs.',
+                                  'AES-256-GCM encrypted API key storage in native desktop vault via Tauri Stronghold.',
+                                  '11-stage Kanban application board with HTML5 drag-and-drop.'
+                                ],
+                                  architecture: 'Tauri 2 Desktop Shell (Rust IPC) → React 19 UI → Local SQLite DB & Tauri Stronghold Vault ↔ Groq AI API',
+                                    technicalDecisions: [
+                                      {
+                                        decision: 'Local SQLite database storage via Tauri Rust IPC',
+                                        reason: 'Guarantees user career data and resume text never leave the local computer.'
+                                      },
+                                      {
+                                        decision: 'Tauri Stronghold native vault for Groq API keys',
+                                        reason: 'Protects user API keys with AES-256-GCM encryption stored in OS-level native storage.'
+                                      }
+                                    ],
+                                      challenges: [
+                                        {
+                                          challenge: 'Parsing raw PDF and DOCX document text locally without external cloud extraction APIs.',
+                                          approach: 'Wrote client-side ArrayBuffer text stream decoding routines.',
+                                          result: 'Extracts resume text locally inside the desktop application shell.'
+                                        }
+                                      ],
+                                        failureHandling: [
+                                          'Database mutation rollback on drag-and-drop errors.',
+                                          'Local encrypted vault key recovery fallback.'
+                                        ],
+                                          currentLimitations: 'Desktop-only application built for Windows operating systems.',
+                                            limitations: [
+                                              'Desktop-only application built for Windows environments.',
+                                              'Requires user Groq API key for AI interview features.'
+                                            ],
+                                              results: 'Delivered a desktop career application with fast local database queries and zero third-party cloud data leakage for user profile data.',
+                                                outcome: 'Provides privacy-first job tracking, document text extraction, and interview coaching.',
+                                                  process: 'Architected Tauri 2 desktop shell & SQLite scripts → Built client-side PDF/DOCX text parsing → Integrated Tauri Stronghold → Built React Kanban board.',
+                                                    lessonsLearned: 'Combining desktop native shells with local SQLite databases delivers fast, privacy-respecting software.',
+                                                      image: 'img/Os.png',
+                                                        images: ['img/Os.png', 'img/os1.png', 'img/os2.png'],
+                                                          githubUrl: 'https://github.com/RaizelHub/careeros',
+                                                            featured: false
+},
+{
+  id: 'point-of-sale-system',
+    slug: 'point-of-sale-system',
+      emoji: '📊',
+        title: 'Point of Sale (POS) & Inventory System',
+          category: 'Web',
+            role: 'Full-Stack Developer',
+              status: 'Academic Project',
+                summary: 'A web POS system for retail checkout featuring barcode scanning, real-time multi-terminal inventory sync via Socket.io, and shift auditing.',
+                  description: 'A web-based Point of Sale system for retail environments featuring barcode lookup, inventory deductions, shift cash auditing, and multi-client sync via Socket.io.',
+                    longDescription: 'A full-stack POS application built for academic project requirements using the MERN stack. Features an interactive checkout counter, barcode scanner integration, stock deduction triggers, shift end cash auditing, and real-time state sync across multiple cashier terminals using Socket.io and Redis.',
+                      problem: 'Small retail stores lack simple digital checkout systems, leading to manual bookkeeping errors and inventory miscounts.',
+                        solution: 'Built a unified web POS dashboard with Socket.io multi-terminal syncing, automatic stock deduction, and shift audit logs.',
+                          technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Redis', 'Tailwind CSS'],
+                            features: [
+                              'Barcode lookup checkout register.',
+                              'Automatic stock level deduction on checkout.',
+                              'Shift sales summary and cash drawer variance reporting.',
+                              'Real-time multi-terminal state sync using Socket.io & Redis.'
+                            ],
+                              whatWorks: [
+                                'Barcode scanner item addition.',
+                                'Inventory decrementing in MongoDB.',
+                                'Multi-cashier terminal synchronization via Socket.io.'
+                              ],
+                                architecture: 'React Frontend → Express API & Socket.io → Redis Adapter → MongoDB Database',
+                                  technicalDecisions: [
+                                    {
+                                      decision: 'Atomic MongoDB updates for inventory decrements',
+                                      reason: 'Prevents race conditions when multiple cashier terminals check out the same item simultaneously.'
+                                    }
+                                  ],
+                                    challenges: [
+                                      {
+                                        challenge: 'Preventing race conditions during simultaneous checkout across multiple cashier terminals.',
+                                        approach: 'Implemented atomic MongoDB `$inc` updates and Redis pub/sub state synchronization.',
+                                        result: 'Inventory decrements consistently without race condition errors.'
+                                      }
+                                    ],
+                                      currentLimitations: 'Academic project environment hosted for demonstration purposes.',
+                                        limitations: [
+                                          'Academic demonstration prototype.',
+                                          'Requires hardware barcode scanner for optimal checkout speeds.'
+                                        ],
+                                          results: 'Built a responsive web POS system with real-time inventory tracking.',
+                                            outcome: 'Demonstrates real-time multi-client checkout synchronization and inventory auditing.',
+                                              process: 'Designed MongoDB schemas → Built Socket.io gateway → Created React checkout UI.',
+                                                image: 'img/Posphoto.png',
+                                                  images: ['img/Posphoto.png'],
+                                                    liveUrl: 'https://pos-five-flax.vercel.app/',
+                                                      isPrivateRepo: true,
+                                                        featured: false
+},
+{
+  id: 'boarding-house-finder',
+    slug: 'boarding-house-finder',
+      emoji: '🏠',
+        title: 'Boarding House Finder',
+          category: 'Mobile',
+            role: 'Full-Stack Developer',
+              status: 'Academic Project',
+                summary: 'A native Android application helping university students locate nearby accommodation with map pins, vacancy status, and landlord contacts.',
+                  description: 'Android application helping university students locate nearby accommodation with map pins, landlord contact information, and route directions.',
+                    longDescription: 'Built natively for Android, this application simplifies accommodation search for university students. Landlords upload property photos and room availability, while students view nearby listings on Google Maps.',
+                      problem: 'Students moving to new university areas struggle to find verified vacant boarding houses and landlord contact information.',
+                        solution: 'Created a native Java Android application using Google Maps API and Firebase Realtime Database for location search and live room status updates.',
+                          technologies: ['Android Studio', 'Java', 'Firebase Realtime Database', 'Google Maps API'],
+                            features: [
+                              'Google Maps pin integration for accommodation locations.',
+                              'Filter listings by price, room type, and distance.',
+                              'Landlord room status management dashboard.'
+                            ],
+                              whatWorks: [
+                                'Interactive map marker rendering.',
+                                'Firebase data synchronization for active listings.'
+                              ],
+                                architecture: 'Android Java Client → Firebase Realtime DB → Google Maps SDK',
+                                  technicalDecisions: [
+                                    {
+                                      decision: 'Firebase Realtime Database for room availability',
+                                      reason: 'Provides instant real-time status updates to mobile clients when landlords toggle room vacancies.'
+                                    }
+                                  ],
+                                    challenges: [
+                                      {
+                                        challenge: 'Managing Google Maps SDK location polling efficiency on mobile hardware.',
+                                        approach: 'Configured distance-filtered location updates to reduce battery drain.',
+                                        result: 'Maintained smooth map rendering while conserving battery.'
+                                      }
+                                    ],
+                                      currentLimitations: 'Academic prototype tailored for campus surroundings.',
+                                        limitations: [
+                                          'Academic prototype environment.',
+                                          'Requires Android OS device or emulator to execute native APK.'
+                                        ],
+                                          results: 'Successfully demonstrated map-based boarding house search functionality.',
+                                            outcome: 'Demonstrates native Android development, Google Maps integration, and real-time database sync.',
+                                              process: 'Designed XML layouts → Connected Google Maps SDK → Configured Firebase DB.',
+                                                isPrivateRepo: true,
+                                                  featured: false
+},
+{
+  id: 'student-attendance-management-system',
+    slug: 'student-attendance-management-system',
+      emoji: '🎓',
+        title: 'Student Attendance Management System',
+          category: 'Desktop',
+            role: 'Full-Stack Developer',
+              status: 'Academic Project',
+                summary: 'A desktop application built with C# Windows Forms and MySQL supporting rapid QR code check-ins and monthly attendance exports.',
+                  description: 'Desktop-based attendance tracker built with C# Windows Forms and MySQL, supporting student ID card and QR code check-ins.',
+                    longDescription: 'A desktop application created for academic institutional record keeping. Supports rapid student check-in via QR code scanning or manual ID entry, updates attendance logs in MySQL, and exports monthly report sheets.',
+                      problem: 'Manual paper attendance tracking in classrooms is slow, prone to errors, and difficult to compile for monthly institutional reports.',
+                        solution: 'Developed a C# desktop application connected to a local MySQL database with automatic check-in time logging and webcam QR scanning.',
+                          technologies: ['C#', '.NET Windows Forms', 'MySQL', 'ZXing.Net (QR Code)'],
+                            features: [
+                              'QR code scanner input processing via webcam.',
+                              'Real-time student check-in log stream.',
+                              'MySQL database storage for student records.',
+                              'CSV/Excel report export utility.'
+                            ],
+                              whatWorks: [
+                                'Webcam QR code scanning.',
+                                'Database log insertion.',
+                                'Excel report generation.'
+                              ],
+                                architecture: 'Webcam QR Scanner → C# Windows Forms App → MySQL Database → Excel Report Exporter',
+                                  technicalDecisions: [
+                                    {
+                                      decision: 'Asynchronous C# background threads for QR decoding',
+                                      reason: 'Prevents desktop UI freezing during rapid camera frame scanning.'
+                                    }
+                                  ],
+                                    challenges: [
+                                      {
+                                        challenge: 'Preventing desktop UI freezes during continuous webcam frame processing.',
+                                        approach: 'Moved image decoding to asynchronous C# background threads.',
+                                        result: 'Maintained smooth UI responsiveness during rapid student check-ins.'
+                                      }
+                                    ],
+                                      currentLimitations: 'Desktop-only application built for Windows environments.',
+                                        limitations: [
+                                          'Desktop-only application built for Windows operating systems.',
+                                          'Requires connected USB webcam for QR scanning features.'
+                                        ],
+                                          results: 'Processed fast student check-ins during academic testing.',
+                                            outcome: 'Demonstrates C# desktop UI development, database logging, and hardware camera integration.',
+                                              process: 'Designed C# UI Forms → Built MySQL schema → Implemented ZXing QR scanning library.',
+                                                image: 'img/studentmanagement.png',
+                                                  images: ['img/studentmanagement.png', 'img/addstudent.png'],
+                                                    isPrivateRepo: true,
+                                                      featured: false
+},
+{
+  id: 'laravel-tenancy-reviewer-center',
+    slug: 'laravel-tenancy-reviewer-center',
+      emoji: '🏢',
+        title: 'Multi-Tenant Reviewer Center',
+          category: 'SaaS',
+            role: 'Full-Stack Developer',
+              status: 'Working Prototype',
+                summary: 'A multi-tenant management platform built with Laravel Tenancy providing database-per-tenant isolation for review center branches.',
+                  description: 'A multi-tenant management platform using Laravel Tenancy, allowing multiple review branches to operate independently within one system.',
+                    longDescription: 'Built using Laravel and the stancl/tenancy package, this project provides database-per-tenant isolation for review centers. Each branch gets its own database schema, isolated student test records, and subdomain routing.',
+                      problem: 'Deploying separate codebases for multiple business branches creates high server maintenance overhead and deployment complexity.',
+                        solution: 'Engineered a multi-tenant architecture isolating databases dynamically per subdomain request using Laravel Tenancy.',
+                          technologies: ['Laravel', 'PHP', 'MySQL', 'Laravel Tenancy', 'Bootstrap'],
+                            features: [
+                              'Tenant isolation per subdomain.',
+                              'Automatic schema migration hooks per branch database.',
+                              'Role-based access control (Admin, Instructor, Student).'
+                            ],
+                              whatWorks: [
+                                'Subdomain tenant identification.',
+                                'Isolated database connection switching.'
+                              ],
+                                architecture: 'Subdomain Request → Laravel Tenancy Middleware → Specific Tenant MySQL DB → Tenant Views',
+                                  technicalDecisions: [
+                                    {
+                                      decision: 'Database-per-tenant multi-tenancy model',
+                                      reason: 'Provides complete data isolation between branch locations for regulatory compliance.'
+                                    }
+                                  ],
+                                    challenges: [
+                                      {
+                                        challenge: 'Running database migrations cleanly across multiple isolated tenant databases.',
+                                        approach: 'Utilized Laravel Tenancy automated migration pipeline hooks.',
+                                        result: 'All tenant databases update automatically during code migrations.'
+                                      }
+                                    ],
+                                      currentLimitations: 'Working prototype requiring wildcard DNS domain routing.',
+                                        limitations: [
+                                          'Working prototype requiring wildcard DNS domain setup for subdomains.',
+                                          'Local testing uses local hosts file mapping.'
+                                        ],
+                                          results: 'Demonstrated single-codebase multi-tenant branch management.',
+                                            outcome: 'Demonstrates multi-tenant database isolation, Laravel middleware, and branch access control.',
+                                              process: 'Configured Laravel Tenancy package → Built migration pipelines → Created tenant management UI.',
+                                                image: 'img/Tenancy.png',
+                                                  images: ['img/Tenancy.png'],
+                                                    isPrivateRepo: true,
+                                                      featured: false
+},
+{
+  id: 'codementorbot',
+    slug: 'codementorbot',
+      emoji: '🤖',
+        title: 'CodeMentorBot',
+          category: 'AI',
+            role: 'Full-Stack Developer',
+              status: 'Working Prototype',
+                summary: 'A personal Telegram bot connected to a local Ollama model to track daily coding hours, award streaks, and answer coding questions.',
+                  description: 'A Telegram bot running a local Ollama model to track developer coding progress, award streak achievements, and answer coding questions.',
+                    longDescription: 'A developer productivity bot connected to a local Ollama LLM instance. It gamifies daily coding habits by tracking user hours, suggesting coding challenges, and reviewing syntax.',
+                      problem: 'Self-taught developers lose consistency without daily habit tracking or immediate answers to programming syntax questions.',
+                        solution: 'Wrote a Python Telegram bot connected to SQLite and a local Ollama LLM for cost-free, offline-capable AI responses.',
+                          technologies: ['Python', 'Telegram Bot API', 'SQLite', 'Ollama (Llama 3)'],
+                            features: [
+                              'Telegram AI chat interface for code syntax questions.',
+                              'Daily streak tracker backed by SQLite.',
+                              'Zero external API cost utilizing local Ollama LLM.'
+                            ],
+                              whatWorks: [
+                                'Telegram message handling.',
+                                'Ollama local inference integration.',
+                                'SQLite progress logging.'
+                              ],
+                                architecture: 'User Telegram Message → Python Bot Service → Local Ollama LLM → SQLite DB',
+                                  technicalDecisions: [
+                                    {
+                                      decision: 'Local Ollama LLM execution',
+                                      reason: 'Eliminates per-token cloud API subscription costs for personal assistant bots.'
+                                    }
+                                  ],
+                                    challenges: [
+                                      {
+                                        challenge: 'Managing AI response generation latency on local CPU hardware.',
+                                        approach: 'Tuned system prompt length and context window sizes in Ollama configuration.',
+                                        result: 'Achieved acceptable response times without third-party API costs.'
+                                      }
+                                    ],
+                                      currentLimitations: 'Requires local host computer to run the background Ollama background daemon.',
+                                        limitations: [
+                                          'Requires local host computer to run the Ollama background daemon.',
+                                          'Response speed depends on local CPU/GPU hardware capability.'
+                                        ],
+                                          results: 'Deployed a cost-free personal Telegram developer mentor bot.',
+                                            outcome: 'Demonstrates Python bot development, local LLM integration, and SQLite habit logging.',
+                                              process: 'Wrote python-telegram-bot service → Built SQLite schema → Integrated Ollama HTTP endpoints.',
+                                                isPrivateRepo: true,
+                                                  featured: false
+}
 ];

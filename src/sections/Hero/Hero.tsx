@@ -49,7 +49,7 @@ export const Hero = () => {
                 className="w-full h-full object-cover object-top grayscale contrast-105 transition-all duration-500"
               />
             </div>
-            
+
             <div className="mt-3 pt-2 border-t border-[#D5D0C7] flex justify-between items-center text-[11px] font-mono text-[#6B6862]">
               <span>JANMARK M. SUELTO</span>
               <span className="text-[#C7462D]">BSIT / CCNA / DEV</span>
@@ -63,7 +63,7 @@ export const Hero = () => {
             <span className="font-mono text-xs font-semibold text-[#6B6862] uppercase tracking-widest block">
               FULL-STACK DEV &amp; AI AUTOMATION SPECIALIST
             </span>
-            
+
             <h1 className="hero-title uppercase text-[#171717]">
               JANMARK SUELTO <br />
               <span className="text-[#C7462D]">FULL-STACK</span> &amp; AUTOMATION SPECIALIST

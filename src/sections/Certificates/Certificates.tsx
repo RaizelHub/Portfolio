@@ -32,9 +32,8 @@ export const Certificates = () => {
             <div
               key={cert.id}
               onClick={() => hasImage && setActiveCert(cert)}
-              className={`group relative bg-[#EFEBE4] border border-[#D5D0C7] rounded-[2px] overflow-hidden flex flex-col transition-all duration-200 ${
-                hasImage ? 'cursor-pointer hover:border-[#171717]' : 'cursor-default'
-              }`}
+              className={`group relative bg-[#EFEBE4] border border-[#D5D0C7] rounded-[2px] overflow-hidden flex flex-col transition-all duration-200 ${hasImage ? 'cursor-pointer hover:border-[#171717]' : 'cursor-default'
+                }`}
             >
               {hasImage ? (
                 <div className="relative overflow-hidden bg-[#F4F1EA] border-b border-[#D5D0C7]" style={{ height: '160px' }}>

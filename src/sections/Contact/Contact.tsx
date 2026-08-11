@@ -6,7 +6,7 @@ export const Contact = () => {
   return (
     <section id="contact" className="bg-[#F4F1EA] text-[#171717] py-16 lg:py-20 border-t border-[#D5D0C7] space-y-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        
+
         {/* Interactive Typing Speed Challenge */}
         <TypingGame />
 

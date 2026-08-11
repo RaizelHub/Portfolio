@@ -27,7 +27,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       >
         [ {tag} ]
       </motion.span>
-      
+
       <motion.h2
         initial={{ opacity: 0, y: 15 }}
         whileInView={{ opacity: 1, y: 0 }}

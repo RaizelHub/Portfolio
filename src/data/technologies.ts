@@ -10,7 +10,7 @@ export const technologies: TechItem[] = [
     description: 'Declarative, component-based UI library with hooks, virtual DOM, and client-side state routing.',
     experience: '2+ yrs',
     proficiency: 88,
-    projects: ['CollabCanvas', 'JobRadar AI', 'LeadFlow AI', 'POS System', 'Smartpipe'],
+    projects: ['CareerOS', 'CollabCanvas', 'JobRadar AI', 'LeadFlow AI', 'POS System', 'Smartpipe'],
   },
   {
     id: 'typescript',
@@ -21,7 +21,7 @@ export const technologies: TechItem[] = [
     description: 'Typed superset of JavaScript that catches bugs at compile time and improves software quality.',
     experience: '2+ yrs',
     proficiency: 85,
-    projects: ['CollabCanvas', 'JobRadar AI', 'Portfolio', 'POS System'],
+    projects: ['CareerOS', 'CollabCanvas', 'JobRadar AI', 'Portfolio', 'POS System'],
   },
   {
     id: 'tailwind',
@@ -54,7 +54,7 @@ export const technologies: TechItem[] = [
     description: 'Next-generation frontend tooling offering instant dev server startup and hot module replacement.',
     experience: '2+ yrs',
     proficiency: 85,
-    projects: ['CollabCanvas', 'Portfolio', 'JobRadar AI', 'POS System'],
+    projects: ['CareerOS', 'CollabCanvas', 'Portfolio', 'JobRadar AI', 'POS System'],
   },
   {
     id: 'framer',

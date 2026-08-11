@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { projects } from '../data/projects';
 import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
+import { CareerOSCaseStudy } from '../components/ui/CareerOSCaseStudy';
 
 export const ProjectDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -79,6 +80,8 @@ export const ProjectDetails = () => {
 
         {slug === 'jobradar-ai' ? (
           <JobRadarCaseStudy />
+        ) : slug === 'careeros' ? (
+          <CareerOSCaseStudy />
         ) : (
           <>
             {/* Title Block Banner */}
@@ -130,9 +133,8 @@ export const ProjectDetails = () => {
                           <button
                             key={img}
                             onClick={() => setActiveImageIndex(idx)}
-                            className={`relative w-24 h-16 rounded-[1px] overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${
-                              activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
-                            }`}
+                            className={`relative w-24 h-16 rounded-[1px] overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
+                              }`}
                           >
                             <img
                               src={`/${img}`}

@@ -94,7 +94,7 @@ export const Sidebar: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 h-16 lg:h-20 bg-[#F4F1EA]/95 backdrop-blur-sm border-b border-[#D5D0C7] z-50 transition-all duration-200">
       <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        
+
         {/* Brand / Monospace Technical ID */}
         <a
           href="/"
@@ -127,9 +127,8 @@ export const Sidebar: React.FC = () => {
                 key={link.sectionId}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className={`relative py-1 flex items-center transition-colors ${
-                  isActive ? 'text-[#171717] font-bold' : 'text-[#6B6862] hover:text-[#171717]'
-                }`}
+                className={`relative py-1 flex items-center transition-colors ${isActive ? 'text-[#171717] font-bold' : 'text-[#6B6862] hover:text-[#171717]'
+                  }`}
               >
                 <span>{link.label}</span>
                 {isActive && (
@@ -181,9 +180,8 @@ export const Sidebar: React.FC = () => {
                   key={link.sectionId}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className={`flex items-center justify-between py-2 px-3 border border-[#D5D0C7] rounded-[2px] ${
-                    isActive ? 'bg-[#EFEBE4] text-[#171717] font-bold border-[#C7462D]' : 'text-[#6B6862]'
-                  }`}
+                  className={`flex items-center justify-between py-2 px-3 border border-[#D5D0C7] rounded-[2px] ${isActive ? 'bg-[#EFEBE4] text-[#171717] font-bold border-[#C7462D]' : 'text-[#6B6862]'
+                    }`}
                 >
                   <span>{link.label}</span>
                   {isActive && <span className="text-[#C7462D]">ACTIVE</span>}
