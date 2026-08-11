@@ -28,7 +28,7 @@ export const Hero = () => {
           </span>
           <span className="hidden sm:inline text-[#D5D0C7]">|</span>
           <span className="hidden sm:flex items-center gap-1.5 text-[#171717]">
-            <span>STATUS: AVAILABLE FOR JUNIOR FULL-STACK &amp; AUTOMATION ROLES</span>
+            <span>STATUS: AVAILABLE FOR JUNIOR WEB DEVELOPER &amp; AUTOMATION ROLES</span>
           </span>
         </div>
       </div>
@@ -61,12 +61,12 @@ export const Hero = () => {
         <div className="lg:col-span-7 flex flex-col space-y-6 order-1 lg:order-2">
           <div className="space-y-4">
             <span className="font-mono text-xs font-semibold text-[#6B6862] uppercase tracking-widest block">
-              JUNIOR FULL-STACK DEVELOPER WITH AN AUTOMATION SPECIALIZATION
+              JUNIOR WEB DEVELOPER WITH AN AUTOMATION SPECIALIZATION
             </span>
 
             <h1 className="hero-title uppercase text-[#171717]">
               JANMARK SUELTO <br />
-              <span className="text-[#C7462D]">JUNIOR FULL-STACK</span> DEVELOPER
+              <span className="text-[#C7462D]">JUNIOR WEB</span> DEVELOPER
             </h1>
 
             <p className="text-lg sm:text-xl text-[#171717] font-medium leading-snug pt-2">
