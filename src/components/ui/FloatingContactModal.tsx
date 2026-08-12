@@ -103,11 +103,11 @@ export const FloatingContactModal: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] px-4 py-3 rounded-[2px] border border-[#D5D0C7] shadow-xl flex items-center gap-2.5 font-mono text-xs font-bold transition-all duration-200 uppercase tracking-wider group"
+            className="fixed bottom-6 right-6 z-50 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] px-4 py-3 rounded-xl border border-[#D5D0C7] shadow-xl flex items-center gap-2.5 font-pt-sans text-xs font-bold transition-all duration-200 tracking-wide group"
             aria-label="Open Floating Contact"
           >
             <Mail className="w-4 h-4 text-[#C7462D] group-hover:text-[#F4F1EA] transition-colors" />
-            <span>CONTACT ME?</span>
+            <span>Contact Me</span>
           </motion.button>
         )}
       </AnimatePresence>
@@ -120,19 +120,19 @@ export const FloatingContactModal: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[440px] max-h-[85vh] bg-[#20201E] text-[#F4F1EA] border border-[#3A3935] rounded-[2px] shadow-2xl overflow-hidden flex flex-col font-mono text-xs"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[440px] max-h-[85vh] bg-[#20201E] text-[#F4F1EA] border border-[#3A3935] rounded-2xl shadow-2xl overflow-hidden flex flex-col font-mono text-xs"
           >
             {/* Header */}
             <div className="bg-[#282825] px-5 py-3.5 border-b border-[#3A3935] flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-[#C7462D]" />
-                <span className="font-bold uppercase tracking-wider text-xs">
-                  DIRECT TRANSMISSION // EMAIL
+                <span className="font-bold tracking-wider text-xs">
+                  Send Email
                 </span>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 text-[#A3A09A] hover:text-[#F4F1EA] hover:bg-[#3A3935] rounded-[1px] transition-colors"
+                className="p-1 text-[#A3A09A] hover:text-[#F4F1EA] hover:bg-[#3A3935] rounded-md transition-colors"
                 aria-label="Close Contact Modal"
               >
                 <X className="w-4 h-4" />
@@ -143,7 +143,7 @@ export const FloatingContactModal: React.FC = () => {
             <div className="p-5 overflow-y-auto space-y-4 flex-1">
               
               {/* Quick Communication Links */}
-              <div className="bg-[#282825] p-3.5 border border-[#3A3935] rounded-[1px] space-y-2.5">
+              <div className="bg-[#282825] p-3.5 border border-[#3A3935] rounded-lg space-y-2.5">
                 <div className="flex items-center justify-between text-[11px]">
                   <span className="text-[#A3A09A]">PRIMARY EMAIL</span>
                   <div className="flex items-center gap-1.5">
@@ -196,7 +196,7 @@ export const FloatingContactModal: React.FC = () => {
                       value={formData.name}
                       onChange={handleFormChange}
                       placeholder="Janmark Suelto"
-                      className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-[1px] px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.name ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
+                      className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-md px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.name ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
                     />
                     {formErrors.name && <span className="text-[10px] text-[#C7462D] block mt-0.5">{formErrors.name}</span>}
                   </div>
@@ -209,7 +209,7 @@ export const FloatingContactModal: React.FC = () => {
                       value={formData.email}
                       onChange={handleFormChange}
                       placeholder="janmark@example.com"
-                      className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-[1px] px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.email ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
+                      className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-md px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.email ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
                     />
                     {formErrors.email && <span className="text-[10px] text-[#C7462D] block mt-0.5">{formErrors.email}</span>}
                   </div>
@@ -223,7 +223,7 @@ export const FloatingContactModal: React.FC = () => {
                     value={formData.subject}
                     onChange={handleFormChange}
                     placeholder="Project Inquiry / Job Offer"
-                    className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-[1px] px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.subject ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
+                    className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-md px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.subject ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
                   />
                   {formErrors.subject && <span className="text-[10px] text-[#C7462D] block mt-0.5">{formErrors.subject}</span>}
                 </div>
@@ -236,7 +236,7 @@ export const FloatingContactModal: React.FC = () => {
                     value={formData.message}
                     onChange={handleFormChange}
                     placeholder="Requirements, timeline, or inquiries..."
-                    className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-[1px] px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.message ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
+                    className={`w-full bg-[#171717] border text-[#F4F1EA] rounded-md px-3 py-2 text-xs focus:border-[#C7462D] focus:outline-none ${formErrors.message ? 'border-[#C7462D]' : 'border-[#3A3935]'}`}
                   />
                   {formErrors.message && <span className="text-[10px] text-[#C7462D] block mt-0.5">{formErrors.message}</span>}
                 </div>
@@ -245,17 +245,17 @@ export const FloatingContactModal: React.FC = () => {
                   <button
                     type="submit"
                     disabled={formStatus === 'loading'}
-                    className="w-full py-2.5 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-mono font-bold uppercase rounded-[1px] transition-colors flex items-center justify-center gap-2 tracking-wider text-xs"
+                    className="w-full py-2.5 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-pt-sans font-bold rounded-lg transition-colors flex items-center justify-center gap-2 tracking-wide text-xs"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    <span>{formStatus === 'loading' ? 'TRANSMITTING...' : 'SUBMIT TRANSMISSION →'}</span>
+                    <span>{formStatus === 'loading' ? 'Sending...' : 'Submit'}</span>
                   </button>
                 </div>
 
                 {formStatus === 'success' && (
-                  <div className="p-2.5 bg-[#282825] border border-[#C7462D] text-[#C7462D] font-bold text-xs flex items-center gap-2 rounded-[1px]">
+                  <div className="p-2.5 bg-[#282825] border border-[#C7462D] text-[#C7462D] font-bold text-xs flex items-center gap-2 rounded-lg">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>TRANSMISSION SENT SUCCESSFULLY.</span>
+                    <span>Message sent successfully.</span>
                   </div>
                 )}
               </form>

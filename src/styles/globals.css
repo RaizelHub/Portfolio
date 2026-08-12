@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-warm-bg: #F4F1EA;
   --color-warm-card: #EFEBE4;
@@ -17,15 +19,40 @@
   --font-heading: 'Jersey 10', 'Inter', sans-serif;
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-pt-sans: 'PT Sans', sans-serif;
+  --font-amarna: 'Amarna', 'Amaranth', sans-serif;
+}
+
+.font-pt-sans {
+  font-family: var(--font-pt-sans);
+}
+
+.font-amarna {
+  font-family: var(--font-amarna);
 }
 
 :root {
-  --bg-warm: #F4F1EA;
+  --bg-primary: #F4F1EA;
+  --bg-surface: #EFEBE4;
+  --bg-input: #F4F1EA;
   --text-primary: #171717;
-  --text-secondary: #6B6862;
-  --accent: #C7462D;
+  --text-muted: #6B6862;
   --border-color: #D5D0C7;
+  --accent: #C7462D;
   --dark-section: #20201E;
+}
+
+.dark,
+html.dark {
+  --bg-primary: #151411;
+  --bg-surface: #1D1C18;
+  --bg-input: #24221D;
+  --text-primary: #F2EEE6;
+  --text-muted: #A9A39A;
+  --border-color: #34312B;
+  --accent: #E25235;
+  --dark-section: #11100E;
+  color-scheme: dark;
 }
 
 .font-display {
@@ -34,25 +61,43 @@
 }
 
 .hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.75rem, 6.5vw, 5.25rem);
-  font-weight: 400;
-  line-height: 0.92;
-  letter-spacing: 0.02em;
+  font-family: var(--font-amarna);
+  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
   color: #171717;
+  transition: color 200ms ease;
+}
+
+.dark .hero-title,
+html.dark .hero-title {
+  color: #F2EEE6;
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 3.8vw, 3.25rem);
-  font-weight: 400;
-  line-height: 0.98;
-  letter-spacing: 0.02em;
+  font-family: var(--font-amarna);
+  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: #171717;
+  text-transform: lowercase;
+  transition: color 200ms ease;
+}
+
+.dark .section-title,
+html.dark .section-title {
+  color: #F2EEE6;
 }
 
 .editorial-border {
   border-color: #D5D0C7;
+}
+
+.dark .editorial-border,
+html.dark .editorial-border {
+  border-color: #34312B;
 }
 
 .editorial-tag {
@@ -66,29 +111,24 @@
   html {
     scroll-behavior: smooth;
     font-family: var(--font-sans);
-    background-color: #F4F1EA;
-    color: #171717;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   body {
-    background-color: #F4F1EA;
-    color: #171717;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: #171717;
-  }
-
-  p {
-    color: #171717;
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
   ::selection {
@@ -96,97 +136,44 @@
     color: #F4F1EA;
   }
 
+  .dark ::selection,
+  html.dark ::selection {
+    background-color: #E25235;
+    color: #151411;
+  }
+
   :focus-visible {
     outline: 2px solid #C7462D;
     outline-offset: 2px;
+  }
+
+  .dark :focus-visible,
+  html.dark :focus-visible {
+    outline-color: #E25235;
   }
 }
 
 /* Custom Editorial Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F4F1EA;
-  border-left: 1px solid #D5D0C7;
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5D0C7;
-  border-radius: 0px;
+  background: var(--border-color);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C7462D;
+  background: var(--accent);
 }
 
-@media print {
-  body {
-    background: #F4F1EA !important;
-    color: #171717 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  nav,
-  footer,
-  aside,
-  .fixed,
-  [class*="backdrop"] {
-    display: none !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    page-break-after: avoid;
-    color: #171717 !important;
-  }
-}
-
-:-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: #F4F1EA;
-  border-left: 1px solid #D5D0C7;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #D5D0C7;
-  border-radius: 0px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #C7462D;
-}
-
-@media print {
-  body {
-    background: #F4F1EA !important;
-    color: #171717 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  nav,
-  footer,
-  aside,
-  .fixed,
-  [class*="backdrop"] {
-    display: none !important;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    page-break-after: avoid;
-    color: #171717 !important;
-  }
+/* Base button defaults */
+button {
+  cursor: pointer;
 }

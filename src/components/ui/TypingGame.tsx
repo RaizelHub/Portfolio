@@ -171,7 +171,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
   const rating = getWpmRating(wpm);
 
   const renderGameContent = () => (
-    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 sm:p-8 rounded-[2px] space-y-6 font-mono text-xs text-[#171717] w-full text-left">
+    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 sm:p-8 rounded-xl space-y-6 font-mono text-xs text-[#171717] w-full text-left">
       
       {/* Header bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5D0C7] pb-4">
@@ -179,7 +179,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
           <span className="font-bold text-sm uppercase tracking-wider text-[#171717]">
             DEV_SPEED // TYPING SPEED TEST
           </span>
-          <span className="text-[10px] bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] font-bold uppercase">
+          <span className="text-[10px] bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-md font-bold uppercase">
             {currentParagraph.category}
           </span>
         </div>
@@ -187,14 +187,14 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
         <div className="flex items-center gap-2">
           <button
             onClick={handleNextParagraph}
-            className="px-3 py-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-[1px] transition-colors uppercase text-[11px]"
+            className="px-3 py-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-md transition-colors uppercase text-[11px]"
           >
             RANDOM PARAGRAPH ({snippetIndex + 1}/{PARAGRAPHS.length})
           </button>
           
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-[1px] transition-colors"
+            className="p-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-md transition-colors"
             aria-label="Expand Fullscreen"
             title={isExpanded ? "Minimize View" : "Expand Fullscreen"}
           >
@@ -205,19 +205,19 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
 
       {/* Live Stats Row */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-[1px]">
+        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-lg">
           <span className="text-[10px] text-[#6B6862] block uppercase font-bold">SPEED (WPM)</span>
           <span className="text-xl font-bold text-[#171717]">{wpm}</span>
         </div>
-        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-[1px]">
+        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-lg">
           <span className="text-[10px] text-[#6B6862] block uppercase font-bold">ACCURACY</span>
           <span className="text-xl font-bold text-[#171717]">{accuracy}%</span>
         </div>
-        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-[1px]">
+        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-lg">
           <span className="text-[10px] text-[#6B6862] block uppercase font-bold">TIME</span>
           <span className="text-xl font-bold text-[#171717]">{elapsedSeconds}s</span>
         </div>
-        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-[1px]">
+        <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-3 rounded-lg">
           <span className="text-[10px] text-[#6B6862] block uppercase font-bold">PROGRESS</span>
           <span className="text-xl font-bold text-[#C7462D]">
             {input.length}/{currentParagraph.text.length}
@@ -228,7 +228,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
       {/* Paragraph Display Container */}
       <div
         onClick={() => inputRef.current?.focus()}
-        className={`relative bg-[#F4F1EA] border p-5 rounded-[1px] font-mono text-sm sm:text-base leading-relaxed tracking-wide min-h-[100px] cursor-text select-none ${
+        className={`relative bg-[#F4F1EA] border p-5 rounded-lg font-mono text-sm sm:text-base leading-relaxed tracking-wide min-h-[100px] cursor-text select-none ${
           isActive ? 'border-[#C7462D]' : 'border-[#D5D0C7]'
         }`}
       >
@@ -285,7 +285,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
         {!isActive && !isCompleted && (
           <button
             onClick={handleStart}
-            className="px-6 py-3 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-bold uppercase rounded-[1px] transition-colors flex items-center gap-2 tracking-wider"
+            className="px-6 py-3 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-bold uppercase rounded-lg transition-colors flex items-center gap-2 tracking-wider"
           >
             <Play className="w-4 h-4" />
             <span>START TYPING TEST</span>
@@ -295,7 +295,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
         {isActive && (
           <button
             onClick={handleReset}
-            className="px-5 py-2.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold uppercase rounded-[1px] transition-colors flex items-center gap-2"
+            className="px-5 py-2.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold uppercase rounded-lg transition-colors flex items-center gap-2"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>RESTART TEST</span>
@@ -306,14 +306,14 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="w-full bg-[#F4F1EA] border border-[#C7462D] p-5 rounded-[1px] flex flex-col sm:flex-row items-center justify-between gap-4"
+            className="w-full bg-[#F4F1EA] border border-[#C7462D] p-5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4"
           >
             <div className="flex items-center gap-3">
               <Trophy className="w-8 h-8 text-[#C7462D]" />
               <div>
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-base text-[#171717]">{rating.title}</span>
-                  <span className="text-[10px] bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] font-bold uppercase">
+                  <span className="text-[10px] bg-[#C7462D] text-[#F4F1EA] px-2 py-0.5 rounded-md font-bold uppercase">
                     {rating.badge}
                   </span>
                 </div>
@@ -326,7 +326,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={handleStart}
-                className="px-4 py-2.5 bg-[#EFEBE4] hover:bg-[#D5D0C7] border border-[#D5D0C7] text-[#171717] font-bold rounded-[1px] transition-colors uppercase text-xs"
+                className="px-4 py-2.5 bg-[#EFEBE4] hover:bg-[#D5D0C7] border border-[#D5D0C7] text-[#171717] font-bold rounded-lg transition-colors uppercase text-xs"
               >
                 TRY AGAIN
               </button>
@@ -335,7 +335,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
                   setIsExpanded(false);
                   window.dispatchEvent(new CustomEvent('open-contact-modal'));
                 }}
-                className="px-5 py-2.5 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-bold rounded-[1px] transition-colors uppercase text-xs flex items-center gap-1.5"
+                className="px-5 py-2.5 bg-[#C7462D] hover:bg-[#a63723] text-[#F4F1EA] font-bold rounded-lg transition-colors uppercase text-xs flex items-center gap-1.5"
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>CONTACT JANMARK ↗</span>

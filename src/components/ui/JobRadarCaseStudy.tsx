@@ -50,13 +50,13 @@ export const JobRadarCaseStudy: React.FC = () => {
   return (
     <div className="space-y-12 text-left">
       {/* SECTION 1: HERO OVERVIEW */}
-      <section className="bg-[#EFEBE4] border border-[#D5D0C7] rounded-[2px] p-6 sm:p-8 space-y-6">
+      <section className="bg-[#EFEBE4] border border-[#D5D0C7] rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2.5 py-0.5 rounded-[1px] uppercase">
+            <span className="text-xs font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2.5 py-0.5 rounded-md uppercase">
               Full-Stack Development / AI Automation / n8n
             </span>
-            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-[#F4F1EA] text-[#C7462D] border border-[#D5D0C7] rounded-[1px] flex items-center">
+            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-[#F4F1EA] text-[#C7462D] border border-[#D5D0C7] rounded-md flex items-center">
               Active Development
             </span>
           </div>
@@ -82,7 +82,7 @@ export const JobRadarCaseStudy: React.FC = () => {
               'Node.js', 'Express', 'Zod', 'Supabase', 'PostgreSQL', 'Supabase Auth', 'Row Level Security',
               'n8n', 'Google Gemini', 'Gmail Integration', 'Webhooks', 'Vercel'
             ].map((tech) => (
-              <span key={tech} className="px-2.5 py-1 text-xs font-mono bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7] rounded-[1px]">
+              <span key={tech} className="px-2.5 py-1 text-xs font-mono bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7] rounded-md">
                 {tech}
               </span>
             ))}
@@ -95,12 +95,12 @@ export const JobRadarCaseStudy: React.FC = () => {
             href="https://job-radar-ai-frontend.vercel.app/demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-[1px] transition-all tracking-wider uppercase"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-lg transition-all tracking-wider uppercase"
           >
             <ExternalLink className="w-4 h-4" />
             <span>Launch Live Demo ↗</span>
           </a>
-          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-[1px] text-xs text-[#6B6862]">
+          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-lg text-xs text-[#6B6862]">
             <Lock className="w-3.5 h-3.5 text-[#C7462D]" />
             <span>Source Code: Private / Available upon request</span>
           </div>
@@ -113,10 +113,10 @@ export const JobRadarCaseStudy: React.FC = () => {
           <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
             <Eye className="w-4 h-4 text-[#C7462D]" /> Production Screenshots &amp; Workflow Execution
           </h3>
-          <div className="flex bg-[#EFEBE4] p-1 rounded-[2px] border border-[#D5D0C7] text-xs font-mono">
+          <div className="flex bg-[#EFEBE4] p-1 rounded-lg border border-[#D5D0C7] text-xs font-mono">
             <button
               onClick={() => setActiveTab('screenshots')}
-              className={`px-3 py-1 rounded-[1px] font-medium transition-all ${
+              className={`px-3 py-1 rounded-md font-medium transition-all ${
                 activeTab === 'screenshots'
                   ? 'bg-[#171717] text-[#F4F1EA] font-semibold'
                   : 'text-[#6B6862] hover:text-[#171717]'
@@ -126,7 +126,7 @@ export const JobRadarCaseStudy: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('placeholders')}
-              className={`px-3 py-1 rounded-[1px] font-medium transition-all ${
+              className={`px-3 py-1 rounded-md font-medium transition-all ${
                 activeTab === 'placeholders'
                   ? 'bg-[#171717] text-[#F4F1EA] font-semibold'
                   : 'text-[#6B6862] hover:text-[#171717]'
@@ -138,8 +138,8 @@ export const JobRadarCaseStudy: React.FC = () => {
         </div>
 
         {activeTab === 'screenshots' ? (
-          <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-[2px] space-y-4">
-            <div className="relative aspect-video rounded-[1px] overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7]">
+          <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-xl space-y-4">
+            <div className="relative aspect-video rounded-lg overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7]">
               <img
                 src={realScreenshots[activeImageIndex].src}
                 alt={realScreenshots[activeImageIndex].title}

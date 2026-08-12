@@ -5,8 +5,7 @@ import { Services } from '../sections/Services/Services';
 import { ProjectsSection } from '../sections/Projects/ProjectsSection';
 import { Experience } from '../sections/Experience/Experience';
 import { Certificates } from '../sections/Certificates/Certificates';
-import { Process } from '../sections/Process/Process';
-import { Contact } from '../sections/Contact/Contact';
+import { GithubActivity } from '../sections/GithubActivity/GithubActivity';
 
 export const Home = () => {
   return (
@@ -18,8 +17,7 @@ export const Home = () => {
       <ProjectsSection />
       <Experience />
       <Certificates />
-      <Process />
-      <Contact />
+      <GithubActivity />
     </div>
   );
 };

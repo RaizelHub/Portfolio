@@ -23,7 +23,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.4 }}
-        className="font-mono text-xs font-semibold uppercase tracking-wider text-[#C7462D] block mb-2"
+        className="font-mono text-xs font-semibold uppercase tracking-wider text-[#C7462D] dark:text-[#E25235] block mb-2"
       >
         [ {tag} ]
       </motion.span>
@@ -33,7 +33,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 0.4, delay: 0.05 }}
-        className="section-title text-[#171717] mb-3 uppercase"
+        className="section-title text-[#171717] dark:text-[#F2EEE6] mb-3 uppercase"
       >
         {title}
       </motion.h2>
@@ -44,7 +44,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-50px' }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-sm sm:text-base text-[#6B6862] font-normal leading-relaxed"
+          className="text-sm sm:text-base text-[#6B6862] dark:text-[#A9A39A] font-normal leading-relaxed"
         >
           {subtitle}
         </motion.p>

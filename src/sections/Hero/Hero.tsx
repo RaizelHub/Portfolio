@@ -1,15 +1,20 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Mail, MapPin } from 'lucide-react';
+import { ArrowRight, Download, MapPin } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
+import { useSound } from '../../context/SoundContext';
 
 export const Hero = () => {
+  const { playHover, playClick } = useSound();
+
   const scrollToSection = (id: string) => {
+    playClick();
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleDownloadResume = () => {
+    playClick();
     const link = document.createElement('a');
     link.href = profile.resumeUrl;
     link.download = 'Suelto-Janmark-Resume.pdf';
@@ -19,17 +24,12 @@ export const Hero = () => {
   };
 
   return (
-    <SectionContainer id="home" className="relative pt-12 pb-16 lg:py-20 border-b border-[#D5D0C7]">
-      {/* Top Monospace Technical Metadata Line */}
-      <div className="flex flex-wrap items-center justify-end gap-3 text-xs font-mono text-[#6B6862] pb-6 mb-8 border-b border-[#D5D0C7]">
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-[#171717]">
-            <MapPin className="w-3.5 h-3.5 text-[#C7462D]" /> BUKIDNON, PHILIPPINES
-          </span>
-          <span className="hidden sm:inline text-[#D5D0C7]">|</span>
-          <span className="hidden sm:flex items-center gap-1.5 text-[#171717]">
-            <span>STATUS: AVAILABLE FOR JUNIOR WEB DEVELOPER &amp; AUTOMATION ROLES</span>
-          </span>
+    <SectionContainer id="home" className="relative pt-12 pb-16 lg:py-20 border-b border-[#D5D0C7] dark:border-[#34312B]">
+      {/* Top Metadata Line */}
+      <div className="flex flex-wrap items-center justify-end gap-3 text-xs font-pt-sans text-[#6B6862] dark:text-[#A9A39A] pb-6 mb-8 border-b border-[#D5D0C7] dark:border-[#34312B]">
+        <div className="flex items-center gap-2 text-[#171717] dark:text-[#F2EEE6] font-medium">
+          <MapPin className="w-3.5 h-3.5 text-[#C7462D] dark:text-[#E25235] shrink-0" />
+          <span>Bukidnon, Philippines &middot; Open to Junior Web Development &amp; Automation Roles</span>
         </div>
       </div>
 
@@ -42,17 +42,12 @@ export const Hero = () => {
             transition={{ duration: 0.5 }}
             className="w-full max-w-sm"
           >
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px]">
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl border border-[#D5D0C7] dark:border-[#34312B] bg-[#EFEBE4] dark:bg-[#1D1C18]">
               <img
                 src={profile.profileImage}
                 alt="Janmark Suelto"
                 className="w-full h-full object-cover object-top grayscale contrast-105 transition-all duration-500"
               />
-            </div>
-
-            <div className="mt-3 pt-2 border-t border-[#D5D0C7] flex justify-between items-center text-[11px] font-mono text-[#6B6862]">
-              <span>JANMARK M. SUELTO</span>
-              <span className="text-[#C7462D]">BSIT / CCNA / DEV</span>
             </div>
           </motion.div>
         </div>
@@ -60,64 +55,35 @@ export const Hero = () => {
         {/* Right Column: Editorial Headline & Bio */}
         <div className="lg:col-span-7 flex flex-col space-y-6 order-1 lg:order-2">
           <div className="space-y-4">
-            <span className="font-mono text-xs font-semibold text-[#6B6862] uppercase tracking-widest block">
-              JUNIOR WEB DEVELOPER WITH AN AUTOMATION SPECIALIZATION
-            </span>
-
-            <h1 className="hero-title uppercase text-[#171717]">
+            <h1 className="hero-title uppercase text-[#171717] dark:text-[#F2EEE6]">
               JANMARK SUELTO <br />
-              <span className="text-[#C7462D]">JUNIOR WEB</span> DEVELOPER
+              <span className="text-[#C7462D] dark:text-[#E25235]">JUNIOR FULL-STACK</span> <br />
+              DEVELOPER
             </h1>
 
-            <p className="text-lg sm:text-xl text-[#171717] font-medium leading-snug pt-2">
-              Building high-performance React &amp; TypeScript applications connected to APIs, n8n workflows, and AI integration engines.
+            <p className="text-lg sm:text-xl text-[#171717] dark:text-[#F2EEE6] font-medium leading-snug pt-2">
+              Building modern web applications, backend services, and automated workflow pipelines.
             </p>
-
-            <p className="text-sm sm:text-base text-[#6B6862] leading-relaxed max-w-2xl">
-              Specialized in lead-management platforms, job discovery systems, automated order processing, administrative tools, and real-time IoT monitoring solutions with technical precision.
-            </p>
-          </div>
-
-          {/* Technical Specs Checklist */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 font-mono text-xs text-[#171717] pt-2 border-t border-[#D5D0C7]/80">
-            <div>
-              <span className="text-[#6B6862] block text-[10px]">STACK</span>
-              <span>React 19 / TS / Node</span>
-            </div>
-            <div>
-              <span className="text-[#6B6862] block text-[10px]">WORKFLOWS</span>
-              <span>n8n / REST / AI APIs</span>
-            </div>
-            <div>
-              <span className="text-[#6B6862] block text-[10px]">LOCATION</span>
-              <span>Bukidnon, PH (GMT+8)</span>
-            </div>
           </div>
 
           {/* Primary Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-4 font-mono text-xs">
+          <div className="flex flex-wrap items-center gap-3 pt-4 font-pt-sans text-xs font-bold">
             <button
               onClick={() => scrollToSection('projects')}
-              className="px-5 py-3 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
+              onMouseEnter={playHover}
+              className="px-6 py-3.5 bg-[#171717] dark:bg-[#F2EEE6] hover:bg-[#C7462D] dark:hover:bg-[#E25235] text-[#F4F1EA] dark:text-[#151411] rounded-xl transition-all flex items-center gap-2 tracking-wide shadow-md hover:shadow-lg"
             >
-              <span>View Projects</span>
+              <span>Explore Projects</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               onClick={handleDownloadResume}
-              className="px-5 py-3 bg-transparent hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
+              onMouseEnter={playHover}
+              className="px-6 py-3.5 bg-transparent hover:bg-[#EFEBE4] dark:hover:bg-[#1D1C18] text-[#171717] dark:text-[#F2EEE6] border border-[#D5D0C7] dark:border-[#34312B] hover:border-[#171717] dark:hover:border-[#F2EEE6] rounded-xl transition-all flex items-center gap-2 tracking-wide"
             >
-              <Download className="w-4 h-4 text-[#C7462D]" />
+              <Download className="w-4 h-4 text-[#C7462D] dark:text-[#E25235]" />
               <span>Resume PDF</span>
-            </button>
-
-            <button
-              onClick={() => window.dispatchEvent(new CustomEvent('open-contact-modal'))}
-              className="px-5 py-3 bg-transparent hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] font-semibold rounded-[2px] transition-colors flex items-center gap-2 uppercase tracking-wider"
-            >
-              <Mail className="w-4 h-4 text-[#C7462D]" />
-              <span>Contact Me?</span>
             </button>
           </div>
         </div>

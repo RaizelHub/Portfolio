@@ -74,8 +74,8 @@ export const Process = () => {
   return (
     <SectionContainer id="process" className="py-16 border-b border-[#D5D0C7]">
       <SectionHeading
-        tag="07 // METHODOLOGY & LIFECYCLE"
-        title="Development &amp; Automation Process"
+        tag="07"
+        title="process &amp; workflow"
         subtitle="A disciplined approach that turns requirements into high-performance web applications and automated workflows."
       />
 
@@ -85,13 +85,13 @@ export const Process = () => {
           return (
             <div
               key={item.step}
-              className="group bg-[#EFEBE4] border border-[#D5D0C7] hover:border-[#171717] rounded-[2px] p-6 sm:p-7 transition-all duration-200 flex flex-col justify-between"
+              className="group bg-[#EFEBE4] border border-[#D5D0C7] hover:border-[#171717] rounded-xl p-6 sm:p-7 transition-all duration-200 flex flex-col justify-between"
             >
               <div>
                 {/* Header */}
                 <div className="flex items-center justify-between mb-4 border-b border-[#D5D0C7] pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-[1px] bg-[#171717] text-[#F4F1EA] flex items-center justify-center font-mono">
+                    <div className="w-9 h-9 rounded-lg bg-[#171717] text-[#F4F1EA] flex items-center justify-center font-mono">
                       <Icon className="w-4 h-4" />
                     </div>
                     <div>
@@ -126,7 +126,7 @@ export const Process = () => {
                   {item.deliverables.map((del) => (
                     <span
                       key={del}
-                      className="text-[10px] px-2 py-0.5 rounded-[1px] bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7]"
+                      className="text-[10px] px-2 py-0.5 rounded-md bg-[#F4F1EA] text-[#171717] border border-[#D5D0C7]"
                     >
                       {del}
                     </span>

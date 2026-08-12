@@ -27,7 +27,7 @@ export const ProjectDetails = () => {
   if (!project) {
     return (
       <main className="min-h-screen pt-20 flex items-center justify-center bg-[#F4F1EA] px-4 font-mono">
-        <div className="text-center bg-[#EFEBE4] border border-[#D5D0C7] p-8 rounded-[2px] max-w-md w-full">
+        <div className="text-center bg-[#EFEBE4] border border-[#D5D0C7] p-8 rounded-xl max-w-md w-full">
           <HelpCircle className="w-12 h-12 text-[#C7462D] mx-auto mb-3" />
           <h2 className="text-lg font-bold text-[#171717] mb-2 uppercase">REPOSITORY NOT FOUND</h2>
           <p className="text-xs text-[#6B6862] mb-6 leading-relaxed">
@@ -35,7 +35,7 @@ export const ProjectDetails = () => {
           </p>
           <button
             onClick={() => navigate('/#projects')}
-            className="px-4 py-2 bg-[#171717] text-[#F4F1EA] hover:bg-[#C7462D] text-xs font-bold rounded-[2px]"
+            className="px-4 py-2 bg-[#171717] text-[#F4F1EA] hover:bg-[#C7462D] text-xs font-bold rounded-lg"
           >
             RETURN TO CASE STUDIES
           </button>
@@ -87,7 +87,7 @@ export const ProjectDetails = () => {
             {/* Title Block Banner */}
             <div className="border-b border-[#D5D0C7] pb-6 mb-8 text-left">
               <div className="flex items-center gap-2 mb-2 font-mono">
-                <span className="text-xs font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-[1px] uppercase">
+                <span className="text-xs font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-md uppercase">
                   {project.category}
                 </span>
                 <span className="text-xs text-[#C7462D] font-semibold uppercase">
@@ -109,9 +109,9 @@ export const ProjectDetails = () => {
 
                 {/* Gallery */}
                 {galleryImages.length > 0 && (
-                  <div className="space-y-3 bg-[#EFEBE4] border border-[#D5D0C7] p-2.5 rounded-[2px]">
+                  <div className="space-y-3 bg-[#EFEBE4] border border-[#D5D0C7] p-2.5 rounded-xl">
                     <div
-                      className="relative aspect-video rounded-[1px] overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7] cursor-pointer group"
+                      className="relative aspect-video rounded-lg overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7] cursor-pointer group"
                       onClick={() => setLightboxOpen(true)}
                     >
                       <img
@@ -120,7 +120,7 @@ export const ProjectDetails = () => {
                         className="w-full h-full object-cover object-top transition-all duration-300"
                       />
                       <div className="absolute inset-0 bg-[#171717]/0 group-hover:bg-[#171717]/40 transition-colors flex items-center justify-center">
-                        <span className="text-[#F4F1EA] opacity-0 group-hover:opacity-100 text-xs font-mono font-semibold transition-opacity bg-[#C7462D] px-3 py-1 rounded-[1px]">
+                        <span className="text-[#F4F1EA] opacity-0 group-hover:opacity-100 text-xs font-mono font-semibold transition-opacity bg-[#C7462D] px-3 py-1 rounded-md">
                           EXPAND FULL SCREEN ↗
                         </span>
                       </div>
@@ -133,7 +133,7 @@ export const ProjectDetails = () => {
                           <button
                             key={img}
                             onClick={() => setActiveImageIndex(idx)}
-                            className={`relative w-24 h-16 rounded-[1px] overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
+                            className={`relative w-24 h-16 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
                               }`}
                           >
                             <img
@@ -163,7 +163,7 @@ export const ProjectDetails = () => {
 
                 {/* Problem & Solution Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px] space-y-2">
+                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-xl space-y-2">
                     <h4 className="font-mono font-bold text-[#C7462D] text-xs uppercase flex items-center gap-1.5">
                       <Shield className="w-4 h-4" /> THE PROBLEM SPECIFICATION
                     </h4>
@@ -171,7 +171,7 @@ export const ProjectDetails = () => {
                       {project.problem}
                     </p>
                   </div>
-                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-[2px] space-y-2">
+                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-xl space-y-2">
                     <h4 className="font-mono font-bold text-[#171717] text-xs uppercase flex items-center gap-1.5">
                       <CheckCircle className="w-4 h-4 text-[#C7462D]" /> THE ARCHITECTURAL SOLUTION
                     </h4>
@@ -207,13 +207,13 @@ export const ProjectDetails = () => {
 
                   {/* Dedicated Architecture Workflow Diagram Image Display */}
                   {project.architectureDiagramUrl && (
-                    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-3 rounded-[2px] space-y-2">
+                    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-3 rounded-xl space-y-2">
                       <div className="flex items-center justify-between text-xs font-mono text-[#6B6862]">
                         <span className="font-bold text-[#171717] uppercase flex items-center gap-1.5">
                           <Workflow className="w-3.5 h-3.5 text-[#C7462D]" /> SYSTEM ARCHITECTURE &amp; WORKFLOW DIAGRAM
                         </span>
                       </div>
-                      <div className="overflow-hidden rounded-[1px] border border-[#D5D0C7] bg-[#F4F1EA]">
+                      <div className="overflow-hidden rounded-lg border border-[#D5D0C7] bg-[#F4F1EA]">
                         <img
                           src={`/${project.architectureDiagramUrl}`}
                           alt={`${project.title} Architecture Workflow Diagram`}
@@ -227,7 +227,7 @@ export const ProjectDetails = () => {
 
               {/* RIGHT: Tech Specs & Links Sidebar */}
               <div className="lg:col-span-4 space-y-6">
-                <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-[2px] text-left space-y-5">
+                <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl text-left space-y-5">
                   <h3 className="font-mono font-bold text-[#171717] border-b border-[#D5D0C7] pb-2 text-xs uppercase flex justify-between">
                     <span>TECHNICAL SPECIFICATIONS</span>
                   </h3>
@@ -241,7 +241,7 @@ export const ProjectDetails = () => {
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs px-2 py-0.5 bg-[#F4F1EA] text-[#171717] rounded-[1px] border border-[#D5D0C7]"
+                          className="text-xs px-2 py-0.5 bg-[#F4F1EA] text-[#171717] rounded-md border border-[#D5D0C7]"
                         >
                           {tech}
                         </span>
@@ -256,7 +256,7 @@ export const ProjectDetails = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-[1px] transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
+                        className="w-full py-2.5 px-4 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>VISIT LIVE DEMO ↗</span>
@@ -268,7 +268,7 @@ export const ProjectDetails = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold rounded-[1px] transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
+                        className="w-full py-2.5 px-4 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold rounded-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
                       >
                         <Github className="w-4 h-4" />
                         <span>INSPECT SOURCE CODE ↗</span>

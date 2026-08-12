@@ -2,8 +2,8 @@ export interface Certificate {
   id: string;
   name: string;
   issuer: string;
-  abbreviation: string;
+  category: string;
   image?: string;
   verifyUrl?: string;
-  year?: string;
+  year: string;
 }
