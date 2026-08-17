@@ -18,6 +18,7 @@ import {
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
 import { useTheme } from '../../context/ThemeContext';
+import { PortfolioVisitorCount } from './PortfolioVisitorCount';
 
 /* ── Exactly 4 primary navigation items with icons ── */
 const navItems = [
@@ -250,7 +251,7 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* ── Utilities Group: GitHub, LinkedIn, Audio on, Light/Dark ── */}
+          {/* ── Utilities Group: GitHub, LinkedIn, Visits, Audio, Light/Dark ── */}
           <div className="hidden md:flex items-center gap-3 lg:gap-4 shrink-0 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
             {/* GitHub */}
             <a
@@ -281,6 +282,11 @@ export const Navbar: React.FC = () => {
             {/* Divider */}
             <div className="h-4 w-px bg-[#DCE1E7] dark:bg-[#242B33]" aria-hidden="true" />
 
+            <PortfolioVisitorCount />
+
+            {/* Divider */}
+            <div className="h-4 w-px bg-[#DCE1E7] dark:bg-[#242B33]" aria-hidden="true" />
+
             {/* Audio Toggle Button */}
             <button
               type="button"
@@ -289,15 +295,15 @@ export const Navbar: React.FC = () => {
                 toggleSound();
               }}
               onMouseEnter={playHover}
-              className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
               aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
+              title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
               {soundEnabled ? (
                 <Volume2 className="h-3.5 w-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
               ) : (
                 <VolumeX className="h-3.5 w-3.5" />
               )}
-              <span>{soundEnabled ? 'Audio on' : 'Audio off'}</span>
             </button>
 
             {/* Theme Toggle Button */}
@@ -308,15 +314,15 @@ export const Navbar: React.FC = () => {
                 toggleTheme();
               }}
               onMouseEnter={playHover}
-              className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
               aria-label="Toggle theme"
+              title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {resolvedTheme === 'dark' ? (
                 <Sun className="h-3.5 w-3.5 text-[#60A5FA]" />
               ) : (
                 <Moon className="h-3.5 w-3.5 text-[#2563EB]" />
               )}
-              <span className="capitalize">{resolvedTheme}</span>
             </button>
           </div>
 
@@ -416,6 +422,7 @@ export const Navbar: React.FC = () => {
 
           {/* Secondary Utilities Separator */}
           <div className="mt-5 pt-5 border-t border-[#DCE1E7] dark:border-[#242B33] flex flex-col space-y-2.5 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
+            <PortfolioVisitorCount variant="mobile" />
             <a
               href={profile.resumeUrl}
               target="_blank"
