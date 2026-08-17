@@ -2,6 +2,149 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'vocara',
+    slug: 'vocara',
+    emoji: '🎤',
+    title: 'VOCARA — AI Interview & Speaking Coach',
+    category: 'Mobile',
+    role: 'Full-Stack Mobile Engineer & AI Systems Architect',
+    status: 'Working Prototype',
+    badge: 'React Native / Expo / Groq AI',
+    description: 'A production-grade AI-powered mobile app for interview preparation and spoken-English coaching, built with React Native, Expo, Supabase, Groq AI, and RevenueCat.',
+    longDescription: 'VOCARA is a mobile-first AI coaching platform designed to help users master job interviews and improve spoken-English communication. Built with React Native, Expo, and TypeScript, the app provides realistic voice-based interview simulations with Groq AI-powered transcription and feedback, job-specific preparation flows, resume intelligence analysis, and gamified speaking exercises. The backend is powered by Supabase with secure authentication, email verification, and Supabase Edge Functions for audio processing. Monetization is handled through a RevenueCat paywall with subscription tier management, and the app ships with a premium Android-first UI featuring dark-mode design, smooth micro-animations, and a production-ready mobile experience.',
+    problem: 'Interview candidates and non-native English speakers lack accessible, affordable, real-time coaching tools. Traditional interview prep relies on expensive human coaches, static books, or generic ChatGPT prompts that lack voice recording, personalized feedback, and realistic job-specific simulations.',
+    solution: 'VOCARA combines voice recording, Groq AI transcription, structured answer feedback, job-specific interview prep flows, and resume analysis into one cohesive mobile app — backed by Supabase for secure data and RevenueCat for premium subscription management — delivering an always-available AI coach in the user\'s pocket.',
+    technologies: [
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'Supabase',
+      'Supabase Edge Functions',
+      'Groq AI',
+      'RevenueCat',
+      'Expo AV',
+      'PostgreSQL',
+      'React Navigation',
+      'AsyncStorage'
+    ],
+    features: [
+      'AI-powered voice interview simulation with Groq AI transcription, structured STAR-methodology feedback, and confidence scoring per answer.',
+      'Job-specific interview preparation flows: users input job title and description to receive tailored question banks and evaluation criteria.',
+      'Resume intelligence analysis: paste or upload resume content to receive AI-generated gap analysis, keyword optimization, and improvement suggestions.',
+      'Spoken-English practice mode with pronunciation exercises, fluency drills, and pacing feedback delivered through voice recording sessions.',
+      'Supabase authentication with email verification, session management, and PostgreSQL Row Level Security for secure per-user data isolation.',
+      'Supabase Edge Functions handling audio transcription pipeline, resume analysis, and AI feedback generation serverlessly.',
+      'RevenueCat subscription paywall integration with free tier, premium unlock flow, and cross-platform entitlement verification.',
+      'Progress tracking dashboard showing session history, improvement metrics, score trends, and streak achievements.',
+      'Premium Android-first mobile UI with dark-mode design, glassmorphism card components, smooth screen transitions, and micro-animations.'
+    ],
+    whatWorks: [
+      'End-to-end voice recording, Groq AI transcription, and structured interview feedback pipeline.',
+      'Supabase authentication with email verification and secure RLS-enforced user data isolation.',
+      'RevenueCat paywall with subscription tier detection and premium feature gating.',
+      'Job-specific question generation and resume analysis via Supabase Edge Functions.',
+      'Progress tracking with session history and improvement score visualization.',
+      'Production-quality premium mobile UI with dark mode, animations, and Android hardware support.'
+    ],
+    architecture: 'React Native (Expo) Mobile Client → Supabase Auth (Email Verification + RLS) → Supabase PostgreSQL → Supabase Edge Functions (Audio Transcription / Resume Analysis) → Groq AI API | RevenueCat Subscription SDK → Premium Paywall Entitlement Layer',
+    technicalDecisions: 'Selected Groq AI for its ultra-low-latency inference to minimize wait time between voice recording submission and AI feedback delivery. Implemented Supabase Edge Functions as the audio processing layer to avoid exposing Groq API keys on the client and to enable server-side audio stream handling. Chose RevenueCat over manual Stripe integration to abstract cross-platform in-app purchase complexity and provide reliable entitlement management across Android builds.',
+    challenges: 'Coordinating the multi-step voice recording → upload → transcription → AI feedback pipeline without blocking the UI or losing audio data on interruption. Solved by implementing a stateful recording manager with background upload queuing and optimistic UI updates, so users see immediate feedback states while the AI pipeline processes asynchronously.',
+    lessonsLearned: 'Building production mobile AI features requires treating the AI response pipeline as an async background job with clear loading states, retry logic, and graceful degradation — not a synchronous call. RevenueCat dramatically simplifies subscription management compared to raw app store APIs.',
+    currentLimitations: 'Android-first build; iOS requires additional App Store provisioning configuration. Audio transcription requires an active Groq API key configured in Supabase Edge Function environment variables.',
+    results: 'Delivered a production-ready AI mobile coaching app featuring end-to-end voice interview simulation, resume analysis, spoken-English exercises, RevenueCat subscription paywall, and a premium dark-mode Android UI — all backed by secure Supabase infrastructure.',
+    process: 'Designed Supabase PostgreSQL schema with RLS policies → Implemented Supabase Edge Functions for Groq AI transcription and resume analysis → Built React Native voice recording pipeline with Expo AV → Integrated RevenueCat subscription paywall → Developed job-specific interview prep flows → Engineered progress tracking dashboard → Polished premium mobile UI with dark mode and animations.',
+    image: 'img/vocara1 (1).jpg',
+    images: [
+      'img/vocara1 (1).jpg',
+      'img/vocara1 (2).jpg',
+      'img/vocara1 (3).jpg',
+      'img/vocara1 (4).jpg',
+      'img/vocara1 (5).jpg',
+      'img/vocara1 (6).jpg'
+    ],
+    githubUrl: 'https://github.com/RaizelHub',
+    featured: true
+  },
+  {
+    id: 'subora',
+    slug: 'subora',
+    emoji: '💳',
+    title: 'Subora — Subscription & Expense Management App',
+    category: 'Mobile',
+    role: 'Full-Stack Mobile Developer',
+    status: 'In Development',
+    badge: 'React Native / Gmail API / Supabase',
+    description: 'A React Native mobile app that automatically discovers subscriptions from Gmail, tracks recurring payments, organizes expenses, manages budgets, and monitors upcoming charges from one unified dashboard.',
+    longDescription: 'Subora is a cross-platform mobile subscription and expense management app built with React Native, Expo, and TypeScript. The app connects to users\' Gmail accounts via Google OAuth and runs a serverless subscription-detection pipeline through Supabase Edge Functions to automatically surface recurring payment emails. Users can review detected subscriptions, approve or dismiss them, manually add cash expenses, set budgets per category, and receive renewal reminders — all within a unified dashboard backed by PostgreSQL with per-user Row Level Security. Premium features are gated behind a RevenueCat subscription paywall. The engineering focus is on the full Gmail OAuth integration, a robust duplicate prevention system, a structured subscription approval workflow, and a real-time synchronized frontend/backend data model.',
+    problem: 'People routinely forget which subscriptions they are paying for, miss renewal dates, and have no clear view of how much recurring spending accumulates across different services and accounts. Manually tracking this across bank statements and inboxes is fragmented and error-prone.',
+    solution: 'Subora centralizes subscriptions and expenses into one React Native app: a Gmail OAuth integration detects recurring payment emails automatically, a structured review-and-approve workflow lets users confirm detected subscriptions, duplicate detection prevents redundant entries, expense categorization organizes spend, and dashboard analytics surface upcoming charges and budget utilization — backed entirely by Supabase PostgreSQL with RLS-enforced per-user data isolation.',
+    technologies: [
+      'React Native',
+      'Expo',
+      'TypeScript',
+      'Supabase',
+      'PostgreSQL',
+      'Supabase Edge Functions',
+      'Gmail API',
+      'Google OAuth',
+      'RevenueCat',
+      'React Navigation',
+      'AsyncStorage'
+    ],
+    features: [
+      'Gmail OAuth integration: securely connects user Gmail accounts and runs a Supabase Edge Function pipeline to scan inbox for subscription-related emails using pattern matching and heuristics.',
+      'Subscription detection & review workflow: detected subscriptions surface in a pending review queue — users approve, edit details, or dismiss each entry before it enters the active tracker.',
+      'Duplicate prevention engine: cross-references detected subscriptions against existing records by merchant name, billing amount, and cycle frequency to block redundant entries.',
+      'Subscription tracker: full CRUD for recurring bills with billing cycle, amount, category, renewal date, and per-subscription notification settings.',
+      'Upcoming renewal reminders: push notifications and dashboard alerts surface subscriptions renewing within the next 7 days.',
+      'Expense tracking: manual cash and card expense logging with category tagging, merchant notes, and date attribution.',
+      'Budget management: per-category budget caps with real-time utilization bars and over-budget alerts.',
+      'Multiple accounts: users can connect multiple Gmail accounts and financial accounts, with spending aggregated across all sources.',
+      'RevenueCat subscription paywall: free tier with core tracking; premium tier unlocks Gmail detection, multiple accounts, and advanced analytics.',
+      'Spending insights dashboard: visual breakdowns of monthly spend by category, subscription cost trends, and upcoming charge calendar.'
+    ],
+    whatWorks: [
+      'Gmail OAuth connection flow with secure token storage and refresh handling.',
+      'Supabase Edge Function subscription-detection pipeline scanning Gmail for recurring payment patterns.',
+      'Duplicate detection cross-referencing by merchant, amount, and billing cycle.',
+      'Subscription review and approval workflow with pending/active/dismissed states.',
+      'Manual expense logging with category tagging and budget tracking.',
+      'RevenueCat paywall with premium feature gating.',
+      'PostgreSQL RLS-enforced per-user data isolation across all tables.'
+    ],
+    architecture: 'React Native (Expo) Client → Google OAuth (Gmail API Token) → Supabase Auth (RLS) → Supabase PostgreSQL | Supabase Edge Functions (Gmail Scan / Duplicate Check / Subscription Detection) → RevenueCat SDK → Premium Paywall Entitlement Layer',
+    technicalDecisions: 'Delegated Gmail scanning to Supabase Edge Functions to keep Gmail API tokens server-side, preventing credential exposure on the mobile client. Implemented a structured review-queue pattern (pending → approved / dismissed) rather than auto-adding detected subscriptions, to give users full control and reduce false-positive noise. Chose RevenueCat for subscription paywall management to abstract Google Play billing complexity and deliver reliable cross-platform entitlement checks.',
+    challenges: [
+      {
+        challenge: 'Preventing duplicate subscriptions when Gmail detection runs repeatedly or users manually add a service already detected.',
+        approach: 'Built a deduplication service that compares incoming subscriptions against existing records on three dimensions: normalized merchant name (fuzzy match), billing amount (±5% tolerance), and billing cycle. Matches above a confidence threshold are flagged and surfaced to the user for disambiguation rather than silently dropped.',
+        result: 'Near-zero duplicate entries in the active subscription list, with transparent conflict resolution visible to the user.'
+      },
+      {
+        challenge: 'Securely handling Google OAuth tokens for Gmail API access without exposing credentials client-side.',
+        approach: 'OAuth authorization code flow is completed on the client; the resulting token is immediately forwarded to a Supabase Edge Function which stores the refresh token server-side in an encrypted Supabase secret. All Gmail API calls originate from the Edge Function — the client never touches the token directly.',
+        result: 'Gmail credentials are fully server-isolated; the client only holds a short-lived Supabase session JWT.'
+      },
+      {
+        challenge: 'Keeping frontend subscription and expense state synchronized with backend changes triggered by Edge Functions.',
+        approach: 'Implemented Supabase Realtime subscriptions on the pending-subscriptions and expenses tables so the mobile client receives live push updates when the detection pipeline completes, without manual polling.',
+        result: 'UI reflects detected subscriptions within seconds of Edge Function completion, with no polling overhead.'
+      }
+    ],
+    lessonsLearned: 'Building a reliable subscription detection system requires treating the Gmail scan as an async background pipeline with explicit state machines (pending / approved / dismissed) rather than fire-and-forget insertion. Duplicate prevention is not a simple equality check — fuzzy matching with user-facing disambiguation produces far better UX than silent deduplication.',
+    currentLimitations: 'Gmail detection accuracy depends on email formatting consistency across billing senders. iOS build requires Apple Developer provisioning for Google OAuth redirect URIs. Advanced AI-powered email parsing is planned for a future release.',
+    results: 'Built a complete subscription and expense management mobile app with Gmail OAuth integration, a serverless detection pipeline, duplicate prevention, a structured approval workflow, budget tracking, and a RevenueCat premium paywall — delivering a unified financial awareness tool for mobile users.',
+    process: 'Designed PostgreSQL schema with RLS policies for subscriptions, expenses, and accounts → Implemented Google OAuth flow and Gmail API token isolation in Supabase Edge Functions → Built subscription-detection pipeline with pattern matching and duplicate prevention → Developed subscription review/approval workflow UI → Integrated RevenueCat paywall → Built expense logging, budget management, and spending insights dashboard → Connected Supabase Realtime for live state sync.',
+    image: 'img/subora1 (1).jpg',
+    images: [
+      'img/subora1 (1).jpg',
+      'img/subora1 (2).jpg',
+      'img/subora1 (3).jpg'
+    ],
+    githubUrl: 'https://github.com/RaizelHub',
+    featured: true
+  },
+  {
     id: 'careeros',
     slug: 'careeros',
     emoji: '💼',

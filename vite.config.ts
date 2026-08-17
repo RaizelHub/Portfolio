@@ -8,4 +8,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    watch: {
+      // Exclude locked/busy files from the watcher (e.g. Android screenshots still open)
+      ignored: ['**/public/img/Screenshot_*.jpg'],
+    },
+  },
 })
+
