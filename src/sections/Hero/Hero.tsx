@@ -69,7 +69,7 @@ export const Hero: React.FC = () => {
             </h1>
 
             <p className="font-mono text-xs sm:text-sm font-semibold tracking-wide text-[#5F6873] dark:text-[#A7B0BA] uppercase pt-1">
-              Web &bull; Mobile &bull; Backend &bull; Automation
+              Web / Mobile / Automation
             </p>
           </motion.div>
 

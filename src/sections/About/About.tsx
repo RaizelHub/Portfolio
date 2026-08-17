@@ -74,7 +74,7 @@ export const About: React.FC = () => {
                 <Target className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-[#78828D] dark:text-[#7F8994] font-mono block text-[10px] uppercase">Target Roles</span>
-                  <span className="text-[#111318] dark:text-[#F4F6F8] font-semibold">Full-Stack Developer &bull; Mobile &bull; Automation</span>
+                  <span className="text-[#111318] dark:text-[#F4F6F8] font-semibold">Web / Mobile / Automation</span>
                 </div>
               </div>
 
