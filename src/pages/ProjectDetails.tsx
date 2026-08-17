@@ -17,6 +17,7 @@ import {
 import { projects } from '../data/projects';
 import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
 import { CareerOSCaseStudy } from '../components/ui/CareerOSCaseStudy';
+import { TikTokShopCaseStudy } from '../components/ui/TikTokShopCaseStudy';
 import { useSound } from '../context/SoundContext';
 
 export const ProjectDetails = () => {
@@ -99,6 +100,8 @@ export const ProjectDetails = () => {
           <JobRadarCaseStudy />
         ) : slug === 'careeros' ? (
           <CareerOSCaseStudy />
+        ) : slug === 'tiktok-shop-automation' ? (
+          <TikTokShopCaseStudy />
         ) : (
           <>
             {/* Title Block Header */}

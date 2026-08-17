@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { FeaturedProject } from '../../components/projects/FeaturedProject';
 import { DesktopShowcase } from '../../components/projects/DesktopShowcase';
 import { MobileShowcase } from '../../components/projects/MobileShowcase';
-import { AutomationShowcase } from '../../components/projects/AutomationShowcase';
-import { KeyEngineering } from '../../components/projects/KeyEngineering';
-import { ProjectTech } from '../../components/projects/ProjectTech';
 import { MoreProjectCard } from '../../components/projects/MoreProjectCard';
 import { projects } from '../../data/projects';
 import { useSound } from '../../context/SoundContext';
@@ -189,132 +186,89 @@ export const ProjectsSection = () => {
       <Separator label="03" />
 
       {/* ══════════════════════════════════════════
-          03 — TIKTOK SHOP ORDER AUTOMATION (Workflow System)
+          03 — TIKTOK SHOP ORDER AUTOMATION (Workflow Showcase)
       ══════════════════════════════════════════ */}
-      <div className="space-y-8">
-        <motion.div {...entrance()} className="max-w-2xl">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-[11px] font-mono font-semibold text-[#78828D] dark:text-[#7F8994] tracking-wider">
-              03
-            </span>
-            <div className="h-px w-4 bg-[#DCE1E7] dark:bg-[#242B33]" />
-            <span className="text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#2563EB] dark:text-[#60A5FA]">
-              AUTOMATION
-            </span>
-          </div>
-
-          <h3
-            className="font-sans font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-1"
-            style={{ fontSize: 'clamp(1.35rem, 2.2vw, 1.75rem)' }}
-          >
-            TikTok Shop Order Automation
-          </h3>
-          <p className="text-base text-[#5F6873] dark:text-[#A7B0BA] mb-3">
-            Automated Order Processing Workflow
-          </p>
-
-          <div className="mb-4">
-            <span className="text-[11px] font-mono font-medium text-[#5F6873] dark:text-[#A7B0BA]">
-              Status: Working prototype
-            </span>
-          </div>
-
-          <p className="text-sm text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed mb-6">
-            An event-driven n8n automation system that ingests incoming TikTok Shop order webhooks,
-            validates payload data, prevents duplicate processing via idempotency checks, updates
-            Supabase inventory records, and dispatches Telegram operator notifications.
-          </p>
-
-          {/* Visual Architecture Flow */}
-          <div className="p-4 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl overflow-x-auto mb-6">
-            <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#78828D] dark:text-[#7F8994] mb-3">
-              Event-Driven Pipeline Flow
-            </p>
-            <div className="flex items-center gap-2 min-w-max text-[11px] font-mono">
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                TikTok Shop
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                Webhook
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                Validation
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                Duplicate Detection
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                Processing
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8]">
-                Supabase
-              </span>
-              <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-              <span className="px-2.5 py-1 bg-[#2563EB]/10 border border-[#2563EB]/30 rounded font-semibold text-[#2563EB] dark:text-[#60A5FA]">
-                Telegram Notification
-              </span>
+      <FeaturedProject
+        index="03"
+        category="AUTOMATION"
+        title="TikTok Shop Order Automation"
+        subtitle="Automated Order Processing Workflow"
+        status="Status: Working prototype"
+        description="An event-driven n8n automation system that ingests incoming TikTok Shop order webhooks, validates payload data, prevents duplicate processing via idempotency checks, updates Supabase inventory records, and dispatches Telegram operator notifications."
+        keyEngineering={[
+          'Webhook ingestion & payload validation from TikTok Shop API',
+          'Duplicate prevention via external order ID idempotency checks',
+          'Workflow branching with conditional business logic in n8n',
+          'Database persistence & stock management in Supabase',
+          'Execution logging, error handling & automated alerts',
+          'Real-time Telegram Bot API operator notification dispatch',
+        ]}
+        technologies={[
+          'n8n',
+          'Supabase',
+          'PostgreSQL',
+          'REST APIs',
+          'Webhooks',
+          'Telegram',
+        ]}
+        slug="tiktok-shop-automation"
+        githubUrl="https://github.com/RaizelHub/OmniEcommerce-ai"
+        layout="content-left"
+        visual={
+          <div className="w-full space-y-3.5">
+            {/* Visual Architecture Flow */}
+            <div className="p-3.5 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl shadow-xs">
+              <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#DCE1E7] dark:border-[#242B33]">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#111318] dark:text-[#F4F6F8]">
+                  Event Pipeline Sequence
+                </span>
+                <span className="text-[9px] font-mono text-[#2563EB] dark:text-[#60A5FA] font-semibold uppercase">
+                  5 Workflows Connected
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-mono">
+                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                  TikTok Shop
+                </span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                  Webhook
+                </span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                  Validation
+                </span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                  Supabase
+                </span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[#2563EB]/10 border border-[#2563EB]/30 rounded font-semibold text-[#2563EB] dark:text-[#60A5FA] whitespace-nowrap">
+                  Telegram
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 items-start">
-            <KeyEngineering
-              items={[
-                'Webhook ingestion & payload validation from TikTok Shop API',
-                'Duplicate prevention via external order ID idempotency checks',
-                'Workflow branching & conditional routing in n8n',
-                'Database persistence & stock management in Supabase',
-                'Execution logging, error handling & automated alerts',
-                'Real-time Telegram Bot API operator notification dispatch',
-              ]}
-            />
-            <div className="space-y-2.5">
-              <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA]">
-                Technologies
-              </p>
-              <ProjectTech
-                technologies={[
-                  'n8n',
-                  'Supabase',
-                  'PostgreSQL',
-                  'REST APIs',
-                  'Webhooks',
-                  'Telegram',
-                ]}
-              />
-            </div>
-          </div>
-
-          <div className="flex items-center gap-5 flex-wrap">
+            {/* Workflow Preview Image */}
             <Link
               to="/projects/tiktok-shop-automation"
-              onMouseEnter={playHover}
-              onClick={playClick}
-              className="group inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-[0.08em] text-[#111318] dark:text-[#F4F6F8] hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors duration-150"
+              className="group block relative rounded-xl overflow-hidden border border-[#DCE1E7] dark:border-[#242B33] bg-[#0B0D10] shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.45)] cursor-pointer"
             >
-              <span>View project</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150 text-[#2563EB] dark:text-[#60A5FA]" />
+              <div className="px-3.5 py-2 bg-[#F1F3F5] dark:bg-[#171C22] border-b border-[#DCE1E7] dark:border-[#242B33] flex items-center justify-between text-[11px] font-mono">
+                <span className="text-[#111318] dark:text-[#F4F6F8] font-bold">n8n Pipeline: Order Ingestion</span>
+                <span className="text-[#2563EB] dark:text-[#60A5FA] group-hover:underline">Explore 5 Workflows ↗</span>
+              </div>
+              <div className="aspect-[16/9.5] overflow-hidden flex items-center justify-center p-2 bg-[#0B0D10]">
+                <img
+                  src="/img/01-Order Processing.png"
+                  alt="n8n Order Processing Workflow"
+                  className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-200"
+                />
+              </div>
             </Link>
-            <a
-              href="https://github.com/RaizelHub/OmniEcommerce-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              onMouseEnter={playHover}
-              onClick={playClick}
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors duration-150"
-            >
-              <ExternalLink className="w-3 h-3" />
-              <span>GitHub</span>
-            </a>
           </div>
-        </motion.div>
-
-        <AutomationShowcase />
-      </div>
+        }
+      />
 
       <Separator label="04" />
 

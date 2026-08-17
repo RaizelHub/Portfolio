@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { KeyEngineering } from './KeyEngineering';
 import { ProjectTech } from './ProjectTech';
 import { useSound } from '../../context/SoundContext';

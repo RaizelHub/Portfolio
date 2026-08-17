@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Calendar, MapPin, Building2, Check } from 'lucide-react';
+import { Calendar, MapPin, Building2 } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { experiences } from '../../data/experience';
 

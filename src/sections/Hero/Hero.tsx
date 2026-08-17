@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Download, Mail, Github, Linkedin, MapPin } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Mail, Github, Linkedin, MapPin } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';

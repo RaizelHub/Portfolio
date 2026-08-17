@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, X, Send, CheckCircle2, Phone, MessageSquare, Copy } from 'lucide-react';
+import { Mail, X, Send, CheckCircle2, Copy } from 'lucide-react';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
 

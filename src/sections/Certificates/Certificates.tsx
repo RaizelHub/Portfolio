@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { ExternalLink, X, ShieldCheck, Award } from 'lucide-react';
+import { X, ShieldCheck, Award } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import Folder from '../../components/ui/Folder/Folder';
 import { certifications } from '../../data/certifications';

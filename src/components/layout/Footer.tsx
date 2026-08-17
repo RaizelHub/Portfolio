@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { useLocation } from 'react-router-dom';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Mail, Check, Copy, ArrowUpRight, Github, Linkedin, MapPin, Clock } from 'lucide-react';
+import { Check, Copy, ArrowUpRight, Github, Linkedin, MapPin, Clock } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';

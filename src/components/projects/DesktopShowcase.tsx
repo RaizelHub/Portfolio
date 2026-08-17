@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { Globe, Lock, ZoomIn, X, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { Lock, ZoomIn, X } from 'lucide-react';
 import { useSound } from '../../context/SoundContext';
 
 interface DesktopShowcaseProps {

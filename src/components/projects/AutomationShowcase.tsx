@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
-import { CheckCircle2, ArrowRight, ShieldCheck, Database, Send, Webhook, ZoomIn, X, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { CheckCircle2, ShieldCheck, Database, Send, Webhook, ZoomIn, X, ChevronRight } from 'lucide-react';
 import { useSound } from '../../context/SoundContext';
 
 interface WorkflowStep {
@@ -65,7 +65,6 @@ export const AutomationShowcase: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const { playHover, playClick } = useSound();
-  const prefersReducedMotion = useReducedMotion();
 
   const currentStep = steps[activeStep];
 
