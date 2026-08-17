@@ -1,23 +1,23 @@
 import { Hero } from '../sections/Hero/Hero';
-import { About } from '../sections/About/About';
-import { Technologies } from '../sections/Technologies/Technologies';
-import { Services } from '../sections/Services/Services';
 import { ProjectsSection } from '../sections/Projects/ProjectsSection';
+import { Technologies } from '../sections/Technologies/Technologies';
 import { Experience } from '../sections/Experience/Experience';
+import { About } from '../sections/About/About';
 import { Certificates } from '../sections/Certificates/Certificates';
 import { GithubActivity } from '../sections/GithubActivity/GithubActivity';
+import { Contact } from '../sections/Contact/Contact';
 
 export const Home = () => {
   return (
-    <div className="space-y-24 sm:space-y-32 pb-24">
+    <div className="space-y-16 sm:space-y-24 pb-20">
       <Hero />
-      <About />
-      <Technologies />
-      <Services />
       <ProjectsSection />
+      <Technologies />
       <Experience />
+      <About />
       <Certificates />
       <GithubActivity />
+      <Contact />
     </div>
   );
 };

@@ -12,7 +12,6 @@ interface ProjectCardProps {
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { playHover, playClick } = useSound();
 
-  // Extract clean primary title string (e.g., "CareerOS" from "CareerOS — Local-First Windows Career Operating System")
   const displayTitle = project.title.includes('—')
     ? project.title.split('—')[0].trim()
     : project.title.includes('-')
@@ -24,38 +23,57 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       to={`/projects/${project.slug}`}
       onMouseEnter={playHover}
       onClick={playClick}
-      className="group relative bg-[#EFEBE4] dark:bg-[#1D1C18] border border-[#D5D0C7] dark:border-[#34312B] hover:border-[#171717] dark:hover:border-[#F2EEE6] rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#C7462D] dark:focus:ring-[#E25235] focus:ring-offset-2"
+      className="group relative bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB]/50 dark:hover:border-[#60A5FA]/50 rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-150 hover:-translate-y-0.5 hover:shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2563EB]"
       aria-label={`View ${displayTitle} case study`}
     >
       {/* Project Image Preview */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-[#F4F1EA] dark:bg-[#151411] border-b border-[#D5D0C7] dark:border-[#34312B]">
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#F7F8FA] dark:bg-[#0B0D10] border-b border-[#DCE1E7] dark:border-[#242B33]">
         {project.image ? (
           <img
             src={`/${project.image}`}
             alt={`${displayTitle} Preview`}
             loading="lazy"
-            className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-[#EFEBE4] dark:bg-[#1D1C18] select-none font-mono">
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-[#F7F8FA] dark:bg-[#0B0D10] select-none font-mono">
             <span className="text-2xl mb-1">{project.emoji || '⚙️'}</span>
-            <span className="text-xs text-[#6B6862] dark:text-[#A9A39A] font-semibold uppercase">{project.category}</span>
+            <span className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-semibold uppercase">{project.category}</span>
           </div>
         )}
       </div>
 
       {/* Card Body: Title + Short Description + Arrow */}
-      <div className="p-5 sm:p-6 space-y-2">
-        <div className="flex items-start justify-between gap-3">
-          <h3 className="font-amarna text-lg sm:text-xl font-bold text-[#171717] dark:text-[#F2EEE6] group-hover:text-[#C7462D] dark:group-hover:text-[#E25235] transition-colors duration-200 uppercase tracking-wide">
-            {displayTitle}
-          </h3>
-          <ArrowUpRight className="w-4 h-4 text-[#6B6862] dark:text-[#A9A39A] group-hover:text-[#C7462D] dark:group-hover:text-[#E25235] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-1" />
+      <div className="p-5 space-y-2 flex-1 flex flex-col justify-between">
+        <div>
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-sans text-base font-bold text-[#111318] dark:text-[#F4F6F8] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors duration-150 leading-snug">
+              {displayTitle}
+            </h3>
+            <ArrowUpRight className="w-4 h-4 text-[#78828D] dark:text-[#7F8994] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-150 shrink-0 mt-0.5" />
+          </div>
+
+          <p className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed line-clamp-2 mt-1">
+            {project.description}
+          </p>
         </div>
 
-        <p className="text-xs sm:text-sm text-[#6B6862] dark:text-[#A9A39A] font-pt-sans leading-relaxed line-clamp-2 font-normal">
-          {project.description}
-        </p>
+        {/* Tech badges */}
+        <div className="flex flex-wrap gap-1 pt-2">
+          {project.technologies.slice(0, 3).map((tech) => (
+            <span
+              key={tech}
+              className="text-[10px] font-mono text-[#5F6873] dark:text-[#A7B0BA] border border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22] px-2 py-0.5 rounded"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.technologies.length > 3 && (
+            <span className="text-[10px] font-mono text-[#78828D] dark:text-[#7F8994] px-1 py-0.5">
+              +{project.technologies.length - 3}
+            </span>
+          )}
+        </div>
       </div>
     </Link>
   );

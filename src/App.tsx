@@ -15,11 +15,11 @@ function App() {
     <ThemeProvider>
       <SoundProvider>
         <Router>
-          <div className="flex flex-col min-h-screen bg-[#F4F1EA] dark:bg-[#151411] text-[#171717] dark:text-[#F2EEE6] font-sans selection:bg-[#C7462D] dark:selection:bg-[#E25235] selection:text-[#F4F1EA] dark:selection:text-[#151411] transition-colors duration-200">
+          <div className="flex flex-col min-h-screen bg-[#F7F8FA] dark:bg-[#0B0D10] text-[#111318] dark:text-[#F4F6F8] font-sans selection:bg-[#2563EB] selection:text-white dark:selection:bg-[#3B82F6] dark:selection:text-[#0B0D10] transition-colors duration-150">
             <ScrollProgress />
             <Sidebar />
 
-            <main className="flex-grow pt-16 xl:ml-60 xl:pt-0">
+            <main className="flex-grow pt-16 xl:ml-64 xl:pt-0">
               <ErrorBoundary>
                 <Routes>
                   <Route path="/" element={<Home />} />
@@ -29,7 +29,7 @@ function App() {
                 </Routes>
               </ErrorBoundary>
             </main>
-            <div className="xl:ml-60">
+            <div className="xl:ml-64">
               <Footer />
             </div>
             <FloatingContactModal />

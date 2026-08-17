@@ -6,16 +6,16 @@ interface KeyEngineeringProps {
 
 export const KeyEngineering: React.FC<KeyEngineeringProps> = ({ items }) => (
   <div>
-    <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#C7462D] dark:text-[#E25235] mb-2.5">
-      Key Engineering
+    <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] mb-2.5">
+      Key Implementation
     </p>
     <ul className="space-y-1.5">
       {items.map((item, i) => (
         <li
           key={i}
-          className="flex items-start gap-2.5 text-[12px] text-[#6B6862] dark:text-[#A9A39A] font-mono leading-snug"
+          className="flex items-start gap-2 text-[12px] text-[#5F6873] dark:text-[#A7B0BA] font-mono leading-snug"
         >
-          <span className="text-[#C7462D] dark:text-[#E25235] shrink-0 mt-[1px] font-bold">›</span>
+          <span className="text-[#2563EB] dark:text-[#60A5FA] shrink-0 mt-[1px] font-bold">›</span>
           <span>{item}</span>
         </li>
       ))}

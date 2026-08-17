@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Award, ExternalLink, X, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { ExternalLink, X, ShieldCheck, Award } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
-import { SectionHeading } from '../../components/ui/SectionHeading';
+import Folder from '../../components/ui/Folder/Folder';
 import { certifications } from '../../data/certifications';
 import type { Certificate } from '../../types';
 import { useSound } from '../../context/SoundContext';
 
-export const Certificates = () => {
+export const Certificates: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const [activeCert, setActiveCert] = useState<Certificate | null>(null);
   const { playHover, playClick } = useSound();
+  const prefersReducedMotion = useReducedMotion();
 
+  // Keyboard Escape listener for modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setActiveCert(null);
@@ -19,139 +22,180 @@ export const Certificates = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
+  const entrance = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 14 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true as const, margin: '-60px' },
+          transition: { duration: 0.45, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+        };
+
+  // Mini paper contents rendered directly inside the React Bits Folder
+  const paperItems = certifications.slice(0, 3).map((cert) => {
+    const hasImage = Boolean(cert.image);
+    const hasVerifyUrl = Boolean(cert.verifyUrl);
+
+    return (
+      <div
+        key={cert.id}
+        onClick={(e) => {
+          if (!isOpen) return;
+          e.stopPropagation();
+          playClick();
+          if (hasImage) {
+            setActiveCert(cert);
+          } else if (hasVerifyUrl) {
+            window.open(cert.verifyUrl, '_blank', 'noopener,noreferrer');
+          }
+        }}
+        className="w-full h-full p-2.5 flex flex-col justify-between select-none cursor-pointer bg-[#FFFFFF] dark:bg-[#1E232B] hover:bg-[#F8FAFC] dark:hover:bg-[#252B35] transition-colors border border-[#DCE1E7]/60 dark:border-[#343D48]/60"
+      >
+        <div className="flex items-center justify-between border-b border-[#DCE1E7] dark:border-[#343D48] pb-1">
+          <span className="text-[9px] font-mono font-bold text-[#2563EB] dark:text-[#60A5FA] uppercase tracking-wider">
+            {cert.category}
+          </span>
+          <span className="text-[8px] font-mono text-[#78828D] dark:text-[#7F8994]">
+            {cert.year}
+          </span>
+        </div>
+
+        <div className="space-y-0.5 my-auto">
+          <p className="text-[9px] font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-tight line-clamp-2">
+            {cert.name}
+          </p>
+          <p className="text-[8px] text-[#5F6873] dark:text-[#A7B0BA] font-mono truncate">
+            {cert.issuer}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between pt-1 border-t border-[#DCE1E7] dark:border-[#343D48] text-[8px] font-mono text-[#2563EB] dark:text-[#60A5FA]">
+          <span className="font-semibold flex items-center gap-0.5">
+            {hasVerifyUrl ? 'Verify ↗' : hasImage ? 'Preview ↗' : 'Verified'}
+          </span>
+          {hasImage && <Award className="w-3 h-3 shrink-0" />}
+        </div>
+      </div>
+    );
+  });
+
   return (
-    <SectionContainer id="certifications" className="py-16 border-b border-[#D5D0C7] dark:border-[#34312B]">
-      <SectionHeading
-        tag="06"
-        title="certifications & training"
-        subtitle="Technical certifications and training across networking, systems, and information security."
-      />
+    <SectionContainer id="certifications" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
+      {/* ── Section Header ── */}
+      <motion.div {...entrance()} className="max-w-3xl mb-10">
+        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
+          CREDENTIALS
+        </span>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-        {certifications.map((cert) => {
-          const hasImage = Boolean(cert.image);
-          const hasVerifyUrl = Boolean(cert.verifyUrl);
+        <h2
+          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
+          style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
+        >
+          Certificates &amp; technical training.
+        </h2>
 
-          return (
-            <div
-              key={cert.id}
-              onMouseEnter={playHover}
-              onClick={() => {
-                playClick();
-                if (hasImage) {
-                  setActiveCert(cert);
-                } else if (hasVerifyUrl) {
-                  window.open(cert.verifyUrl, '_blank', 'noopener,noreferrer');
-                }
-              }}
-              className="group bg-[#EFEBE4] dark:bg-[#1D1C18] border border-[#D5D0C7] dark:border-[#34312B] hover:border-[#171717] dark:hover:border-[#F2EEE6] rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-md cursor-pointer select-none"
-            >
-              <div className="space-y-3">
-                {/* Top Category & Year Header */}
-                <div className="flex items-center justify-between border-b border-[#D5D0C7]/80 dark:border-[#34312B]/80 pb-3">
-                  <span className="font-mono text-[11px] font-bold text-[#6B6862] dark:text-[#A9A39A] uppercase tracking-wider">
-                    {cert.category}
-                  </span>
-                  <span className="font-mono text-xs font-bold text-[#171717] dark:text-[#F2EEE6] bg-[#F4F1EA] dark:bg-[#151411] border border-[#D5D0C7] dark:border-[#34312B] px-2.5 py-0.5 rounded-md">
-                    {cert.year}
-                  </span>
-                </div>
+        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+          Credentials that support my software development and technical work.
+        </p>
+      </motion.div>
 
-                {/* Credential Title */}
-                <h3 className="font-amarna text-lg sm:text-xl font-bold text-[#171717] dark:text-[#F2EEE6] group-hover:text-[#C7462D] dark:group-hover:text-[#E25235] transition-colors uppercase tracking-wide pt-1">
-                  {cert.name}
-                </h3>
+      {/* ── React Bits Interactive Folder (All credentials contained inside) ── */}
+      <div className="my-10 flex flex-col items-center justify-center">
+        <span className="font-sans text-sm sm:text-base font-bold text-[#111318] dark:text-[#F4F6F8] mb-4">
+          Certificates &amp; Credentials Folder
+        </span>
 
-                {/* Issuer */}
-                <p className="text-xs sm:text-sm text-[#6B6862] dark:text-[#A9A39A] font-pt-sans font-medium">
-                  {cert.issuer}
-                </p>
-              </div>
+        <div className="w-full min-h-[260px] sm:min-h-[310px] flex items-center justify-center py-6 overflow-visible">
+          <Folder
+            size={2.2}
+            color="#2563EB"
+            isOpen={isOpen}
+            onToggle={() => {
+              playClick();
+              setIsOpen((prev) => !prev);
+            }}
+            items={paperItems}
+          />
+        </div>
 
-              {/* Bottom Action CTA */}
-              <div className="pt-4 border-t border-[#D5D0C7]/80 dark:border-[#34312B]/80 flex items-center justify-between font-pt-sans text-xs font-bold text-[#171717] dark:text-[#F2EEE6]">
-                <span className="group-hover:text-[#C7462D] dark:group-hover:text-[#E25235] flex items-center gap-1.5 transition-colors uppercase tracking-wider">
-                  <Award className="w-4 h-4 text-[#C7462D] dark:text-[#E25235]" />
-                  <span>VIEW CREDENTIAL ↗</span>
-                </span>
-
-                {cert.verifyUrl && (
-                  <a
-                    href={cert.verifyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      playClick();
-                    }}
-                    className="text-[#6B6862] dark:text-[#A9A39A] hover:text-[#171717] dark:hover:text-[#F2EEE6] transition-colors p-1"
-                    title="Verify Badge"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                )}
-              </div>
-            </div>
-          );
-        })}
+        {/* Count & Toggle Prompt */}
+        <button
+          type="button"
+          onClick={() => {
+            playClick();
+            setIsOpen((prev) => !prev);
+          }}
+          onMouseEnter={playHover}
+          className="mt-6 inline-flex items-center gap-2 text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors cursor-pointer bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA] px-4 py-2 rounded-lg shadow-2xs"
+        >
+          <span className="font-semibold text-[#111318] dark:text-[#F4F6F8]">
+            {certifications.length} credentials
+          </span>
+          <span>&bull;</span>
+          <span className="text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium">
+            {isOpen ? 'Click to close folder' : 'Click to open folder'}
+          </span>
+        </button>
       </div>
 
-      {/* Certificate Viewer Lightbox */}
+      {/* ── Clean Certificate Image Lightbox Modal ── */}
       <AnimatePresence>
         {activeCert && activeCert.image && (
           <motion.div
-            key="cert-lightbox"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-[#171717]/70 dark:bg-[#151411]/85 backdrop-blur-sm"
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs"
             onClick={() => setActiveCert(null)}
           >
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
+              initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              className="relative max-w-3xl w-full bg-[#F4F1EA] dark:bg-[#151411] border-2 border-[#171717] dark:border-[#34312B] rounded-2xl overflow-hidden shadow-2xl"
+              exit={{ scale: 0.96, opacity: 0 }}
+              className="relative max-w-3xl w-full bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-[#D5D0C7] dark:border-[#34312B] bg-[#EFEBE4] dark:bg-[#1D1C18]">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between px-5 py-3 border-b border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22]">
                 <div>
-                  <h4 className="font-amarna text-base font-bold text-[#171717] dark:text-[#F2EEE6] uppercase">
+                  <h4 className="font-sans text-sm font-bold text-[#111318] dark:text-[#F4F6F8]">
                     {activeCert.name}
                   </h4>
-                  <span className="text-xs text-[#6B6862] dark:text-[#A9A39A] font-pt-sans block">{activeCert.issuer} ({activeCert.year})</span>
+                  <span className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-sans">
+                    {activeCert.issuer} ({activeCert.year})
+                  </span>
                 </div>
                 <button
-                  onClick={() => {
-                    playClick();
-                    setActiveCert(null);
-                  }}
-                  className="p-1.5 rounded-lg border border-[#D5D0C7] dark:border-[#34312B] text-[#171717] dark:text-[#F2EEE6] hover:bg-[#F4F1EA] dark:hover:bg-[#151411] transition-colors"
-                  aria-label="Close viewer"
+                  onClick={() => setActiveCert(null)}
+                  className="p-1 rounded-md text-[#5F6873] dark:text-[#A7B0BA] hover:bg-black/5 dark:hover:bg-white/5"
+                  aria-label="Close certificate viewer"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 
-              <div className="bg-[#F4F1EA] dark:bg-[#151411] p-4 flex items-center justify-center max-h-[75vh] overflow-auto">
+              {/* Modal Body */}
+              <div className="p-4 flex items-center justify-center max-h-[75vh] overflow-auto bg-[#F7F8FA] dark:bg-[#0B0D10]">
                 <img
                   src={`/${activeCert.image}`}
                   alt={`${activeCert.name} certificate`}
-                  className="w-full h-auto object-contain border border-[#D5D0C7] dark:border-[#34312B] rounded-lg shadow-sm"
+                  className="w-full h-auto object-contain rounded-lg border border-[#DCE1E7] dark:border-[#242B33]"
                 />
               </div>
 
+              {/* Modal Footer */}
               {activeCert.verifyUrl && (
-                <div className="px-5 py-3 border-t border-[#D5D0C7] dark:border-[#34312B] bg-[#EFEBE4] dark:bg-[#1D1C18] flex justify-end">
+                <div className="px-5 py-3 border-t border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22] flex justify-end">
                   <a
                     href={activeCert.verifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={playClick}
-                    className="px-4 py-2 bg-[#171717] dark:bg-[#F2EEE6] hover:bg-[#C7462D] dark:hover:bg-[#E25235] text-[#F4F1EA] dark:text-[#151411] text-xs font-pt-sans font-bold rounded-xl transition-all flex items-center gap-1.5 uppercase tracking-wider"
+                    className="px-4 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-sans font-semibold rounded-lg transition-colors flex items-center gap-1.5"
                   >
-                    <ShieldCheck className="w-4 h-4 text-[#C7462D] dark:text-[#E25235]" />
-                    <span>Verify Credential Badge ↗</span>
+                    <ShieldCheck className="w-3.5 h-3.5" />
+                    <span>Verify Credential ↗</span>
                   </a>
                 </div>
               )}

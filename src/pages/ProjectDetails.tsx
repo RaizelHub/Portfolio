@@ -1,17 +1,28 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, Github, ExternalLink,
-  CheckCircle2, Info, HelpCircle, Shield,
-  Workflow, CheckCircle, ListTodo, X
+  ArrowLeft,
+  Github,
+  ExternalLink,
+  CheckCircle2,
+  Info,
+  HelpCircle,
+  Shield,
+  Workflow,
+  CheckCircle,
+  ListTodo,
+  X,
+  ZoomIn,
 } from 'lucide-react';
 import { projects } from '../data/projects';
 import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
 import { CareerOSCaseStudy } from '../components/ui/CareerOSCaseStudy';
+import { useSound } from '../context/SoundContext';
 
 export const ProjectDetails = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { playHover, playClick } = useSound();
 
   const project = projects.find((p) => p.slug === slug);
 
@@ -26,18 +37,20 @@ export const ProjectDetails = () => {
 
   if (!project) {
     return (
-      <main className="min-h-screen pt-20 flex items-center justify-center bg-[#F4F1EA] px-4 font-mono">
-        <div className="text-center bg-[#EFEBE4] border border-[#D5D0C7] p-8 rounded-xl max-w-md w-full">
-          <HelpCircle className="w-12 h-12 text-[#C7462D] mx-auto mb-3" />
-          <h2 className="text-lg font-bold text-[#171717] mb-2 uppercase">REPOSITORY NOT FOUND</h2>
-          <p className="text-xs text-[#6B6862] mb-6 leading-relaxed">
-            The requested project path does not exist.
+      <main className="min-h-screen pt-20 flex items-center justify-center bg-[#F7F8FA] dark:bg-[#0B0D10] px-4 font-mono">
+        <div className="text-center bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-8 rounded-xl max-w-md w-full shadow-xs">
+          <HelpCircle className="w-10 h-10 text-[#2563EB] dark:text-[#60A5FA] mx-auto mb-3" />
+          <h2 className="text-base font-bold text-[#111318] dark:text-[#F4F6F8] mb-2 uppercase">
+            Repository Not Found
+          </h2>
+          <p className="text-xs text-[#5F6873] dark:text-[#A7B0BA] mb-6 leading-relaxed">
+            The requested project path does not exist in the directory.
           </p>
           <button
             onClick={() => navigate('/#projects')}
-            className="px-4 py-2 bg-[#171717] text-[#F4F1EA] hover:bg-[#C7462D] text-xs font-bold rounded-lg"
+            className="px-4 py-2 bg-[#2563EB] text-white hover:bg-[#1D4ED8] text-xs font-semibold rounded-lg transition-colors"
           >
-            RETURN TO CASE STUDIES
+            Return to Case Studies
           </button>
         </div>
       </main>
@@ -59,22 +72,26 @@ export const ProjectDetails = () => {
   }, [lightboxOpen, galleryImages.length]);
 
   return (
-    <main className="min-h-screen pt-12 pb-20 bg-[#F4F1EA] text-[#171717]">
+    <main className="min-h-screen pt-8 pb-20 bg-[#F7F8FA] dark:bg-[#0B0D10] text-[#111318] dark:text-[#F4F6F8] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Back navigation */}
         <div className="mb-6 flex items-center justify-between font-mono text-xs">
           <Link
             to="/#projects"
-            className="inline-flex items-center gap-1.5 font-semibold text-[#171717] hover:text-[#C7462D] transition-colors"
+            onMouseEnter={playHover}
+            onClick={playClick}
+            className="inline-flex items-center gap-1.5 font-medium text-[#5F6873] hover:text-[#2563EB] dark:text-[#A7B0BA] dark:hover:text-[#60A5FA] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 text-[#C7462D]" /> RETURN TO DASHBOARD
+            <ArrowLeft className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+            <span>Return to Overview</span>
           </Link>
           <Link
             to="/projects"
-            className="font-semibold text-[#C7462D] hover:underline"
+            onMouseEnter={playHover}
+            onClick={playClick}
+            className="font-medium text-[#2563EB] dark:text-[#60A5FA] hover:underline"
           >
-            VIEW ALL REPOSITORIES ↗
+            View All Repositories ↗
           </Link>
         </div>
 
@@ -84,44 +101,45 @@ export const ProjectDetails = () => {
           <CareerOSCaseStudy />
         ) : (
           <>
-            {/* Title Block Banner */}
-            <div className="border-b border-[#D5D0C7] pb-6 mb-8 text-left">
-              <div className="flex items-center gap-2 mb-2 font-mono">
-                <span className="text-xs font-bold bg-[#171717] text-[#F4F1EA] px-2 py-0.5 rounded-md uppercase">
+            {/* Title Block Header */}
+            <div className="border-b border-[#DCE1E7] dark:border-[#242B33] pb-6 mb-8 text-left">
+              <div className="flex items-center gap-2 mb-2.5 font-mono text-xs">
+                <span className="font-bold bg-[#111318] dark:bg-[#F4F6F8] text-white dark:text-[#0B0D10] px-2 py-0.5 rounded uppercase text-[10px]">
                   {project.category}
                 </span>
-                <span className="text-xs text-[#C7462D] font-semibold uppercase">
+                <span className="text-[#5F6873] dark:text-[#A7B0BA] font-medium">
                   {project.status}
                 </span>
               </div>
-              <h1 className="section-title text-[#171717] uppercase">
+
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3">
                 {project.title}
               </h1>
-              <p className="mt-2 text-sm sm:text-base text-[#6B6862] max-w-4xl leading-relaxed">
+
+              <p className="text-base sm:text-lg text-[#5F6873] dark:text-[#A7B0BA] font-sans max-w-4xl leading-relaxed">
                 {project.description}
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-              {/* LEFT: Case Study Writing */}
+              {/* LEFT: Case Study Core Content */}
               <div className="lg:col-span-8 space-y-8 text-left">
-
                 {/* Gallery */}
                 {galleryImages.length > 0 && (
-                  <div className="space-y-3 bg-[#EFEBE4] border border-[#D5D0C7] p-2.5 rounded-xl">
+                  <div className="space-y-3 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-3 rounded-xl shadow-xs">
                     <div
-                      className="relative aspect-video rounded-lg overflow-hidden bg-[#F4F1EA] border border-[#D5D0C7] cursor-pointer group"
+                      className="relative aspect-video rounded-lg overflow-hidden bg-[#F7F8FA] dark:bg-[#0B0D10] border border-[#DCE1E7] dark:border-[#242B33] cursor-pointer group flex items-center justify-center"
                       onClick={() => setLightboxOpen(true)}
                     >
                       <img
                         src={`/${galleryImages[activeImageIndex]}`}
                         alt={`${project.title} screenshot ${activeImageIndex + 1}`}
-                        className="w-full h-full object-cover object-top transition-all duration-300"
+                        className="w-full h-full object-contain transition-transform duration-200"
                       />
-                      <div className="absolute inset-0 bg-[#171717]/0 group-hover:bg-[#171717]/40 transition-colors flex items-center justify-center">
-                        <span className="text-[#F4F1EA] opacity-0 group-hover:opacity-100 text-xs font-mono font-semibold transition-opacity bg-[#C7462D] px-3 py-1 rounded-md">
-                          EXPAND FULL SCREEN ↗
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                        <span className="text-white opacity-0 group-hover:opacity-100 text-xs font-mono font-semibold transition-opacity bg-[#111318]/90 px-3 py-1.5 rounded-md backdrop-blur-xs flex items-center gap-1.5">
+                          <ZoomIn className="w-3.5 h-3.5" />
+                          Expand Preview ↗
                         </span>
                       </div>
                     </div>
@@ -133,15 +151,18 @@ export const ProjectDetails = () => {
                           <button
                             key={img}
                             onClick={() => setActiveImageIndex(idx)}
-                            className={`relative w-24 h-16 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] ${activeImageIndex === idx ? 'border-[#C7462D] opacity-100' : 'border-[#D5D0C7] opacity-60 hover:opacity-100'
-                              }`}
+                            className={`relative w-20 h-14 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] bg-[#F7F8FA] dark:bg-[#0B0D10] ${
+                              activeImageIndex === idx
+                                ? 'border-[#2563EB] dark:border-[#60A5FA] opacity-100'
+                                : 'border-[#DCE1E7] dark:border-[#242B33] opacity-60 hover:opacity-100'
+                            }`}
                           >
                             <img
                               src={`/${img}`}
                               alt={`Thumbnail ${idx + 1}`}
                               className="w-full h-full object-cover object-top"
                             />
-                            <span className="absolute bottom-0 right-0 bg-[#171717]/80 text-[#F4F1EA] px-1 py-0.2">
+                            <span className="absolute bottom-0 right-0 bg-[#111318]/80 text-white px-1 py-0.2 text-[9px]">
                               {idx + 1}
                             </span>
                           </button>
@@ -151,31 +172,32 @@ export const ProjectDetails = () => {
                   </div>
                 )}
 
-                {/* Overview / Background */}
+                {/* System Overview */}
                 <section className="space-y-3">
-                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
-                    <Info className="w-4 h-4 text-[#C7462D]" /> SYSTEM OVERVIEW &amp; CONTEXT
+                  <h3 className="text-sm font-bold text-[#111318] dark:text-[#F4F6F8] flex items-center gap-2 border-b border-[#DCE1E7] dark:border-[#242B33] pb-2.5 font-mono uppercase tracking-wider">
+                    <Info className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+                    <span>System Overview &amp; Context</span>
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#171717] leading-relaxed font-normal">
+                  <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed">
                     {project.longDescription}
                   </p>
                 </section>
 
                 {/* Problem & Solution Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-xl space-y-2">
-                    <h4 className="font-mono font-bold text-[#C7462D] text-xs uppercase flex items-center gap-1.5">
-                      <Shield className="w-4 h-4" /> THE PROBLEM SPECIFICATION
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-5 rounded-xl space-y-2 shadow-xs">
+                    <h4 className="font-mono font-bold text-xs uppercase flex items-center gap-1.5 text-[#2563EB] dark:text-[#60A5FA]">
+                      <Shield className="w-4 h-4" /> The Problem Specification
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed">
                       {project.problem}
                     </p>
                   </div>
-                  <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-5 rounded-xl space-y-2">
-                    <h4 className="font-mono font-bold text-[#171717] text-xs uppercase flex items-center gap-1.5">
-                      <CheckCircle className="w-4 h-4 text-[#C7462D]" /> THE ARCHITECTURAL SOLUTION
+                  <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-5 rounded-xl space-y-2 shadow-xs">
+                    <h4 className="font-mono font-bold text-xs uppercase flex items-center gap-1.5 text-[#111318] dark:text-[#F4F6F8]">
+                      <CheckCircle className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" /> The Architectural Solution
                     </h4>
-                    <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
+                    <p className="text-xs sm:text-sm text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed">
                       {project.solution}
                     </p>
                   </div>
@@ -183,13 +205,14 @@ export const ProjectDetails = () => {
 
                 {/* Core Features */}
                 <section className="space-y-3">
-                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
-                    <ListTodo className="w-4 h-4 text-[#C7462D]" /> CORE FEATURES &amp; CAPABILITIES
+                  <h3 className="text-sm font-bold text-[#111318] dark:text-[#F4F6F8] flex items-center gap-2 border-b border-[#DCE1E7] dark:border-[#242B33] pb-2.5 font-mono uppercase tracking-wider">
+                    <ListTodo className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+                    <span>Core Features &amp; Capabilities</span>
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[#171717]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-[#111318] dark:text-[#F4F6F8] font-sans">
                     {project.features.map((feat) => (
-                      <div key={feat} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+                      <div key={feat} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA] shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -198,22 +221,23 @@ export const ProjectDetails = () => {
 
                 {/* Development Process & Architecture Diagram */}
                 <section className="space-y-4">
-                  <h3 className="text-base font-bold text-[#171717] flex items-center gap-2 border-b border-[#D5D0C7] pb-2 font-mono uppercase">
-                    <Workflow className="w-4 h-4 text-[#C7462D]" /> DEVELOPMENT PROCESS &amp; WORKFLOW
+                  <h3 className="text-sm font-bold text-[#111318] dark:text-[#F4F6F8] flex items-center gap-2 border-b border-[#DCE1E7] dark:border-[#242B33] pb-2.5 font-mono uppercase tracking-wider">
+                    <Workflow className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+                    <span>Development Process &amp; Workflow</span>
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed">
                     {project.process}
                   </p>
 
-                  {/* Dedicated Architecture Workflow Diagram Image Display */}
                   {project.architectureDiagramUrl && (
-                    <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-3 rounded-xl space-y-2">
-                      <div className="flex items-center justify-between text-xs font-mono text-[#6B6862]">
-                        <span className="font-bold text-[#171717] uppercase flex items-center gap-1.5">
-                          <Workflow className="w-3.5 h-3.5 text-[#C7462D]" /> SYSTEM ARCHITECTURE &amp; WORKFLOW DIAGRAM
+                    <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-3 rounded-xl space-y-2 shadow-xs">
+                      <div className="flex items-center justify-between text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA]">
+                        <span className="font-bold text-[#111318] dark:text-[#F4F6F8] uppercase flex items-center gap-1.5">
+                          <Workflow className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+                          System Architecture &amp; Workflow Diagram
                         </span>
                       </div>
-                      <div className="overflow-hidden rounded-lg border border-[#D5D0C7] bg-[#F4F1EA]">
+                      <div className="overflow-hidden rounded-lg border border-[#DCE1E7] dark:border-[#242B33] bg-[#F7F8FA] dark:bg-[#0B0D10] p-2">
                         <img
                           src={`/${project.architectureDiagramUrl}`}
                           alt={`${project.title} Architecture Workflow Diagram`}
@@ -225,23 +249,23 @@ export const ProjectDetails = () => {
                 </section>
               </div>
 
-              {/* RIGHT: Tech Specs & Links Sidebar */}
-              <div className="lg:col-span-4 space-y-6">
-                <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl text-left space-y-5">
-                  <h3 className="font-mono font-bold text-[#171717] border-b border-[#D5D0C7] pb-2 text-xs uppercase flex justify-between">
-                    <span>TECHNICAL SPECIFICATIONS</span>
+              {/* RIGHT: Technical Specifications Sidebar */}
+              <div className="lg:col-span-4 space-y-5">
+                <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] p-6 rounded-xl text-left space-y-5 shadow-xs">
+                  <h3 className="font-mono font-bold text-[#111318] dark:text-[#F4F6F8] border-b border-[#DCE1E7] dark:border-[#242B33] pb-2.5 text-xs uppercase">
+                    Technical Specifications
                   </h3>
 
                   {/* Stack badges */}
                   <div className="space-y-2 font-mono">
-                    <span className="text-[10px] uppercase text-[#6B6862] block font-bold">
-                      TECHNOLOGIES APPLIED
+                    <span className="text-[10px] uppercase text-[#78828D] dark:text-[#7F8994] block font-bold">
+                      Technologies Applied
                     </span>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs px-2 py-0.5 bg-[#F4F1EA] text-[#171717] rounded-md border border-[#D5D0C7]"
+                          className="text-xs px-2.5 py-1 bg-[#F1F3F5] dark:bg-[#171C22] text-[#111318] dark:text-[#F4F6F8] rounded-md border border-[#DCE1E7] dark:border-[#242B33]"
                         >
                           {tech}
                         </span>
@@ -249,17 +273,17 @@ export const ProjectDetails = () => {
                     </div>
                   </div>
 
-                  {/* Repository Links */}
-                  <div className="space-y-2 pt-3 font-mono text-xs">
+                  {/* Links */}
+                  <div className="space-y-2 pt-2 font-mono text-xs">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
+                        className="w-full py-2.5 px-4 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 block text-center"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
-                        <span>VISIT LIVE DEMO ↗</span>
+                        <span>Visit Live Demo ↗</span>
                       </a>
                     )}
 
@@ -268,30 +292,29 @@ export const ProjectDetails = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] font-bold rounded-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wider block text-center"
+                        className="w-full py-2.5 px-4 bg-[#F1F3F5] dark:bg-[#171C22] hover:bg-[#EAEFF5] dark:hover:bg-[#1D232B] text-[#111318] dark:text-[#F4F6F8] border border-[#DCE1E7] dark:border-[#242B33] font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 block text-center"
                       >
                         <Github className="w-4 h-4" />
-                        <span>INSPECT SOURCE CODE ↗</span>
+                        <span>Inspect Source Code ↗</span>
                       </a>
                     )}
                   </div>
                 </div>
               </div>
-
             </div>
           </>
         )}
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox Modal */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-[100] bg-[#171717]/90 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-[200] bg-black/85 backdrop-blur-xs flex items-center justify-center p-4"
           onClick={() => setLightboxOpen(false)}
         >
           <button
             onClick={() => setLightboxOpen(false)}
-            className="absolute top-4 right-4 p-2 text-[#F4F1EA] hover:text-[#C7462D]"
+            className="absolute top-4 right-4 p-2 text-white hover:text-[#60A5FA] transition-colors"
             aria-label="Close lightbox"
           >
             <X className="w-6 h-6" />
@@ -300,7 +323,7 @@ export const ProjectDetails = () => {
           <img
             src={`/${galleryImages[activeImageIndex]}`}
             alt={`${project.title} screenshot ${activeImageIndex + 1}`}
-            className="max-w-[90vw] max-h-[90vh] object-contain border-2 border-[#D5D0C7]"
+            className="max-w-[92vw] max-h-[88vh] object-contain rounded-lg border border-white/10"
             onClick={(e) => e.stopPropagation()}
           />
         </div>

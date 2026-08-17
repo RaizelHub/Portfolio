@@ -1,8 +1,8 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 interface SectionHeadingProps {
-  tag: string;
+  tag?: string;
   title: string;
   subtitle?: string;
   align?: 'left' | 'center';
@@ -14,37 +14,41 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   subtitle,
   align = 'left',
 }) => {
+  const prefersReducedMotion = useReducedMotion();
   const isLeft = align === 'left';
+
+  const anim = (delay = 0) =>
+    prefersReducedMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 12 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true as const, margin: '-50px' },
+          transition: { duration: 0.4, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+        };
 
   return (
     <div className={`mb-10 max-w-3xl ${isLeft ? 'text-left' : 'mx-auto text-center'}`}>
-      <motion.span
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.4 }}
-        className="font-mono text-xs font-semibold uppercase tracking-wider text-[#C7462D] dark:text-[#E25235] block mb-2"
-      >
-        [ {tag} ]
-      </motion.span>
+      {tag && (
+        <motion.span
+          {...anim(0)}
+          className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3"
+        >
+          {tag}
+        </motion.span>
+      )}
 
       <motion.h2
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.4, delay: 0.05 }}
-        className="section-title text-[#171717] dark:text-[#F2EEE6] mb-3 uppercase"
+        {...anim(0.05)}
+        className="font-sans text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
       >
         {title}
       </motion.h2>
 
       {subtitle && (
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-sm sm:text-base text-[#6B6862] dark:text-[#A9A39A] font-normal leading-relaxed"
+          {...anim(0.1)}
+          className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed max-w-xl"
         >
           {subtitle}
         </motion.p>

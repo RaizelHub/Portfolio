@@ -82,7 +82,7 @@ export const CareerOSCaseStudy: React.FC = () => {
             <span className="text-xs font-mono font-bold bg-[#171717] text-[#F4F1EA] px-2.5 py-0.5 rounded-md uppercase">
               Desktop Native / Tauri 2 / Rust / SQLite
             </span>
-            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-[#F4F1EA] text-[#C7462D] border border-[#D5D0C7] rounded-md flex items-center gap-1">
+            <span className="px-2.5 py-0.5 text-xs font-mono font-semibold bg-[#F4F1EA] text-[#2563EB] border border-[#D5D0C7] rounded-md flex items-center gap-1">
               <Sparkles className="w-3 h-3" />
               Windows Career OS
             </span>
@@ -139,13 +139,13 @@ export const CareerOSCaseStudy: React.FC = () => {
             href="https://github.com/RaizelHub/careeros"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#171717] hover:bg-[#C7462D] text-[#F4F1EA] font-bold rounded-lg transition-all tracking-wider uppercase"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#171717] hover:bg-[#2563EB] text-[#F4F1EA] font-bold rounded-lg transition-all tracking-wider uppercase"
           >
             <Github className="w-4 h-4" />
             <span>INSPECT SOURCE CODE ↗</span>
           </a>
           <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-lg text-xs text-[#6B6862]">
-            <HardDrive className="w-3.5 h-3.5 text-[#C7462D]" />
+            <HardDrive className="w-3.5 h-3.5 text-[#2563EB]" />
             <span>100% Local Desktop Storage (SQLite careeros.db)</span>
           </div>
         </div>
@@ -155,7 +155,7 @@ export const CareerOSCaseStudy: React.FC = () => {
       <section className="space-y-4">
         <div className="flex items-center justify-between border-b border-[#D5D0C7] pb-3">
           <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
-            <Eye className="w-4 h-4 text-[#C7462D]" /> Desktop App Interface &amp; Feature Breakdown
+            <Eye className="w-4 h-4 text-[#2563EB]" /> Desktop App Interface &amp; Feature Breakdown
           </h3>
           <div className="flex bg-[#EFEBE4] p-1 rounded-lg border border-[#D5D0C7] text-xs font-mono">
             <button
@@ -190,7 +190,7 @@ export const CareerOSCaseStudy: React.FC = () => {
                 className="w-full h-full object-cover object-top"
               />
               <div className="absolute bottom-0 inset-x-0 bg-[#171717]/95 text-[#F4F1EA] backdrop-blur-sm p-3 border-t border-[#D5D0C7]">
-                <span className="text-xs font-mono font-bold text-[#C7462D] block uppercase">
+                <span className="text-xs font-mono font-bold text-[#2563EB] block uppercase">
                   {realScreenshots[activeImageIndex].title}
                 </span>
                 <p className="text-xs text-[#D5D0C7] font-normal mt-0.5">
@@ -207,7 +207,7 @@ export const CareerOSCaseStudy: React.FC = () => {
                   onClick={() => setActiveImageIndex(idx)}
                   className={`p-3 rounded-lg border text-left transition-all font-mono ${
                     activeImageIndex === idx
-                      ? 'border-[#C7462D] bg-[#F4F1EA]'
+                      ? 'border-[#2563EB] bg-[#F4F1EA]'
                       : 'border-[#D5D0C7] bg-[#F4F1EA]/50 hover:border-[#171717]'
                   }`}
                 >
@@ -232,7 +232,7 @@ export const CareerOSCaseStudy: React.FC = () => {
                 >
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-[#C7462D]">
+                      <div className="flex items-center gap-2 text-[#2563EB]">
                         <Icon className="w-4 h-4 shrink-0" />
                         <span className="text-xs font-mono font-bold uppercase tracking-wide text-[#171717]">
                           {spec.title}
@@ -256,7 +256,7 @@ export const CareerOSCaseStudy: React.FC = () => {
       {/* PROBLEM & SOLUTION GRID */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl space-y-3">
-          <div className="flex items-center gap-2 text-[#C7462D] font-mono font-bold text-sm uppercase">
+          <div className="flex items-center gap-2 text-[#2563EB] font-mono font-bold text-sm uppercase">
             <AlertTriangle className="w-5 h-5" />
             <h3>THE PROBLEM SPECIFICATION</h3>
           </div>
@@ -265,15 +265,15 @@ export const CareerOSCaseStudy: React.FC = () => {
           </p>
           <ul className="text-xs text-[#171717] space-y-2 pt-1 font-mono">
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>Data Re-entry &amp; Friction:</strong> Users manually copy-paste company names, job titles, and resume content repeatedly.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>Context-Blind AI:</strong> Generic AI chatbots lack memory of active applications, skills, or resume versions.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>Privacy Risks:</strong> Uploading raw resumes and background data to third-party cloud tools poses privacy concerns.</span>
             </li>
           </ul>
@@ -281,7 +281,7 @@ export const CareerOSCaseStudy: React.FC = () => {
 
         <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl space-y-3">
           <div className="flex items-center gap-2 text-[#171717] font-mono font-bold text-sm uppercase">
-            <CheckCircle2 className="w-5 h-5 text-[#C7462D]" />
+            <CheckCircle2 className="w-5 h-5 text-[#2563EB]" />
             <h3>THE ARCHITECTURAL SOLUTION</h3>
           </div>
           <p className="text-xs sm:text-sm text-[#6B6862] leading-relaxed font-normal">
@@ -289,15 +289,15 @@ export const CareerOSCaseStudy: React.FC = () => {
           </p>
           <ul className="text-xs text-[#171717] space-y-2 pt-1 font-mono">
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>Connected Domain Workflows:</strong> Job Analyzer skill gaps auto-populate Learning Goals; Offer/Hired status logs Timeline milestones.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>Context-Aware AI Assistant:</strong> Attach target Job postings and Resume records using removable UI chips ([ Job ], [ Resume ]).</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-[#C7462D] font-bold">•</span>
+              <span className="text-[#2563EB] font-bold">•</span>
               <span><strong>100% Local Processing &amp; Privacy:</strong> All records, notes, and document text remain in a local SQLite database (careeros.db).</span>
             </li>
           </ul>
@@ -308,7 +308,7 @@ export const CareerOSCaseStudy: React.FC = () => {
       <section className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 sm:p-8 rounded-xl space-y-6">
         <div className="space-y-1">
           <h3 className="text-base sm:text-lg font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
-            <Workflow className="w-5 h-5 text-[#C7462D]" /> System Architecture &amp; Data Pipeline Topology
+            <Workflow className="w-5 h-5 text-[#2563EB]" /> System Architecture &amp; Data Pipeline Topology
           </h3>
           <p className="text-xs text-[#6B6862] font-mono">
             Native Win32 windowing, Tauri 2 Rust IPC, local SQLite storage, Stronghold key vault, and Groq Llama-3.3 AI context resolver.
@@ -318,7 +318,7 @@ export const CareerOSCaseStudy: React.FC = () => {
         <div className="bg-[#F4F1EA] p-5 rounded-lg border border-[#D5D0C7] space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-3 text-center text-xs font-mono">
             <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-lg flex flex-col justify-between items-center gap-2">
-              <HardDrive className="w-6 h-6 text-[#C7462D]" />
+              <HardDrive className="w-6 h-6 text-[#2563EB]" />
               <div>
                 <span className="font-bold text-[#171717] block uppercase">Desktop Shell</span>
                 <span className="text-[10px] text-[#6B6862]">Tauri 2 (Rust / Win32)</span>
@@ -334,7 +334,7 @@ export const CareerOSCaseStudy: React.FC = () => {
             </div>
 
             <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-lg flex flex-col justify-between items-center gap-2">
-              <Layers className="w-6 h-6 text-[#C7462D]" />
+              <Layers className="w-6 h-6 text-[#2563EB]" />
               <div>
                 <span className="font-bold text-[#171717] block uppercase">UI &amp; Event Bus</span>
                 <span className="text-[10px] text-[#6B6862]">React 19 + dataEventBus</span>
@@ -350,7 +350,7 @@ export const CareerOSCaseStudy: React.FC = () => {
             </div>
 
             <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-4 rounded-lg flex flex-col justify-between items-center gap-2">
-              <Cpu className="w-6 h-6 text-[#C7462D]" />
+              <Cpu className="w-6 h-6 text-[#2563EB]" />
               <div>
                 <span className="font-bold text-[#171717] block uppercase">Groq AI Engine</span>
                 <span className="text-[10px] text-[#6B6862]">Llama-3.3 70B + XML Tags</span>
@@ -363,7 +363,7 @@ export const CareerOSCaseStudy: React.FC = () => {
       {/* KEY TECHNICAL CHALLENGES & ENGINEERING SOLUTIONS */}
       <section className="space-y-4">
         <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2 border-b border-[#D5D0C7] pb-2">
-          <Zap className="w-4 h-4 text-[#C7462D]" /> Key Technical Challenges &amp; Engineering Solutions
+          <Zap className="w-4 h-4 text-[#2563EB]" /> Key Technical Challenges &amp; Solutions
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
@@ -379,7 +379,7 @@ export const CareerOSCaseStudy: React.FC = () => {
               <strong>Challenge:</strong> Extracting plain text from uploaded PDF and DOCX resume files without uploading raw files to third-party cloud parsing services.
             </p>
             <p className="text-xs text-[#171717] leading-relaxed bg-[#F4F1EA] p-3 rounded-lg border border-[#D5D0C7] mt-2">
-              <strong>Solution:</strong> Developed <code className="text-[#C7462D]">resumeTextExtractor.ts</code> using native browser ArrayBuffer text stream decoding. For .docx files, the engine decompresses the zip container in memory and parses <code className="text-[#C7462D]">&lt;w:t&gt;</code> text elements from word/document.xml. For .pdf files, it decodes literal text streams (Tj/TJ operators) completely offline.
+              <strong>Solution:</strong> Developed <code className="text-[#2563EB]">resumeTextExtractor.ts</code> using native browser ArrayBuffer text stream decoding. For .docx files, the engine decompresses the zip container in memory and parses <code className="text-[#2563EB]">&lt;w:t&gt;</code> text elements from word/document.xml. For .pdf files, it decodes literal text streams (Tj/TJ operators) completely offline.
             </p>
           </div>
 
@@ -395,7 +395,7 @@ export const CareerOSCaseStudy: React.FC = () => {
               <strong>Challenge:</strong> Malicious or poorly formatted job postings containing instructions like "Ignore previous system prompts" could corrupt AI behavior when attached to chat conversations.
             </p>
             <p className="text-xs text-[#171717] leading-relaxed bg-[#F4F1EA] p-3 rounded-lg border border-[#D5D0C7] mt-2">
-              <strong>Solution:</strong> Engineered <code className="text-[#C7462D]">contextResolverService.ts</code> to wrap attached records inside explicit XML tags (<code className="text-[#C7462D]">&lt;career_context_data&gt;</code>) with system-level instruction boundaries. Implemented text character caps (3,000 chars for Job postings, 6,000 chars for Resumes) to prevent context window overflow.
+              <strong>Solution:</strong> Engineered <code className="text-[#2563EB]">contextResolverService.ts</code> to wrap attached records inside explicit XML tags (<code className="text-[#2563EB]">&lt;career_context_data&gt;</code>) with system-level instruction boundaries. Implemented text character caps (3,000 chars for Job postings, 6,000 chars for Resumes) to prevent context window overflow.
             </p>
           </div>
 
@@ -411,7 +411,7 @@ export const CareerOSCaseStudy: React.FC = () => {
               <strong>Challenge:</strong> Updating a job status or completing a learning goal needed to update Dashboard metrics, Timeline activity logs, and Analytics instantly without reloading the page or using complex global state stores like Redux.
             </p>
             <p className="text-xs text-[#171717] leading-relaxed bg-[#F4F1EA] p-3 rounded-lg border border-[#D5D0C7] mt-2">
-              <strong>Solution:</strong> Designed a lightweight, typed event bus (<code className="text-[#C7462D]">dataEventBus.ts</code>). Components emit domain events (jobs:changed, timeline:changed, dashboard:invalidate), triggering subscribed hooks (useJobs, useDashboard) to re-query SQLite asynchronously and update local state seamlessly.
+              <strong>Solution:</strong> Designed a lightweight, typed event bus (<code className="text-[#2563EB]">dataEventBus.ts</code>). Components emit domain events (jobs:changed, timeline:changed, dashboard:invalidate), triggering subscribed hooks (useJobs, useDashboard) to re-query SQLite asynchronously and update local state seamlessly.
             </p>
           </div>
 
@@ -427,7 +427,7 @@ export const CareerOSCaseStudy: React.FC = () => {
               <strong>Challenge:</strong> Storing Groq API keys securely without exposing secrets to plain React state or browser localStorage.
             </p>
             <p className="text-xs text-[#171717] leading-relaxed bg-[#F4F1EA] p-3 rounded-lg border border-[#D5D0C7] mt-2">
-              <strong>Solution:</strong> Integrated Tauri Stronghold (<code className="text-[#C7462D]">@tauri-apps/plugin-stronghold</code>), storing API keys in an AES-256-GCM encrypted desktop vault. Raw keys are retrieved asynchronously via Rust IPC only when executing completions.
+              <strong>Solution:</strong> Integrated Tauri Stronghold (<code className="text-[#2563EB]">@tauri-apps/plugin-stronghold</code>), storing API keys in an AES-256-GCM encrypted desktop vault. Raw keys are retrieved asynchronously via Rust IPC only when executing completions.
             </p>
           </div>
         </div>
@@ -436,7 +436,7 @@ export const CareerOSCaseStudy: React.FC = () => {
       {/* KEY ACCOMPLISHMENTS & METRICS */}
       <section className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl space-y-4">
         <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2 border-b border-[#D5D0C7] pb-2">
-          <BarChart3 className="w-4 h-4 text-[#C7462D]" /> Key Accomplishments &amp; Architectural Metrics
+          <BarChart3 className="w-4 h-4 text-[#2563EB]" /> Key Accomplishments &amp; Architectural Metrics
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-center">
@@ -445,7 +445,7 @@ export const CareerOSCaseStudy: React.FC = () => {
             <span className="text-[10px] text-[#6B6862] uppercase block mt-1">SQLite DB Init Time</span>
           </div>
           <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-4 rounded-lg">
-            <span className="text-2xl font-bold text-[#C7462D] block">100%</span>
+            <span className="text-2xl font-bold text-[#2563EB] block">100%</span>
             <span className="text-[10px] text-[#6B6862] uppercase block mt-1">Local Data &amp; PDF Parsing</span>
           </div>
           <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-4 rounded-lg">
@@ -453,7 +453,7 @@ export const CareerOSCaseStudy: React.FC = () => {
             <span className="text-[10px] text-[#6B6862] uppercase block mt-1">Interactive Kanban Pipeline</span>
           </div>
           <div className="bg-[#F4F1EA] border border-[#D5D0C7] p-4 rounded-lg">
-            <span className="text-2xl font-bold text-[#C7462D] block">&lt; 9s</span>
+            <span className="text-2xl font-bold text-[#2563EB] block">&lt; 9s</span>
             <span className="text-[10px] text-[#6B6862] uppercase block mt-1">Frontend Vite Build Time</span>
           </div>
         </div>
@@ -462,35 +462,35 @@ export const CareerOSCaseStudy: React.FC = () => {
       {/* KEY PORTFOLIO HIGHLIGHTS / BULLET POINTS */}
       <section className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 rounded-xl space-y-3 font-mono">
         <h3 className="text-base font-bold text-[#171717] uppercase flex items-center gap-2 border-b border-[#D5D0C7] pb-2">
-          <Sparkles className="w-4 h-4 text-[#C7462D]" /> Key Portfolio Bullets (Resume / Technical Summary)
+          <Sparkles className="w-4 h-4 text-[#2563EB]" /> Key Portfolio Bullets (Resume / Technical Summary)
         </h3>
         <div className="space-y-2.5 text-xs text-[#171717] pt-1">
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <span>
               <strong>Engineered a local-first desktop application</strong> using Tauri 2, React 19, TypeScript, Rust, and SQLite, providing end-to-end management of job application pipelines, mock interview prep, and career analytics.
             </span>
           </div>
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <span>
               <strong>Implemented zero-dependency local text extraction</strong> for PDF and DOCX resumes, parsing document XML streams locally in-memory without third-party cloud APIs.
             </span>
           </div>
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <span>
               <strong>Architected a context-aware AI integration</strong> powered by Groq Llama-3.3 70B, featuring explicit record attachment chips, XML security boundaries, and schema validation (aiSchemaValidator) for safe JSON responses.
             </span>
           </div>
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <span>
               <strong>Secured user credentials using Tauri Stronghold</strong>, storing API keys inside an encrypted native desktop vault with zero exposure to localStorage or React component state.
             </span>
           </div>
           <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#C7462D] shrink-0 mt-0.5" />
+            <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
             <span>
               <strong>Designed a lightweight typed event bus (dataEventBus)</strong> to synchronize live SQLite data invalidations across Dashboard, Timeline, and Job Tracker modules seamlessly.
             </span>

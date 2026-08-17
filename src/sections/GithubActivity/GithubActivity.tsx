@@ -1,35 +1,42 @@
+import React from 'react';
 import { Github, ExternalLink, Activity } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
-import { SectionHeading } from '../../components/ui/SectionHeading';
 import { useSound } from '../../context/SoundContext';
 
-export const GithubActivity = () => {
+export const GithubActivity: React.FC = () => {
   const { playHover, playClick } = useSound();
 
   return (
-    <SectionContainer id="github-activity" className="py-16 border-b border-[#D5D0C7] dark:border-[#34312B]">
-      <SectionHeading
-        tag="07"
-        title="github activity"
-        subtitle="Real-time contribution activity feed from @RaizelHub on GitHub."
-      />
+    <SectionContainer id="github-activity" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
+      <div className="max-w-3xl mb-10">
+        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
+          Activity
+        </span>
 
-      {/* GitHub Overview Card & Heatmap */}
-      <div className="bg-[#EFEBE4] dark:bg-[#1D1C18] border border-[#D5D0C7] dark:border-[#34312B] rounded-2xl p-6 space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#D5D0C7] dark:border-[#34312B] pb-4">
+        <h2
+          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
+          style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
+        >
+          GitHub activity.
+        </h2>
+
+        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+          Public repositories and contribution stream from @RaizelHub on GitHub.
+        </p>
+      </div>
+
+      <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl p-6 space-y-6 shadow-xs">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#DCE1E7] dark:border-[#242B33] pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#171717] dark:bg-[#E25235] text-[#F4F1EA] dark:text-[#151411] flex items-center justify-center">
-              <Github className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-lg bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] text-[#111318] dark:text-[#F4F6F8] flex items-center justify-center">
+              <Github className="w-4 h-4" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-pt-sans font-bold text-base text-[#171717] dark:text-[#F2EEE6]">@RaizelHub</span>
-                <span className="px-2 py-0.5 text-[10px] font-mono bg-[#F4F1EA] dark:bg-[#151411] text-[#C7462D] dark:text-[#E25235] border border-[#D5D0C7] dark:border-[#34312B] rounded-md font-bold uppercase">
-                  ACTIVE DEVELOPER
-                </span>
-              </div>
-              <span className="text-xs font-pt-sans text-[#6B6862] dark:text-[#A9A39A]">
-                Public Code Repositories &amp; Version History
+              <span className="font-sans font-bold text-sm text-[#111318] dark:text-[#F4F6F8] block">
+                @RaizelHub
+              </span>
+              <span className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-mono">
+                github.com/RaizelHub
               </span>
             </div>
           </div>
@@ -40,33 +47,33 @@ export const GithubActivity = () => {
             rel="noopener noreferrer"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#171717] dark:bg-[#F2EEE6] hover:bg-[#C7462D] dark:hover:bg-[#E25235] text-[#F4F1EA] dark:text-[#151411] font-pt-sans text-xs font-bold rounded-lg transition-colors uppercase tracking-wider"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-sans text-xs font-semibold rounded-lg transition-colors"
           >
-            <span>VIEW ON GITHUB</span>
+            <span>View on GitHub</span>
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
 
-        {/* Contribution Graph Preview */}
-        <div className="space-y-3 font-pt-sans">
-          <div className="flex items-center justify-between text-xs font-bold text-[#171717] dark:text-[#F2EEE6] uppercase">
+        {/* Contribution Graph */}
+        <div className="space-y-2 font-sans">
+          <div className="flex items-center justify-between text-xs font-semibold text-[#111318] dark:text-[#F4F6F8]">
             <span className="flex items-center gap-2">
-              <Activity className="w-4 h-4 text-[#C7462D] dark:text-[#E25235]" />
-              GitHub Contribution Heatmap
+              <Activity className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+              Contribution Heatmap
             </span>
-            <span className="text-[#6B6862] dark:text-[#A9A39A] text-[11px]">Updated Automatically</span>
+            <span className="text-[#78828D] dark:text-[#7F8994] font-mono text-[11px]">Updated automatically</span>
           </div>
 
-          <div className="bg-[#F4F1EA] dark:bg-[#151411] border border-[#D5D0C7] dark:border-[#34312B] rounded-xl p-4 overflow-x-auto flex justify-center items-center min-h-[120px]">
+          <div className="bg-[#F7F8FA] dark:bg-[#0B0D10] border border-[#DCE1E7] dark:border-[#242B33] rounded-lg p-4 overflow-x-auto flex justify-center items-center min-h-[110px]">
             <img
-              src="https://ghchart.rshah.org/C7462D/RaizelHub"
+              src="https://ghchart.rshah.org/2563EB/RaizelHub"
               alt="RaizelHub GitHub Contribution Chart"
-              className="w-full max-w-4xl min-w-[600px] h-auto object-contain filter contrast-125 dark:invert dark:hue-rotate-180"
+              className="w-full max-w-4xl min-w-[600px] h-auto object-contain filter dark:invert dark:hue-rotate-180"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = 'none';
                 if (target.parentElement) {
-                  target.parentElement.innerHTML = '<span class="text-xs font-mono text-[#6B6862]">Live contribution graph active on <a href="https://github.com/RaizelHub" target="_blank" class="text-[#C7462D] underline">GitHub @RaizelHub</a></span>';
+                  target.parentElement.innerHTML = '<span class="text-xs font-mono text-[#5F6873]">Live activity on <a href="https://github.com/RaizelHub" target="_blank" class="text-[#2563EB] underline">GitHub @RaizelHub</a></span>';
                 }
               }}
             />
