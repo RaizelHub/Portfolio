@@ -1,209 +1,453 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Download } from 'lucide-react';
-import { Button } from '../ui/Button';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  BriefcaseBusiness,
+  FolderKanban,
+  Github,
+  Linkedin,
+  Mail,
+  Menu,
+  Moon,
+  Sun,
+  User,
+  Volume2,
+  VolumeX,
+  X,
+  ExternalLink,
+} from 'lucide-react';
 import { profile } from '../../data/profile';
+import { useSound } from '../../context/SoundContext';
+import { useTheme } from '../../context/ThemeContext';
 
-interface NavLink {
-  label: string;
-  href: string;
-  sectionId: string;
-}
+/* ── Exactly 4 primary navigation items with icons ── */
+const navItems = [
+  { label: 'Work', href: '/#projects', sectionId: 'projects', icon: FolderKanban },
+  { label: 'Experience', href: '/#experience', sectionId: 'experience', icon: BriefcaseBusiness },
+  { label: 'About', href: '/#about', sectionId: 'about', icon: User },
+  { label: 'Contact', href: '/#contact', sectionId: 'contact', icon: Mail },
+] as const;
 
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const observedSectionIds = [
+  'home',
+  'projects',
+  'technologies',
+  'experience',
+  'about',
+  'certifications',
+  'github-activity',
+  'contact',
+];
+
+export const Navbar: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
+  const navRef = useRef<HTMLElement>(null);
+  const visibleSectionsRef = useRef(new Map<string, DOMRectReadOnly>());
+
   const location = useLocation();
   const navigate = useNavigate();
+  const { soundEnabled, toggleSound, playHover, playClick, playNavigate } = useSound();
+  const { resolvedTheme, toggleTheme } = useTheme();
 
-  const navLinks: NavLink[] = [
-    { label: 'Home', href: '/', sectionId: 'home' },
-    { label: 'About', href: '/#about', sectionId: 'about' },
-    { label: 'Skills', href: '/#skills', sectionId: 'skills' },
-    { label: 'Services', href: '/#services', sectionId: 'services' },
-    { label: 'Projects', href: '/#projects', sectionId: 'projects' },
-    { label: 'Experience', href: '/#experience', sectionId: 'experience' },
-    { label: 'Contact', href: '/#contact', sectionId: 'contact' },
-  ];
-
-  // Scroll handler to toggle sticky navigation style & active highlights
+  /* ── 1. Active section tracking via IntersectionObserver ── */
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+    if (location.pathname !== '/') {
+      setActiveSection(location.pathname.startsWith('/projects') ? 'projects' : '');
+      return;
+    }
 
-      // Only evaluate active highlights if on the home page
-      if (location.pathname === '/') {
-        let current = 'home';
-        for (const link of navLinks) {
-          const el = document.getElementById(link.sectionId);
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top <= 140) {
-              current = link.sectionId;
-            }
+    const sections = observedSectionIds
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const visibleSections = visibleSectionsRef.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.boundingClientRect);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        const visible = [...visibleSections.entries()].sort(
+          ([, a], [, b]) => Math.abs(a.top - 90) - Math.abs(b.top - 90),
+        );
+
+        if (visible[0]) {
+          const currentId = visible[0][0];
+          // Map secondary sections to their parent nav item
+          if (currentId === 'home' || currentId === 'projects' || currentId === 'technologies') {
+            setActiveSection('projects');
+          } else if (currentId === 'experience') {
+            setActiveSection('experience');
+          } else if (currentId === 'about' || currentId === 'certifications' || currentId === 'github-activity') {
+            setActiveSection('about');
+          } else if (currentId === 'contact') {
+            setActiveSection('contact');
           }
         }
-        setActiveSection(current);
-      } else {
-        // Highlight active sub-pages
-        if (location.pathname.startsWith('/projects')) {
-          setActiveSection('projects');
-        } else {
-          setActiveSection('');
-        }
+      },
+      { rootMargin: '-72px 0px -55% 0px', threshold: [0, 0.1, 0.25] },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      observer.disconnect();
+      visibleSections.clear();
+    };
+  }, [location.pathname]);
+
+  /* ── 2. Sticky Scroll Background Transition ── */
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(currentScrollY > 16);
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Trigger initial call
+    handleScroll(); // Check on mount
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [location, navLinks]);
+  }, []);
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, link: NavLink) => {
-    e.preventDefault();
-    setIsOpen(false);
-
-    if (location.pathname === '/') {
-      const el = document.getElementById(link.sectionId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-        setActiveSection(link.sectionId);
+  /* ── 3. Handle Keyboard Accessibility (Escape to close mobile menu) ── */
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
       }
-    } else {
-      navigate(link.href);
-      // Wait for navigation and then scroll
-      setTimeout(() => {
-        const el = document.getElementById(link.sectionId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 100);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileMenuOpen]);
+
+  /* ── 4. Smooth Anchor Navigation ── */
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    event.preventDefault();
+    playNavigate();
+    setIsMobileMenuOpen(false);
+    setActiveSection(sectionId);
+
+    if (location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+
+    window.history.replaceState(null, '', `/#${sectionId}`);
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
     }
   };
 
-  const handleLogoClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsOpen(false);
+  const handleBrandClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    playClick();
+    setIsMobileMenuOpen(false);
+    setActiveSection('home');
+
     if (location.pathname === '/') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('home');
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
     } else {
       navigate('/');
     }
   };
 
-  const handleDownloadResume = () => {
-    const link = document.createElement('a');
-    link.href = profile.resumeUrl;
-    link.download = 'Suelto-Janmark-Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-        ? 'bg-navy-950/80 backdrop-blur-md border-b border-navy-800/60 py-3 shadow-lg'
-        : 'bg-transparent py-5'
-      }`}>
+    <header
+      ref={navRef}
+      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${
+        isScrolled || isMobileMenuOpen
+          ? 'bg-[#F7F8FA]/95 dark:bg-[#0B0D10]/95 border-b border-[#DCE1E7] dark:border-[#242B33] backdrop-blur-xs shadow-2xs'
+          : 'bg-transparent border-b border-transparent'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <a
-            href="/"
-            onClick={handleLogoClick}
-            className="flex items-center gap-2 group cursor-pointer"
+        <div className="flex h-16 sm:h-[68px] items-center justify-between gap-4 lg:gap-6">
+          {/* ── Brand: Profile Image + Name + Subtitle ── */}
+          <Link
+            to="/"
+            onClick={handleBrandClick}
+            onMouseEnter={playHover}
+            className="flex items-center gap-3 shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-[#2563EB] focus-visible:outline-offset-4 py-1 group"
+            aria-label="Janmark Suelto — Back to top"
           >
-            <div className="w-8 h-8 rounded-md bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center font-mono font-bold text-navy-950 transition-colors duration-200">
-              JM
+            <img
+              src={profile.profileImage}
+              alt="Janmark Suelto"
+              className="h-8 w-8 shrink-0 rounded-md border border-[#DCE1E7] object-cover object-top dark:border-[#242B33] group-hover:border-[#2563EB] dark:group-hover:border-[#60A5FA] transition-colors"
+            />
+            <div className="min-w-0 leading-tight">
+              <span className="block truncate text-[13px] font-semibold text-[#111318] dark:text-[#F4F6F8] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
+                Janmark Suelto
+              </span>
+              <span className="block truncate text-[11px] text-[#5F6873] dark:text-[#A7B0BA]">
+                Software Developer
+              </span>
             </div>
-            <span className="font-bold tracking-tight text-white group-hover:text-emerald-400 transition-colors duration-200 text-sm sm:text-base">
-              Janmark
-            </span>
-          </a>
+          </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1.5 lg:gap-3">
-            <ul className="flex items-center gap-1 lg:gap-2">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.sectionId;
-                return (
-                  <li key={link.sectionId}>
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleLinkClick(e, link)}
-                      className={`px-3 py-1.5 rounded-md text-xs lg:text-sm font-medium transition-all duration-200 select-none ${isActive
-                          ? 'text-emerald-400 bg-emerald-950/30'
-                          : 'text-slate-400 hover:text-white hover:bg-navy-800/40'
-                        }`}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+          {/* ── Navigation Links with Underline Active Indicator ── */}
+          <nav
+            aria-label="Main Navigation"
+            className="hidden md:flex items-center gap-1.5 lg:gap-2"
+          >
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive =
+                activeSection === item.sectionId ||
+                (item.sectionId === 'projects' &&
+                  (location.pathname.startsWith('/projects') || activeSection === 'projects' || activeSection === 'home'));
 
-            <div className="h-4 w-[1px] bg-navy-800 mx-1 lg:mx-2" />
+              return (
+                <a
+                  key={item.sectionId}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.sectionId)}
+                  onMouseEnter={playHover}
+                  className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${
+                    isActive
+                      ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
+                      : 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
+                  }`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <Icon
+                    className={`h-4 w-4 shrink-0 transition-colors ${
+                      isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70 group-hover:opacity-100'
+                    }`}
+                    strokeWidth={1.8}
+                  />
+                  <span>{item.label}</span>
+                  {/* Subtle 2px active underline indicator */}
+                  {isActive && (
+                    <span
+                      className="absolute bottom-0 inset-x-2.5 h-[2px] bg-[#2563EB] dark:bg-[#60A5FA] rounded-full"
+                      aria-hidden="true"
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
 
-            <Button
-              variant="primary"
-              size="sm"
-              leftIcon={<Download className="w-3.5 h-3.5" />}
-              onClick={handleDownloadResume}
+          {/* ── Utilities Group: GitHub, LinkedIn, Audio on, Light/Dark ── */}
+          <div className="hidden md:flex items-center gap-3 lg:gap-4 shrink-0 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
+            {/* GitHub */}
+            <a
+              href={profile.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
             >
-              Download Resume
-            </Button>
+              <Github className="w-3.5 h-3.5" />
+              <span>GitHub</span>
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href={profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
+            >
+              <Linkedin className="w-3.5 h-3.5" />
+              <span>LinkedIn</span>
+            </a>
+
+            {/* Divider */}
+            <div className="h-4 w-px bg-[#DCE1E7] dark:bg-[#242B33]" aria-hidden="true" />
+
+            {/* Audio Toggle Button */}
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                toggleSound();
+              }}
+              onMouseEnter={playHover}
+              className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
+            >
+              {soundEnabled ? (
+                <Volume2 className="h-3.5 w-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+              ) : (
+                <VolumeX className="h-3.5 w-3.5" />
+              )}
+              <span>{soundEnabled ? 'Audio on' : 'Audio off'}</span>
+            </button>
+
+            {/* Theme Toggle Button */}
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                toggleTheme();
+              }}
+              onMouseEnter={playHover}
+              className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === 'dark' ? (
+                <Sun className="h-3.5 w-3.5 text-[#60A5FA]" />
+              ) : (
+                <Moon className="h-3.5 w-3.5 text-[#2563EB]" />
+              )}
+              <span className="capitalize">{resolvedTheme}</span>
+            </button>
           </div>
 
-          {/* Mobile Hamburg Trigger */}
-          <div className="flex items-center md:hidden gap-3">
-            <Button
-              variant="primary"
-              size="sm"
-              className="text-xs px-3 py-1.5"
-              leftIcon={<Download className="w-3.5 h-3.5" />}
-              onClick={handleDownloadResume}
-            >
-              Resume
-            </Button>
+          {/* ── Mobile Header Utilities & Hamburger ── */}
+          <div className="flex md:hidden items-center gap-1.5">
+            {/* Audio Toggle (Mobile) */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-1.5 bg-navy-800 text-slate-400 hover:text-white hover:bg-navy-700 rounded-md transition-colors"
-              aria-label="Toggle menu"
+              type="button"
+              onClick={() => {
+                playClick();
+                toggleSound();
+              }}
+              className="p-2 rounded-lg text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors"
+              aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
+              title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {soundEnabled ? (
+                <Volume2 className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+              ) : (
+                <VolumeX className="w-4 h-4" />
+              )}
+            </button>
+
+            {/* Theme Toggle (Mobile) */}
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                toggleTheme();
+              }}
+              onMouseEnter={playHover}
+              className="p-2 rounded-lg text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors"
+              aria-label="Toggle theme"
+            >
+              {resolvedTheme === 'dark' ? <Sun className="w-4 h-4 text-[#60A5FA]" /> : <Moon className="w-4 h-4 text-[#2563EB]" />}
+            </button>
+
+            {/* Hamburger Button */}
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                setIsMobileMenuOpen((prev) => !prev);
+              }}
+              className="p-2 rounded-lg border border-[#DCE1E7] dark:border-[#242B33] bg-[#FFFFFF] dark:bg-[#11151A] text-[#111318] dark:text-[#F4F6F8] focus-visible:outline-2 focus-visible:outline-[#2563EB]"
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            >
+              {isMobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown */}
-      {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-navy-950/95 backdrop-blur-md border-b border-navy-800 py-4 px-4 shadow-xl flex flex-col gap-3 transition-all duration-300">
-          <ul className="flex flex-col gap-1">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.sectionId;
+      {/* ── Mobile Navigation Dropdown Menu Panel ── */}
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-navigation"
+          className="md:hidden border-t border-[#DCE1E7] dark:border-[#242B33] bg-[#F7F8FA] dark:bg-[#0B0D10] px-6 py-6 shadow-xl transition-all"
+        >
+          <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive =
+                activeSection === item.sectionId ||
+                (item.sectionId === 'projects' &&
+                  (location.pathname.startsWith('/projects') || activeSection === 'projects' || activeSection === 'home'));
+
               return (
-                <li key={link.sectionId}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link)}
-                    className={`block px-4 py-2.5 rounded-md text-sm font-semibold transition-colors ${isActive
-                        ? 'text-emerald-400 bg-emerald-950/30'
-                        : 'text-slate-400 hover:text-white hover:bg-navy-800/40'
-                      }`}
-                  >
-                    {link.label}
-                  </a>
-                </li>
+                <a
+                  key={item.sectionId}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.sectionId)}
+                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
+                      : 'text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8]'
+                  }`}
+                >
+                  <Icon
+                    className={`h-4 w-4 shrink-0 ${
+                      isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70'
+                    }`}
+                  />
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span
+                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[#2563EB] dark:bg-[#60A5FA] rounded-full"
+                      aria-hidden="true"
+                    />
+                  )}
+                </a>
               );
             })}
-          </ul>
+          </nav>
+
+          {/* Secondary Utilities Separator */}
+          <div className="mt-5 pt-5 border-t border-[#DCE1E7] dark:border-[#242B33] flex flex-col space-y-2.5 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
+            <a
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between text-[#111318] dark:text-[#F4F6F8] hover:text-[#2563EB] dark:hover:text-[#60A5FA] font-semibold py-1"
+            >
+              <span>Résumé (PDF)</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+            </a>
+            <a
+              href={profile.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between hover:text-[#2563EB] dark:hover:text-[#60A5FA] py-1"
+            >
+              <span>GitHub</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+            </a>
+            <a
+              href={profile.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between hover:text-[#2563EB] dark:hover:text-[#60A5FA] py-1"
+            >
+              <span>LinkedIn</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-60" />
+            </a>
+          </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
+
+export default Navbar;
