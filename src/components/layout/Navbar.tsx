@@ -176,11 +176,10 @@ export const Navbar: React.FC = () => {
   return (
     <header
       ref={navRef}
-      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${
-        isScrolled || isMobileMenuOpen
+      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${isScrolled || isMobileMenuOpen
           ? 'bg-[#F7F8FA]/95 dark:bg-[#0B0D10]/95 border-b border-[#DCE1E7] dark:border-[#242B33] backdrop-blur-xs shadow-2xs'
           : 'bg-transparent border-b border-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 sm:h-[68px] items-center justify-between gap-4 lg:gap-6">
@@ -225,17 +224,15 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   onMouseEnter={playHover}
-                  className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${
-                    isActive
+                  className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${isActive
                       ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
                       : 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
-                  }`}
+                    }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   <Icon
-                    className={`h-4 w-4 shrink-0 transition-colors ${
-                      isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70 group-hover:opacity-100'
-                    }`}
+                    className={`h-4 w-4 shrink-0 transition-colors ${isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70 group-hover:opacity-100'
+                      }`}
                     strokeWidth={1.8}
                   />
                   <span>{item.label}</span>
@@ -397,16 +394,14 @@ export const Navbar: React.FC = () => {
                   key={item.sectionId}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
-                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${
-                    isActive
+                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${isActive
                       ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
                       : 'text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8]'
-                  }`}
+                    }`}
                 >
                   <Icon
-                    className={`h-4 w-4 shrink-0 ${
-                      isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70'
-                    }`}
+                    className={`h-4 w-4 shrink-0 ${isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70'
+                      }`}
                   />
                   <span>{item.label}</span>
                   {isActive && (

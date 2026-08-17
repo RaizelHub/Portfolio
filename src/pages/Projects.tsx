@@ -85,12 +85,12 @@ export const Projects = () => {
   const groupedProjects =
     activeCategory === 'All'
       ? categoryOrder
-          .map((cat) => ({
-            category: cat,
-            meta: categoryMeta[cat],
-            projects: filteredProjects.filter((p) => p.category === cat),
-          }))
-          .filter((group) => group.projects && group.projects.length > 0)
+        .map((cat) => ({
+          category: cat,
+          meta: categoryMeta[cat],
+          projects: filteredProjects.filter((p) => p.category === cat),
+        }))
+        .filter((group) => group.projects && group.projects.length > 0)
       : null;
 
   const categoryCounts: Record<string, number> = {};
@@ -139,11 +139,10 @@ export const Projects = () => {
                 playClick();
                 setActiveCategory('All');
               }}
-              className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${
-                activeCategory === 'All'
+              className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${activeCategory === 'All'
                   ? 'bg-[#111318] dark:bg-[#F4F6F8] text-white dark:text-[#0B0D10] border-[#111318] dark:border-[#F4F6F8] font-bold shadow-xs'
                   : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
-              }`}
+                }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
               <span>All ({projects.length})</span>
@@ -165,11 +164,10 @@ export const Projects = () => {
                       playClick();
                       setActiveCategory(cat);
                     }}
-                    className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${
-                      isActive
+                    className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${isActive
                         ? 'bg-[#2563EB] dark:bg-[#2563EB] text-white border-[#2563EB] font-bold shadow-xs'
                         : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
-                    }`}
+                      }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
                     <span>{meta.tab} ({categoryCounts[cat]})</span>

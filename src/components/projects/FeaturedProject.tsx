@@ -57,27 +57,27 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
   const contentEntrance = prefersReducedMotion
     ? {}
     : {
-        initial: { opacity: 0, y: 16 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true as const, margin: '-60px' },
-        transition: {
-          duration: 0.45,
-          ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-        },
-      };
+      initial: { opacity: 0, y: 16 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true as const, margin: '-60px' },
+      transition: {
+        duration: 0.45,
+        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+      },
+    };
 
   const visualEntrance = prefersReducedMotion
     ? {}
     : {
-        initial: { opacity: 0, scale: 0.98 },
-        whileInView: { opacity: 1, scale: 1 },
-        viewport: { once: true as const, margin: '-60px' },
-        transition: {
-          duration: 0.48,
-          delay: 0.08,
-          ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-        },
-      };
+      initial: { opacity: 0, scale: 0.98 },
+      whileInView: { opacity: 1, scale: 1 },
+      viewport: { once: true as const, margin: '-60px' },
+      transition: {
+        duration: 0.48,
+        delay: 0.08,
+        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+      },
+    };
 
   /* ── Content block ── */
   const ContentBlock = (

@@ -9,13 +9,14 @@ import { ThemeProvider } from './context/ThemeContext';
 import { Home } from './pages/Home';
 import { Projects } from './pages/Projects';
 import { ProjectDetails } from './pages/ProjectDetails';
+import { AdminAnalytics } from './pages/AdminAnalytics';
 
 function App() {
   return (
     <ThemeProvider>
       <SoundProvider>
         <Router>
-          <div className="flex flex-col min-h-screen bg-[#F7F8FA] dark:bg-[#0B0D10] text-[#111318] dark:text-[#F4F6F8] font-sans selection:bg-[#2563EB] selection:text-white dark:selection:bg-[#3B82F6] dark:selection:text-[#0B0D10] transition-colors duration-150">
+          <div className="flex flex-col min-h-screen bg-[#F8FAFC] dark:bg-[#080A0E] text-[#0F172A] dark:text-[#F8FAFC] font-sans selection:bg-[#F59E0B] selection:text-[#080A0E] transition-colors duration-150">
             <ScrollProgress />
             <Navbar />
 
@@ -25,11 +26,13 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/projects/:slug" element={<ProjectDetails />} />
+                  <Route path="/admin/analytics" element={<AdminAnalytics />} />
+                  <Route path="/analytics" element={<Navigate to="/admin/analytics" replace />} />
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </ErrorBoundary>
             </main>
-            
+
             <Footer />
             <FloatingContactModal />
           </div>

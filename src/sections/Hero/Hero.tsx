@@ -34,10 +34,10 @@ export const Hero: React.FC = () => {
     prefersReducedMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 12 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.4, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
-        };
+        initial: { opacity: 0, y: 12 },
+        animate: { opacity: 1, y: 0 },
+        transition: { duration: 0.4, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+      };
 
   return (
     <SectionContainer id="home" className="relative pt-8 pb-16 lg:pt-12 lg:pb-20 border-b border-[#DCE1E7] dark:border-[#242B33]">

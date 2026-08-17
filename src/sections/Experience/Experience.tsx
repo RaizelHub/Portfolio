@@ -11,11 +11,11 @@ export const Experience: React.FC = () => {
     prefersReducedMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 14 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true as const, margin: '-60px' },
-          transition: { duration: 0.45, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
-        };
+        initial: { opacity: 0, y: 14 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true as const, margin: '-60px' },
+        transition: { duration: 0.45, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+      };
 
   return (
     <SectionContainer id="experience" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">

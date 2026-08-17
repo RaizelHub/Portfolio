@@ -154,11 +154,10 @@ export const ProjectDetails = () => {
                           <button
                             key={img}
                             onClick={() => setActiveImageIndex(idx)}
-                            className={`relative w-20 h-14 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] bg-[#F7F8FA] dark:bg-[#0B0D10] ${
-                              activeImageIndex === idx
+                            className={`relative w-20 h-14 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] bg-[#F7F8FA] dark:bg-[#0B0D10] ${activeImageIndex === idx
                                 ? 'border-[#2563EB] dark:border-[#60A5FA] opacity-100'
                                 : 'border-[#DCE1E7] dark:border-[#242B33] opacity-60 hover:opacity-100'
-                            }`}
+                              }`}
                           >
                             <img
                               src={`/${img}`}
