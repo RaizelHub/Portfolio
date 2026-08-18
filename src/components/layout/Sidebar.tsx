@@ -105,13 +105,13 @@ export const Sidebar: React.FC = () => {
   };
 
   const navRow = 'group flex h-9 w-full items-center gap-2.5 rounded-md px-3 text-[13px] transition-colors duration-150';
-  const inactiveRow = 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]';
-  const activeRow = 'text-[#111318] dark:text-[#F4F6F8] font-semibold bg-black/[0.05] dark:bg-white/[0.06]';
+  const inactiveRow = 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)]';
+  const activeRow = 'text-[var(--text-primary)] font-semibold bg-[var(--surface-hover)]';
 
   const panel = (
-    <div className="flex h-full flex-col bg-[#F7F8FA] text-[#111318] dark:bg-[#0B0D10] dark:text-[#F4F6F8] border-r border-[#DCE1E7] dark:border-[#242B33]">
+    <div className="flex h-full flex-col bg-[var(--background)] text-[var(--text-primary)] border-r border-[var(--border-subtle)]">
       {/* Brand Header */}
-      <div className="flex items-center gap-3 border-b border-[#DCE1E7] px-5 py-4 dark:border-[#242B33]">
+      <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] px-5 py-4">
         <Link
           to="/"
           onClick={closeDrawer}
@@ -122,13 +122,13 @@ export const Sidebar: React.FC = () => {
           <img
             src={profile.profileImage}
             alt="Janmark Suelto"
-            className="h-8 w-8 shrink-0 rounded-md object-cover object-top"
+            className="h-8 w-8 shrink-0 rounded-md object-cover object-top border border-[var(--border-subtle)]"
           />
           <span className="min-w-0 leading-tight">
-            <span className="block truncate text-[13px] font-semibold text-[#111318] dark:text-[#F4F6F8]">
+            <span className="block truncate text-[13px] font-semibold text-[var(--text-primary)]">
               Janmark Suelto
             </span>
-            <span className="mt-0.5 block truncate text-[11px] text-[#5F6873] dark:text-[#A7B0BA]">
+            <span className="mt-0.5 block truncate text-[11px] text-[var(--text-secondary)]">
               Software Developer
             </span>
           </span>
@@ -136,7 +136,7 @@ export const Sidebar: React.FC = () => {
         <button
           type="button"
           onClick={closeDrawer}
-          className="rounded-md p-1.5 text-[#5F6873] hover:bg-black/5 hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:bg-white/5 dark:hover:text-[#F4F6F8] xl:hidden"
+          className="rounded-md p-1.5 text-[var(--text-secondary)] hover:bg-black/5 hover:text-[var(--text-primary)] dark:hover:bg-white/5 xl:hidden"
           aria-label="Close navigation"
         >
           <X className="h-4 w-4" />
@@ -145,7 +145,7 @@ export const Sidebar: React.FC = () => {
 
       {/* 4 Primary Navigation Links */}
       <div className="flex-1 overflow-y-auto px-3 py-5">
-        <p className="mb-2 px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-[#78828D] dark:text-[#7F8994]">
+        <p className="mb-2 px-3 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
           Navigation
         </p>
         <nav aria-label="Portfolio sections" className="space-y-1">
@@ -164,13 +164,13 @@ export const Sidebar: React.FC = () => {
                 className={`${navRow} ${isActive ? activeRow : inactiveRow}`}
                 aria-current={isActive ? 'location' : undefined}
               >
-                {/* Subtle blue left indicator on active state */}
+                {/* Subtle copper indicator on active state */}
                 <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${isActive ? 'bg-[#2563EB] dark:bg-[#60A5FA]' : 'bg-transparent'
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${isActive ? 'bg-[var(--accent)]' : 'bg-transparent'
                     }`}
                   aria-hidden="true"
                 />
-                <Icon className="h-4 w-4 shrink-0 opacity-70 group-hover:opacity-100" strokeWidth={1.8} />
+                <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-[var(--accent)]' : 'opacity-70 group-hover:opacity-100'}`} strokeWidth={1.8} />
                 <span>{link.label}</span>
               </a>
             );
@@ -179,16 +179,16 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Footer / Socials & Theme Toggle */}
-      <div className="border-t border-[#DCE1E7] p-3.5 dark:border-[#242B33] space-y-3">
+      <div className="border-t border-[var(--border-subtle)] p-3.5 space-y-3">
         {/* Social Links */}
-        <div className="flex items-center justify-between px-1.5 text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA]">
+        <div className="flex items-center justify-between px-1.5 text-xs font-mono text-[var(--text-secondary)]">
           <a
             href={profile.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
+            className="flex items-center gap-1.5 hover:text-[var(--text-primary)] transition-colors py-1"
           >
             <Github className="w-3.5 h-3.5" />
             <span>GitHub</span>
@@ -199,7 +199,7 @@ export const Sidebar: React.FC = () => {
             rel="noopener noreferrer"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
+            className="flex items-center gap-1.5 hover:text-[var(--text-primary)] transition-colors py-1"
           >
             <Linkedin className="w-3.5 h-3.5" />
             <span>LinkedIn</span>
@@ -207,7 +207,7 @@ export const Sidebar: React.FC = () => {
         </div>
 
         {/* Theme & Sound Controls */}
-        <div className="flex items-center justify-between border-t border-[#DCE1E7] pt-3 px-1 dark:border-[#242B33]">
+        <div className="flex items-center justify-between border-t border-[var(--border-subtle)] pt-3 px-1">
           <button
             type="button"
             onClick={() => {
@@ -215,10 +215,10 @@ export const Sidebar: React.FC = () => {
               toggleSound();
             }}
             onMouseEnter={playHover}
-            className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
           >
-            {soundEnabled ? <Volume2 className="h-3.5 w-3.5 text-[#2563EB] dark:text-[#60A5FA]" /> : <VolumeX className="h-3.5 w-3.5" />}
+            {soundEnabled ? <Volume2 className="h-3.5 w-3.5 text-[var(--accent)]" /> : <VolumeX className="h-3.5 w-3.5" />}
             <span>{soundEnabled ? 'Audio on' : 'Audio off'}</span>
           </button>
 
@@ -229,10 +229,10 @@ export const Sidebar: React.FC = () => {
               toggleTheme();
             }}
             onMouseEnter={playHover}
-            className="flex items-center gap-1.5 text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors"
+            className="flex items-center gap-1.5 text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             aria-label="Toggle theme"
           >
-            {resolvedTheme === 'dark' ? <Sun className="h-3.5 w-3.5 text-[#60A5FA]" /> : <Moon className="h-3.5 w-3.5 text-[#2563EB]" />}
+            {resolvedTheme === 'dark' ? <Sun className="h-3.5 w-3.5 text-[var(--accent)]" /> : <Moon className="h-3.5 w-3.5 text-[var(--accent)]" />}
             <span className="capitalize">{resolvedTheme}</span>
           </button>
         </div>
@@ -243,14 +243,14 @@ export const Sidebar: React.FC = () => {
   return (
     <>
       {/* Mobile Top App Header */}
-      <header className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-[#DCE1E7] bg-[#F7F8FA]/90 px-4 backdrop-blur-md dark:border-[#242B33] dark:bg-[#0B0D10]/90 xl:hidden">
+      <header className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-[var(--border-subtle)] bg-[var(--background)]/90 px-4 backdrop-blur-md xl:hidden">
         <Link to="/" className="flex items-center gap-2.5" onClick={() => setActiveSection('home')}>
           <img
             src={profile.profileImage}
             alt="Janmark Suelto"
-            className="h-7 w-7 rounded-md object-cover object-top"
+            className="h-7 w-7 rounded-md object-cover object-top border border-[var(--border-subtle)]"
           />
-          <span className="text-xs font-semibold text-[#111318] dark:text-[#F4F6F8]">
+          <span className="text-xs font-semibold text-[var(--text-primary)]">
             Janmark Suelto
           </span>
         </Link>
@@ -262,7 +262,7 @@ export const Sidebar: React.FC = () => {
             playClick();
             setIsOpen(true);
           }}
-          className="rounded-md border border-[#DCE1E7] p-2 text-[#5F6873] hover:text-[#111318] dark:border-[#242B33] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8]"
+          className="rounded-md border border-[var(--border-subtle)] p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
           aria-label="Open menu"
         >
           <Menu className="h-4 w-4" />

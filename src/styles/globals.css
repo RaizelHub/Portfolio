@@ -5,30 +5,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-bg-light: #F7F8FA;
-  --color-surface-1-light: #FFFFFF;
-  --color-surface-2-light: #F1F3F5;
-  --color-surface-3-light: #EAEDF1;
-  --color-border-subtle-light: #DCE1E7;
-  --color-border-strong-light: #C5CCD5;
-  --color-text-primary-light: #111318;
-  --color-text-secondary-light: #5F6873;
-  --color-text-tertiary-light: #78828D;
-
-  --color-bg-dark: #0B0D10;
-  --color-surface-1-dark: #11151A;
-  --color-surface-2-dark: #171C22;
-  --color-surface-3-dark: #1D232B;
-  --color-border-subtle-dark: #242B33;
-  --color-border-strong-dark: #343D48;
-  --color-text-primary-dark: #F4F6F8;
-  --color-text-secondary-dark: #A7B0BA;
-  --color-text-tertiary-dark: #7F8994;
-
-  --color-accent-blue: #2563EB;
-  --color-accent-blue-hover: #1D4ED8;
-  --color-accent-blue-light: #60A5FA;
-
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-title: 'Roboto Slab', serif;
@@ -36,50 +12,64 @@
   --font-slab: 'Roboto Slab', serif;
 }
 
+/* ==========================================================================
+   GRAPHITE + WARM COPPER DESIGN SYSTEM
+   ========================================================================== */
 :root {
-  --background: #F7F8FA;
-  --surface-1: #FFFFFF;
-  --surface-2: #F1F3F5;
-  --surface-3: #EAEDF1;
+  --background: #ede8df;
+  --background-secondary: #e5dfd5;
+  --surface: #f7f5f0;
+  --surface-elevated: #ffffff;
+  --surface-hover: #eae4d9;
+  --border: #d2cbbe;
+  --border-subtle: #ded8cd;
+  --text-primary: #16191e;
+  --text-secondary: #585d68;
+  --text-muted: #7e8490;
+  --accent: #a66f32;
+  --accent-hover: #8f5c24;
+  --accent-soft: rgba(166, 111, 50, 0.12);
+  --success: #3c7e52;
+  --warning: #b38226;
+  --error: #c24b4b;
+  --info: #3f6ca6;
+  --focus: #a66f32;
+  --on-accent: #ffffff;
 
-  --border-subtle: #DCE1E7;
-  --border-strong: #C5CCD5;
-
-  --text-primary: #111318;
-  --text-secondary: #5F6873;
-  --text-tertiary: #78828D;
-
-  --accent: #2563EB;
-  --accent-strong: #1D4ED8;
-  --accent-hover: #3B82F6;
-  --on-accent: #FFFFFF;
-
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --selection-bg: #e2d7c5;
+  --selection-color: #16191e;
 }
 
 .dark,
 html.dark {
-  --background: #0B0D10;
-  --surface-1: #11151A;
-  --surface-2: #171C22;
-  --surface-3: #1D232B;
+  --background: #0c0e12;
+  --background-secondary: #10141a;
+  --surface: #141820;
+  --surface-elevated: #191e27;
+  --surface-hover: #1e242e;
+  --border: #29313c;
+  --border-subtle: #20262f;
+  --text-primary: #f4f1ea;
+  --text-secondary: #a9adb5;
+  --text-muted: #777e89;
+  --accent: #d7a15b;
+  --accent-hover: #e6b36d;
+  --accent-soft: #2b2116;
+  --success: #75b88a;
+  --warning: #ddb66b;
+  --error: #df7777;
+  --info: #7c9ccf;
+  --focus: #f1bf79;
+  --on-accent: #0c0e12;
 
-  --border-subtle: #242B33;
-  --border-strong: #343D48;
-
-  --text-primary: #F4F6F8;
-  --text-secondary: #A7B0BA;
-  --text-tertiary: #7F8994;
-
-  --accent: #60A5FA;
-  --accent-strong: #2563EB;
-  --accent-hover: #93C5FD;
-  --on-accent: #0B0D10;
+  --selection-bg: #2b2116;
+  --selection-color: #f4f1ea;
   color-scheme: dark;
 }
 
+/* ==========================================================================
+   BASE & TYPOGRAPHY
+   ========================================================================== */
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -105,30 +95,16 @@ html.dark {
   }
 
   ::selection {
-    background-color: #2563EB;
-    color: #FFFFFF;
+    background-color: var(--selection-bg);
+    color: var(--selection-color);
   }
 
-  .dark ::selection,
-  html.dark ::selection {
-    background-color: #3B82F6;
-    color: #0B0D10;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  .font-title,
-  .font-display,
-  .font-slab {
+  h1, h2, h3, h4, h5, h6, .font-title, .font-display, .font-slab {
     font-family: var(--font-title);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
 }
@@ -144,7 +120,7 @@ html.dark {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-strong);
+  background: var(--border);
   border-radius: 3px;
 }
 

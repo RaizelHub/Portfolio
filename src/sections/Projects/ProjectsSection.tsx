@@ -57,10 +57,10 @@ const moreProjects = [
 const Separator = ({ label }: { label: string }) => (
   <div className="relative my-16 lg:my-24">
     <div className="absolute inset-0 flex items-center" aria-hidden="true">
-      <div className="w-full border-t border-[#DCE1E7] dark:border-[#242B33]" />
+      <div className="w-full border-t border-[var(--border-subtle)]" />
     </div>
     <div className="relative flex">
-      <span className="bg-[#F7F8FA] dark:bg-[#0B0D10] pr-4 text-[10px] font-mono text-[#78828D] dark:text-[#7F8994] uppercase tracking-widest select-none">
+      <span className="bg-[var(--background)] pr-4 text-[10px] font-mono text-[var(--text-muted)] uppercase tracking-widest select-none">
         {label}
       </span>
     </div>
@@ -84,24 +84,24 @@ export const ProjectsSection = () => {
   return (
     <SectionContainer
       id="projects"
-      className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]"
+      className="py-16 border-b border-[var(--border-subtle)]"
     >
       {/* ══════════════════════════════════════════
           SECTION HEADER — SELECTED WORK
       ══════════════════════════════════════════ */}
       <motion.div {...entrance()} className="mb-16 max-w-3xl">
-        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
+        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)] block mb-3">
           Selected Work
         </span>
 
         <h2
-          className="font-title font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
+          className="font-title font-bold text-[var(--text-primary)] leading-[1.12] mb-3"
           style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
         >
           Software across web, mobile, and automation.
         </h2>
 
-        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
           Selected projects showing how I build software across different platforms and workflows.
         </p>
       </motion.div>
@@ -217,33 +217,33 @@ export const ProjectsSection = () => {
         visual={
           <div className="w-full space-y-3.5">
             {/* Visual Architecture Flow */}
-            <div className="p-3.5 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl shadow-xs">
-              <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#DCE1E7] dark:border-[#242B33]">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#111318] dark:text-[#F4F6F8]">
+            <div className="p-3.5 bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl shadow-xs">
+              <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[var(--border-subtle)]">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--text-primary)]">
                   Event Pipeline Sequence
                 </span>
-                <span className="text-[9px] font-mono text-[#2563EB] dark:text-[#60A5FA] font-semibold uppercase">
+                <span className="text-[9px] font-mono text-[var(--accent)] font-semibold uppercase">
                   5 Workflows Connected
                 </span>
               </div>
               <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[10px] font-mono">
-                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                <span className="px-2 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded font-medium text-[var(--text-primary)] whitespace-nowrap">
                   TikTok Shop
                 </span>
-                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                <span className="text-[var(--text-muted)] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded font-medium text-[var(--text-primary)] whitespace-nowrap">
                   Webhook
                 </span>
-                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                <span className="text-[var(--text-muted)] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded font-medium text-[var(--text-primary)] whitespace-nowrap">
                   Validation
                 </span>
-                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-                <span className="px-2 py-0.5 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded font-semibold text-[#111318] dark:text-[#F4F6F8] whitespace-nowrap">
+                <span className="text-[var(--text-muted)] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded font-medium text-[var(--text-primary)] whitespace-nowrap">
                   Supabase
                 </span>
-                <span className="text-[#2563EB] dark:text-[#60A5FA] font-bold">→</span>
-                <span className="px-2 py-0.5 bg-[#2563EB]/10 border border-[#2563EB]/30 rounded font-semibold text-[#2563EB] dark:text-[#60A5FA] whitespace-nowrap">
+                <span className="text-[var(--text-muted)] font-bold">→</span>
+                <span className="px-2 py-0.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded font-medium text-[var(--text-primary)] whitespace-nowrap">
                   Telegram
                 </span>
               </div>
@@ -252,17 +252,17 @@ export const ProjectsSection = () => {
             {/* Workflow Preview Image */}
             <Link
               to="/projects/tiktok-shop-automation"
-              className="group block relative rounded-xl overflow-hidden border border-[#DCE1E7] dark:border-[#242B33] bg-[#0B0D10] shadow-[0_16px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_16px_40px_rgba(0,0,0,0.45)] cursor-pointer"
+              className="group block relative rounded-xl overflow-hidden border border-[var(--border-subtle)] hover:border-[var(--border)] bg-[var(--surface)] shadow-md cursor-pointer transition-all"
             >
-              <div className="px-3.5 py-2 bg-[#F1F3F5] dark:bg-[#171C22] border-b border-[#DCE1E7] dark:border-[#242B33] flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#111318] dark:text-[#F4F6F8] font-bold">n8n Pipeline: Order Ingestion</span>
-                <span className="text-[#2563EB] dark:text-[#60A5FA] group-hover:underline">Explore 5 Workflows ↗</span>
+              <div className="px-3.5 py-2 bg-[var(--surface-elevated)] border-b border-[var(--border-subtle)] flex items-center justify-between text-[11px] font-mono">
+                <span className="text-[var(--text-primary)] font-bold">n8n Pipeline: Order Ingestion</span>
+                <span className="text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors">Explore 5 Workflows ↗</span>
               </div>
-              <div className="aspect-[16/9.5] overflow-hidden flex items-center justify-center p-2 bg-[#0B0D10]">
+              <div className="aspect-[16/9.5] overflow-hidden flex items-center justify-center p-2 bg-[var(--background)]">
                 <img
                   src="/img/01-Order Processing.png"
                   alt="n8n Order Processing Workflow"
-                  className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-200"
+                  className="w-full h-full object-contain group-hover:scale-[1.01] transition-transform duration-200"
                 />
               </div>
             </Link>
@@ -317,9 +317,9 @@ export const ProjectsSection = () => {
       {/* ══════════════════════════════════════════
           MORE PROJECTS
       ══════════════════════════════════════════ */}
-      <div className="mt-20 pt-12 border-t border-[#DCE1E7] dark:border-[#242B33]">
+      <div className="mt-20 pt-12 border-t border-[var(--border-subtle)]">
         <motion.div {...entrance()} className="mb-6">
-          <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#78828D] dark:text-[#7F8994] mb-2">
+          <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[var(--text-muted)] mb-2">
             More Projects
           </p>
         </motion.div>
@@ -352,10 +352,10 @@ export const ProjectsSection = () => {
           to="/projects"
           onMouseEnter={playHover}
           onClick={playClick}
-          className="group text-xs font-mono font-semibold text-[#111318] dark:text-[#F4F6F8] hover:text-[#2563EB] dark:hover:text-[#60A5FA] flex items-center gap-2 uppercase border border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA] px-5 py-2.5 rounded-lg bg-[#FFFFFF] dark:bg-[#11151A] transition-colors shadow-xs"
+          className="group text-xs font-mono font-semibold text-[var(--text-primary)] hover:text-[var(--accent)] flex items-center gap-2 uppercase border border-[var(--border-subtle)] hover:border-[var(--border)] px-5 py-2.5 rounded-lg bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-colors shadow-xs"
         >
           <span>View All Projects Directory ({projects.length})</span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA] group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
     </SectionContainer>

@@ -124,21 +124,21 @@ export const Technologies: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="technologies" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
+    <SectionContainer id="technologies" className="py-16 border-b border-[var(--border-subtle)]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="max-w-3xl mb-12">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
         >
           Technologies
         </h2>
 
-        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
           Languages, frameworks, databases, and workflow orchestration tools applied across practical systems.
         </p>
       </motion.div>
 
-      {/* ── Grouped Technology Cards ── */}
+      {/* ── Grouped Technology Cards: Neutral & Restrained ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         {TECH_GROUPS.map((group, idx) => {
           const GroupIcon = group.icon;
@@ -147,12 +147,12 @@ export const Technologies: React.FC = () => {
             <motion.div
               key={group.id}
               {...entrance(idx * 0.05)}
-              className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl p-5 shadow-xs"
+              className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-5 shadow-xs"
             >
               {/* Group Header */}
-              <div className="flex items-center gap-2 pb-3.5 mb-3.5 border-b border-[#DCE1E7] dark:border-[#242B33]">
-                <GroupIcon className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
-                <h3 className="font-sans font-bold text-sm text-[#111318] dark:text-[#F4F6F8]">
+              <div className="flex items-center gap-2 pb-3.5 mb-3.5 border-b border-[var(--border-subtle)]">
+                <GroupIcon className="w-4 h-4 text-[var(--accent)]" />
+                <h3 className="font-sans font-bold text-sm text-[var(--text-primary)]">
                   {group.title}
                 </h3>
               </div>
@@ -166,12 +166,12 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[#F7F8FA] dark:bg-[#171C22] border border-transparent hover:border-[#DCE1E7] dark:hover:border-[#343D48] transition-colors"
+                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-colors"
                     >
-                      <div className="w-6 h-6 rounded-md bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] flex items-center justify-center shrink-0 text-[#5F6873] dark:text-[#A7B0BA] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
+                      <div className="w-6 h-6 rounded-md bg-[var(--surface)] border border-[var(--border-subtle)] flex items-center justify-center shrink-0 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
                         <ItemIcon className="w-3.5 h-3.5" />
                       </div>
-                      <span className="font-sans text-xs font-semibold text-[#111318] dark:text-[#F4F6F8] truncate">
+                      <span className="font-sans text-xs font-medium text-[var(--text-primary)] truncate">
                         {item.name}
                       </span>
                     </div>

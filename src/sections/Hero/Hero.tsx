@@ -41,14 +41,14 @@ export const Hero: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="home" className="relative pt-8 pb-16 lg:pt-12 lg:pb-20 border-b border-[#DCE1E7] dark:border-[#242B33]">
+    <SectionContainer id="home" className="relative pt-8 pb-16 lg:pt-12 lg:pb-20 border-b border-[var(--border-subtle)]">
       {/* Top Location Metadata Line */}
       <motion.div
         {...entrance(0)}
-        className="flex items-center justify-between gap-3 text-xs font-mono pb-6 mb-10 border-b border-[#DCE1E7] dark:border-[#242B33]"
+        className="flex items-center justify-between gap-3 text-xs font-mono pb-6 mb-10 border-b border-[var(--border-subtle)]"
       >
-        <div className="flex items-center gap-2 text-[#5F6873] dark:text-[#A7B0BA] text-[11px]">
-          <MapPin className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA] shrink-0" />
+        <div className="flex items-center gap-2 text-[var(--text-muted)] text-[11px]">
+          <MapPin className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
           <span>Bukidnon, Philippines (GMT+8)</span>
         </div>
       </motion.div>
@@ -58,25 +58,25 @@ export const Hero: React.FC = () => {
         {/* Left Column: Headline, Positioning, Actions */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
           <motion.div {...entrance(0.08)} className="space-y-3">
-            <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block">
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)] block">
               Janmark Suelto
             </span>
 
             <h1
-              className="font-title font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] leading-[1.08]"
+              className="font-title font-bold tracking-tight text-[var(--text-primary)] leading-[1.08]"
               style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.75rem)' }}
             >
               Software Developer
             </h1>
 
-            <p className="font-mono text-xs sm:text-sm font-semibold tracking-wide text-[#5F6873] dark:text-[#A7B0BA] uppercase pt-1">
+            <p className="font-mono text-xs sm:text-sm font-medium tracking-wide text-[var(--text-muted)] uppercase pt-1">
               Web / Mobile / Automation
             </p>
           </motion.div>
 
           <motion.p
             {...entrance(0.14)}
-            className="text-base sm:text-lg text-[#111318] dark:text-[#F4F6F8] leading-relaxed max-w-2xl font-sans"
+            className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl font-sans"
           >
             I build software across web, mobile, backend systems, and automation. Focused on practical products, integrations, and systems built with modern web technologies.
           </motion.p>
@@ -89,7 +89,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={() => scrollToSection('projects')}
               onMouseEnter={playHover}
-              className="px-5 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] text-white rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans shadow-xs cursor-pointer"
+              className="px-5 py-3 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--on-accent)] rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans cursor-pointer font-semibold select-none active:scale-[0.98]"
             >
               <span>View my work</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -98,23 +98,23 @@ export const Hero: React.FC = () => {
             <button
               onClick={openContact}
               onMouseEnter={playHover}
-              className="px-5 py-3 bg-[#FFFFFF] dark:bg-[#11151A] hover:bg-[#F1F3F5] dark:hover:bg-[#171C22] text-[#111318] dark:text-[#F4F6F8] border border-[#DCE1E7] dark:border-[#343D48] rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans cursor-pointer"
+              className="px-5 py-3 bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--text-primary)] border border-[var(--border)] rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans cursor-pointer active:scale-[0.98]"
             >
-              <Mail className="w-3.5 h-3.5 text-[#5F6873] dark:text-[#A7B0BA]" />
+              <Mail className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
               <span>Contact me</span>
             </button>
 
             <button
               onClick={handleDownloadResume}
               onMouseEnter={playHover}
-              className="px-3 py-3 text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors flex items-center gap-1 font-mono text-[11px] cursor-pointer"
+              className="px-3 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-1 font-mono text-[11px] cursor-pointer"
               title="Download Resume PDF"
             >
               <span>View résumé</span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[var(--accent)]" />
             </button>
 
-            <div className="h-4 w-px bg-[#DCE1E7] dark:border-[#242B33] hidden sm:block mx-1" />
+            <div className="h-4 w-px bg-[var(--border-subtle)] hidden sm:block mx-1" />
 
             <div className="flex items-center gap-1.5">
               <a
@@ -123,7 +123,7 @@ export const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="p-2.5 rounded-lg border border-[#DCE1E7] dark:border-[#242B33] text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] hover:border-[#C5CCD5] dark:hover:border-[#343D48] bg-[#FFFFFF] dark:bg-[#11151A] transition-colors"
+                className="p-2.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-colors"
                 aria-label="GitHub Profile"
               >
                 <Github className="w-3.5 h-3.5" />
@@ -134,7 +134,7 @@ export const Hero: React.FC = () => {
                 rel="noopener noreferrer"
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="p-2.5 rounded-lg border border-[#DCE1E7] dark:border-[#242B33] text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] hover:border-[#C5CCD5] dark:hover:border-[#343D48] bg-[#FFFFFF] dark:bg-[#11151A] transition-colors"
+                className="p-2.5 rounded-lg border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] transition-colors"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="w-3.5 h-3.5" />

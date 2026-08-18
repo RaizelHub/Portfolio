@@ -19,9 +19,9 @@ export const ScrollProgress = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-[2px] bg-[#D5D0C7]/30 z-[100] pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-[100] pointer-events-none">
       <motion.div
-        className="h-full bg-[#C7462D]"
+        className="h-full bg-[var(--accent)]"
         style={{ width: `${progress}%` }}
         transition={{ duration: 0.1, ease: 'linear' }}
       />

@@ -9,7 +9,7 @@ export const ProjectTech: React.FC<ProjectTechProps> = ({ technologies }) => (
     {technologies.map((tech) => (
       <span
         key={tech}
-        className="text-[11px] font-mono text-[#5F6873] dark:text-[#A7B0BA] border border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22] px-2.5 py-[4px] rounded-md tracking-wide"
+        className="text-[11px] font-mono text-[var(--text-muted)] border border-[var(--border-subtle)] bg-[var(--surface)] px-2.5 py-[3px] rounded-md tracking-wide"
       >
         {tech}
       </span>

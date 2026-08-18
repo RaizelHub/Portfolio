@@ -50,61 +50,61 @@ export const Certificates: React.FC = () => {
             window.open(cert.verifyUrl, '_blank', 'noopener,noreferrer');
           }
         }}
-        className="w-full h-full p-2.5 flex flex-col justify-between select-none cursor-pointer bg-[#FFFFFF] dark:bg-[#1E232B] hover:bg-[#F8FAFC] dark:hover:bg-[#252B35] transition-colors border border-[#DCE1E7]/60 dark:border-[#343D48]/60"
+        className="w-full h-full p-2.5 flex flex-col justify-between select-none cursor-pointer bg-[var(--surface-elevated)] hover:bg-[var(--surface-hover)] transition-colors border border-[var(--border-subtle)]"
       >
-        <div className="flex items-center justify-between border-b border-[#DCE1E7] dark:border-[#343D48] pb-1">
-          <span className="text-[9px] font-mono font-bold text-[#2563EB] dark:text-[#60A5FA] uppercase tracking-wider">
+        <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-1">
+          <span className="text-[9px] font-mono font-semibold text-[var(--accent)] uppercase tracking-wider">
             {cert.category}
           </span>
-          <span className="text-[8px] font-mono text-[#78828D] dark:text-[#7F8994]">
+          <span className="text-[8px] font-mono text-[var(--text-muted)]">
             {cert.year}
           </span>
         </div>
 
         <div className="space-y-0.5 my-auto">
-          <p className="text-[9px] font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-tight line-clamp-2">
+          <p className="text-[9px] font-sans font-bold text-[var(--text-primary)] leading-tight line-clamp-2">
             {cert.name}
           </p>
-          <p className="text-[8px] text-[#5F6873] dark:text-[#A7B0BA] font-mono truncate">
+          <p className="text-[8px] text-[var(--text-secondary)] font-mono truncate">
             {cert.issuer}
           </p>
         </div>
 
-        <div className="flex items-center justify-between pt-1 border-t border-[#DCE1E7] dark:border-[#343D48] text-[8px] font-mono text-[#2563EB] dark:text-[#60A5FA]">
-          <span className="font-semibold flex items-center gap-0.5">
+        <div className="flex items-center justify-between pt-1 border-t border-[var(--border-subtle)] text-[8px] font-mono text-[var(--accent)]">
+          <span className="font-medium flex items-center gap-0.5">
             {hasVerifyUrl ? 'Verify ↗' : hasImage ? 'Preview ↗' : 'Verified'}
           </span>
-          {hasImage && <Award className="w-3 h-3 shrink-0" />}
+          {hasImage && <Award className="w-3 h-3 shrink-0 text-[var(--accent)]" />}
         </div>
       </div>
     );
   });
 
   return (
-    <SectionContainer id="certifications" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
+    <SectionContainer id="certifications" className="py-16 border-b border-[var(--border-subtle)]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="max-w-3xl mb-10">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
         >
           Certificates &amp; Credentials
         </h2>
 
-        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
           Credentials that support my software development and technical work.
         </p>
       </motion.div>
 
-      {/* ── React Bits Interactive Folder (All credentials contained inside) ── */}
+      {/* ── React Bits Interactive Folder (Signature Graphite + Copper detail) ── */}
       <div className="my-10 flex flex-col items-center justify-center">
-        <span className="font-sans text-sm sm:text-base font-bold text-[#111318] dark:text-[#F4F6F8] mb-4">
+        <span className="font-sans text-sm sm:text-base font-bold text-[var(--text-primary)] mb-4">
           Certificates &amp; Credentials Folder
         </span>
 
         <div className="w-full min-h-[260px] sm:min-h-[310px] flex items-center justify-center py-6 overflow-visible">
           <Folder
             size={2.2}
-            color="#2563EB"
+            color="#141820"
             isOpen={isOpen}
             onToggle={() => {
               playClick();
@@ -122,13 +122,13 @@ export const Certificates: React.FC = () => {
             setIsOpen((prev) => !prev);
           }}
           onMouseEnter={playHover}
-          className="mt-6 inline-flex items-center gap-2 text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors cursor-pointer bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA] px-4 py-2 rounded-lg shadow-2xs"
+          className="mt-6 inline-flex items-center gap-2 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] px-4 py-2 rounded-lg shadow-xs"
         >
-          <span className="font-semibold text-[#111318] dark:text-[#F4F6F8]">
+          <span className="font-semibold text-[var(--text-primary)]">
             {certifications.length} credentials
           </span>
           <span>&bull;</span>
-          <span className="text-[11px] text-[#2563EB] dark:text-[#60A5FA] font-medium">
+          <span className="text-[11px] text-[var(--accent)] font-medium">
             {isOpen ? 'Click to close folder' : 'Click to open folder'}
           </span>
         </button>
@@ -141,56 +141,51 @@ export const Certificates: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs"
             onClick={() => setActiveCert(null)}
           >
             <motion.div
-              initial={{ scale: 0.96, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.96, opacity: 0 }}
-              className="relative max-w-3xl w-full bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl overflow-hidden shadow-2xl"
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative max-w-3xl w-full bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden shadow-2xl p-6"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between px-5 py-3 border-b border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22]">
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-[var(--border-subtle)]">
                 <div>
-                  <h4 className="font-sans text-sm font-bold text-[#111318] dark:text-[#F4F6F8]">
+                  <h3 className="font-sans font-bold text-sm text-[var(--text-primary)]">
                     {activeCert.name}
-                  </h4>
-                  <span className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-sans">
-                    {activeCert.issuer} ({activeCert.year})
-                  </span>
+                  </h3>
+                  <p className="text-xs text-[var(--text-secondary)] font-mono">
+                    {activeCert.issuer} &bull; {activeCert.year}
+                  </p>
                 </div>
                 <button
                   onClick={() => setActiveCert(null)}
-                  className="p-1 rounded-md text-[#5F6873] dark:text-[#A7B0BA] hover:bg-black/5 dark:hover:bg-white/5"
-                  aria-label="Close certificate viewer"
+                  className="p-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Modal Body */}
-              <div className="p-4 flex items-center justify-center max-h-[75vh] overflow-auto bg-[#F7F8FA] dark:bg-[#0B0D10]">
+              <div className="flex justify-center bg-[var(--background)] p-4 rounded-lg border border-[var(--border-subtle)]">
                 <img
-                  src={`/${activeCert.image}`}
-                  alt={`${activeCert.name} certificate`}
-                  className="w-full h-auto object-contain rounded-lg border border-[#DCE1E7] dark:border-[#242B33]"
+                  src={activeCert.image}
+                  alt={activeCert.name}
+                  className="max-h-[60vh] object-contain rounded-md"
                 />
               </div>
 
-              {/* Modal Footer */}
               {activeCert.verifyUrl && (
-                <div className="px-5 py-3 border-t border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22] flex justify-end">
+                <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] flex justify-end">
                   <a
                     href={activeCert.verifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={playClick}
-                    className="px-4 py-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-sans font-semibold rounded-lg transition-colors flex items-center gap-1.5"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--on-accent)] font-mono text-xs font-semibold rounded-lg transition-colors"
                   >
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>Verify Credential ↗</span>
+                    <ShieldCheck className="w-4 h-4" />
+                    <span>Verify Credential Online</span>
                   </a>
                 </div>
               )}

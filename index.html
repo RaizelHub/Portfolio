@@ -1,18 +1,17 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/jpeg" href="/img/Profile.jpg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Anti-Flash Dark Mode Script -->
+  <!-- Anti-Flash Dark Mode Script (Default Dark) -->
   <script>
     (function () {
       try {
-        var theme = localStorage.getItem('portfolio-theme');
-        var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (theme === 'dark' || ((!theme || theme === 'system') && supportDark)) {
+        var theme = localStorage.getItem('portfolio-theme-v2') || 'dark';
+        if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
@@ -25,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Amarna:ital,wght@0,100..700;1,100..700&family=Amaranth:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Jersey+10&family=Jersey+10+Charted&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet" />
 
   <!-- Primary SEO Metadata -->
@@ -53,7 +52,7 @@
   <meta property="twitter:image" content="/img/Profile.jpg" />
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#F4F1EA" />
+  <meta name="theme-color" content="#0C0E12" />
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -84,7 +83,7 @@
   </script>
 </head>
 
-<body class="bg-[#F4F1EA] text-[#171717] antialiased overflow-x-hidden">
+<body class="antialiased overflow-x-hidden">
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>

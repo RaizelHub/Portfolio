@@ -11,7 +11,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const STORAGE_KEY = 'portfolio-theme';
+const STORAGE_KEY = 'portfolio-theme-v2';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -21,10 +21,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return saved;
       }
     }
-    return 'system';
+    return 'dark';
   });
 
-  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark');
 
   useEffect(() => {
     const root = document.documentElement;

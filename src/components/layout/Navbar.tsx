@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   BriefcaseBusiness,
   FolderKanban,
@@ -177,7 +178,7 @@ export const Navbar: React.FC = () => {
     <header
       ref={navRef}
       className={`sticky top-0 z-50 w-full transition-colors duration-200 ${isScrolled || isMobileMenuOpen
-        ? 'bg-[#F7F8FA]/95 dark:bg-[#0B0D10]/95 border-b border-[#DCE1E7] dark:border-[#242B33] backdrop-blur-xs shadow-2xs'
+        ? 'bg-[var(--background)]/90 border-b border-[var(--border-subtle)] backdrop-blur-md'
         : 'bg-transparent border-b border-transparent'
         }`}
     >
@@ -188,19 +189,19 @@ export const Navbar: React.FC = () => {
             to="/"
             onClick={handleBrandClick}
             onMouseEnter={playHover}
-            className="flex items-center gap-3 shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-[#2563EB] focus-visible:outline-offset-4 py-1 group"
+            className="flex items-center gap-3 shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-4 py-1 group"
             aria-label="Janmark Suelto — Back to top"
           >
             <img
               src={profile.profileImage}
               alt="Janmark Suelto"
-              className="h-8 w-8 shrink-0 rounded-md object-cover object-top"
+              className="h-8 w-8 shrink-0 rounded-md object-cover object-top border border-[var(--border-subtle)] group-hover:border-[var(--border)] transition-colors"
             />
             <div className="min-w-0 leading-tight">
-              <span className="block truncate text-[13px] font-semibold text-[#111318] dark:text-[#F4F6F8] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
+              <span className="block truncate text-[13px] font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
                 Janmark Suelto
               </span>
-              <span className="block truncate text-[11px] text-[#5F6873] dark:text-[#A7B0BA]">
+              <span className="block truncate text-[11px] text-[var(--text-secondary)]">
                 Software Developer
               </span>
             </div>
@@ -225,21 +226,23 @@ export const Navbar: React.FC = () => {
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   onMouseEnter={playHover}
                   className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${isActive
-                    ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
-                    : 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
+                    ? 'text-[var(--text-primary)] font-semibold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   <Icon
-                    className={`h-4 w-4 shrink-0 transition-colors ${isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70 group-hover:opacity-100'
+                    className={`h-4 w-4 shrink-0 transition-colors ${isActive ? 'text-[var(--accent)]' : 'opacity-60 group-hover:opacity-100'
                       }`}
-                    strokeWidth={1.8}
                   />
                   <span>{item.label}</span>
-                  {/* Subtle 2px active underline indicator */}
+
+                  {/* Active Indicator Underline */}
                   {isActive && (
-                    <span
-                      className="absolute bottom-0 inset-x-2.5 h-[2px] bg-[#2563EB] dark:bg-[#60A5FA] rounded-full"
+                    <motion.span
+                      layoutId="activeNavIndicator"
+                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[var(--accent)] rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       aria-hidden="true"
                     />
                   )}
@@ -248,41 +251,43 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* ── Utilities Group: GitHub, LinkedIn, Visits, Audio, Light/Dark ── */}
-          <div className="hidden md:flex items-center gap-3 lg:gap-4 shrink-0 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
-            {/* GitHub */}
+          {/* ── Action Utilities ── */}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Social Link: GitHub */}
             <a
               href={profile.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
+              className="p-1.5 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              aria-label="GitHub Profile"
+              title="GitHub"
             >
-              <Github className="w-3.5 h-3.5" />
-              <span>GitHub</span>
+              <Github className="w-4 h-4" />
             </a>
 
-            {/* LinkedIn */}
+            {/* Social Link: LinkedIn */}
             <a
               href={profile.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="flex items-center gap-1.5 hover:text-[#2563EB] dark:hover:text-[#60A5FA] transition-colors py-1"
+              className="p-1.5 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              aria-label="LinkedIn Profile"
+              title="LinkedIn"
             >
-              <Linkedin className="w-3.5 h-3.5" />
-              <span>LinkedIn</span>
+              <Linkedin className="w-4 h-4" />
             </a>
 
             {/* Divider */}
-            <div className="h-4 w-px bg-[#DCE1E7] dark:bg-[#242B33]" aria-hidden="true" />
+            <div className="h-4 w-px bg-[var(--border-subtle)]" aria-hidden="true" />
 
             <PortfolioVisitorCount />
 
             {/* Divider */}
-            <div className="h-4 w-px bg-[#DCE1E7] dark:bg-[#242B33]" aria-hidden="true" />
+            <div className="h-4 w-px bg-[var(--border-subtle)]" aria-hidden="true" />
 
             {/* Audio Toggle Button */}
             <button
@@ -292,12 +297,12 @@ export const Navbar: React.FC = () => {
                 toggleSound();
               }}
               onMouseEnter={playHover}
-              className="flex items-center text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
               aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
               title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
               {soundEnabled ? (
-                <Volume2 className="h-3.5 w-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+                <Volume2 className="h-3.5 w-3.5 text-[var(--accent)]" />
               ) : (
                 <VolumeX className="h-3.5 w-3.5" />
               )}
@@ -311,14 +316,14 @@ export const Navbar: React.FC = () => {
                 toggleTheme();
               }}
               onMouseEnter={playHover}
-              className="flex items-center text-[11px] font-mono text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
               aria-label="Toggle theme"
               title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {resolvedTheme === 'dark' ? (
-                <Sun className="h-3.5 w-3.5 text-[#60A5FA]" />
+                <Sun className="h-3.5 w-3.5 text-[var(--accent)]" />
               ) : (
-                <Moon className="h-3.5 w-3.5 text-[#2563EB]" />
+                <Moon className="h-3.5 w-3.5 text-[var(--accent)]" />
               )}
             </button>
           </div>
@@ -332,12 +337,12 @@ export const Navbar: React.FC = () => {
                 playClick();
                 toggleSound();
               }}
-              className="p-2 rounded-lg text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors"
+              className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
               title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
               {soundEnabled ? (
-                <Volume2 className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+                <Volume2 className="w-4 h-4 text-[var(--accent)]" />
               ) : (
                 <VolumeX className="w-4 h-4" />
               )}
@@ -351,10 +356,10 @@ export const Navbar: React.FC = () => {
                 toggleTheme();
               }}
               onMouseEnter={playHover}
-              className="p-2 rounded-lg text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors"
+              className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               aria-label="Toggle theme"
             >
-              {resolvedTheme === 'dark' ? <Sun className="w-4 h-4 text-[#60A5FA]" /> : <Moon className="w-4 h-4 text-[#2563EB]" />}
+              {resolvedTheme === 'dark' ? <Sun className="w-4 h-4 text-[var(--accent)]" /> : <Moon className="w-4 h-4 text-[var(--accent)]" />}
             </button>
 
             {/* Hamburger Button */}
@@ -364,7 +369,7 @@ export const Navbar: React.FC = () => {
                 playClick();
                 setIsMobileMenuOpen((prev) => !prev);
               }}
-              className="p-2 rounded-lg border border-[#DCE1E7] dark:border-[#242B33] bg-[#FFFFFF] dark:bg-[#11151A] text-[#111318] dark:text-[#F4F6F8] focus-visible:outline-2 focus-visible:outline-[#2563EB]"
+              className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-primary)] focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -379,7 +384,7 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="md:hidden border-t border-[#DCE1E7] dark:border-[#242B33] bg-[#F7F8FA] dark:bg-[#0B0D10] px-6 py-6 shadow-xl transition-all"
+          className="md:hidden border-t border-[var(--border-subtle)] bg-[var(--background)] px-6 py-6 shadow-xl transition-all"
         >
           <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-1">
             {navItems.map((item) => {
@@ -395,18 +400,18 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${isActive
-                    ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
-                    : 'text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8]'
+                    ? 'text-[var(--text-primary)] font-semibold bg-[var(--surface-hover)]'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                     }`}
                 >
                   <Icon
-                    className={`h-4 w-4 shrink-0 ${isActive ? 'text-[#2563EB] dark:text-[#60A5FA]' : 'opacity-70'
+                    className={`h-4 w-4 shrink-0 ${isActive ? 'text-[var(--accent)]' : 'opacity-70'
                       }`}
                   />
                   <span>{item.label}</span>
                   {isActive && (
                     <span
-                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[#2563EB] dark:bg-[#60A5FA] rounded-full"
+                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[var(--accent)] rounded-full"
                       aria-hidden="true"
                     />
                   )}
@@ -416,13 +421,13 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Secondary Utilities Separator */}
-          <div className="mt-5 pt-5 border-t border-[#DCE1E7] dark:border-[#242B33] flex flex-col space-y-2.5 font-mono text-xs text-[#5F6873] dark:text-[#A7B0BA]">
+          <div className="mt-5 pt-5 border-t border-[var(--border-subtle)] flex flex-col space-y-2.5 font-mono text-xs text-[var(--text-secondary)]">
             <PortfolioVisitorCount variant="mobile" />
             <a
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between text-[#111318] dark:text-[#F4F6F8] hover:text-[#2563EB] dark:hover:text-[#60A5FA] font-semibold py-1"
+              className="inline-flex items-center justify-between text-[var(--text-primary)] hover:text-[var(--accent)] font-semibold py-1"
             >
               <span>Résumé (PDF)</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-60" />
@@ -431,7 +436,7 @@ export const Navbar: React.FC = () => {
               href={profile.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between hover:text-[#2563EB] dark:hover:text-[#60A5FA] py-1"
+              className="inline-flex items-center justify-between hover:text-[var(--accent)] py-1"
             >
               <span>GitHub</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-60" />
@@ -440,7 +445,7 @@ export const Navbar: React.FC = () => {
               href={profile.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between hover:text-[#2563EB] dark:hover:text-[#60A5FA] py-1"
+              className="inline-flex items-center justify-between hover:text-[var(--accent)] py-1"
             >
               <span>LinkedIn</span>
               <ExternalLink className="w-3.5 h-3.5 opacity-60" />

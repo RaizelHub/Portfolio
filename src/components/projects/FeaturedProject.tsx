@@ -82,13 +82,13 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
   /* ── Content block ── */
   const ContentBlock = (
     <motion.div {...contentEntrance} className="flex flex-col gap-5">
-      {/* Index + category */}
+      {/* Index + category: Copper index, neutral category */}
       <div className="flex items-center gap-3">
-        <span className="text-[11px] font-mono font-semibold text-[#64748B] tracking-wider">
+        <span className="text-[11px] font-mono font-semibold text-[var(--accent)] tracking-wider">
           {index}
         </span>
-        <div className="h-px w-4 bg-[#E2E8F0] dark:bg-[#1E2735]" />
-        <span className="text-[11px] font-mono font-bold uppercase tracking-[0.12em] text-[#F59E0B]">
+        <div className="h-px w-4 bg-[var(--border-subtle)]" />
+        <span className="text-[11px] font-mono font-medium uppercase tracking-[0.12em] text-[var(--text-muted)]">
           {category}
         </span>
       </div>
@@ -96,25 +96,25 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
       {/* Title + subtitle */}
       <div>
         <h3
-          className="font-title font-bold tracking-tight leading-tight text-[#0F172A] dark:text-[#F8FAFC]"
+          className="font-title font-bold tracking-tight leading-tight text-[var(--text-primary)]"
           style={{ fontSize: 'clamp(1.4rem, 2.3vw, 1.85rem)' }}
         >
           {title}
         </h3>
-        <p className="text-sm sm:text-base text-[#64748B] dark:text-[#94A3B8] font-normal leading-snug mt-1">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] font-normal leading-snug mt-1">
           {subtitle}
         </p>
       </div>
 
       {/* Plain text status badge */}
       <div>
-        <span className="text-[11px] font-mono font-medium text-[#64748B] dark:text-[#94A3B8]">
+        <span className="text-[11px] font-mono font-medium text-[var(--text-muted)]">
           {status}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed max-w-md">
+      <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-md">
         {description}
       </p>
 
@@ -130,10 +130,10 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
           to={`/projects/${slug}`}
           onMouseEnter={playHover}
           onClick={playClick}
-          className="group inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-[0.08em] text-[#0F172A] dark:text-[#F8FAFC] hover:text-[#F59E0B] transition-colors duration-150"
+          className="group inline-flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors duration-150"
         >
           <span>View case study</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150 text-[#F59E0B]" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150 text-[var(--text-muted)] group-hover:text-[var(--accent)]" />
         </Link>
 
         {githubUrl && (
@@ -143,7 +143,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
             rel="noopener noreferrer"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#64748B] dark:text-[#94A3B8] hover:text-[#F59E0B] transition-colors duration-150"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-150"
           >
             <ExternalLink className="w-3 h-3" />
             <span>GitHub</span>

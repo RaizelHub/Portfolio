@@ -99,7 +99,7 @@ export const Projects = () => {
   });
 
   return (
-    <main className="min-h-screen pt-8 pb-20 bg-[#F7F8FA] dark:bg-[#0B0D10] text-[#111318] dark:text-[#F4F6F8] transition-colors">
+    <main className="min-h-screen pt-8 pb-20 bg-[var(--background)] text-[var(--text-primary)] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Navigation Breadcrumb */}
         <div className="mb-6">
@@ -107,30 +107,30 @@ export const Projects = () => {
             to="/#projects"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[#5F6873] hover:text-[#2563EB] dark:text-[#A7B0BA] dark:hover:text-[#60A5FA] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 text-[#2563EB] dark:text-[#60A5FA]" />
+            <ArrowLeft className="w-4 h-4 text-[var(--accent)]" />
             <span>Return to Overview</span>
           </Link>
         </div>
 
         {/* Section Header */}
         <div className="mb-10 max-w-3xl">
-          <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)] block mb-3">
             Project Directory
           </span>
           <h1
-            className="font-title text-3xl sm:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+            className="font-title text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
           >
             All Repositories &amp; Work
           </h1>
-          <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed">
+          <p className="text-sm sm:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
             The complete collection of full-stack web platforms, mobile applications, automation workflows, and hardware projects.
           </p>
         </div>
 
         {/* Controls Container: Tabs + Search Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-[#DCE1E7] dark:border-[#242B33] pb-6 mb-10">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-6 mb-10">
           {/* Category filter tabs */}
           <div className="flex flex-wrap gap-1.5 order-2 md:order-1 text-xs font-mono">
             <button
@@ -140,8 +140,8 @@ export const Projects = () => {
                 setActiveCategory('All');
               }}
               className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${activeCategory === 'All'
-                ? 'bg-[#111318] dark:bg-[#F4F6F8] text-white dark:text-[#0B0D10] border-[#111318] dark:border-[#F4F6F8] font-bold shadow-xs'
-                : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
+                ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
+                : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
                 }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -165,8 +165,8 @@ export const Projects = () => {
                       setActiveCategory(cat);
                     }}
                     className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${isActive
-                      ? 'bg-[#2563EB] dark:bg-[#2563EB] text-white border-[#2563EB] font-bold shadow-xs'
-                      : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
+                      ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
+                      : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
                       }`}
                   >
                     <Icon className="w-3.5 h-3.5" />
@@ -178,13 +178,13 @@ export const Projects = () => {
 
           {/* Search bar */}
           <div className="relative order-1 md:order-2 w-full md:max-w-xs shrink-0">
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-[#78828D] dark:text-[#7F8994]" />
+            <Search className="absolute left-3 top-2.5 w-4 h-4 text-[var(--text-muted)]" />
             <input
               type="text"
               placeholder="Search stack, title, scope..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] focus:border-[#2563EB] dark:focus:border-[#60A5FA] text-[#111318] dark:text-[#F4F6F8] rounded-lg pl-9 pr-4 py-2 text-xs font-mono focus:outline-none transition-colors placeholder:text-[#78828D] dark:placeholder:text-[#7F8994]"
+              className="w-full bg-[var(--surface)] border border-[var(--border-subtle)] focus:border-[var(--accent)] text-[var(--text-primary)] rounded-lg pl-9 pr-4 py-2 text-xs font-mono focus:outline-none transition-colors placeholder:text-[var(--text-muted)]"
             />
           </div>
         </div>
@@ -206,17 +206,17 @@ export const Projects = () => {
                     >
                       {/* Category Header */}
                       <div className="flex items-center gap-2.5 mb-2">
-                        <div className="p-1.5 rounded-md bg-[#F1F3F5] dark:bg-[#171C22] text-[#2563EB] dark:text-[#60A5FA]">
+                        <div className="p-1.5 rounded-md bg-[var(--surface-elevated)] text-[var(--accent)]">
                           <Icon className="w-4 h-4" />
                         </div>
-                        <h3 className="text-base font-bold text-[#111318] dark:text-[#F4F6F8] font-sans flex items-center gap-2">
+                        <h3 className="text-base font-bold text-[var(--text-primary)] font-sans flex items-center gap-2">
                           {group.meta?.label || group.category}
-                          <span className="text-[11px] font-mono text-[#5F6873] dark:text-[#A7B0BA] font-normal">
+                          <span className="text-[11px] font-mono text-[var(--text-muted)] font-normal">
                             ({group.projects.length})
                           </span>
                         </h3>
                       </div>
-                      <p className="text-xs text-[#5F6873] dark:text-[#A7B0BA] font-sans mb-6">
+                      <p className="text-xs text-[var(--text-secondary)] font-sans mb-6">
                         {group.meta?.description}
                       </p>
 
@@ -244,12 +244,12 @@ export const Projects = () => {
             )}
           </>
         ) : (
-          <div className="text-center py-16 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl p-6 max-w-md mx-auto font-mono">
-            <FolderOpen className="w-10 h-10 text-[#78828D] dark:text-[#7F8994] mx-auto mb-3" />
-            <h3 className="font-bold text-[#111318] dark:text-[#F4F6F8] text-sm uppercase">
+          <div className="text-center py-16 bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 max-w-md mx-auto font-mono">
+            <FolderOpen className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
+            <h3 className="font-bold text-[var(--text-primary)] text-sm uppercase">
               No repositories matched
             </h3>
-            <p className="text-xs text-[#5F6873] dark:text-[#A7B0BA] mt-1">
+            <p className="text-xs text-[var(--text-secondary)] mt-1">
               Adjust search query or select another category filter.
             </p>
           </div>

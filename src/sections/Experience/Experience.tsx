@@ -18,16 +18,16 @@ export const Experience: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="experience" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
+    <SectionContainer id="experience" className="py-16 border-b border-[var(--border-subtle)]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="max-w-3xl mb-12">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
         >
           Experience
         </h2>
 
-        <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
+        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
           Practical IT operations, workstation diagnostics, system maintenance, and enterprise support.
         </p>
       </motion.div>
@@ -38,18 +38,18 @@ export const Experience: React.FC = () => {
           <motion.div
             key={exp.id}
             {...entrance(idx * 0.06)}
-            className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl p-6 sm:p-8 shadow-xs"
+            className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 sm:p-8 shadow-xs"
           >
             {/* Header: Role, Organization & Dates */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#DCE1E7] dark:border-[#242B33] pb-5 mb-5">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-5 mb-5">
               <div className="space-y-1">
-                <h3 className="font-sans text-lg sm:text-xl font-bold text-[#111318] dark:text-[#F4F6F8]">
+                <h3 className="font-sans text-lg sm:text-xl font-bold text-[var(--text-primary)]">
                   {exp.role}
                 </h3>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-[#5F6873] dark:text-[#A7B0BA] font-sans">
-                  <span className="flex items-center gap-1.5 font-medium text-[#111318] dark:text-[#F4F6F8]">
-                    <Building2 className="w-3.5 h-3.5 text-[#2563EB] dark:text-[#60A5FA]" />
+                <div className="flex flex-wrap items-center gap-3 text-xs text-[var(--text-secondary)] font-sans">
+                  <span className="flex items-center gap-1.5 font-medium text-[var(--text-primary)]">
+                    <Building2 className="w-3.5 h-3.5 text-[var(--accent)]" />
                     {exp.company}
                   </span>
                   <span>&bull;</span>
@@ -60,26 +60,26 @@ export const Experience: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded-md font-mono text-xs text-[#111318] dark:text-[#F4F6F8] shrink-0">
-                <Calendar className="w-3 h-3 text-[#2563EB] dark:text-[#60A5FA]" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded-md font-mono text-xs text-[var(--text-primary)] shrink-0">
+                <Calendar className="w-3 h-3 text-[var(--accent)]" />
                 <span>{exp.period}</span>
               </div>
             </div>
 
             {/* Short Summary */}
-            <p className="text-sm text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed mb-5 font-sans">
+            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 font-sans">
               {exp.description}
             </p>
 
             {/* Key Contributions */}
             <div className="space-y-2.5">
-              <h4 className="font-mono text-[10px] uppercase tracking-wider text-[#78828D] dark:text-[#7F8994] font-semibold">
+              <h4 className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)] font-semibold">
                 Key Responsibilities &amp; Operations
               </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                 {exp.responsibilities.map((resp, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs text-[#111318] dark:text-[#F4F6F8] font-sans">
-                    <span className="text-[#2563EB] dark:text-[#60A5FA] mt-0.5 font-bold">›</span>
+                  <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-primary)] font-sans">
+                    <span className="text-[var(--accent)] mt-0.5 font-bold">›</span>
                     <span>{resp}</span>
                   </div>
                 ))}
