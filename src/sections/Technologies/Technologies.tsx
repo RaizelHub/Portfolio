@@ -30,6 +30,7 @@ import { useSound } from '../../context/SoundContext';
 interface TechItem {
   name: string;
   icon: React.ElementType;
+  color: string;
 }
 
 interface TechGroup {
@@ -45,11 +46,11 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Frontend',
     icon: Code2,
     items: [
-      { name: 'React', icon: SiReact },
-      { name: 'TypeScript', icon: SiTypescript },
-      { name: 'JavaScript', icon: SiJavascript },
-      { name: 'Tailwind CSS', icon: SiTailwindcss },
-      { name: 'Vite', icon: SiVite },
+      { name: 'React', icon: SiReact, color: '#61DAFB' },
+      { name: 'TypeScript', icon: SiTypescript, color: '#3178C6' },
+      { name: 'JavaScript', icon: SiJavascript, color: '#F7DF1E' },
+      { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#06B6D4' },
+      { name: 'Vite', icon: SiVite, color: '#646CFF' },
     ],
   },
   {
@@ -57,9 +58,9 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Mobile',
     icon: Smartphone,
     items: [
-      { name: 'React Native', icon: SiReact },
-      { name: 'Expo', icon: SiExpo },
-      { name: 'Flutter', icon: SiFlutter },
+      { name: 'React Native', icon: SiReact, color: '#61DAFB' },
+      { name: 'Expo', icon: SiExpo, color: '#1C2024' },
+      { name: 'Flutter', icon: SiFlutter, color: '#02569B' },
     ],
   },
   {
@@ -67,10 +68,10 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Backend',
     icon: Server,
     items: [
-      { name: 'Node.js', icon: SiNodedotjs },
-      { name: 'Express', icon: SiExpress },
-      { name: 'Laravel', icon: SiLaravel },
-      { name: 'REST APIs', icon: Server },
+      { name: 'Node.js', icon: SiNodedotjs, color: '#5FA04E' },
+      { name: 'Express', icon: SiExpress, color: '#687076' },
+      { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },
+      { name: 'REST APIs', icon: Server, color: '#0284C7' },
     ],
   },
   {
@@ -78,11 +79,11 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Data',
     icon: Database,
     items: [
-      { name: 'Supabase', icon: SiSupabase },
-      { name: 'PostgreSQL', icon: SiPostgresql },
-      { name: 'MySQL', icon: SiMysql },
-      { name: 'MongoDB', icon: SiMongodb },
-      { name: 'Firebase', icon: SiFirebase },
+      { name: 'Supabase', icon: SiSupabase, color: '#3ECF8E' },
+      { name: 'PostgreSQL', icon: SiPostgresql, color: '#4169E1' },
+      { name: 'MySQL', icon: SiMysql, color: '#4479A1' },
+      { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
+      { name: 'Firebase', icon: SiFirebase, color: '#FFCA28' },
     ],
   },
   {
@@ -90,10 +91,10 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Automation',
     icon: Workflow,
     items: [
-      { name: 'n8n', icon: SiN8N },
-      { name: 'Webhooks', icon: Webhook },
-      { name: 'Groq AI', icon: Cpu },
-      { name: 'Google Gemini', icon: SiGooglegemini },
+      { name: 'n8n', icon: SiN8N, color: '#EA4B71' },
+      { name: 'Webhooks', icon: Webhook, color: '#8B5CF6' },
+      { name: 'Groq AI', icon: Cpu, color: '#F55036' },
+      { name: 'Google Gemini', icon: SiGooglegemini, color: '#8E75FF' },
     ],
   },
   {
@@ -101,10 +102,10 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Tools',
     icon: Wrench,
     items: [
-      { name: 'Git', icon: SiGit },
-      { name: 'GitHub', icon: SiGithub },
-      { name: 'Docker', icon: SiDocker },
-      { name: 'Vercel', icon: SiVercel },
+      { name: 'Git', icon: SiGit, color: '#F05032' },
+      { name: 'GitHub', icon: SiGithub, color: '#24292F' },
+      { name: 'Docker', icon: SiDocker, color: '#2496ED' },
+      { name: 'Vercel', icon: SiVercel, color: '#000000' },
     ],
   },
 ];
@@ -138,7 +139,7 @@ export const Technologies: React.FC = () => {
         </p>
       </motion.div>
 
-      {/* ── Grouped Technology Cards: Neutral & Restrained ── */}
+      {/* ── Grouped Technology Cards ── */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
         {TECH_GROUPS.map((group, idx) => {
           const GroupIcon = group.icon;
@@ -157,7 +158,7 @@ export const Technologies: React.FC = () => {
                 </h3>
               </div>
 
-              {/* Items List with Icons */}
+              {/* Items List with Real Logo Colors */}
               <div className="space-y-2">
                 {group.items.map((item) => {
                   const ItemIcon = item.icon;
@@ -166,10 +167,13 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-colors"
+                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-all hover:translate-x-0.5"
                     >
-                      <div className="w-6 h-6 rounded-md bg-[var(--surface)] border border-[var(--border-subtle)] flex items-center justify-center shrink-0 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
-                        <ItemIcon className="w-3.5 h-3.5" />
+                      <div className="w-7 h-7 rounded-md bg-[var(--surface)] border border-[var(--border-subtle)] flex items-center justify-center shrink-0 shadow-2xs">
+                        <ItemIcon
+                          className="w-4 h-4 transition-transform group-hover:scale-110"
+                          style={{ color: item.color }}
+                        />
                       </div>
                       <span className="font-sans text-xs font-medium text-[var(--text-primary)] truncate">
                         {item.name}

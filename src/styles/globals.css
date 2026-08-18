@@ -5,114 +5,138 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-warm-bg: #F4F1EA;
+  --color-warm-card: #EFEBE4;
+  --color-warm-text-primary: #171717;
+  --color-warm-text-secondary: #5B5852;
+  --color-warm-accent: #A93622;
+  --color-warm-border: #D8D2C7;
+  --color-warm-dark: #20201E;
+  --color-warm-dark-card: #282825;
+  --color-warm-dark-text: #F4F1EA;
+  --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-title: 'Roboto Slab', serif;
-  --font-display: 'Roboto Slab', serif;
-  --font-slab: 'Roboto Slab', serif;
+  --font-title: 'Roboto Slab', 'Inter', serif;
+  --font-display: 'Roboto Slab', 'Inter', serif;
+  --font-slab: 'Roboto Slab', 'Inter', serif;
 }
 
-/* ==========================================================================
-   GRAPHITE + WARM COPPER DESIGN SYSTEM
-   ========================================================================== */
 :root {
-  --background: #ede8df;
-  --background-secondary: #e5dfd5;
-  --surface: #f7f5f0;
-  --surface-elevated: #ffffff;
-  --surface-hover: #eae4d9;
-  --border: #d2cbbe;
-  --border-subtle: #ded8cd;
-  --text-primary: #16191e;
-  --text-secondary: #585d68;
-  --text-muted: #7e8490;
-  --accent: #a66f32;
-  --accent-hover: #8f5c24;
-  --accent-soft: rgba(166, 111, 50, 0.12);
+  --background: #F4F1EA;
+  --background-secondary: #EBE7E0;
+  --surface: #EFEBE4;
+  --surface-elevated: #FAF8F4;
+  --surface-hover: #E7E2D9;
+  --border: #C6BFB3;
+  --border-subtle: #D8D2C7;
+  --text-primary: #171717;
+  --text-secondary: #5B5852;
+  --text-muted: #847E75;
+  --accent: #A93622;
+  --accent-hover: #8F2B1A;
+  --accent-soft: rgba(169, 54, 34, 0.12);
   --success: #3c7e52;
   --warning: #b38226;
   --error: #c24b4b;
   --info: #3f6ca6;
-  --focus: #a66f32;
-  --on-accent: #ffffff;
+  --focus: #A93622;
+  --on-accent: #FFFFFF;
 
-  --selection-bg: #e2d7c5;
-  --selection-color: #16191e;
+  --selection-bg: #A93622;
+  --selection-color: #FFFFFF;
+  color-scheme: light;
 }
 
 .dark,
 html.dark {
-  --background: #0c0e12;
-  --background-secondary: #10141a;
-  --surface: #141820;
-  --surface-elevated: #191e27;
-  --surface-hover: #1e242e;
-  --border: #29313c;
-  --border-subtle: #20262f;
-  --text-primary: #f4f1ea;
-  --text-secondary: #a9adb5;
-  --text-muted: #777e89;
-  --accent: #d7a15b;
-  --accent-hover: #e6b36d;
-  --accent-soft: #2b2116;
+  --background: #20201E;
+  --background-secondary: #1A1A18;
+  --surface: #282825;
+  --surface-elevated: #30302D;
+  --surface-hover: #363632;
+  --border: #3D3D38;
+  --border-subtle: #30302C;
+  --text-primary: #F4F1EA;
+  --text-secondary: #A8A49C;
+  --text-muted: #7E7A73;
+  --accent: #C7462D;
+  --accent-hover: #D9563D;
+  --accent-soft: rgba(199, 70, 45, 0.15);
   --success: #75b88a;
   --warning: #ddb66b;
   --error: #df7777;
   --info: #7c9ccf;
-  --focus: #f1bf79;
-  --on-accent: #0c0e12;
+  --focus: #C7462D;
+  --on-accent: #FFFFFF;
 
-  --selection-bg: #2b2116;
-  --selection-color: #f4f1ea;
+  --selection-bg: #C7462D;
+  --selection-color: #FFFFFF;
   color-scheme: dark;
 }
 
-/* ==========================================================================
-   BASE & TYPOGRAPHY
-   ========================================================================== */
+.section-title {
+  max-width: 54rem;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: var(--font-sans);
     background-color: var(--background);
     color: var(--text-primary);
-    transition: background-color 150ms ease, color 150ms ease;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
   }
 
   body {
+    min-width: 320px;
+    margin: 0;
     background-color: var(--background);
     color: var(--text-primary);
-    font-family: var(--font-sans);
+    font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     transition: background-color 150ms ease, color 150ms ease;
   }
 
-  ::selection {
-    background-color: var(--selection-bg);
-    color: var(--selection-color);
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-title, .font-display, .font-slab {
-    font-family: var(--font-title);
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--selection-color);
   }
 
   :focus-visible {
     outline: 2px solid var(--focus);
     outline-offset: 2px;
   }
+
+  h1, h2, h3, h4, h5, h6, .font-title, .font-display, .font-slab {
+    font-family: var(--font-title);
+  }
 }
 
-/* Minimal Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -121,13 +145,46 @@ html.dark {
 
 ::-webkit-scrollbar-thumb {
   background: var(--border);
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
 
-button {
-  cursor: pointer;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #171717 !important;
+    print-color-adjust: exact;
+  }
+
+  header,
+  footer,
+  aside,
+  .fixed {
+    display: none !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
 }
