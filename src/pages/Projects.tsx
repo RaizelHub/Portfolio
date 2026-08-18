@@ -120,7 +120,7 @@ export const Projects = () => {
             Project Directory
           </span>
           <h1
-            className="font-sans text-3xl sm:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+            className="font-title text-3xl sm:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
           >
             All Repositories &amp; Work
           </h1>
@@ -140,8 +140,8 @@ export const Projects = () => {
                 setActiveCategory('All');
               }}
               className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${activeCategory === 'All'
-                  ? 'bg-[#111318] dark:bg-[#F4F6F8] text-white dark:text-[#0B0D10] border-[#111318] dark:border-[#F4F6F8] font-bold shadow-xs'
-                  : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
+                ? 'bg-[#111318] dark:bg-[#F4F6F8] text-white dark:text-[#0B0D10] border-[#111318] dark:border-[#F4F6F8] font-bold shadow-xs'
+                : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
                 }`}
             >
               <LayoutGrid className="w-3.5 h-3.5" />
@@ -165,8 +165,8 @@ export const Projects = () => {
                       setActiveCategory(cat);
                     }}
                     className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${isActive
-                        ? 'bg-[#2563EB] dark:bg-[#2563EB] text-white border-[#2563EB] font-bold shadow-xs'
-                        : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
+                      ? 'bg-[#2563EB] dark:bg-[#2563EB] text-white border-[#2563EB] font-bold shadow-xs'
+                      : 'bg-[#FFFFFF] dark:bg-[#11151A] text-[#5F6873] dark:text-[#A7B0BA] border-[#DCE1E7] dark:border-[#242B33] hover:border-[#2563EB] dark:hover:border-[#60A5FA]'
                       }`}
                   >
                     <Icon className="w-3.5 h-3.5" />

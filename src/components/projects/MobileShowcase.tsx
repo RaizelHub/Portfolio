@@ -16,28 +16,28 @@ export const MobileShowcase: React.FC<MobileShowcaseProps> = ({ images, projectN
     prefersReducedMotion
       ? {}
       : {
-          initial: { opacity: 0, x: xFrom },
-          whileInView: { opacity: 1, x: 0 },
-          viewport: { once: true as const, margin: '-60px' },
-          transition: {
-            duration: 0.55,
-            ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-            delay,
-          },
-        };
-
-  const centerEntrance = prefersReducedMotion
-    ? {}
-    : {
-        initial: { opacity: 0, y: 28 },
-        whileInView: { opacity: 1, y: 0 },
+        initial: { opacity: 0, x: xFrom },
+        whileInView: { opacity: 1, x: 0 },
         viewport: { once: true as const, margin: '-60px' },
         transition: {
           duration: 0.55,
           ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-          delay: 0.18,
+          delay,
         },
       };
+
+  const centerEntrance = prefersReducedMotion
+    ? {}
+    : {
+      initial: { opacity: 0, y: 28 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true as const, margin: '-60px' },
+      transition: {
+        duration: 0.55,
+        ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
+        delay: 0.18,
+      },
+    };
 
   return (
     /* Outer container — constrains width, clips overflow, centers cluster */

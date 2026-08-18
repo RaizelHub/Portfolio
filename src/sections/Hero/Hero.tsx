@@ -1,11 +1,12 @@
-import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Mail, Github, Linkedin, MapPin } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
 
 export const Hero: React.FC = () => {
+  const [showRealProfile, setShowRealProfile] = useState(false);
   const { playHover, playClick } = useSound();
   const prefersReducedMotion = useReducedMotion();
 
@@ -62,7 +63,7 @@ export const Hero: React.FC = () => {
             </span>
 
             <h1
-              className="font-sans font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] leading-[1.08]"
+              className="font-title font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] leading-[1.08]"
               style={{ fontSize: 'clamp(1.9rem, 3.5vw, 2.75rem)' }}
             >
               Software Developer
@@ -88,7 +89,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={() => scrollToSection('projects')}
               onMouseEnter={playHover}
-              className="px-5 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] text-white rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans shadow-xs"
+              className="px-5 py-3 bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-[#2563EB] dark:hover:bg-[#1D4ED8] text-white rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans shadow-xs cursor-pointer"
             >
               <span>View my work</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -97,7 +98,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={openContact}
               onMouseEnter={playHover}
-              className="px-5 py-3 bg-[#FFFFFF] dark:bg-[#11151A] hover:bg-[#F1F3F5] dark:hover:bg-[#171C22] text-[#111318] dark:text-[#F4F6F8] border border-[#DCE1E7] dark:border-[#343D48] rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans"
+              className="px-5 py-3 bg-[#FFFFFF] dark:bg-[#11151A] hover:bg-[#F1F3F5] dark:hover:bg-[#171C22] text-[#111318] dark:text-[#F4F6F8] border border-[#DCE1E7] dark:border-[#343D48] rounded-lg transition-colors flex items-center gap-2 tracking-wide font-sans cursor-pointer"
             >
               <Mail className="w-3.5 h-3.5 text-[#5F6873] dark:text-[#A7B0BA]" />
               <span>Contact me</span>
@@ -106,7 +107,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={handleDownloadResume}
               onMouseEnter={playHover}
-              className="px-3 py-3 text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors flex items-center gap-1 font-mono text-[11px]"
+              className="px-3 py-3 text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8] transition-colors flex items-center gap-1 font-mono text-[11px] cursor-pointer"
               title="Download Resume PDF"
             >
               <span>View résumé</span>
@@ -146,17 +147,35 @@ export const Hero: React.FC = () => {
         <div className="lg:col-span-4 flex flex-col items-center lg:items-end">
           <motion.div
             {...entrance(0.15)}
-            className="w-full max-w-[250px] sm:max-w-[270px]"
+            className="w-full max-w-[240px] sm:max-w-[270px] flex flex-col items-center lg:items-end"
           >
-            <div className="relative rounded-xl p-2 bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] shadow-xs">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-[#F1F3F5] dark:bg-[#171C22]">
-                <img
-                  src={profile.profileImage}
-                  alt="Janmark Suelto"
-                  className="w-full h-full object-cover object-top grayscale contrast-105 transition-all duration-300"
-                />
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                setShowRealProfile((prev) => !prev);
+              }}
+              onMouseEnter={playHover}
+              className="group relative cursor-pointer select-none focus:outline-none transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              title={showRealProfile ? 'Click to show anime avatar' : 'Click to reveal real portrait'}
+              aria-label="Toggle profile portrait"
+            >
+              <div className="relative w-full flex items-center justify-center overflow-hidden rounded-xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={showRealProfile ? 'real-profile' : 'anime-profile'}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.96 }}
+                    transition={{ duration: 0.25, ease: 'easeOut' }}
+                    src={showRealProfile ? profile.profileImage : (profile.animeProfileImage || '/img/Anime.jpg')}
+                    alt={showRealProfile ? 'Janmark Suelto - Real Portrait' : 'Janmark Suelto - Anime Avatar'}
+                    className={`w-full h-auto max-h-[340px] object-contain object-bottom ${showRealProfile ? 'grayscale contrast-105' : 'rounded-xl'
+                      } transition-all duration-300`}
+                  />
+                </AnimatePresence>
               </div>
-            </div>
+            </button>
           </motion.div>
         </div>
       </div>

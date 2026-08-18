@@ -31,28 +31,26 @@ export const DeviceMockup: React.FC<DeviceMockupProps> = ({
         prefersReducedMotion
           ? undefined
           : {
-              duration: isPrimary ? 4.2 : 3.6,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: floatDelay,
-            }
+            duration: isPrimary ? 4.2 : 3.6,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: floatDelay,
+          }
       }
       // Hover lift
       whileHover={prefersReducedMotion ? undefined : { y: isPrimary ? -11 : -6 }}
       style={{ rotate: rotation }}
-      className={`relative select-none flex-shrink-0 ${
-        isPrimary
+      className={`relative select-none flex-shrink-0 ${isPrimary
           ? 'w-[158px] sm:w-[172px] lg:w-[188px]'
           : 'w-[136px] sm:w-[148px] lg:w-[160px]'
-      }`}
+        }`}
     >
       {/* Phone shell */}
       <div
         className={`relative rounded-[2.5rem] overflow-hidden bg-[#14120E]
-          ${
-            isPrimary
-              ? 'border border-[#38342E] shadow-[0_28px_72px_rgba(0,0,0,0.24)] dark:shadow-[0_28px_72px_rgba(0,0,0,0.60)]'
-              : 'border border-[#2C2926] opacity-80 dark:opacity-65 shadow-[0_16px_48px_rgba(0,0,0,0.16)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.48)]'
+          ${isPrimary
+            ? 'border border-[#38342E] shadow-[0_28px_72px_rgba(0,0,0,0.24)] dark:shadow-[0_28px_72px_rgba(0,0,0,0.60)]'
+            : 'border border-[#2C2926] opacity-80 dark:opacity-65 shadow-[0_16px_48px_rgba(0,0,0,0.16)] dark:shadow-[0_16px_48px_rgba(0,0,0,0.48)]'
           }`}
       >
         {/* Status bar (decorative notch area) */}

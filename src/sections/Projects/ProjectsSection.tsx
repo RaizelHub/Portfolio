@@ -95,7 +95,7 @@ export const ProjectsSection = () => {
         </span>
 
         <h2
-          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
+          className="font-title font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
           style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
         >
           Software across web, mobile, and automation.

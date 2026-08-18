@@ -15,4 +15,5 @@ export const profile: Profile = {
   messengerUrl: 'https://m.me/Raizelxdarriii90',
   resumeUrl: '/Suelto-Janmark-Resume.pdf',
   profileImage: '/img/Profile.jpg',
+  animeProfileImage: '/img/Anime.png',
 };

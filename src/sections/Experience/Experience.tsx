@@ -21,15 +21,10 @@ export const Experience: React.FC = () => {
     <SectionContainer id="experience" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="max-w-3xl mb-12">
-        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
-          Experience
-        </span>
-
         <h2
-          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
-          style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
         >
-          Work &amp; technical history.
+          Experience
         </h2>
 
         <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">

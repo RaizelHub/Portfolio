@@ -40,7 +40,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
       <motion.h2
         {...anim(0.05)}
-        className="font-sans text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+        className="font-title text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
       >
         {title}
       </motion.h2>

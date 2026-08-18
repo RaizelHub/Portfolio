@@ -115,7 +115,7 @@ export const ProjectDetails = () => {
                 </span>
               </div>
 
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3">
+              <h1 className="font-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3">
                 {project.title}
               </h1>
 
@@ -155,8 +155,8 @@ export const ProjectDetails = () => {
                             key={img}
                             onClick={() => setActiveImageIndex(idx)}
                             className={`relative w-20 h-14 rounded-md overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] bg-[#F7F8FA] dark:bg-[#0B0D10] ${activeImageIndex === idx
-                                ? 'border-[#2563EB] dark:border-[#60A5FA] opacity-100'
-                                : 'border-[#DCE1E7] dark:border-[#242B33] opacity-60 hover:opacity-100'
+                              ? 'border-[#2563EB] dark:border-[#60A5FA] opacity-100'
+                              : 'border-[#DCE1E7] dark:border-[#242B33] opacity-60 hover:opacity-100'
                               }`}
                           >
                             <img

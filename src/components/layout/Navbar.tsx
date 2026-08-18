@@ -177,8 +177,8 @@ export const Navbar: React.FC = () => {
     <header
       ref={navRef}
       className={`sticky top-0 z-50 w-full transition-colors duration-200 ${isScrolled || isMobileMenuOpen
-          ? 'bg-[#F7F8FA]/95 dark:bg-[#0B0D10]/95 border-b border-[#DCE1E7] dark:border-[#242B33] backdrop-blur-xs shadow-2xs'
-          : 'bg-transparent border-b border-transparent'
+        ? 'bg-[#F7F8FA]/95 dark:bg-[#0B0D10]/95 border-b border-[#DCE1E7] dark:border-[#242B33] backdrop-blur-xs shadow-2xs'
+        : 'bg-transparent border-b border-transparent'
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,7 +194,7 @@ export const Navbar: React.FC = () => {
             <img
               src={profile.profileImage}
               alt="Janmark Suelto"
-              className="h-8 w-8 shrink-0 rounded-md border border-[#DCE1E7] object-cover object-top dark:border-[#242B33] group-hover:border-[#2563EB] dark:group-hover:border-[#60A5FA] transition-colors"
+              className="h-8 w-8 shrink-0 rounded-md object-cover object-top"
             />
             <div className="min-w-0 leading-tight">
               <span className="block truncate text-[13px] font-semibold text-[#111318] dark:text-[#F4F6F8] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
@@ -225,8 +225,8 @@ export const Navbar: React.FC = () => {
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   onMouseEnter={playHover}
                   className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${isActive
-                      ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
-                      : 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
+                    ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
+                    : 'text-[#5F6873] hover:text-[#111318] dark:text-[#A7B0BA] dark:hover:text-[#F4F6F8] hover:bg-black/[0.03] dark:hover:bg-white/[0.04]'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -395,8 +395,8 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${isActive
-                      ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
-                      : 'text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8]'
+                    ? 'text-[#2563EB] dark:text-[#60A5FA] font-semibold bg-black/[0.03] dark:bg-white/[0.04]'
+                    : 'text-[#5F6873] dark:text-[#A7B0BA] hover:text-[#111318] dark:hover:text-[#F4F6F8]'
                     }`}
                 >
                   <Icon

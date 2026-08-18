@@ -13,5 +13,6 @@ export interface Profile {
   messengerUrl?: string;
   resumeUrl: string;
   profileImage: string;
+  animeProfileImage?: string;
   gooberImage?: string;
 }

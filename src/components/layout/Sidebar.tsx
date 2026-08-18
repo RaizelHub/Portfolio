@@ -122,7 +122,7 @@ export const Sidebar: React.FC = () => {
           <img
             src={profile.profileImage}
             alt="Janmark Suelto"
-            className="h-8 w-8 shrink-0 rounded-md border border-[#DCE1E7] object-cover object-top dark:border-[#242B33]"
+            className="h-8 w-8 shrink-0 rounded-md object-cover object-top"
           />
           <span className="min-w-0 leading-tight">
             <span className="block truncate text-[13px] font-semibold text-[#111318] dark:text-[#F4F6F8]">
@@ -166,9 +166,8 @@ export const Sidebar: React.FC = () => {
               >
                 {/* Subtle blue left indicator on active state */}
                 <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${
-                    isActive ? 'bg-[#2563EB] dark:bg-[#60A5FA]' : 'bg-transparent'
-                  }`}
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${isActive ? 'bg-[#2563EB] dark:bg-[#60A5FA]' : 'bg-transparent'
+                    }`}
                   aria-hidden="true"
                 />
                 <Icon className="h-4 w-4 shrink-0 opacity-70 group-hover:opacity-100" strokeWidth={1.8} />
@@ -249,7 +248,7 @@ export const Sidebar: React.FC = () => {
           <img
             src={profile.profileImage}
             alt="Janmark Suelto"
-            className="h-7 w-7 rounded-md border border-[#DCE1E7] object-cover object-top dark:border-[#242B33]"
+            className="h-7 w-7 rounded-md object-cover object-top"
           />
           <span className="text-xs font-semibold text-[#111318] dark:text-[#F4F6F8]">
             Janmark Suelto

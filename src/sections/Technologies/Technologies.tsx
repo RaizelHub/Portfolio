@@ -29,7 +29,6 @@ import { useSound } from '../../context/SoundContext';
 
 interface TechItem {
   name: string;
-  note?: string;
   icon: React.ElementType;
 }
 
@@ -43,14 +42,14 @@ interface TechGroup {
 const TECH_GROUPS: TechGroup[] = [
   {
     id: 'frontend',
-    title: 'Frontend & Web',
+    title: 'Frontend',
     icon: Code2,
     items: [
-      { name: 'React', note: 'UI Library', icon: SiReact },
-      { name: 'TypeScript', note: 'Type Safety', icon: SiTypescript },
-      { name: 'JavaScript', note: 'ES6+ Runtime', icon: SiJavascript },
-      { name: 'Tailwind CSS', note: 'Design Tokens', icon: SiTailwindcss },
-      { name: 'Vite', note: 'Build Tooling', icon: SiVite },
+      { name: 'React', icon: SiReact },
+      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'JavaScript', icon: SiJavascript },
+      { name: 'Tailwind CSS', icon: SiTailwindcss },
+      { name: 'Vite', icon: SiVite },
     ],
   },
   {
@@ -58,54 +57,54 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Mobile',
     icon: Smartphone,
     items: [
-      { name: 'React Native', note: 'Cross-platform', icon: SiReact },
-      { name: 'Expo', note: 'Tooling & EAS', icon: SiExpo },
-      { name: 'Flutter (Dart)', note: 'Mobile UI SDK', icon: SiFlutter },
+      { name: 'React Native', icon: SiReact },
+      { name: 'Expo', icon: SiExpo },
+      { name: 'Flutter', icon: SiFlutter },
     ],
   },
   {
     id: 'backend',
-    title: 'Backend & APIs',
+    title: 'Backend',
     icon: Server,
     items: [
-      { name: 'Node.js', note: 'Runtime', icon: SiNodedotjs },
-      { name: 'Express', note: 'REST Framework', icon: SiExpress },
-      { name: 'Laravel', note: 'PHP MVC', icon: SiLaravel },
-      { name: 'REST APIs', note: 'Web Services', icon: Server },
+      { name: 'Node.js', icon: SiNodedotjs },
+      { name: 'Express', icon: SiExpress },
+      { name: 'Laravel', icon: SiLaravel },
+      { name: 'REST APIs', icon: Server },
     ],
   },
   {
     id: 'data',
-    title: 'Data & Persistence',
+    title: 'Data',
     icon: Database,
     items: [
-      { name: 'Supabase', note: 'Auth & Edge Functions', icon: SiSupabase },
-      { name: 'PostgreSQL', note: 'Relational DB', icon: SiPostgresql },
-      { name: 'MySQL', note: 'SQL Database', icon: SiMysql },
-      { name: 'MongoDB', note: 'Document Store', icon: SiMongodb },
-      { name: 'Firebase', note: 'Realtime Sync', icon: SiFirebase },
+      { name: 'Supabase', icon: SiSupabase },
+      { name: 'PostgreSQL', icon: SiPostgresql },
+      { name: 'MySQL', icon: SiMysql },
+      { name: 'MongoDB', icon: SiMongodb },
+      { name: 'Firebase', icon: SiFirebase },
     ],
   },
   {
     id: 'automation',
-    title: 'Automation & AI',
+    title: 'Automation',
     icon: Workflow,
     items: [
-      { name: 'n8n', note: 'Workflow Engine', icon: SiN8N },
-      { name: 'Webhooks', note: 'Event Ingestion', icon: Webhook },
-      { name: 'Groq AI', note: 'Fast Inference', icon: Cpu },
-      { name: 'Google Gemini', note: 'LLM APIs', icon: SiGooglegemini },
+      { name: 'n8n', icon: SiN8N },
+      { name: 'Webhooks', icon: Webhook },
+      { name: 'Groq AI', icon: Cpu },
+      { name: 'Google Gemini', icon: SiGooglegemini },
     ],
   },
   {
     id: 'tools',
-    title: 'Tools & DevOps',
+    title: 'Tools',
     icon: Wrench,
     items: [
-      { name: 'Git', note: 'Version Control', icon: SiGit },
-      { name: 'GitHub', note: 'CI/CD & Repos', icon: SiGithub },
-      { name: 'Docker', note: 'Containers', icon: SiDocker },
-      { name: 'Vercel', note: 'Deployment', icon: SiVercel },
+      { name: 'Git', icon: SiGit },
+      { name: 'GitHub', icon: SiGithub },
+      { name: 'Docker', icon: SiDocker },
+      { name: 'Vercel', icon: SiVercel },
     ],
   },
 ];
@@ -128,15 +127,10 @@ export const Technologies: React.FC = () => {
     <SectionContainer id="technologies" className="py-16 border-b border-[#DCE1E7] dark:border-[#242B33]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="max-w-3xl mb-12">
-        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
-          Technologies
-        </span>
-
         <h2
-          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
-          style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.1rem)' }}
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
         >
-          Tech stack &amp; capabilities.
+          Technologies
         </h2>
 
         <p className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans">
@@ -172,22 +166,14 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex items-center justify-between p-2 rounded-lg bg-[#F7F8FA] dark:bg-[#171C22] border border-transparent hover:border-[#DCE1E7] dark:hover:border-[#343D48] transition-colors"
+                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[#F7F8FA] dark:bg-[#171C22] border border-transparent hover:border-[#DCE1E7] dark:hover:border-[#343D48] transition-colors"
                     >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="w-6 h-6 rounded-md bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] flex items-center justify-center shrink-0 text-[#5F6873] dark:text-[#A7B0BA] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
-                          <ItemIcon className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="font-sans text-xs font-semibold text-[#111318] dark:text-[#F4F6F8] truncate">
-                          {item.name}
-                        </span>
+                      <div className="w-6 h-6 rounded-md bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] flex items-center justify-center shrink-0 text-[#5F6873] dark:text-[#A7B0BA] group-hover:text-[#2563EB] dark:group-hover:text-[#60A5FA] transition-colors">
+                        <ItemIcon className="w-3.5 h-3.5" />
                       </div>
-
-                      {item.note && (
-                        <span className="font-mono text-[10px] text-[#78828D] dark:text-[#7F8994] shrink-0 pl-2">
-                          {item.note}
-                        </span>
-                      )}
+                      <span className="font-sans text-xs font-semibold text-[#111318] dark:text-[#F4F6F8] truncate">
+                        {item.name}
+                      </span>
                     </div>
                   );
                 })}

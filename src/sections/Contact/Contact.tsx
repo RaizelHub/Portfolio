@@ -30,15 +30,10 @@ export const Contact: React.FC = () => {
   return (
     <SectionContainer id="contact" className="py-20 border-b border-[#DCE1E7] dark:border-[#242B33]">
       <motion.div {...entrance()} className="max-w-3xl">
-        <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3">
-          Contact
-        </span>
-
         <h2
-          className="font-sans font-bold text-[#111318] dark:text-[#F4F6F8] leading-[1.12] mb-3"
-          style={{ fontSize: 'clamp(1.65rem, 2.8vw, 2.35rem)' }}
+          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
         >
-          Let's build something useful.
+          Contact
         </h2>
 
         <p className="text-base sm:text-lg text-[#5F6873] dark:text-[#A7B0BA] leading-relaxed max-w-xl font-sans mb-10">
