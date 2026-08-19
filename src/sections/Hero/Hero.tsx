@@ -25,7 +25,7 @@ export const Hero: React.FC = () => {
     playClick();
     const link = document.createElement('a');
     link.href = profile.resumeUrl;
-    link.download = 'Suelto-Janmark-Resume.pdf';
+    link.download = 'Suelto-Janmark-Software Developer.Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

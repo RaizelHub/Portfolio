@@ -129,7 +129,15 @@ html.dark {
     outline-offset: 2px;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-title, .font-display, .font-slab {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .font-title,
+  .font-display,
+  .font-slab {
     font-family: var(--font-title);
   }
 }

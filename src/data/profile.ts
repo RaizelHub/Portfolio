@@ -13,7 +13,7 @@ export const profile: Profile = {
   facebookUrl: 'https://www.facebook.com/Raizelxdarriii90/',
   whatsappUrl: 'https://wa.me/qr/YHP7U5VEMH5IP1',
   messengerUrl: 'https://m.me/Raizelxdarriii90',
-  resumeUrl: '/Suelto-Janmark-Resume.pdf',
+  resumeUrl: '/Suelto-Janmark-Software Developer.Resume.pdf',
   profileImage: '/img/Profile.jpg',
   animeProfileImage: '/img/Anime.png',
 };

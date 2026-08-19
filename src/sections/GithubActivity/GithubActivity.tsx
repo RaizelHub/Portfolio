@@ -285,9 +285,8 @@ export const GithubActivity: React.FC = () => {
                               style={{
                                 backgroundColor: getColor(day.level),
                               }}
-                              className={`w-[11px] h-[11px] rounded-[2px] border border-[var(--border-subtle)] transition-all cursor-pointer ${
-                                isHovered ? 'scale-135 z-10 ring-1 ring-[var(--accent)] border-[var(--accent)]' : ''
-                              }`}
+                              className={`w-[11px] h-[11px] rounded-[2px] border border-[var(--border-subtle)] transition-all cursor-pointer ${isHovered ? 'scale-135 z-10 ring-1 ring-[var(--accent)] border-[var(--accent)]' : ''
+                                }`}
                               title={`${day.count} contributions on ${day.date}`}
                             />
                           );
