@@ -125,22 +125,22 @@ export const Technologies: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="technologies" className="py-16 border-b border-[var(--border-subtle)]">
+    <SectionContainer id="technologies" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
       {/* ── Section Header ── */}
-      <motion.div {...entrance()} className="max-w-3xl mb-12">
+      <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+          className="section-heading font-title text-[var(--text-primary)] md:col-span-5 md:mb-0"
         >
           Technologies
         </h2>
 
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
           Languages, frameworks, databases, and workflow orchestration tools applied across practical systems.
         </p>
       </motion.div>
 
       {/* ── Grouped Technology Cards ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+      <div className="grid grid-cols-1 border-t border-[var(--border-subtle)] md:grid-cols-2 lg:grid-cols-3">
         {TECH_GROUPS.map((group, idx) => {
           const GroupIcon = group.icon;
 
@@ -148,10 +148,10 @@ export const Technologies: React.FC = () => {
             <motion.div
               key={group.id}
               {...entrance(idx * 0.05)}
-              className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-5 shadow-xs"
+              className="border-b border-[var(--border-subtle)] px-0 py-8 md:px-6 lg:min-h-[330px] lg:border-r lg:px-8 [&:nth-child(3n)]:lg:border-r-0"
             >
               {/* Group Header */}
-              <div className="flex items-center gap-2 pb-3.5 mb-3.5 border-b border-[var(--border-subtle)]">
+              <div className="mb-5 flex items-center gap-2 border-b border-[var(--border-subtle)] pb-4">
                 <GroupIcon className="w-4 h-4 text-[var(--accent)]" />
                 <h3 className="font-sans font-bold text-sm text-[var(--text-primary)]">
                   {group.title}
@@ -159,7 +159,7 @@ export const Technologies: React.FC = () => {
               </div>
 
               {/* Items List with Real Logo Colors */}
-              <div className="space-y-2">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
                 {group.items.map((item) => {
                   const ItemIcon = item.icon;
 
@@ -167,15 +167,15 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex items-center gap-2.5 p-2 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-all hover:translate-x-0.5"
+                      className="group flex min-h-10 items-center gap-2.5 border-b border-transparent py-2 transition-all duration-200 hover:border-[var(--border-subtle)] hover:translate-x-0.5"
                     >
-                      <div className="w-7 h-7 rounded-md bg-[var(--surface)] border border-[var(--border-subtle)] flex items-center justify-center shrink-0 shadow-2xs">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center">
                         <ItemIcon
                           className="w-4 h-4 transition-transform group-hover:scale-110"
                           style={{ color: item.color }}
                         />
                       </div>
-                      <span className="font-sans text-xs font-medium text-[var(--text-primary)] truncate">
+                      <span className="break-safe font-sans text-sm font-medium leading-snug text-[var(--text-primary)]">
                         {item.name}
                       </span>
                     </div>

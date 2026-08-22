@@ -44,7 +44,7 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
   if (variant === 'mobile') {
     return (
       <div
-        className="flex items-center justify-between font-mono text-xs text-[#64748B] py-1 select-none cursor-default"
+        className="flex cursor-default select-none items-center justify-between py-1 font-mono text-xs text-[var(--text-secondary)]"
         role="status"
         aria-label={`${number} portfolio visits`}
       >
@@ -61,7 +61,7 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
           <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" strokeWidth={2} />
           <span>Portfolio visits</span>
         </span>
-        <span className="font-semibold text-[#0F172A] dark:text-[#F8FAFC]" aria-hidden="true">
+        <span className="font-semibold text-[var(--text-primary)]" aria-hidden="true">
           {number}
         </span>
       </div>
@@ -70,7 +70,7 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
 
   return (
     <span
-      className="flex items-center gap-1.5 text-[11px] font-mono text-[#64748B] py-1 select-none cursor-default"
+      className="flex cursor-default select-none items-center gap-1.5 py-1 font-mono text-xs text-[var(--text-secondary)]"
       aria-label={`${count} portfolio visits`}
       title={visitor ? `${visitor.displayName} (${visitor.shortId}) · ${number} portfolio visits` : `${number} portfolio visits`}
     >
@@ -84,7 +84,7 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
         />
       )}
       <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" aria-hidden="true" strokeWidth={2} />
-      <span className="font-medium text-[#0F172A] dark:text-[#F8FAFC]">{number}</span>
+      <span className="font-medium text-[var(--text-primary)]">{number}</span>
       <span className="hidden lg:inline">{word}</span>
     </span>
   );

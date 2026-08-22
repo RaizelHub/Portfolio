@@ -9,7 +9,7 @@ import { Contact } from '../sections/Contact/Contact';
 
 export const Home = () => {
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
+    <div>
       <Hero />
       <ProjectsSection />
       <Technologies />

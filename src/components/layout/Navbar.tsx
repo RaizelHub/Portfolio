@@ -177,31 +177,31 @@ export const Navbar: React.FC = () => {
   return (
     <header
       ref={navRef}
-      className={`sticky top-0 z-50 w-full transition-colors duration-200 ${isScrolled || isMobileMenuOpen
-        ? 'bg-[var(--background)]/90 border-b border-[var(--border-subtle)] backdrop-blur-md'
+      className={`sticky top-0 z-50 w-full transition-colors duration-300 ${isScrolled || isMobileMenuOpen
+        ? 'bg-[var(--background)]/94 border-b border-[var(--border-subtle)] backdrop-blur-xl'
         : 'bg-transparent border-b border-transparent'
         }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 sm:h-[68px] items-center justify-between gap-4 lg:gap-6">
+      <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
+        <div className="flex h-16 items-center justify-between gap-4 lg:gap-8">
           {/* ── Brand: Profile Image + Name + Subtitle ── */}
           <Link
             to="/"
             onClick={handleBrandClick}
             onMouseEnter={playHover}
-            className="flex items-center gap-3 shrink-0 rounded-md focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-4 py-1 group"
+            className="group flex min-w-0 flex-1 items-center gap-2.5 py-1 focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-4 lg:flex-none lg:gap-3"
             aria-label="Janmark Suelto — Back to top"
           >
             <img
               src={profile.profileImage}
               alt="Janmark Suelto"
-              className="h-8 w-8 shrink-0 rounded-md object-cover object-top border border-[var(--border-subtle)] group-hover:border-[var(--border)] transition-colors"
+              className="h-9 w-9 shrink-0 object-cover object-top grayscale border border-[var(--border)] transition-all duration-300 group-hover:grayscale-0"
             />
             <div className="min-w-0 leading-tight">
-              <span className="block truncate text-[13px] font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors">
+              <span className="block truncate text-[13px] font-bold tracking-[-0.01em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
                 Janmark Suelto
               </span>
-              <span className="block truncate text-[11px] text-[var(--text-secondary)]">
+              <span className="mt-0.5 block truncate font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
                 Software Developer
               </span>
             </div>
@@ -210,7 +210,7 @@ export const Navbar: React.FC = () => {
           {/* ── Navigation Links with Underline Active Indicator ── */}
           <nav
             aria-label="Main Navigation"
-            className="hidden md:flex items-center gap-1.5 lg:gap-2"
+            className="hidden min-w-0 items-center gap-1 lg:flex lg:gap-2"
           >
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -225,7 +225,7 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   onMouseEnter={playHover}
-                  className={`relative group flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] transition-colors duration-150 select-none ${isActive
+                  className={`relative group flex items-center gap-2 px-3 py-2 text-[13px] transition-colors duration-200 select-none ${isActive
                     ? 'text-[var(--text-primary)] font-semibold'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                     }`}
@@ -241,7 +241,7 @@ export const Navbar: React.FC = () => {
                   {isActive && (
                     <motion.span
                       layoutId="activeNavIndicator"
-                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[var(--accent)] rounded-full"
+                      className="absolute bottom-0 inset-x-3 h-px bg-[var(--accent)]"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       aria-hidden="true"
                     />
@@ -252,7 +252,7 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* ── Action Utilities ── */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden min-w-0 items-center gap-2 lg:flex">
             {/* Social Link: GitHub */}
             <a
               href={profile.githubUrl}
@@ -260,7 +260,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="p-1.5 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              className="p-2 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label="GitHub Profile"
               title="GitHub"
             >
@@ -274,7 +274,7 @@ export const Navbar: React.FC = () => {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="p-1.5 rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              className="p-2 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label="LinkedIn Profile"
               title="LinkedIn"
             >
@@ -297,7 +297,7 @@ export const Navbar: React.FC = () => {
                 toggleSound();
               }}
               onMouseEnter={playHover}
-              className="flex items-center text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center px-1.5 py-2 font-mono text-[11px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
               title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
@@ -316,20 +316,20 @@ export const Navbar: React.FC = () => {
                 toggleTheme();
               }}
               onMouseEnter={playHover}
-              className="flex items-center text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors py-1 px-1.5 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+              className="flex items-center px-1.5 py-2 font-mono text-[11px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label="Toggle theme"
               title={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {resolvedTheme === 'dark' ? (
-                <Sun className="h-3.5 w-3.5 text-[var(--accent)]" />
+                <Sun className="theme-toggle-icon h-3.5 w-3.5 text-[var(--accent)]" />
               ) : (
-                <Moon className="h-3.5 w-3.5 text-[var(--accent)]" />
+                <Moon className="theme-toggle-icon h-3.5 w-3.5 text-[var(--accent)]" />
               )}
             </button>
           </div>
 
           {/* ── Mobile Header Utilities & Hamburger ── */}
-          <div className="flex md:hidden items-center gap-1.5">
+          <div className="flex items-center gap-1.5 lg:hidden">
             {/* Audio Toggle (Mobile) */}
             <button
               type="button"
@@ -337,7 +337,7 @@ export const Navbar: React.FC = () => {
                 playClick();
                 toggleSound();
               }}
-              className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className="p-2 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label={soundEnabled ? 'Disable audio' : 'Enable audio'}
               title={soundEnabled ? 'Audio: On' : 'Audio: Off'}
             >
@@ -356,10 +356,10 @@ export const Navbar: React.FC = () => {
                 toggleTheme();
               }}
               onMouseEnter={playHover}
-              className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              className="p-2 text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               aria-label="Toggle theme"
             >
-              {resolvedTheme === 'dark' ? <Sun className="w-4 h-4 text-[var(--accent)]" /> : <Moon className="w-4 h-4 text-[var(--accent)]" />}
+              {resolvedTheme === 'dark' ? <Sun className="theme-toggle-icon w-4 h-4 text-[var(--accent)]" /> : <Moon className="theme-toggle-icon w-4 h-4 text-[var(--accent)]" />}
             </button>
 
             {/* Hamburger Button */}
@@ -369,7 +369,7 @@ export const Navbar: React.FC = () => {
                 playClick();
                 setIsMobileMenuOpen((prev) => !prev);
               }}
-              className="p-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-primary)] focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
+              className="border border-[var(--border)] bg-[var(--surface)] p-2 text-[var(--text-primary)] focus-visible:outline-2 focus-visible:outline-[var(--focus)]"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
               aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -384,7 +384,7 @@ export const Navbar: React.FC = () => {
       {isMobileMenuOpen && (
         <div
           id="mobile-navigation"
-          className="md:hidden border-t border-[var(--border-subtle)] bg-[var(--background)] px-6 py-6 shadow-xl transition-all"
+          className="border-t border-[var(--border-subtle)] bg-[var(--background)] px-[var(--page-gutter)] py-6 shadow-[var(--shadow-soft)] lg:hidden"
         >
           <nav aria-label="Mobile Navigation Links" className="flex flex-col space-y-1">
             {navItems.map((item) => {
@@ -399,7 +399,7 @@ export const Navbar: React.FC = () => {
                   key={item.sectionId}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
-                  className={`relative flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-colors ${isActive
+                  className={`relative flex min-h-11 items-center gap-2.5 border-b border-[var(--border-subtle)] px-1 py-2.5 text-sm font-medium transition-colors ${isActive
                     ? 'text-[var(--text-primary)] font-semibold bg-[var(--surface-hover)]'
                     : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                     }`}
@@ -411,7 +411,7 @@ export const Navbar: React.FC = () => {
                   <span>{item.label}</span>
                   {isActive && (
                     <span
-                      className="absolute bottom-0 inset-x-3 h-[2px] bg-[var(--accent)] rounded-full"
+                      className="absolute bottom-0 inset-x-0 h-px bg-[var(--accent)]"
                       aria-hidden="true"
                     />
                   )}

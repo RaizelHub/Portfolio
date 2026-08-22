@@ -18,23 +18,23 @@ export const About: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="about" className="py-16 border-b border-[var(--border-subtle)]">
+    <SectionContainer id="about" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
       {/* ── Section Header ── */}
-      <motion.div {...entrance()} className="max-w-3xl mb-12">
+      <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+          className="section-heading font-title text-[var(--text-primary)] md:col-span-5 md:mb-0"
         >
           About
         </h2>
 
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
           Who I am, what I specialize in, and how I build reliable software systems.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+      <div className="grid grid-cols-1 items-start gap-14 border-t border-[var(--border-subtle)] pt-10 lg:grid-cols-12 lg:gap-20">
         {/* Left Column: Direct Bio & Approach */}
-        <motion.div {...entrance(0.08)} className="lg:col-span-7 space-y-4 text-sm sm:text-base leading-relaxed font-sans">
+        <motion.div {...entrance(0.08)} className="body-copy space-y-5 lg:col-span-7">
           <p className="font-medium text-[var(--text-primary)]">
             I’m a software developer based in Bukidnon, Philippines. I design and build end-to-end applications spanning web interfaces, mobile apps with React Native, and workflow automations with n8n and Supabase.
           </p>
@@ -49,10 +49,10 @@ export const About: React.FC = () => {
         </motion.div>
 
         {/* Right Column: Operational Snapshot & Education */}
-        <motion.div {...entrance(0.14)} className="lg:col-span-5 space-y-6">
+        <motion.div {...entrance(0.14)} className="space-y-10 lg:col-span-5">
           {/* Operational Snapshot */}
-          <div className="bg-[var(--surface)] border border-[var(--border-subtle)] p-6 rounded-xl space-y-4 shadow-xs">
-            <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-3">
+          <div className="space-y-5 border-t border-[var(--border)] pt-5">
+            <h3 className="border-b border-[var(--border-subtle)] pb-4 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
               Operational Snapshot
             </h3>
 
@@ -60,7 +60,7 @@ export const About: React.FC = () => {
               <div className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-[var(--text-muted)] font-mono block text-[10px] uppercase">Location</span>
+                  <span className="block font-mono text-xs uppercase text-[var(--text-muted)]">Location</span>
                   <span className="text-[var(--text-primary)] font-semibold">Bukidnon, Philippines (GMT+8)</span>
                 </div>
               </div>
@@ -68,7 +68,7 @@ export const About: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Target className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-[var(--text-muted)] font-mono block text-[10px] uppercase">Target Roles</span>
+                  <span className="block font-mono text-xs uppercase text-[var(--text-muted)]">Target Roles</span>
                   <span className="text-[var(--text-primary)] font-semibold">Web / Mobile / Automation</span>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export const About: React.FC = () => {
               <div className="flex items-start gap-3">
                 <Clock className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-[var(--text-muted)] font-mono block text-[10px] uppercase">Availability</span>
+                  <span className="block font-mono text-xs uppercase text-[var(--text-muted)]">Availability</span>
                   <span className="text-[var(--text-primary)] font-semibold">Open to remote full-time &amp; contract</span>
                 </div>
               </div>
@@ -84,25 +84,25 @@ export const About: React.FC = () => {
           </div>
 
           {/* Education Box */}
-          <div className="bg-[var(--surface)] border border-[var(--border-subtle)] p-6 rounded-xl space-y-3 shadow-xs">
-            <h3 className="text-[var(--text-primary)] font-mono text-xs font-bold uppercase tracking-wider border-b border-[var(--border-subtle)] pb-3 flex items-center justify-between">
+          <div className="space-y-4 border-t border-[var(--border)] pt-5">
+            <h3 className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4 font-mono text-xs font-bold uppercase tracking-wider text-[var(--text-primary)]">
               <span className="flex items-center gap-2">
                 <GraduationCap className="w-4 h-4 text-[var(--accent)]" />
                 Education
               </span>
-              <span className="text-[10px] text-[var(--text-muted)]">BSIT</span>
+              <span className="text-xs text-[var(--text-muted)]">BSIT</span>
             </h3>
 
             {educationList.map((edu) => (
               <div key={edu.id} className="space-y-1">
-                <div className="flex items-center justify-between gap-2">
-                  <h4 className="font-bold text-[var(--text-primary)] text-sm">{edu.institution}</h4>
-                  <span className="text-[10px] font-mono font-semibold text-[var(--accent)]">
+                <div className="flex min-w-0 flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+                  <h4 className="break-safe text-sm font-semibold text-[var(--text-primary)]">{edu.institution}</h4>
+                  <span className="font-mono text-xs font-semibold text-[var(--accent)]">
                     {edu.period}
                   </span>
                 </div>
                 <p className="text-xs text-[var(--text-secondary)] font-sans">{edu.degree}</p>
-                <span className="text-[11px] text-[var(--text-muted)] font-mono flex items-center gap-1">
+                <span className="flex items-center gap-1 font-mono text-xs text-[var(--text-muted)]">
                   <MapPin className="w-3 h-3 text-[var(--accent)]" /> {edu.location}
                 </span>
               </div>

@@ -81,22 +81,22 @@ export const Certificates: React.FC = () => {
   });
 
   return (
-    <SectionContainer id="certifications" className="py-16 border-b border-[var(--border-subtle)]">
+    <SectionContainer id="certifications" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
       {/* ── Section Header ── */}
-      <motion.div {...entrance()} className="max-w-3xl mb-10">
+      <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+          className="section-heading font-title text-[var(--text-primary)] md:col-span-5 md:mb-0"
         >
           Certificates &amp; Credentials
         </h2>
 
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
           Credentials that support my software development and technical work.
         </p>
       </motion.div>
 
       {/* ── React Bits Interactive Folder (Signature Graphite + Copper detail) ── */}
-      <div className="my-10 flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center border-y border-[var(--border-subtle)] py-12">
         <span className="font-sans text-sm sm:text-base font-bold text-[var(--text-primary)] mb-4">
           Certificates &amp; Credentials Folder
         </span>
@@ -122,7 +122,7 @@ export const Certificates: React.FC = () => {
             setIsOpen((prev) => !prev);
           }}
           onMouseEnter={playHover}
-          className="mt-6 inline-flex items-center gap-2 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] px-4 py-2 rounded-lg shadow-xs"
+          className="mt-6 inline-flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface)] px-4 py-2 font-mono text-xs text-[var(--text-secondary)] transition-all duration-200 hover:-translate-y-px hover:border-[var(--accent)] hover:text-[var(--text-primary)]"
         >
           <span className="font-semibold text-[var(--text-primary)]">
             {certifications.length} credentials

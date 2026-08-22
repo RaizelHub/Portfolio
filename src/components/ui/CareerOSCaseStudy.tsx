@@ -74,7 +74,7 @@ export const CareerOSCaseStudy: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-12 text-left">
+    <div className="case-study space-y-12 text-left">
       {/* SECTION 1: HERO OVERVIEW */}
       <section className="bg-[#EFEBE4] border border-[#D5D0C7] rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -96,7 +96,7 @@ export const CareerOSCaseStudy: React.FC = () => {
           <h1 className="section-title text-[#171717] uppercase">
             CareerOS — Local-First Windows Career Operating System
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-[#171717] leading-relaxed max-w-4xl font-medium">
+          <p className="body-copy mt-3 text-[#171717]">
             A privacy-centric, desktop career management engine powered by Tauri 2, React 19, SQLite, and Context-Aware AI. Designed to replace fragmented job search spreadsheets, online resume formatting tools, and generic ChatGPT windows—storing 100% of user data locally on the user's PC.
           </p>
         </div>
@@ -134,7 +134,7 @@ export const CareerOSCaseStudy: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
+        <div className="flex min-w-0 flex-wrap items-center gap-3 pt-2 font-mono text-sm">
           <a
             href="https://github.com/RaizelHub/careeros"
             target="_blank"
@@ -144,20 +144,20 @@ export const CareerOSCaseStudy: React.FC = () => {
             <Github className="w-4 h-4" />
             <span>INSPECT SOURCE CODE ↗</span>
           </a>
-          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-lg text-xs text-[#6B6862]">
+          <div className="inline-flex min-w-0 max-w-full items-center gap-2 border border-[#D5D0C7] bg-[#F4F1EA] px-3 py-2.5 text-xs text-[#6B6862]">
             <HardDrive className="w-3.5 h-3.5 text-[#2563EB]" />
-            <span>100% Local Desktop Storage (SQLite careeros.db)</span>
+            <span className="break-safe">100% Local Desktop Storage (SQLite careeros.db)</span>
           </div>
         </div>
       </section>
 
       {/* GALLERY & SCREENSHOT / ARCHITECTURAL VIEWER */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-[#D5D0C7] pb-3">
-          <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
+        <div className="flex min-w-0 flex-col items-start justify-between gap-3 border-b border-[#D5D0C7] pb-3 md:flex-row md:items-center">
+          <h3 className="flex min-w-0 items-start gap-2 font-mono text-sm font-semibold uppercase leading-[1.45] text-[#171717] sm:text-base">
             <Eye className="w-4 h-4 text-[#2563EB]" /> Desktop App Interface &amp; Feature Breakdown
           </h3>
-          <div className="flex bg-[#EFEBE4] p-1 rounded-lg border border-[#D5D0C7] text-xs font-mono">
+          <div className="flex max-w-full flex-wrap border border-[#D5D0C7] bg-[#EFEBE4] p-1 font-mono text-xs">
             <button
               onClick={() => setActiveTab('screenshots')}
               className={`px-3 py-1 rounded-md font-medium transition-all ${
@@ -211,10 +211,10 @@ export const CareerOSCaseStudy: React.FC = () => {
                       : 'border-[#D5D0C7] bg-[#F4F1EA]/50 hover:border-[#171717]'
                   }`}
                 >
-                  <span className="text-xs font-bold text-[#171717] truncate block uppercase">
+                  <span className="break-safe block text-xs font-semibold uppercase leading-[1.45] text-[#171717]">
                     0{idx + 1}. {item.title}
                   </span>
-                  <span className="text-[10px] text-[#6B6862] truncate block mt-0.5">
+                  <span className="break-safe mt-0.5 block text-xs text-[#6B6862]">
                     Click to view screenshot
                   </span>
                 </button>

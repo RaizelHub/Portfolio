@@ -19,8 +19,8 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[var(--background)] border-t border-[var(--border-subtle)] py-8 text-[var(--text-secondary)] font-mono text-xs transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="border-t border-[var(--border-subtle)] bg-[var(--background)] py-10 font-mono text-xs text-[var(--text-secondary)] transition-colors">
+      <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
         <div className="flex flex-col md:flex-row items-center justify-between gap-5">
           {/* Brand Info */}
           <div className="text-center md:text-left">
@@ -71,7 +71,7 @@ export const Footer: React.FC = () => {
             <span>&copy; {new Date().getFullYear()}</span>
             <button
               onClick={handleBackToTop}
-              className="p-1.5 bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)] rounded-md transition-colors flex items-center gap-1 font-mono uppercase text-[10px]"
+              className="flex min-h-9 items-center gap-1 border border-[var(--border-subtle)] bg-[var(--surface)] p-1.5 font-mono text-[10px] uppercase transition-colors hover:border-[var(--accent)] hover:text-[var(--text-primary)]"
               title="Back to Top"
             >
               <span>Top</span>

@@ -17,7 +17,7 @@ import { AutomationShowcase } from '../projects/AutomationShowcase';
 
 export const TikTokShopCaseStudy: React.FC = () => {
   return (
-    <div className="space-y-12 text-left">
+    <div className="case-study space-y-12 text-left">
       {/* ── Section 1: Header / Overview ── */}
       <section className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -35,7 +35,7 @@ export const TikTokShopCaseStudy: React.FC = () => {
               href="https://github.com/RaizelHub/OmniEcommerce-ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold px-3 py-1.5 rounded-lg bg-[var(--surface-elevated)] hover:bg-[var(--surface-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[var(--border)] transition-colors"
+              className="inline-flex min-w-0 max-w-full items-center gap-1.5 border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3 py-1.5 font-mono text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--border)] hover:bg-[var(--surface-hover)]"
             >
               <Github className="w-3.5 h-3.5" />
               <span>Source Repository</span>
@@ -45,10 +45,10 @@ export const TikTokShopCaseStudy: React.FC = () => {
         </div>
 
         <div>
-          <h1 className="font-sans text-2xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-3">
+          <h1 className="section-title mb-3 text-[var(--text-primary)]">
             TikTok Shop Order Automation &amp; E-Commerce Architecture
           </h1>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] font-sans leading-relaxed max-w-4xl">
+          <p className="body-copy text-[var(--text-secondary)]">
             An end-to-end event-driven orchestration system built on n8n, Supabase PostgreSQL, and Telegram.
             The architecture captures high-velocity e-commerce webhooks, validates payloads, enforces idempotent deduplication,
             synchronizes multi-channel inventory records, and dispatches real-time operator alerts.
@@ -80,7 +80,7 @@ export const TikTokShopCaseStudy: React.FC = () => {
       <section className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--border-subtle)] pb-3">
           <div>
-            <h2 className="font-sans text-xl sm:text-2xl font-bold tracking-tight text-[var(--text-primary)] flex items-center gap-2">
+            <h2 className="project-heading flex min-w-0 items-start gap-2 text-[var(--text-primary)]">
               <Workflow className="w-5 h-5 text-[var(--accent)]" />
               <span>Interactive Workflow Architecture</span>
             </h2>

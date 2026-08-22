@@ -69,7 +69,7 @@ export const AutomationShowcase: React.FC = () => {
   const currentStep = steps[activeStep];
 
   return (
-    <div className="bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl p-5 sm:p-7 shadow-xs">
+    <div className="project-showcase border border-[var(--border-subtle)] bg-[var(--surface)] p-5 shadow-xs sm:p-7">
       {/* Top Studio Bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-[#DCE1E7] dark:border-[#242B33]">
         <div className="flex items-center gap-2">
@@ -89,7 +89,7 @@ export const AutomationShowcase: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
         {/* Left Column: Interactive Pipeline Step Selector */}
-        <div className="lg:col-span-5 space-y-2">
+        <div className="min-w-0 space-y-2 lg:col-span-5">
           <p className="text-[10px] font-mono font-bold uppercase tracking-[0.14em] text-[#78828D] dark:text-[#7F8994] mb-3">
             Execution Flow Sequence ({activeStep + 1} of {steps.length})
           </p>
@@ -108,7 +108,7 @@ export const AutomationShowcase: React.FC = () => {
                     playClick();
                     setActiveStep(idx);
                   }}
-                  className={`w-full text-left p-3 rounded-lg border transition-all duration-150 flex items-start gap-3 ${
+                  className={`flex w-full min-w-0 items-start gap-3 border p-3 text-left transition-all duration-150 ${
                     isSelected
                       ? 'bg-[#F1F3F5] dark:bg-[#171C22] border-[#2563EB] dark:border-[#60A5FA] shadow-xs'
                       : 'bg-transparent border-[#DCE1E7]/70 dark:border-[#242B33]/70 hover:border-[#C5CCD5] dark:hover:border-[#343D48]'
@@ -125,15 +125,15 @@ export const AutomationShowcase: React.FC = () => {
                   </div>
 
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="font-mono text-xs font-bold text-[#111318] dark:text-[#F4F6F8] truncate">
+                    <div className="flex min-w-0 flex-wrap items-start justify-between gap-2">
+                      <span className="break-safe min-w-0 flex-1 font-mono text-xs font-semibold leading-[1.45] text-[#111318] dark:text-[#F4F6F8]">
                         {idx + 1}. {step.label}
                       </span>
                       <span className="text-[9px] font-mono uppercase text-[#78828D] dark:text-[#7F8994] shrink-0">
                         {step.category}
                       </span>
                     </div>
-                    <p className="text-[11px] text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-snug mt-1 line-clamp-2">
+                    <p className="mt-1 text-xs leading-[1.55] text-[#5F6873] dark:text-[#A7B0BA]">
                       {step.desc}
                     </p>
                   </div>
@@ -144,9 +144,9 @@ export const AutomationShowcase: React.FC = () => {
         </div>
 
         {/* Right Column: Dynamic Workflow Canvas Display */}
-        <div className="lg:col-span-7 flex flex-col space-y-3">
-          <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[#5F6873] dark:text-[#A7B0BA]">
-            <span className="font-semibold text-[#111318] dark:text-[#F4F6F8]">
+        <div className="flex min-w-0 flex-col space-y-3 lg:col-span-7">
+          <div className="flex min-w-0 flex-wrap items-center justify-between gap-2 font-mono text-xs uppercase text-[#5F6873] dark:text-[#A7B0BA]">
+            <span className="break-safe font-semibold text-[#111318] dark:text-[#F4F6F8]">
               {currentStep.label}
             </span>
             <button
@@ -192,8 +192,8 @@ export const AutomationShowcase: React.FC = () => {
           </div>
 
           {/* Caption & Navigation Controls */}
-          <div className="p-3 bg-[#F1F3F5] dark:bg-[#171C22] border border-[#DCE1E7] dark:border-[#242B33] rounded-lg text-xs font-mono flex items-center justify-between gap-3">
-            <span className="text-[#5F6873] dark:text-[#A7B0BA] text-[11px] truncate">
+          <div className="flex min-w-0 flex-col items-start justify-between gap-3 border border-[#DCE1E7] bg-[#F1F3F5] p-3 font-mono text-xs dark:border-[#242B33] dark:bg-[#171C22] sm:flex-row sm:items-center">
+            <span className="break-safe text-xs leading-[1.5] text-[#5F6873] dark:text-[#A7B0BA]">
               {currentStep.caption}
             </span>
             <button
@@ -228,9 +228,9 @@ export const AutomationShowcase: React.FC = () => {
               className="relative max-w-5xl w-full bg-[#FFFFFF] dark:bg-[#11151A] border border-[#DCE1E7] dark:border-[#242B33] rounded-xl overflow-hidden shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-5 py-3 border-b border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22]">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#111318] dark:text-[#F4F6F8]">
+              <div className="flex min-w-0 items-start justify-between gap-3 border-b border-[#DCE1E7] bg-[#F1F3F5] px-5 py-3 dark:border-[#242B33] dark:bg-[#171C22]">
+                <div className="flex min-w-0 flex-wrap items-center gap-2">
+                  <span className="break-safe font-mono text-xs font-bold uppercase tracking-wider text-[#111318] dark:text-[#F4F6F8]">
                     {currentStep.label}
                   </span>
                   <span className="text-[10px] font-mono text-[#78828D] dark:text-[#7F8994]">
@@ -253,8 +253,8 @@ export const AutomationShowcase: React.FC = () => {
                 />
               </div>
 
-              <div className="px-5 py-2.5 border-t border-[#DCE1E7] dark:border-[#242B33] bg-[#F1F3F5] dark:bg-[#171C22] flex items-center justify-between text-xs font-mono text-[#5F6873] dark:text-[#A7B0BA]">
-                <span>{currentStep.caption}</span>
+              <div className="flex min-w-0 flex-col items-start justify-between gap-3 border-t border-[#DCE1E7] bg-[#F1F3F5] px-5 py-2.5 font-mono text-xs text-[#5F6873] dark:border-[#242B33] dark:bg-[#171C22] sm:flex-row sm:items-center">
+                <span className="break-safe">{currentStep.caption}</span>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setActiveStep((prev) => (prev === 0 ? steps.length - 1 : prev - 1))}

@@ -14,35 +14,18 @@ export const DeviceMockup: React.FC<DeviceMockupProps> = ({
   alt,
   priority = 'secondary',
   rotation = 0,
-  floatDelay = 0,
 }) => {
   const prefersReducedMotion = useReducedMotion();
   const isPrimary = priority === 'primary';
 
   return (
     <motion.div
-      // Continuous floating
-      animate={
-        prefersReducedMotion
-          ? undefined
-          : { y: [0, isPrimary ? -7 : -4, 0] }
-      }
-      transition={
-        prefersReducedMotion
-          ? undefined
-          : {
-            duration: isPrimary ? 4.2 : 3.6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: floatDelay,
-          }
-      }
-      // Hover lift
-      whileHover={prefersReducedMotion ? undefined : { y: isPrimary ? -11 : -6 }}
+      whileHover={prefersReducedMotion ? undefined : { y: isPrimary ? -5 : -3 }}
+      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
       style={{ rotate: rotation }}
       className={`relative select-none flex-shrink-0 ${isPrimary
-          ? 'w-[158px] sm:w-[172px] lg:w-[188px]'
-          : 'w-[136px] sm:w-[148px] lg:w-[160px]'
+          ? 'w-[clamp(9.5rem,26vw,11.75rem)] max-w-full'
+          : 'w-[clamp(8rem,23vw,10rem)] max-w-full'
         }`}
     >
       {/* Phone shell */}

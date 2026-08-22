@@ -232,7 +232,7 @@ export const Sidebar: React.FC = () => {
             className="flex items-center gap-1.5 text-[11px] font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
             aria-label="Toggle theme"
           >
-            {resolvedTheme === 'dark' ? <Sun className="h-3.5 w-3.5 text-[var(--accent)]" /> : <Moon className="h-3.5 w-3.5 text-[var(--accent)]" />}
+            {resolvedTheme === 'dark' ? <Sun className="theme-toggle-icon h-3.5 w-3.5 text-[var(--accent)]" /> : <Moon className="theme-toggle-icon h-3.5 w-3.5 text-[var(--accent)]" />}
             <span className="capitalize">{resolvedTheme}</span>
           </button>
         </div>

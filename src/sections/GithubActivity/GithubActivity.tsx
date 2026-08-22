@@ -144,23 +144,23 @@ export const GithubActivity: React.FC = () => {
   };
 
   return (
-    <SectionContainer id="github-activity" className="py-16 border-b border-[var(--border-subtle)]">
+    <SectionContainer id="github-activity" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
       {/* ── Section Header ── */}
-      <div className="max-w-3xl mb-10">
-        <h2 className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3">
+      <div className="mb-12 grid gap-5 md:grid-cols-12 md:items-end">
+        <h2 className="section-heading font-title text-[var(--text-primary)] md:col-span-5">
           GitHub Activity
         </h2>
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
           Live open-source contributions and development frequency from @RaizelHub.
         </p>
       </div>
 
       {/* ── Activity Card Container ── */}
-      <div className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 space-y-6 shadow-xs">
+      <div className="space-y-8 border-y border-[var(--border-subtle)] py-8">
         {/* Header Bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] text-[var(--text-primary)] flex items-center justify-center">
+            <div className="flex h-10 w-10 items-center justify-center border border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)]">
               <Github className="w-5 h-5" />
             </div>
             <div>
@@ -179,7 +179,7 @@ export const GithubActivity: React.FC = () => {
             rel="noopener noreferrer"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--on-accent)] font-sans text-xs font-semibold rounded-lg transition-colors cursor-pointer"
+            className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 bg-[var(--accent)] px-3.5 py-2 font-sans text-xs font-semibold text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)]"
           >
             <span>View GitHub Profile</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -188,7 +188,7 @@ export const GithubActivity: React.FC = () => {
 
         {/* ── Activity Metric Highlights ── */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          <div className="p-3.5 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1">
+          <div className="space-y-1 border-l border-[var(--accent)] bg-[var(--surface-elevated)] p-3.5">
             <span className="text-xs text-[var(--text-muted)] font-mono block">
               Past Year Commits
             </span>
@@ -197,7 +197,7 @@ export const GithubActivity: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1">
+          <div className="space-y-1 border-l border-[var(--accent)] bg-[var(--surface-elevated)] p-3.5">
             <span className="text-xs text-[var(--text-muted)] font-mono block">
               Active Commit Days
             </span>
@@ -206,7 +206,7 @@ export const GithubActivity: React.FC = () => {
             </p>
           </div>
 
-          <div className="p-3.5 rounded-lg bg-[var(--surface-elevated)] border border-[var(--border-subtle)] space-y-1 col-span-2 sm:col-span-1">
+          <div className="col-span-2 space-y-1 border-l border-[var(--accent)] bg-[var(--surface-elevated)] p-3.5 sm:col-span-1">
             <span className="text-xs text-[var(--text-muted)] font-mono block">
               Longest Streak
             </span>
@@ -218,12 +218,12 @@ export const GithubActivity: React.FC = () => {
 
         {/* ── High-Contrast Native Contribution Heatmap ── */}
         <div className="space-y-3 font-sans">
-          <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-primary)]">
+          <div className="flex flex-col items-start gap-2 text-xs font-semibold text-[var(--text-primary)] sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
             <span className="flex items-center gap-2">
               <Calendar className="w-3.5 h-3.5 text-[var(--accent)]" />
               Contribution Calendar (Last 12 Months)
             </span>
-            <span className="text-[var(--text-muted)] font-mono text-[11px]">
+            <span className="break-safe font-mono text-[11px] font-normal text-[var(--text-muted)]">
               {hoveredDay && hoveredDay.count >= 0
                 ? `${hoveredDay.count} ${hoveredDay.count === 1 ? 'contribution' : 'contributions'} on ${formatDate(hoveredDay.date)}`
                 : 'Hover squares to view details'}

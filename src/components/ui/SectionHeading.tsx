@@ -32,7 +32,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {tag && (
         <motion.span
           {...anim(0)}
-          className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#2563EB] dark:text-[#60A5FA] block mb-3"
+          className="mb-4 block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]"
         >
           {tag}
         </motion.span>
@@ -40,7 +40,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
       <motion.h2
         {...anim(0.05)}
-        className="font-title text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#111318] dark:text-[#F4F6F8] mb-3"
+        className="section-heading mb-4 font-title text-[var(--text-primary)]"
       >
         {title}
       </motion.h2>
@@ -48,7 +48,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {subtitle && (
         <motion.p
           {...anim(0.1)}
-          className="text-sm sm:text-base text-[#5F6873] dark:text-[#A7B0BA] font-sans leading-relaxed max-w-xl"
+          className="body-copy text-[var(--text-secondary)]"
         >
           {subtitle}
         </motion.p>

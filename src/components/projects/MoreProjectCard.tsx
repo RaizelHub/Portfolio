@@ -28,20 +28,20 @@ export const MoreProjectCard: React.FC<MoreProjectCardProps> = ({
       onMouseEnter={playHover}
       onClick={playClick}
       aria-label={`View ${shortTitle} project`}
-      className="group flex flex-col gap-3.5 p-5 h-full bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] rounded-xl transition-all duration-150 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)]"
+      className="group flex h-full flex-col gap-4 border-b border-[var(--border-subtle)] bg-transparent px-0 py-6 transition-all duration-200 hover:border-[var(--accent)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)]"
     >
       {/* Category label: Neutral */}
-      <span className="text-[10px] font-mono font-medium uppercase tracking-widest text-[var(--text-muted)]">
+      <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--text-muted)]">
         {category}
       </span>
 
       {/* Title row */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <h4 className="font-sans text-sm font-bold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors duration-150 leading-tight">
+      <div className="flex min-w-0 items-start justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <h4 className="break-safe font-title text-lg font-semibold leading-tight tracking-[-0.02em] text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--accent)]">
             {shortTitle}
           </h4>
-          <p className="text-[11px] font-mono text-[var(--text-secondary)] mt-0.5 truncate">
+          <p className="break-safe mt-1 font-mono text-xs leading-[1.45] text-[var(--text-secondary)]">
             {subtitle}
           </p>
         </div>
@@ -49,7 +49,7 @@ export const MoreProjectCard: React.FC<MoreProjectCardProps> = ({
       </div>
 
       {/* Description */}
-      <p className="text-xs text-[var(--text-secondary)] leading-relaxed line-clamp-2 flex-1">
+      <p className="body-copy flex-1 max-w-[55ch] text-[var(--text-secondary)]">
         {description}
       </p>
 
@@ -58,7 +58,7 @@ export const MoreProjectCard: React.FC<MoreProjectCardProps> = ({
         {technologies.slice(0, 4).map((tech) => (
           <span
             key={tech}
-            className="text-[10px] font-mono text-[var(--text-muted)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2 py-0.5 rounded"
+            className="break-safe border-l border-[var(--border)] pl-2 font-mono text-xs leading-[1.4] text-[var(--text-muted)]"
           >
             {tech}
           </span>

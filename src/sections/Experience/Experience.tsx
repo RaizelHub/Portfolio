@@ -18,32 +18,32 @@ export const Experience: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="experience" className="py-16 border-b border-[var(--border-subtle)]">
+    <SectionContainer id="experience" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
       {/* ── Section Header ── */}
-      <motion.div {...entrance()} className="max-w-3xl mb-12">
+      <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+          className="section-heading font-title text-[var(--text-primary)] md:col-span-5 md:mb-0"
         >
           Experience
         </h2>
 
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans">
+        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
           Practical IT operations, workstation diagnostics, system maintenance, and enterprise support.
         </p>
       </motion.div>
 
       {/* ── Editorial Experience Cards ── */}
-      <div className="space-y-6">
+      <div className="border-t border-[var(--border-subtle)]">
         {experiences.map((exp, idx) => (
           <motion.div
             key={exp.id}
             {...entrance(idx * 0.06)}
-            className="bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 sm:p-8 shadow-xs"
+            className="grid gap-8 border-b border-[var(--border-subtle)] py-10 lg:grid-cols-12 lg:gap-12"
           >
             {/* Header: Role, Organization & Dates */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[var(--border-subtle)] pb-5 mb-5">
+            <div className="flex flex-col gap-5 lg:col-span-4">
               <div className="space-y-1">
-                <h3 className="font-sans text-lg sm:text-xl font-bold text-[var(--text-primary)]">
+                <h3 className="font-title text-lg font-semibold text-[var(--text-primary)] sm:text-xl">
                   {exp.role}
                 </h3>
 
@@ -60,23 +60,24 @@ export const Experience: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded-md font-mono text-xs text-[var(--text-primary)] shrink-0">
+              <div className="inline-flex w-fit shrink-0 items-center gap-1.5 border-l border-[var(--accent)] pl-3 font-mono text-xs text-[var(--text-primary)]">
                 <Calendar className="w-3 h-3 text-[var(--accent)]" />
                 <span>{exp.period}</span>
               </div>
             </div>
 
             {/* Short Summary */}
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-5 font-sans">
-              {exp.description}
-            </p>
+            <div className="space-y-6 lg:col-span-8">
+              <p className="body-copy text-[var(--text-secondary)]">
+                {exp.description}
+              </p>
 
-            {/* Key Contributions */}
-            <div className="space-y-2.5">
-              <h4 className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)] font-semibold">
+              {/* Key Contributions */}
+              <div className="space-y-3">
+              <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Key Responsibilities &amp; Operations
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
                 {exp.responsibilities.map((resp, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-primary)] font-sans">
                     <span className="text-[var(--accent)] mt-0.5 font-bold">›</span>
@@ -84,6 +85,7 @@ export const Experience: React.FC = () => {
                   </div>
                 ))}
               </div>
+            </div>
             </div>
           </motion.div>
         ))}

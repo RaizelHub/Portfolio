@@ -81,14 +81,14 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
 
   /* ── Content block ── */
   const ContentBlock = (
-    <motion.div {...contentEntrance} className="flex flex-col gap-5">
+    <motion.div {...contentEntrance} className="flex min-w-0 flex-col gap-5">
       {/* Index + category: Copper index, neutral category */}
       <div className="flex items-center gap-3">
-        <span className="text-[11px] font-mono font-semibold text-[var(--accent)] tracking-wider">
+        <span className="font-mono text-xs font-semibold tracking-wider text-[var(--accent)]">
           {index}
         </span>
-        <div className="h-px w-4 bg-[var(--border-subtle)]" />
-        <span className="text-[11px] font-mono font-medium uppercase tracking-[0.12em] text-[var(--text-muted)]">
+        <div className="h-px w-8 bg-[var(--border)]" />
+        <span className="font-mono text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)]">
           {category}
         </span>
       </div>
@@ -96,25 +96,24 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
       {/* Title + subtitle */}
       <div>
         <h3
-          className="font-title font-bold tracking-tight leading-tight text-[var(--text-primary)]"
-          style={{ fontSize: 'clamp(1.4rem, 2.3vw, 1.85rem)' }}
+          className="project-heading font-title text-[var(--text-primary)]"
         >
           {title}
         </h3>
-        <p className="text-sm sm:text-base text-[var(--text-secondary)] font-normal leading-snug mt-1">
+        <p className="mt-2 text-sm font-normal leading-snug text-[var(--text-secondary)] sm:text-base">
           {subtitle}
         </p>
       </div>
 
       {/* Plain text status badge */}
       <div>
-        <span className="text-[11px] font-mono font-medium text-[var(--text-muted)]">
+        <span className="font-mono text-xs font-medium text-[var(--text-muted)]">
           {status}
         </span>
       </div>
 
       {/* Description */}
-      <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-md">
+      <p className="body-copy max-w-[55ch] text-[var(--text-secondary)]">
         {description}
       </p>
 
@@ -157,23 +156,23 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
   const VisualBlock = (
     <motion.div
       {...visualEntrance}
-      className="flex items-center justify-center w-full min-h-[300px] sm:min-h-[360px] overflow-hidden"
+      className="media-frame flex min-h-0 min-w-0 w-full items-center justify-center overflow-hidden p-4 sm:min-h-[360px] sm:p-6 lg:min-h-[420px]"
     >
       {visual}
     </motion.div>
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-center">
+    <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-20">
       {isContentLeft ? (
         <>
-          <div>{ContentBlock}</div>
-          <div>{VisualBlock}</div>
+          <div className="min-w-0 lg:col-span-5">{ContentBlock}</div>
+          <div className="min-w-0 lg:col-span-7">{VisualBlock}</div>
         </>
       ) : (
         <>
-          <div className="order-2 lg:order-1">{VisualBlock}</div>
-          <div className="order-1 lg:order-2">{ContentBlock}</div>
+          <div className="order-2 min-w-0 lg:order-1 lg:col-span-7">{VisualBlock}</div>
+          <div className="order-1 min-w-0 lg:order-2 lg:col-span-5">{ContentBlock}</div>
         </>
       )}
     </div>

@@ -48,7 +48,7 @@ export const JobRadarCaseStudy: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-12 text-left">
+    <div className="case-study space-y-12 text-left">
       {/* SECTION 1: HERO OVERVIEW */}
       <section className="bg-[#EFEBE4] border border-[#D5D0C7] rounded-xl p-6 sm:p-8 space-y-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -66,7 +66,7 @@ export const JobRadarCaseStudy: React.FC = () => {
           <h1 className="section-title text-[#171717] uppercase">
             JobRadar AI — Job Discovery &amp; Application Automation Platform
           </h1>
-          <p className="mt-3 text-sm sm:text-base text-[#171717] leading-relaxed max-w-4xl font-medium">
+          <p className="body-copy mt-3 text-[#171717]">
             A full-stack job-search automation platform that collects remote job opportunities, removes duplicates, evaluates candidate-job compatibility with AI, sends high-match email alerts, and tracks applications through a visual CRM pipeline.
           </p>
         </div>
@@ -90,7 +90,7 @@ export const JobRadarCaseStudy: React.FC = () => {
         </div>
 
         {/* Action Buttons */}
-        <div className="pt-2 flex flex-wrap items-center gap-3 font-mono text-xs">
+        <div className="flex min-w-0 flex-wrap items-center gap-3 pt-2 font-mono text-sm">
           <a
             href="https://job-radar-ai-frontend.vercel.app/demo"
             target="_blank"
@@ -100,20 +100,20 @@ export const JobRadarCaseStudy: React.FC = () => {
             <ExternalLink className="w-4 h-4" />
             <span>Launch Live Demo ↗</span>
           </a>
-          <div className="inline-flex items-center gap-2 px-3 py-2.5 bg-[#F4F1EA] border border-[#D5D0C7] rounded-lg text-xs text-[#6B6862]">
+          <div className="inline-flex min-w-0 max-w-full items-center gap-2 border border-[#D5D0C7] bg-[#F4F1EA] px-3 py-2.5 text-xs text-[#6B6862]">
             <Lock className="w-3.5 h-3.5 text-[#2563EB]" />
-            <span>Source Code: Private / Available upon request</span>
+            <span className="break-safe">Source Code: Private / Available upon request</span>
           </div>
         </div>
       </section>
 
       {/* GALLERY & SCREENSHOT / PLACEHOLDER VIEWER */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between border-b border-[#D5D0C7] pb-3">
-          <h3 className="text-base font-bold text-[#171717] font-mono uppercase flex items-center gap-2">
+        <div className="flex min-w-0 flex-col items-start justify-between gap-3 border-b border-[#D5D0C7] pb-3 md:flex-row md:items-center">
+          <h3 className="flex min-w-0 items-start gap-2 font-mono text-sm font-semibold uppercase leading-[1.45] text-[#171717] sm:text-base">
             <Eye className="w-4 h-4 text-[#2563EB]" /> Production Screenshots &amp; Workflow Execution
           </h3>
-          <div className="flex bg-[#EFEBE4] p-1 rounded-lg border border-[#D5D0C7] text-xs font-mono">
+          <div className="flex max-w-full flex-wrap border border-[#D5D0C7] bg-[#EFEBE4] p-1 font-mono text-xs">
             <button
               onClick={() => setActiveTab('screenshots')}
               className={`px-3 py-1 rounded-md font-medium transition-all ${
@@ -167,10 +167,10 @@ export const JobRadarCaseStudy: React.FC = () => {
                       : 'border-navy-800 bg-navy-900/50 hover:border-slate-600'
                   }`}
                 >
-                  <span className="text-[11px] font-semibold text-white truncate block">
+                  <span className="break-safe block text-xs font-semibold leading-[1.45] text-white">
                     {item.title}
                   </span>
-                  <span className="text-[10px] text-slate-500 truncate block">Click to view</span>
+                  <span className="block text-xs text-slate-500">Click to view</span>
                 </button>
               ))}
             </div>
@@ -599,7 +599,7 @@ export const JobRadarCaseStudy: React.FC = () => {
             'Containerized self-hosting & monitoring'
           ].map((item, idx) => (
             <div key={idx} className="bg-navy-900/60 border border-navy-800 p-3 rounded-lg flex items-center gap-2 text-slate-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+              <span className="h-4 w-px shrink-0 bg-[var(--accent)]" />
               <span>{item}</span>
             </div>
           ))}

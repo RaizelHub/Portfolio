@@ -28,27 +28,27 @@ export const Contact: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="contact" className="py-20 border-b border-[var(--border-subtle)]">
-      <motion.div {...entrance()} className="max-w-3xl">
+    <SectionContainer id="contact" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
+      <motion.div {...entrance()}>
         <h2
-          className="font-title text-2xl sm:text-3xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+          className="section-heading mb-5 font-title text-[var(--text-primary)]"
         >
           Contact
         </h2>
 
-        <p className="text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed max-w-xl font-sans mb-10">
+        <p className="body-copy mb-12 text-[var(--text-secondary)]">
           Open to software development and automation opportunities. Let’s talk about your roadmap, integrations, or developer roles.
         </p>
 
         {/* Action Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+        <div className="grid grid-cols-1 items-stretch border-t border-[var(--border-subtle)] md:grid-cols-12">
           {/* Email Card */}
-          <div className="md:col-span-7 bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-6 shadow-xs">
+          <div className="flex flex-col justify-between space-y-8 border-b border-[var(--border-subtle)] py-8 md:col-span-7 md:border-r md:px-8 md:pl-0">
             <div className="space-y-2">
-              <span className="font-mono text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider block">
+              <span className="block font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
                 Direct Email
               </span>
-              <p className="font-mono text-base sm:text-lg font-bold text-[var(--text-primary)] break-all">
+              <p className="break-safe font-mono text-sm font-semibold text-[var(--text-primary)] sm:text-base">
                 {profile.email}
               </p>
               <p className="text-xs text-[var(--text-secondary)] font-sans">
@@ -61,7 +61,7 @@ export const Contact: React.FC = () => {
                 href={`mailto:${profile.email}`}
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="px-5 py-2.5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--on-accent)] text-xs font-sans font-semibold rounded-lg transition-colors inline-flex items-center gap-2 shadow-xs cursor-pointer"
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 bg-[var(--accent)] px-5 py-2.5 font-sans text-sm font-semibold text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)]"
               >
                 <span>Email me</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -71,7 +71,7 @@ export const Contact: React.FC = () => {
                 type="button"
                 onClick={handleCopyEmail}
                 onMouseEnter={playHover}
-                className="px-4 py-2.5 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] hover:border-[var(--border)] text-[var(--text-primary)] text-xs font-mono rounded-lg transition-colors inline-flex items-center gap-2 cursor-pointer"
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-2.5 font-mono text-sm text-[var(--text-primary)] transition-colors hover:border-[var(--accent)]"
               >
                 {copied ? (
                   <>
@@ -89,24 +89,24 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Socials & Location Card */}
-          <div className="md:col-span-5 flex flex-col justify-between gap-3">
+          <div className="flex flex-col justify-between md:col-span-5 md:pl-8">
             <a
               href={profile.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="group p-4 bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] rounded-xl transition-colors flex items-center justify-between shadow-xs"
+              className="group flex min-h-20 min-w-0 items-center justify-between gap-3 border-b border-[var(--border-subtle)] py-4 transition-colors hover:border-[var(--accent)]"
             >
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 bg-[var(--surface-elevated)] rounded-lg text-[var(--accent)]">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <div className="p-2 text-[var(--accent)]">
                   <Linkedin className="w-4 h-4" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="font-sans text-xs font-bold text-[var(--text-primary)] block">
                     LinkedIn
                   </span>
-                  <span className="text-[11px] text-[var(--text-secondary)] font-mono">
+                  <span className="break-safe font-mono text-xs text-[var(--text-secondary)]">
                     janmark-suelto
                   </span>
                 </div>
@@ -120,17 +120,17 @@ export const Contact: React.FC = () => {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="group p-4 bg-[var(--surface)] border border-[var(--border-subtle)] hover:border-[var(--border)] rounded-xl transition-colors flex items-center justify-between shadow-xs"
+              className="group flex min-h-20 min-w-0 items-center justify-between gap-3 border-b border-[var(--border-subtle)] py-4 transition-colors hover:border-[var(--accent)]"
             >
-              <div className="flex items-center gap-2.5">
-                <div className="p-2 bg-[var(--surface-elevated)] rounded-lg text-[var(--accent)]">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <div className="p-2 text-[var(--accent)]">
                   <Github className="w-4 h-4" />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className="font-sans text-xs font-bold text-[var(--text-primary)] block">
                     GitHub
                   </span>
-                  <span className="text-[11px] text-[var(--text-secondary)] font-mono">
+                  <span className="break-safe font-mono text-xs text-[var(--text-secondary)]">
                     @RaizelHub
                   </span>
                 </div>
@@ -138,7 +138,7 @@ export const Contact: React.FC = () => {
               <ArrowUpRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] transition-colors" />
             </a>
 
-            <div className="p-3 bg-[var(--surface-elevated)] border border-[var(--border-subtle)] rounded-xl flex items-center justify-between text-xs font-mono text-[var(--text-secondary)]">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3 py-4 font-mono text-xs text-[var(--text-secondary)]">
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[var(--accent)]" />
                 Bukidnon, PH

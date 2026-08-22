@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -14,6 +15,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = 'portfolio-theme-v2';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const transitionInProgress = useRef(false);
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem(STORAGE_KEY) as Theme;
@@ -63,8 +65,46 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const toggleTheme = () => {
+    if (transitionInProgress.current) return;
+
     const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
-    setTheme(nextTheme);
+    const root = document.documentElement;
+
+    const applyNextTheme = () => {
+      root.classList.toggle('dark', nextTheme === 'dark');
+      document.body.classList.toggle('dark', nextTheme === 'dark');
+      setThemeState(nextTheme);
+      setResolvedTheme(nextTheme);
+      localStorage.setItem(STORAGE_KEY, nextTheme);
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      applyNextTheme();
+      return;
+    }
+
+    const startViewTransition = document.startViewTransition?.bind(document);
+
+    if (!startViewTransition) {
+      root.classList.add('theme-transition-fallback');
+      // Make sure the transition rules are active before the theme colors change.
+      void root.offsetWidth;
+      applyNextTheme();
+      window.setTimeout(() => root.classList.remove('theme-transition-fallback'), 750);
+      return;
+    }
+
+    root.dataset.themeTransition = 'active';
+    transitionInProgress.current = true;
+
+    const transition = startViewTransition(() => {
+      flushSync(applyNextTheme);
+    });
+
+    void transition.finished.finally(() => {
+      delete root.dataset.themeTransition;
+      transitionInProgress.current = false;
+    });
   };
 
   return (

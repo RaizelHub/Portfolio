@@ -8,7 +8,7 @@ interface SectionContainerProps {
 
 export const SectionContainer = ({ children, className = '', id }: SectionContainerProps) => {
   return (
-    <section id={id} className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-20 ${className}`}>
+    <section id={id} className={`mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)] scroll-mt-20 ${className}`}>
       {children}
     </section>
   );

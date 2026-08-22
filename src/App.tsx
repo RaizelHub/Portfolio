@@ -16,7 +16,7 @@ function App() {
     <ThemeProvider>
       <SoundProvider>
         <Router>
-          <div className="flex flex-col min-h-screen bg-[var(--background)] text-[var(--text-primary)] font-sans transition-colors duration-150">
+          <div className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--text-primary)] font-sans transition-colors duration-150">
             <ScrollProgress />
             <Navbar />
 

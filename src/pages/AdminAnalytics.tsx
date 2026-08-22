@@ -168,8 +168,8 @@ export const AdminAnalytics: React.FC = () => {
   }, [data]);
 
   return (
-    <main className="min-h-screen pt-6 pb-24 bg-[#F8FAFC] dark:bg-[#0B0E14] text-[#0F172A] dark:text-[#F8FAFC] font-sans antialiased relative transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+    <main className="analytics-page relative min-h-screen bg-[#F8FAFC] pb-24 pt-6 font-sans text-[#0F172A] antialiased transition-colors dark:bg-[#0B0E14] dark:text-[#F8FAFC]">
+      <div className="relative z-10 mx-auto w-full max-w-[var(--content-width)] space-y-8 px-[var(--page-gutter)]">
         {/* ── Top HUD Navigation Bar ── */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E2E8F0] dark:border-[#1E2735] pb-5">
           <div className="space-y-1.5">
@@ -193,7 +193,7 @@ export const AdminAnalytics: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex flex-wrap items-center gap-2.5">
             <button
               onClick={handleExportJson}
               onMouseEnter={playHover}
@@ -226,11 +226,11 @@ export const AdminAnalytics: React.FC = () => {
               <span>Deterministic Persona &amp; Telemetry Architecture</span>
             </div>
 
-            <h1 className="font-display text-2xl sm:text-4xl font-bold tracking-tight text-[#0F172A] dark:text-[#F8FAFC]">
+            <h1 className="section-heading font-display text-[#0F172A] dark:text-[#F8FAFC]">
               Anonymous Visitor Intelligence
             </h1>
 
-            <p className="text-sm sm:text-base text-[#475569] dark:text-[#94A3B8] leading-relaxed font-sans">
+            <p className="body-copy text-[#475569] dark:text-[#94A3B8]">
               Real-time traffic sessions resolved into deterministic <span className="text-[#F59E0B] font-mono font-semibold">Adjective + Animal</span> personas with illustrated cartoon avatars. Full historical counts are 100% preserved without scraping personal identities.
             </p>
           </div>
@@ -240,8 +240,8 @@ export const AdminAnalytics: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* KPI 1: Cumulative Traffic Volume */}
           <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#F59E0B]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs text-[#64748B]">
-              <span className="uppercase font-semibold tracking-wider">Total Traffic Volume</span>
+            <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
+              <span className="break-safe uppercase font-semibold tracking-wider">Total Traffic Volume</span>
               <div className="p-1.5 rounded-md bg-[#F59E0B]/10 text-[#F59E0B]">
                 <Eye className="w-4 h-4" />
               </div>
@@ -257,8 +257,8 @@ export const AdminAnalytics: React.FC = () => {
 
           {/* KPI 2: Profiled Anonymous Personas */}
           <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#06B6D4]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs text-[#64748B]">
-              <span className="uppercase font-semibold tracking-wider">Profiled Personas</span>
+            <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
+              <span className="break-safe uppercase font-semibold tracking-wider">Profiled Personas</span>
               <div className="p-1.5 rounded-md bg-[#06B6D4]/10 text-[#06B6D4]">
                 <Users className="w-4 h-4" />
               </div>
@@ -274,8 +274,8 @@ export const AdminAnalytics: React.FC = () => {
 
           {/* KPI 3: Returning Visitor Engagement */}
           <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#10B981]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs text-[#64748B]">
-              <span className="uppercase font-semibold tracking-wider">Returning Visitors</span>
+            <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
+              <span className="break-safe uppercase font-semibold tracking-wider">Returning Visitors</span>
               <div className="p-1.5 rounded-md bg-[#10B981]/10 text-[#10B981]">
                 <RotateCcw className="w-4 h-4" />
               </div>
@@ -291,8 +291,8 @@ export const AdminAnalytics: React.FC = () => {
 
           {/* KPI 4: Historical Traffic Baseline */}
           <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#8B5CF6]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
-            <div className="flex items-center justify-between font-mono text-xs text-[#64748B]">
-              <span className="uppercase font-semibold tracking-wider">Historical Baseline</span>
+            <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
+              <span className="break-safe uppercase font-semibold tracking-wider">Historical Baseline</span>
               <div className="p-1.5 rounded-md bg-[#8B5CF6]/10 text-[#8B5CF6]">
                 <History className="w-4 h-4" />
               </div>
@@ -321,8 +321,8 @@ export const AdminAnalytics: React.FC = () => {
             <div className="space-y-2">
               {topReferrers.length > 0 ? (
                 topReferrers.map(([ref, count]) => (
-                  <div key={ref} className="flex items-center justify-between p-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0E1218] border border-[#E2E8F0] dark:border-[#1E2735]">
-                    <span className="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{ref}</span>
+                  <div key={ref} className="flex min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-2 dark:border-[#1E2735] dark:bg-[#0E1218]">
+                    <span className="break-safe font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{ref}</span>
                     <span className="px-2 py-0.5 rounded bg-[#F59E0B]/15 text-[#F59E0B] font-bold text-[11px]">
                       {count} session{count > 1 ? 's' : ''}
                     </span>
@@ -346,8 +346,8 @@ export const AdminAnalytics: React.FC = () => {
             <div className="space-y-2">
               {osBreakdown.length > 0 ? (
                 osBreakdown.map(([osName, count]) => (
-                  <div key={osName} className="flex items-center justify-between p-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0E1218] border border-[#E2E8F0] dark:border-[#1E2735]">
-                    <span className="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{osName}</span>
+                  <div key={osName} className="flex min-w-0 flex-wrap items-center justify-between gap-2 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-2 dark:border-[#1E2735] dark:bg-[#0E1218]">
+                    <span className="break-safe font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{osName}</span>
                     <span className="px-2 py-0.5 rounded bg-[#06B6D4]/15 text-[#06B6D4] font-bold text-[11px]">
                       {count} client{count > 1 ? 's' : ''}
                     </span>
@@ -404,8 +404,8 @@ export const AdminAnalytics: React.FC = () => {
           </div>
 
           {/* Search bar & Grid/Table Switcher */}
-          <div className="flex items-center gap-2 w-full md:max-w-md">
-            <div className="relative flex-grow">
+          <div className="flex min-w-0 w-full items-center gap-2 md:max-w-md">
+            <div className="relative min-w-0 flex-grow">
               <Search className="absolute left-3 top-2.5 w-4 h-4 text-[#64748B]" />
               <input
                 type="text"
@@ -447,7 +447,7 @@ export const AdminAnalytics: React.FC = () => {
 
         {/* ── Active Personas Stream ── */}
         <div className="space-y-4">
-          <div className="flex items-center justify-between font-mono text-xs text-[#64748B]">
+          <div className="flex min-w-0 flex-col items-start justify-between gap-2 font-mono text-xs text-[#64748B] sm:flex-row sm:flex-wrap sm:items-center">
             <span className="font-bold uppercase tracking-wider text-[#0F172A] dark:text-[#F8FAFC]">
               Active Anonymous Personas ({filteredVisitors.length})
             </span>
@@ -487,7 +487,7 @@ export const AdminAnalytics: React.FC = () => {
                             className="rounded-full ring-2 ring-[#F59E0B]/30 group-hover:ring-[#F59E0B] transition-all"
                           />
                           <div className="min-w-0">
-                            <h3 className="font-display font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC] group-hover:text-[#F59E0B] transition-colors truncate">
+                            <h3 className="break-safe font-display text-sm font-semibold text-[#0F172A] transition-colors group-hover:text-[#F59E0B] dark:text-[#F8FAFC]">
                               {visitor.displayName}
                             </h3>
                             <span className="font-mono text-xs text-[#64748B]">
@@ -509,20 +509,20 @@ export const AdminAnalytics: React.FC = () => {
                       </div>
 
                       {/* Middle: Device & Origin */}
-                      <div className="grid grid-cols-2 gap-2 text-xs font-mono text-[#64748B] dark:text-[#94A3B8] pt-2 border-t border-[#E2E8F0] dark:border-[#1E2735]">
-                        <div className="flex items-center gap-1.5 truncate">
+                      <div className="grid grid-cols-1 gap-2 border-t border-[#E2E8F0] pt-2 font-mono text-xs text-[#64748B] dark:border-[#1E2735] dark:text-[#94A3B8] sm:grid-cols-2">
+                        <div className="flex min-w-0 items-start gap-1.5">
                           <DeviceIcon className="w-3.5 h-3.5 text-[#06B6D4] shrink-0" />
-                          <span className="truncate">{visitor.browser} on {visitor.os}</span>
+                          <span className="break-safe">{visitor.browser} on {visitor.os}</span>
                         </div>
 
-                        <div className="flex items-center gap-1.5 justify-end truncate">
+                        <div className="flex min-w-0 items-start gap-1.5 sm:justify-end">
                           <Globe className="w-3.5 h-3.5 text-[#F59E0B] shrink-0" />
-                          <span className="truncate text-[#0F172A] dark:text-[#F8FAFC]">{visitor.referrer}</span>
+                          <span className="break-safe text-[#0F172A] dark:text-[#F8FAFC]">{visitor.referrer}</span>
                         </div>
                       </div>
 
                       {/* Footer: Timeline & Visited Projects */}
-                      <div className="flex items-center justify-between text-[11px] font-mono text-[#64748B] pt-1">
+                      <div className="flex min-w-0 flex-wrap items-center justify-between gap-2 pt-1 font-mono text-[11px] text-[#64748B]">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3 text-[#64748B]" />
                           {formatRelativeTime(visitor.lastSeenAt)}
@@ -617,7 +617,7 @@ export const AdminAnalytics: React.FC = () => {
             <Layers className="w-4 h-4 text-[#8B5CF6]" />
             Historical Continuity Guarantee
           </div>
-          <p className="leading-relaxed font-sans text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8]">
+          <p className="body-copy text-[#475569] dark:text-[#94A3B8]">
             {data ? data.historicalVisits.toLocaleString() : '0'} visits occurred before generated anonymous visitor profiles were introduced. 
             These historical records remain 100% counted toward the public total visit counter, without fabricating fake retrospective identities.
           </p>
@@ -638,12 +638,12 @@ export const AdminAnalytics: React.FC = () => {
               initial={{ scale: 0.95, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 15 }}
-              className="relative max-w-lg w-full bg-[#FFFFFF] dark:bg-[#0E1218] border border-[#E2E8F0] dark:border-[#1E2735] rounded-2xl overflow-hidden shadow-2xl p-6 sm:p-7 space-y-6 font-mono text-xs"
+              className="relative max-h-[calc(100dvh-2rem)] w-full max-w-lg space-y-6 overflow-y-auto rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-5 font-mono text-xs shadow-2xl dark:border-[#1E2735] dark:bg-[#0E1218] sm:p-7"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-4 border-b border-[#E2E8F0] dark:border-[#1E2735] pb-5">
-                <div className="flex items-center gap-4">
+                <div className="flex min-w-0 items-center gap-3 sm:gap-4">
                   <VisitorAvatar
                     displayName={selectedVisitor.displayName}
                     avatarUrl={selectedVisitor.avatarUrl}
@@ -651,9 +651,9 @@ export const AdminAnalytics: React.FC = () => {
                     size="lg"
                     className="rounded-2xl ring-4 ring-[#F59E0B]/30"
                   />
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-display text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                  <div className="min-w-0">
+                    <div className="flex min-w-0 flex-wrap items-center gap-2">
+                      <h3 className="break-safe font-display text-lg font-semibold text-[#0F172A] dark:text-[#F8FAFC] sm:text-xl">
                         {selectedVisitor.displayName}
                       </h3>
                       <span className="px-2 py-0.5 rounded text-[10px] bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30 font-bold">

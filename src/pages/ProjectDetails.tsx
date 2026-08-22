@@ -36,6 +36,20 @@ export const ProjectDetails = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
+  const galleryImages = project?.images || (project?.image ? [project.image] : []);
+
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (!lightboxOpen || galleryImages.length === 0) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxOpen(false);
+      if (e.key === 'ArrowLeft') setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
+      if (e.key === 'ArrowRight') setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [lightboxOpen, galleryImages.length]);
+
   if (!project) {
     return (
       <main className="min-h-screen pt-20 flex items-center justify-center bg-[var(--background)] px-4 font-mono">
@@ -58,25 +72,11 @@ export const ProjectDetails = () => {
     );
   }
 
-  const galleryImages = project.images || (project.image ? [project.image] : []);
-
-  // Keyboard navigation for lightbox
-  useEffect(() => {
-    if (!lightboxOpen) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxOpen(false);
-      if (e.key === 'ArrowLeft') setActiveImageIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
-      if (e.key === 'ArrowRight') setActiveImageIndex((prev) => (prev === galleryImages.length - 1 ? 0 : prev + 1));
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [lightboxOpen, galleryImages.length]);
-
   return (
-    <main className="min-h-screen pt-8 pb-20 bg-[var(--background)] text-[var(--text-primary)] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--background)] pb-[var(--section-space)] pt-8 text-[var(--text-primary)] transition-colors">
+      <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
         {/* Back navigation */}
-        <div className="mb-6 flex items-center justify-between font-mono text-xs">
+        <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-3 font-mono text-xs">
           <Link
             to="/#projects"
             onMouseEnter={playHover}
@@ -105,9 +105,9 @@ export const ProjectDetails = () => {
         ) : (
           <>
             {/* Title Block Header */}
-            <div className="border-b border-[var(--border-subtle)] pb-6 mb-8 text-left">
+            <div className="mb-10 border-b border-[var(--border-subtle)] pb-8 pt-5 text-left">
               <div className="flex items-center gap-2 mb-2.5 font-mono text-xs">
-                <span className="font-bold bg-[var(--surface-elevated)] text-[var(--text-primary)] border border-[var(--border-subtle)] px-2 py-0.5 rounded uppercase text-[10px]">
+                <span className="border-l border-[var(--accent)] pl-2 text-xs font-semibold uppercase text-[var(--text-primary)]">
                   {project.category}
                 </span>
                 <span className="text-[var(--text-muted)] font-medium">
@@ -115,23 +115,23 @@ export const ProjectDetails = () => {
                 </span>
               </div>
 
-              <h1 className="font-title text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text-primary)] mb-3">
+              <h1 className="section-heading mb-5 max-w-[24ch] font-title text-[var(--text-primary)]">
                 {project.title}
               </h1>
 
-              <p className="text-base sm:text-lg text-[var(--text-secondary)] font-sans max-w-4xl leading-relaxed">
+              <p className="body-copy text-[var(--text-secondary)]">
                 {project.description}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-14">
               {/* LEFT: Case Study Core Content */}
-              <div className="lg:col-span-8 space-y-8 text-left">
+              <div className="space-y-12 text-left lg:col-span-9">
                 {/* Gallery */}
                 {galleryImages.length > 0 && (
-                  <div className="space-y-3 bg-[var(--surface)] border border-[var(--border-subtle)] p-3 rounded-xl shadow-xs">
+                  <div className="media-frame space-y-3 p-3 sm:p-5">
                     <div
-                      className="relative aspect-video rounded-lg overflow-hidden bg-[var(--background)] border border-[var(--border-subtle)] cursor-pointer group flex items-center justify-center"
+                      className="group relative flex aspect-video cursor-pointer items-center justify-center overflow-hidden border border-[var(--border-subtle)] bg-[var(--background)]"
                       onClick={() => setLightboxOpen(true)}
                     >
                       <img
@@ -180,26 +180,26 @@ export const ProjectDetails = () => {
                     <Info className="w-4 h-4 text-[var(--accent)]" />
                     <span>System Overview &amp; Context</span>
                   </h3>
-                  <p className="text-sm sm:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
+                  <p className="body-copy text-[var(--text-secondary)]">
                     {project.longDescription}
                   </p>
                 </section>
 
                 {/* Problem & Solution Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div className="bg-[var(--surface)] border border-[var(--border-subtle)] p-5 rounded-xl space-y-2 shadow-xs">
+                <div className="grid grid-cols-1 border-y border-[var(--border-subtle)] md:grid-cols-2">
+                  <div className="space-y-2 border-b border-[var(--border-subtle)] py-6 md:border-b-0 md:border-r md:pr-8">
                     <h4 className="font-mono font-bold text-xs uppercase flex items-center gap-1.5 text-[var(--accent)]">
                       <Shield className="w-4 h-4" /> The Problem Specification
                     </h4>
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-sans leading-relaxed">
+                    <p className="text-[0.9375rem] leading-[1.65] text-[var(--text-secondary)]">
                       {project.problem}
                     </p>
                   </div>
-                  <div className="bg-[var(--surface)] border border-[var(--border-subtle)] p-5 rounded-xl space-y-2 shadow-xs">
+                  <div className="space-y-2 py-6 md:pl-8">
                     <h4 className="font-mono font-bold text-xs uppercase flex items-center gap-1.5 text-[var(--text-primary)]">
                       <CheckCircle className="w-4 h-4 text-[var(--accent)]" /> The Architectural Solution
                     </h4>
-                    <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-sans leading-relaxed">
+                    <p className="text-[0.9375rem] leading-[1.65] text-[var(--text-secondary)]">
                       {project.solution}
                     </p>
                   </div>
@@ -211,7 +211,7 @@ export const ProjectDetails = () => {
                     <ListTodo className="w-4 h-4 text-[var(--accent)]" />
                     <span>Core Features &amp; Capabilities</span>
                   </h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-[var(--text-primary)] font-sans">
+                  <div className="grid grid-cols-1 gap-3 text-[0.9375rem] leading-[1.55] text-[var(--text-primary)] sm:grid-cols-2">
                     {project.features.map((feat) => (
                       <div key={feat} className="flex items-start gap-2">
                         <CheckCircle2 className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
@@ -227,7 +227,7 @@ export const ProjectDetails = () => {
                     <Workflow className="w-4 h-4 text-[var(--accent)]" />
                     <span>Development Process &amp; Workflow</span>
                   </h3>
-                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-sans leading-relaxed">
+                  <p className="body-copy text-[var(--text-secondary)]">
                     {project.process}
                   </p>
 
@@ -252,22 +252,22 @@ export const ProjectDetails = () => {
               </div>
 
               {/* RIGHT: Technical Specifications Sidebar */}
-              <div className="lg:col-span-4 space-y-5">
-                <div className="bg-[var(--surface)] border border-[var(--border-subtle)] p-6 rounded-xl text-left space-y-5 shadow-xs">
+              <div className="space-y-5 lg:sticky lg:top-24 lg:col-span-3">
+                <div className="space-y-5 border-t border-[var(--border)] pt-5 text-left">
                   <h3 className="font-mono font-bold text-[var(--text-primary)] border-b border-[var(--border-subtle)] pb-2.5 text-xs uppercase">
                     Technical Specifications
                   </h3>
 
                   {/* Stack badges */}
                   <div className="space-y-2 font-mono">
-                    <span className="text-[10px] uppercase text-[var(--text-muted)] block font-bold">
+                    <span className="block text-xs font-semibold uppercase text-[var(--text-muted)]">
                       Technologies Applied
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech) => (
                         <span
                           key={tech}
-                          className="text-xs px-2.5 py-1 bg-[var(--surface-elevated)] text-[var(--text-secondary)] rounded-md border border-[var(--border-subtle)]"
+                          className="break-safe border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-2.5 py-1 font-mono text-xs leading-[1.4] text-[var(--text-secondary)]"
                         >
                           {tech}
                         </span>
@@ -276,13 +276,13 @@ export const ProjectDetails = () => {
                   </div>
 
                   {/* Links */}
-                  <div className="space-y-2 pt-2 font-mono text-xs">
+                  <div className="space-y-2 pt-2 font-mono text-sm">
                     {project.liveUrl && (
                       <a
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--on-accent)] font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 block text-center"
+                        className="flex min-h-11 w-full min-w-0 items-center justify-center gap-2 bg-[var(--accent)] px-4 py-2.5 text-center font-semibold text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
                       >
                         <ExternalLink className="w-3.5 h-3.5" />
                         <span>Visit Live Demo ↗</span>
@@ -294,7 +294,7 @@ export const ProjectDetails = () => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full py-2.5 px-4 bg-[var(--surface-elevated)] hover:bg-[var(--surface-hover)] text-[var(--text-primary)] border border-[var(--border-subtle)] hover:border-[var(--border)] font-semibold rounded-lg transition-colors flex items-center justify-center gap-2 block text-center"
+                        className="flex min-h-11 w-full min-w-0 items-center justify-center gap-2 border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-4 py-2.5 text-center font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--border)] hover:bg-[var(--surface-hover)]"
                       >
                         <Github className="w-4 h-4" />
                         <span>Inspect Source Code ↗</span>

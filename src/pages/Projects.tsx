@@ -99,8 +99,8 @@ export const Projects = () => {
   });
 
   return (
-    <main className="min-h-screen pt-8 pb-20 bg-[var(--background)] text-[var(--text-primary)] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[var(--background)] pb-[var(--section-space)] pt-8 text-[var(--text-primary)] transition-colors">
+      <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
         {/* Navigation Breadcrumb */}
         <div className="mb-6">
           <Link
@@ -115,22 +115,22 @@ export const Projects = () => {
         </div>
 
         {/* Section Header */}
-        <div className="mb-10 max-w-3xl">
-          <span className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)] block mb-3">
+        <div className="mb-12 max-w-4xl border-b border-[var(--border-subtle)] pb-10 pt-6">
+          <span className="mb-4 block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
             Project Directory
           </span>
           <h1
-            className="font-title text-3xl sm:text-4xl font-bold tracking-tight text-[var(--text-primary)] mb-3"
+            className="section-heading mb-5 font-title text-[var(--text-primary)]"
           >
             All Repositories &amp; Work
           </h1>
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] font-sans leading-relaxed">
+          <p className="body-copy text-[var(--text-secondary)]">
             The complete collection of full-stack web platforms, mobile applications, automation workflows, and hardware projects.
           </p>
         </div>
 
         {/* Controls Container: Tabs + Search Bar */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-[var(--border-subtle)] pb-6 mb-10">
+        <div className="mb-14 flex flex-col items-stretch justify-between gap-5 border-b border-[var(--border-subtle)] pb-7 md:flex-row md:items-center">
           {/* Category filter tabs */}
           <div className="flex flex-wrap gap-1.5 order-2 md:order-1 text-xs font-mono">
             <button
@@ -139,7 +139,7 @@ export const Projects = () => {
                 playClick();
                 setActiveCategory('All');
               }}
-              className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${activeCategory === 'All'
+              className={`inline-flex min-h-9 items-center gap-1.5 border px-3 py-1.5 transition-colors ${activeCategory === 'All'
                 ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
                 : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
                 }`}
@@ -164,7 +164,7 @@ export const Projects = () => {
                       playClick();
                       setActiveCategory(cat);
                     }}
-                    className={`px-3 py-1.5 rounded-lg border transition-colors inline-flex items-center gap-1.5 ${isActive
+                    className={`inline-flex min-h-9 items-center gap-1.5 border px-3 py-1.5 transition-colors ${isActive
                       ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
                       : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
                       }`}
@@ -184,7 +184,7 @@ export const Projects = () => {
               placeholder="Search stack, title, scope..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[var(--surface)] border border-[var(--border-subtle)] focus:border-[var(--accent)] text-[var(--text-primary)] rounded-lg pl-9 pr-4 py-2 text-xs font-mono focus:outline-none transition-colors placeholder:text-[var(--text-muted)]"
+              className="w-full border border-[var(--border-subtle)] bg-[var(--surface)] py-2 pl-9 pr-4 font-mono text-xs text-[var(--text-primary)] transition-colors placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] focus:outline-none"
             />
           </div>
         </div>
@@ -205,13 +205,13 @@ export const Projects = () => {
                       transition={{ duration: 0.35, delay: groupIndex * 0.05 }}
                     >
                       {/* Category Header */}
-                      <div className="flex items-center gap-2.5 mb-2">
+                      <div className="mb-2 flex min-w-0 items-center gap-2.5">
                         <div className="p-1.5 rounded-md bg-[var(--surface-elevated)] text-[var(--accent)]">
                           <Icon className="w-4 h-4" />
                         </div>
-                        <h3 className="text-base font-bold text-[var(--text-primary)] font-sans flex items-center gap-2">
+                        <h3 className="flex min-w-0 flex-wrap items-center gap-2 font-sans text-base font-semibold text-[var(--text-primary)]">
                           {group.meta?.label || group.category}
-                          <span className="text-[11px] font-mono text-[var(--text-muted)] font-normal">
+                          <span className="font-mono text-xs font-normal text-[var(--text-muted)]">
                             ({group.projects.length})
                           </span>
                         </h3>
@@ -220,7 +220,7 @@ export const Projects = () => {
                         {group.meta?.description}
                       </p>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 gap-7 lg:grid-cols-2">
                         {group.projects.map((project) => (
                           <ProjectCard key={project.id} project={project} />
                         ))}
@@ -235,7 +235,7 @@ export const Projects = () => {
                 initial={prefersReducedMotion ? {} : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                className="grid grid-cols-1 gap-7 lg:grid-cols-2"
               >
                 {filteredProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
