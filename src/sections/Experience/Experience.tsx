@@ -74,18 +74,18 @@ export const Experience: React.FC = () => {
 
               {/* Key Contributions */}
               <div className="space-y-3">
-              <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-                Key Responsibilities &amp; Operations
-              </h4>
-              <div className="grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
-                {exp.responsibilities.map((resp, i) => (
-                  <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-primary)] font-sans">
-                    <span className="text-[var(--accent)] mt-0.5 font-bold">›</span>
-                    <span>{resp}</span>
-                  </div>
-                ))}
+                <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Key Responsibilities &amp; Operations
+                </h4>
+                <div className="grid grid-cols-1 gap-x-8 gap-y-3 md:grid-cols-2">
+                  {exp.responsibilities.map((resp, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-[var(--text-primary)] font-sans">
+                      <span className="text-[var(--accent)] mt-0.5 font-bold">›</span>
+                      <span>{resp}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
             </div>
           </motion.div>
         ))}

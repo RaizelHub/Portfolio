@@ -351,12 +351,12 @@ html.dark {
   overflow-wrap: anywhere;
 }
 
-.case-study [class*="grid"] > *,
-.case-study [class*="flex"] > *,
-.project-showcase [class*="grid"] > *,
-.project-showcase [class*="flex"] > *,
-.analytics-page [class*="grid"] > *,
-.analytics-page [class*="flex"] > * {
+.case-study [class*="grid"]>*,
+.case-study [class*="flex"]>*,
+.project-showcase [class*="grid"]>*,
+.project-showcase [class*="flex"]>*,
+.analytics-page [class*="grid"]>*,
+.analytics-page [class*="flex"]>* {
   min-width: 0;
 }
 
