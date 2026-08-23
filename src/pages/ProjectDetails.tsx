@@ -18,6 +18,7 @@ import { projects } from '../data/projects';
 import { JobRadarCaseStudy } from '../components/ui/JobRadarCaseStudy';
 import { CareerOSCaseStudy } from '../components/ui/CareerOSCaseStudy';
 import { TikTokShopCaseStudy } from '../components/ui/TikTokShopCaseStudy';
+import { ProjectLikeButton } from '../components/ui/ProjectLikeButton';
 import { useSound } from '../context/SoundContext';
 
 export const ProjectDetails = () => {
@@ -75,7 +76,7 @@ export const ProjectDetails = () => {
   return (
     <main className="min-h-screen bg-[var(--background)] pb-[var(--section-space)] pt-8 text-[var(--text-primary)] transition-colors">
       <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
-        {/* Back navigation */}
+        {/* Back navigation + Like */}
         <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-3 font-mono text-xs">
           <Link
             to="/#projects"
@@ -86,14 +87,18 @@ export const ProjectDetails = () => {
             <ArrowLeft className="w-4 h-4 text-[var(--accent)]" />
             <span>Return to Overview</span>
           </Link>
-          <Link
-            to="/projects"
-            onMouseEnter={playHover}
-            onClick={playClick}
-            className="font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-          >
-            View All Repositories ↗
-          </Link>
+
+          <div className="flex items-center gap-3">
+            {slug && <ProjectLikeButton slug={slug} projectName={project?.title || 'Project'} variant="badge" />}
+            <Link
+              to="/projects"
+              onMouseEnter={playHover}
+              onClick={playClick}
+              className="font-medium text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+            >
+              View All Repositories ↗
+            </Link>
+          </div>
         </div>
 
         {slug === 'jobradar-ai' ? (
@@ -300,6 +305,15 @@ export const ProjectDetails = () => {
                         <span>Inspect Source Code ↗</span>
                       </a>
                     )}
+
+                    <div className="pt-2">
+                      <ProjectLikeButton
+                        slug={project.slug}
+                        projectName={project.title}
+                        variant="default"
+                        className="w-full justify-center"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { KeyEngineering } from './KeyEngineering';
 import { ProjectTech } from './ProjectTech';
+import { ProjectLikeButton } from '../ui/ProjectLikeButton';
 import { useSound } from '../../context/SoundContext';
 
 interface FeaturedProjectProps {
@@ -124,7 +125,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
       <ProjectTech technologies={technologies} />
 
       {/* CTA buttons */}
-      <div className="flex items-center gap-5 flex-wrap pt-1">
+      <div className="flex items-center gap-4 sm:gap-5 flex-wrap pt-1">
         <Link
           to={`/projects/${slug}`}
           onMouseEnter={playHover}
@@ -148,6 +149,8 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
             <span>GitHub</span>
           </a>
         )}
+
+        <ProjectLikeButton slug={slug} projectName={title} variant="default" />
       </div>
     </motion.div>
   );

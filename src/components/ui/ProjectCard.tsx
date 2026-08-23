@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '../../types';
+import { ProjectLikeButton } from './ProjectLikeButton';
 import { useSound } from '../../context/SoundContext';
 
 interface ProjectCardProps {
@@ -41,9 +42,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       {/* Card Body: Title + Short Description + Arrow */}
       <div className="flex flex-1 flex-col justify-between space-y-5 p-6 sm:p-7">
         <div>
-          <div className="mb-3 flex min-w-0 flex-wrap items-start justify-between gap-x-3 gap-y-1 font-mono text-xs uppercase leading-[1.4] tracking-[0.08em] text-[var(--text-muted)]">
-            <span className="break-safe">{project.category}</span>
-            <span className="break-safe normal-case tracking-normal">{project.status}</span>
+          <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-xs uppercase leading-[1.4] tracking-[0.08em] text-[var(--text-muted)]">
+            <div className="flex items-center gap-2">
+              <span className="break-safe">{project.category}</span>
+              <span>·</span>
+              <span className="break-safe normal-case tracking-normal">{project.status}</span>
+            </div>
+            <ProjectLikeButton slug={project.slug} projectName={displayTitle} variant="badge" />
           </div>
           <div className="flex min-w-0 items-start justify-between gap-3">
             <h3 className="project-heading min-w-0 flex-1 font-title text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--accent)]">
