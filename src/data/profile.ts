@@ -4,7 +4,7 @@ export const profile: Profile = {
   name: 'Janmark Suelto',
   title: 'Software Developer',
   location: 'Bukidnon, Philippines',
-  timezone: 'GMT+8 · Open to Remote Roles',
+  timezone: 'Open to Remote Roles',
   bio: 'I build practical software across web, mobile, backend systems, and automation workflows. Specializing in React, TypeScript, React Native, Supabase, and n8n.',
   email: 'janmarkking@gmail.com',
   phone: '+63 969 022 1571',
@@ -14,6 +14,6 @@ export const profile: Profile = {
   whatsappUrl: 'https://wa.me/qr/YHP7U5VEMH5IP1',
   messengerUrl: 'https://m.me/Raizelxdarriii90',
   resumeUrl: '/Suelto-Janmark-Software Developer.Resume.pdf',
-  profileImage: '/img/Profile.jpg',
+  profileImage: '/img/editorial_portrait.jpg',
   animeProfileImage: '/img/Anime.png',
 };

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Navbar } from './components/layout/Navbar';
+import { Sidebar } from './components/layout/Sidebar';
 import { Footer } from './components/layout/Footer';
 import { ScrollProgress } from './components/layout/ScrollProgress';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
@@ -16,24 +16,27 @@ function App() {
     <ThemeProvider>
       <SoundProvider>
         <Router>
-          <div className="flex min-h-screen flex-col bg-[var(--background)] text-[var(--text-primary)] font-sans transition-colors duration-150">
+          <div className="min-h-screen bg-[var(--background)] text-[var(--text-primary)] font-sans transition-colors duration-150">
             <ScrollProgress />
-            <Navbar />
+            <Sidebar />
 
-            <main className="flex-grow">
-              <ErrorBoundary>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/projects" element={<Projects />} />
-                  <Route path="/projects/:slug" element={<ProjectDetails />} />
-                  <Route path="/admin/analytics" element={<AdminAnalytics />} />
-                  <Route path="/analytics" element={<Navigate to="/admin/analytics" replace />} />
-                  <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-              </ErrorBoundary>
-            </main>
+            <div className="flex min-h-screen flex-col lg:pr-64">
+              <main className="flex-grow">
+                <ErrorBoundary>
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/projects" element={<Projects />} />
+                    <Route path="/projects/:slug" element={<ProjectDetails />} />
+                    <Route path="/admin/analytics" element={<AdminAnalytics />} />
+                    <Route path="/analytics" element={<Navigate to="/admin/analytics" replace />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                  </Routes>
+                </ErrorBoundary>
+              </main>
 
-            <Footer />
+              <Footer />
+            </div>
+
             <FloatingContactModal />
           </div>
         </Router>

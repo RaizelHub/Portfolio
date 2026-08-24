@@ -83,8 +83,8 @@ export const DesktopShowcase: React.FC<DesktopShowcaseProps> = ({
                 setActiveIdx(i);
               }}
               className={`h-1.5 rounded-full transition-all cursor-pointer ${activeIdx === i
-                  ? 'w-5 bg-[var(--accent)]'
-                  : 'w-1.5 bg-[var(--text-muted)]/40 hover:bg-[var(--text-primary)]'
+                ? 'w-5 bg-[var(--accent)]'
+                : 'w-1.5 bg-[var(--text-muted)]/40 hover:bg-[var(--text-primary)]'
                 }`}
               aria-label={`View screen ${i + 1}`}
             />

@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-5">
           {/* Brand Info */}
           <div className="text-center md:text-left">
-            <span className="font-sans font-bold text-sm text-[var(--text-primary)] block">
+            <span className="font-nav font-black text-xs tracking-wider text-[var(--text-primary)] block">
               Janmark Suelto
             </span>
             <span className="text-[11px] text-[var(--text-muted)] mt-0.5 block font-mono">

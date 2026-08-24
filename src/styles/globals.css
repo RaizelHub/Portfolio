@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Smooch+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -7,44 +7,57 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-title: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-title: 'Smooch Sans', sans-serif;
+  --font-nav: 'Orbitron', sans-serif;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — LIGHT MODE (GALLERY / EDITORIAL WARMTH)
+   DESIGN TOKENS — LIGHT MODE (MINIMALIST TITANIUM & PORCELAIN)
    ══════════════════════════════════════════════════════════════════════════════ */
 :root {
+  /* Font Family Tokens */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-title: 'Smooch Sans', sans-serif;
+  --font-nav: 'Orbitron', sans-serif;
+
   /* Surfaces */
-  --background: #f8f6f0;
-  --background-secondary: #f0ece3;
-  --surface: #ede9e0;
+  --background: #fafafa;
+  --background-secondary: #f4f4f5;
+  --surface: #e4e4e7;
   --surface-elevated: #ffffff;
-  --surface-hover: #e5e0d5;
+  --surface-hover: #d4d4d8;
 
   /* Borders */
-  --border: #d2ccbf;
-  --border-subtle: #e2ddd3;
+  --border: #d4d4d8;
+  --border-subtle: #e4e4e7;
 
   /* Typography: Strong Neutral */
-  --text-primary: #12151a;
-  --text-secondary: #4b5563;
-  --text-muted: #6b7280;
+  --text-primary: #09090b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
 
-  /* Warm Copper Accent */
-  --accent: #b37b3b;
-  --accent-hover: #9c682e;
-  --accent-soft: rgba(179, 123, 59, 0.10);
+  /* Titanium Obsidian Accent */
+  --accent: #18181b;
+  --accent-hover: #000000;
+  --accent-soft: rgba(24, 24, 27, 0.08);
   --on-accent: #ffffff;
 
+  /* Telemetry / Contribution Levels */
+  --accent-level-1: rgba(24, 24, 27, 0.18);
+  --accent-level-2: rgba(24, 24, 27, 0.42);
+  --accent-level-3: rgba(24, 24, 27, 0.68);
+  --accent-level-4: #18181b;
+
   /* Semantic */
-  --success: #2e7d4a;
-  --warning: #b38226;
-  --error: #c24b4b;
-  --info: #3b6fb6;
-  --focus: #b37b3b;
+  --success: #52525b;
+  --warning: #71717a;
+  --error: #e11d48;
+  --info: #52525b;
+  --focus: #18181b;
 
   /* Selection */
-  --selection-bg: #b37b3b;
+  --selection-bg: #18181b;
   --selection-color: #ffffff;
 
   /* Controlled Layout & Whitespace */
@@ -57,10 +70,10 @@
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: clamp(0.9375rem, 0.2vw + 0.875rem, 1rem);
-  --text-lg: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
-  --text-project-title: clamp(1.2rem, 1.2vw + 0.6rem, 1.625rem);
-  --text-section-title: clamp(1.5rem, 1.8vw + 0.6rem, 2.125rem);
-  --text-hero-title: clamp(2.25rem, 3.5vw + 0.75rem, 3.5rem);
+  --text-lg: clamp(1.0625rem, 0.25vw + 1rem, 1.25rem);
+  --text-project-title: clamp(1.35rem, 1.5vw + 0.7rem, 1.85rem);
+  --text-section-title: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
+  --text-hero-title: clamp(2rem, 2.8vw + 0.6rem, 3.25rem);
 
   /* Restrained Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -69,51 +82,63 @@
   --radius-lg: 12px;
 
   /* Soft Shadows */
-  --shadow-soft: 0 16px 40px rgba(24, 20, 15, 0.05);
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.05);
 
   color-scheme: light;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — DARK MODE (PRIMARY GRAPHITE / NEAR-BLACK + WARM COPPER)
+   DESIGN TOKENS — DARK MODE (OBSIDIAN NOIR & LUMINOUS TITANIUM SILVER)
    ══════════════════════════════════════════════════════════════════════════════ */
 .dark,
 html.dark {
-  /* Surfaces: Deep Architectural Graphite */
-  --background: #0e1013;
-  --background-secondary: #0a0c0e;
-  --surface: #14171c;
+  /* Font Family Tokens */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-title: 'Smooch Sans', sans-serif;
+  --font-nav: 'Orbitron', sans-serif;
+
+  /* Surfaces: Deep Obsidian Noir */
+  --background: #090a0c;
+  --background-secondary: #0d0f12;
+  --surface: #13161a;
   --surface-elevated: #1a1e24;
-  --surface-hover: #20252e;
+  --surface-hover: #222830;
 
   /* Hairline Borders */
-  --border: #282e38;
-  --border-subtle: #1c2028;
+  --border: #2a313c;
+  --border-subtle: #1a1f26;
 
-  /* Strong Neutral Typography */
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
-  --text-muted: #6b7280;
+  /* Pure White & Silver Typography */
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 
-  /* Warm Copper Accent */
-  --accent: #d7a15b;
-  --accent-hover: #e5b26e;
-  --accent-soft: rgba(215, 161, 91, 0.12);
-  --on-accent: #0e1013;
+  /* Luminous Titanium Silver Accent */
+  --accent: #e2e8f0;
+  --accent-hover: #ffffff;
+  --accent-soft: rgba(226, 232, 240, 0.12);
+  --on-accent: #090a0c;
+
+  /* Telemetry / Contribution Levels */
+  --accent-level-1: rgba(226, 232, 240, 0.20);
+  --accent-level-2: rgba(226, 232, 240, 0.45);
+  --accent-level-3: rgba(226, 232, 240, 0.70);
+  --accent-level-4: #ffffff;
 
   /* Semantic */
-  --success: #68b683;
-  --warning: #e0b368;
-  --error: #e06868;
-  --info: #689ae0;
-  --focus: #d7a15b;
+  --success: #94a3b8;
+  --warning: #cbd5e1;
+  --error: #f43f5e;
+  --info: #94a3b8;
+  --focus: #e2e8f0;
 
   /* Selection */
-  --selection-bg: #d7a15b;
-  --selection-color: #0e1013;
+  --selection-bg: #e2e8f0;
+  --selection-color: #090a0c;
 
   /* Soft Ambient Shadows */
-  --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.55);
 
   color-scheme: dark;
 }
@@ -136,7 +161,7 @@ html.dark {
     margin: 0;
     background-color: var(--background);
     color: var(--text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 150ms ease, color 150ms ease;
@@ -185,6 +210,7 @@ html.dark {
   select {
     min-width: 0;
     max-width: 100%;
+    font-family: var(--font-sans);
   }
 
   pre {
@@ -209,19 +235,38 @@ html.dark {
     outline-offset: 2px;
   }
 
-  h1, h2, h3, h4, h5, h6,
+  /* 1. Smooch Sans: Display & Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   .font-title {
     font-family: var(--font-title);
     max-width: 100%;
     line-height: 1.1;
-    letter-spacing: -0.025em;
+    letter-spacing: 0.01em;
     overflow-wrap: break-word;
     text-wrap: balance;
   }
 
-  p {
-    line-height: 1.65;
-    text-wrap: pretty;
+  /* 3. Roboto Condensed: Primary Body Copy & General UI */
+  p,
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  /* 4. JetBrains Mono: Technical Metadata, Code, Indexes */
+  code,
+  pre,
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
+  /* 2. Unbounded: Interactive Navigation & Action Buttons */
+  .font-nav {
+    font-family: var(--font-nav);
   }
 }
 
@@ -231,41 +276,47 @@ html.dark {
 
 /* Hero Display */
 .hero-title {
-  max-width: 16ch;
+  max-width: none;
+  font-family: var(--font-title);
   font-size: var(--text-hero-title);
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: -0.025em;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 /* Section Heading */
 .section-heading {
   max-width: 28ch;
+  font-family: var(--font-title);
   font-size: var(--text-section-title);
   font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 /* Project Heading */
 .project-heading {
   max-width: 32ch;
+  font-family: var(--font-title);
   font-size: var(--text-project-title);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
+  line-height: 1.18;
+  letter-spacing: 0.01em;
 }
 
 /* Body Copy */
 .body-copy {
   max-width: 62ch;
+  font-family: var(--font-sans);
   font-size: var(--text-base);
   font-weight: 400;
   line-height: 1.65;
 }
 
 /* Metadata / Section Indicators */
-.section-number {
+.section-number,
+.meta-label {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 600;

@@ -92,8 +92,8 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
           className={`group relative inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-full border transition-all duration-200 cursor-pointer select-none ${
             isLiked
-              ? 'bg-[var(--accent-soft)] border-[var(--accent)] text-[var(--accent)] font-semibold'
-              : 'bg-[var(--surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent)] hover:text-[var(--text-primary)]'
+              ? 'bg-[var(--surface-elevated)] border-[var(--border)] text-[var(--text-primary)] font-semibold'
+              : 'bg-[var(--surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
           }`}
         >
           <motion.div
@@ -102,7 +102,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           >
             <Heart
               className={`w-3.5 h-3.5 transition-colors ${
-                isLiked ? 'fill-[var(--accent)] text-[var(--accent)]' : 'text-current group-hover:text-[var(--accent)]'
+                isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
               }`}
             />
           </motion.div>
@@ -119,7 +119,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.75, ease: 'easeOut' }}
               className={`pointer-events-none absolute -top-2 right-2 text-xs font-mono font-bold select-none ${
-                item.text.startsWith('+') ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'
+                item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
               }`}
             >
               {item.text}
@@ -140,8 +140,8 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
           className={`group flex items-center gap-1.5 font-mono text-xs transition-colors cursor-pointer select-none ${
             isLiked
-              ? 'text-[var(--accent)] font-semibold'
-              : 'text-[var(--text-muted)] hover:text-[var(--accent)]'
+              ? 'text-[var(--text-primary)] font-semibold'
+              : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
           }`}
         >
           <motion.div
@@ -150,7 +150,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           >
             <Heart
               className={`w-3.5 h-3.5 transition-colors ${
-                isLiked ? 'fill-[var(--accent)] text-[var(--accent)]' : 'text-current'
+                isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
               }`}
             />
           </motion.div>
@@ -166,7 +166,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
               animate={{ opacity: 0, y: -18, scale: 1.1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="pointer-events-none absolute -top-2 right-0 text-[11px] font-mono font-bold text-[var(--accent)] select-none"
+              className="pointer-events-none absolute -top-2 right-0 text-[11px] font-mono font-bold text-rose-500 select-none"
             >
               {item.text}
             </motion.span>
@@ -186,7 +186,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
         className={`group relative flex items-center gap-2 border px-3.5 py-1.5 font-mono text-xs transition-all duration-200 cursor-pointer select-none ${
           isLiked
-            ? 'border-[var(--accent)] bg-[var(--accent-soft)] text-[var(--accent)] font-semibold shadow-xs'
+            ? 'border-[var(--border)] bg-[var(--surface-elevated)] text-[var(--text-primary)] font-semibold shadow-xs'
             : 'border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-secondary)] hover:border-[var(--border)] hover:text-[var(--text-primary)] hover:-translate-y-px'
         }`}
       >
@@ -197,7 +197,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         >
           <Heart
             className={`w-3.5 h-3.5 transition-colors ${
-              isLiked ? 'fill-[var(--accent)] text-[var(--accent)]' : 'text-current group-hover:text-[var(--accent)]'
+              isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
             }`}
           />
         </motion.div>
@@ -217,7 +217,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className={`pointer-events-none absolute -top-3 right-3 text-xs font-mono font-bold select-none ${
-              item.text.startsWith('+') ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'
+              item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
             }`}
           >
             {item.text}

@@ -95,7 +95,7 @@ export const FloatingContactModal: React.FC = () => {
               setIsOpen(true);
             }}
             onMouseEnter={playHover}
-            className="group fixed bottom-6 right-6 z-50 flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-3 text-xs font-semibold text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-px hover:border-[var(--accent)] hover:bg-[var(--surface-hover)]"
+            className="group fixed bottom-6 right-6 lg:right-72 z-50 flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-3 font-nav text-xs font-semibold tracking-tight text-[var(--text-primary)] shadow-[var(--shadow-soft)] transition-all duration-200 hover:-translate-y-px hover:border-[var(--accent)] hover:bg-[var(--surface-hover)]"
             aria-label="Open Contact Modal"
           >
             <Mail className="w-4 h-4 text-[var(--accent)] transition-colors" />
@@ -112,7 +112,7 @@ export const FloatingContactModal: React.FC = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ duration: 0.18 }}
-            className="fixed bottom-4 right-4 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] min-w-0 flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface)] font-mono text-xs text-[var(--text-primary)] shadow-2xl sm:bottom-6 sm:right-6 sm:max-h-[calc(100dvh-3rem)] sm:w-[420px]"
+            className="fixed bottom-4 right-4 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] min-w-0 flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface)] font-mono text-xs text-[var(--text-primary)] shadow-2xl sm:bottom-6 sm:right-6 lg:right-70 sm:max-h-[calc(100dvh-3rem)] sm:w-[420px]"
           >
             {/* Header */}
             <div className="bg-[var(--surface-elevated)] px-5 py-3 border-b border-[var(--border-subtle)] flex items-center justify-between">
@@ -209,7 +209,7 @@ export const FloatingContactModal: React.FC = () => {
                 <button
                   type="submit"
                   disabled={formStatus === 'loading'}
-                  className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 bg-[var(--accent)] py-2.5 font-sans text-sm font-semibold text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
+                  className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 bg-[var(--accent)] py-2.5 font-nav text-xs font-semibold tracking-tight text-[var(--on-accent)] transition-colors hover:bg-[var(--accent-hover)]"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>{formStatus === 'loading' ? 'Sending...' : 'Send Message'}</span>

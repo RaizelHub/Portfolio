@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Mail, Github, Linkedin, MapPin } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
 
 export const Hero: React.FC = () => {
-  const [showRealProfile, setShowRealProfile] = useState(false);
   const { playHover, playClick } = useSound();
   const prefersReducedMotion = useReducedMotion();
 
@@ -49,7 +48,7 @@ export const Hero: React.FC = () => {
       >
         <div className="flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-[var(--text-muted)]">
           <MapPin className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
-          <span>Bukidnon, Philippines (GMT+8)</span>
+          <span>Bukidnon, Philippines</span>
         </div>
       </motion.div>
 
@@ -58,12 +57,12 @@ export const Hero: React.FC = () => {
         {/* Left Column: Headline, Positioning, Actions */}
         <div className="flex min-w-0 flex-col lg:col-span-7">
           <motion.div {...entrance(0.08)} className="space-y-4">
-            <span className="block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+            <span className="block font-mono text-xs font-bold uppercase tracking-[0.16em] text-[var(--accent)]">
               Janmark Suelto
             </span>
 
             <h1
-              className="hero-title font-title text-[var(--text-primary)]"
+              className="hero-title font-title text-[var(--text-primary)] whitespace-nowrap"
             >
               Software Developer
             </h1>
@@ -83,12 +82,12 @@ export const Hero: React.FC = () => {
           {/* Primary Action Buttons */}
           <motion.div
             {...entrance(0.22)}
-            className="mt-8 flex min-w-0 flex-wrap items-center gap-3 text-sm font-semibold"
+            className="mt-8 flex min-w-0 flex-wrap items-center gap-3 text-xs"
           >
             <button
               onClick={() => scrollToSection('projects')}
               onMouseEnter={playHover}
-              className="flex min-h-11 w-full cursor-pointer select-none items-center justify-center gap-2 bg-[var(--accent)] px-5 py-3 font-sans font-semibold tracking-wide text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)] active:translate-y-0 active:scale-[0.98] sm:w-auto"
+              className="flex min-h-11 w-full cursor-pointer select-none items-center justify-center gap-2 bg-[var(--accent)] px-5 py-3 font-nav text-xs font-semibold tracking-tight text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)] active:translate-y-0 active:scale-[0.98] sm:w-auto"
             >
               <span>View my work</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -97,7 +96,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={openContact}
               onMouseEnter={playHover}
-              className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 border border-[var(--border)] bg-transparent px-5 py-3 font-sans tracking-wide text-[var(--text-primary)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--surface)] active:translate-y-0 active:scale-[0.98] sm:w-auto"
+              className="flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 border border-[var(--border)] bg-transparent px-5 py-3 font-nav text-xs font-semibold tracking-tight text-[var(--text-primary)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--surface)] active:translate-y-0 active:scale-[0.98] sm:w-auto"
             >
               <Mail className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
               <span>Contact me</span>
@@ -106,7 +105,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={handleDownloadResume}
               onMouseEnter={playHover}
-              className="flex min-h-11 cursor-pointer items-center gap-1 px-3 py-3 font-mono text-xs text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
+              className="flex min-h-11 cursor-pointer items-center gap-1 px-3 py-3 font-mono text-xs font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
               title="Download Resume PDF"
             >
               <span>View résumé</span>
@@ -142,38 +141,19 @@ export const Hero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Right Column: Controlled Portrait Presentation */}
+        {/* Right Column: Portrait Presentation */}
         <div className="flex min-w-0 flex-col items-center lg:col-span-5 lg:items-end">
           <motion.div
             {...entrance(0.15)}
             className="flex w-full max-w-[330px] flex-col items-center lg:items-end xl:max-w-[380px]"
           >
-            <button
-              type="button"
-              onClick={() => {
-                playClick();
-                setShowRealProfile((prev) => !prev);
-              }}
-              onMouseEnter={playHover}
-              className="group relative w-full cursor-pointer select-none p-3 focus:outline-none active:scale-[0.99]"
-              title={showRealProfile ? 'Click to show anime avatar' : 'Click to reveal real portrait'}
-              aria-label="Toggle profile portrait"
-            >
-              <div className="media-frame relative flex aspect-[4/5] w-full items-end justify-center overflow-hidden bg-[var(--surface)] before:absolute before:left-0 before:top-0 before:z-10 before:h-20 before:w-1 before:bg-[var(--accent)]">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={showRealProfile ? 'real-profile' : 'anime-profile'}
-                    initial={{ opacity: 0, scale: 0.96 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.96 }}
-                    transition={{ duration: 0.25, ease: 'easeOut' }}
-                    src={showRealProfile ? profile.profileImage : (profile.animeProfileImage || '/img/Anime.jpg')}
-                    alt={showRealProfile ? 'Janmark Suelto - Real Portrait' : 'Janmark Suelto - Anime Avatar'}
-                    className={`h-full w-full object-cover object-top ${showRealProfile ? 'grayscale contrast-105' : ''} transition-all duration-500 group-hover:scale-[1.015]`}
-                  />
-                </AnimatePresence>
-              </div>
-            </button>
+            <div className="relative flex aspect-[4/5] w-full items-end justify-center overflow-hidden bg-transparent border-0 outline-none shadow-none select-none pointer-events-none">
+              <img
+                src={profile.profileImage}
+                alt="Janmark Suelto"
+                className="h-full w-full object-cover object-top border-0 outline-none shadow-none"
+              />
+            </div>
           </motion.div>
         </div>
       </div>

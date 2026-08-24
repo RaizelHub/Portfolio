@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   BriefcaseBusiness,
   FolderKanban,
@@ -137,7 +136,23 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileMenuOpen]);
 
-  /* ── 4. Smooth Anchor Navigation ── */
+  /* ── 4. Cross-page hash scroll handling ── */
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const sectionId = location.hash.replace('#', '');
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const timer = setTimeout(() => {
+          el.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          });
+        }, 100);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [location.pathname, location.hash]);
+
+  /* ── 5. Smooth Anchor Navigation ── */
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     event.preventDefault();
     playNavigate();
@@ -184,27 +199,17 @@ export const Navbar: React.FC = () => {
     >
       <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
         <div className="flex h-16 items-center justify-between gap-4 lg:gap-8">
-          {/* ── Brand: Profile Image + Name + Subtitle ── */}
+          {/* ── Brand: Name ── */}
           <Link
             to="/"
             onClick={handleBrandClick}
             onMouseEnter={playHover}
-            className="group flex min-w-0 flex-1 items-center gap-2.5 py-1 focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-4 lg:flex-none lg:gap-3"
+            className="group flex min-w-0 items-center py-1 focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-4"
             aria-label="Janmark Suelto — Back to top"
           >
-            <img
-              src={profile.profileImage}
-              alt="Janmark Suelto"
-              className="h-9 w-9 shrink-0 object-cover object-top grayscale border border-[var(--border)] transition-all duration-300 group-hover:grayscale-0"
-            />
-            <div className="min-w-0 leading-tight">
-              <span className="block truncate text-[13px] font-bold tracking-[-0.01em] text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
-                Janmark Suelto
-              </span>
-              <span className="mt-0.5 block truncate font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--text-muted)]">
-                Software Developer
-              </span>
-            </div>
+            <span className="font-nav text-sm font-bold tracking-tight text-[var(--text-primary)] transition-colors group-hover:text-[var(--accent)]">
+              Janmark Suelto
+            </span>
           </Link>
 
           {/* ── Navigation Links with Underline Active Indicator ── */}
@@ -225,9 +230,9 @@ export const Navbar: React.FC = () => {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
                   onMouseEnter={playHover}
-                  className={`relative group flex items-center gap-2 px-3 py-2 text-[13px] transition-colors duration-200 select-none ${isActive
-                    ? 'text-[var(--text-primary)] font-semibold'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  className={`relative group flex items-center gap-2 px-3 py-2 font-nav text-xs tracking-tight transition-colors duration-200 select-none ${isActive
+                    ? 'text-[var(--accent)] font-bold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium'
                     }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -236,16 +241,6 @@ export const Navbar: React.FC = () => {
                       }`}
                   />
                   <span>{item.label}</span>
-
-                  {/* Active Indicator Underline */}
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeNavIndicator"
-                      className="absolute bottom-0 inset-x-3 h-px bg-[var(--accent)]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      aria-hidden="true"
-                    />
-                  )}
                 </a>
               );
             })}
@@ -399,9 +394,9 @@ export const Navbar: React.FC = () => {
                   key={item.sectionId}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.sectionId)}
-                  className={`relative flex min-h-11 items-center gap-2.5 border-b border-[var(--border-subtle)] px-1 py-2.5 text-sm font-medium transition-colors ${isActive
-                    ? 'text-[var(--text-primary)] font-semibold bg-[var(--surface-hover)]'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  className={`relative flex min-h-11 items-center gap-2.5 border-b border-[var(--border-subtle)] px-2 py-3 font-nav text-xs tracking-tight transition-colors ${isActive
+                    ? 'text-[var(--accent)] font-bold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium'
                     }`}
                 >
                   <Icon
@@ -409,12 +404,6 @@ export const Navbar: React.FC = () => {
                       }`}
                   />
                   <span>{item.label}</span>
-                  {isActive && (
-                    <span
-                      className="absolute bottom-0 inset-x-0 h-px bg-[var(--accent)]"
-                      aria-hidden="true"
-                    />
-                  )}
                 </a>
               );
             })}

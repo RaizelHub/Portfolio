@@ -61,7 +61,7 @@ export const About: React.FC = () => {
                 <MapPin className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" />
                 <div>
                   <span className="block font-mono text-xs uppercase text-[var(--text-muted)]">Location</span>
-                  <span className="text-[var(--text-primary)] font-semibold">Bukidnon, Philippines (GMT+8)</span>
+                  <span className="text-[var(--text-primary)] font-semibold">Bukidnon, Philippines</span>
                 </div>
               </div>
 
@@ -113,3 +113,4 @@ export const About: React.FC = () => {
     </SectionContainer>
   );
 };
+

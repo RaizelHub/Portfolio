@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { Check, Copy, ArrowUpRight, Github, Linkedin, MapPin, Clock } from 'lucide-react';
+import { Check, Copy, ArrowUpRight, Github, Linkedin, MapPin } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
 import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
@@ -61,7 +61,7 @@ export const Contact: React.FC = () => {
                 href={`mailto:${profile.email}`}
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="inline-flex min-h-11 cursor-pointer items-center gap-2 bg-[var(--accent)] px-5 py-2.5 font-sans text-sm font-semibold text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)]"
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 bg-[var(--accent)] px-5 py-2.5 font-nav text-xs font-semibold tracking-tight text-[var(--on-accent)] transition-all duration-200 hover:-translate-y-px hover:bg-[var(--accent-hover)]"
               >
                 <span>Email me</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -71,7 +71,7 @@ export const Contact: React.FC = () => {
                 type="button"
                 onClick={handleCopyEmail}
                 onMouseEnter={playHover}
-                className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-2.5 font-mono text-sm text-[var(--text-primary)] transition-colors hover:border-[var(--accent)]"
+                className="inline-flex min-h-11 cursor-pointer items-center gap-2 border border-[var(--border)] bg-[var(--surface-elevated)] px-4 py-2.5 font-mono text-xs text-[var(--text-primary)] transition-colors hover:border-[var(--accent)]"
               >
                 {copied ? (
                   <>
@@ -141,11 +141,10 @@ export const Contact: React.FC = () => {
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3 py-4 font-mono text-xs text-[var(--text-secondary)]">
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[var(--accent)]" />
-                Bukidnon, PH
+                Bukidnon, Philippines
               </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5 text-[var(--accent)]" />
-                GMT+8
+              <span className="flex items-center gap-1.5 text-[var(--text-muted)]">
+                Remote &amp; Contract
               </span>
             </div>
           </div>

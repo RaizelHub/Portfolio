@@ -24,8 +24,8 @@ export const DeviceMockup: React.FC<DeviceMockupProps> = ({
       transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
       style={{ rotate: rotation }}
       className={`relative select-none flex-shrink-0 ${isPrimary
-          ? 'w-[clamp(9.5rem,26vw,11.75rem)] max-w-full'
-          : 'w-[clamp(8rem,23vw,10rem)] max-w-full'
+        ? 'w-[clamp(9.5rem,26vw,11.75rem)] max-w-full'
+        : 'w-[clamp(8rem,23vw,10rem)] max-w-full'
         }`}
     >
       {/* Phone shell */}

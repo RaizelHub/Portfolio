@@ -188,7 +188,7 @@ export const AdminAnalytics: React.FC = () => {
                 <span className="font-semibold uppercase tracking-wider">Telemetry Stream</span>
               </div>
               <span className="text-xs font-mono text-[#64748B] hidden md:inline">
-                8.156° N, 125.127° E &bull; Bukidnon, PH (GMT+8)
+                8.156° N, 125.127° E &bull; Bukidnon, PH
               </span>
             </div>
           </div>
