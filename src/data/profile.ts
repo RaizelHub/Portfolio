@@ -16,4 +16,6 @@ export const profile: Profile = {
   resumeUrl: '/Suelto-Janmark-Software Developer.Resume.pdf',
   profileImage: '/img/editorial_portrait.jpg',
   animeProfileImage: '/img/Anime.png',
+  gcashNumber: '0969 022 1571',
+  maribankNumber: '0969 022 1571',
 };

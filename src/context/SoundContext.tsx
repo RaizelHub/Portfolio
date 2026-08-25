@@ -6,14 +6,26 @@ interface SoundContextType {
   playHover: () => void;
   playClick: () => void;
   playNavigate: () => void;
+  playCoinChime: () => void;
+  playDoorSlide: () => void;
+  playTerminalKey: () => void;
+  playEmoteChime: () => void;
+  playTeleportChime: () => void;
+  playFootstep: (stepIndex?: number) => void;
 }
 
 const SoundContext = createContext<SoundContextType>({
   soundEnabled: false,
-  toggleSound: () => {},
-  playHover: () => {},
-  playClick: () => {},
-  playNavigate: () => {},
+  toggleSound: () => { },
+  playHover: () => { },
+  playClick: () => { },
+  playNavigate: () => { },
+  playCoinChime: () => { },
+  playDoorSlide: () => { },
+  playTerminalKey: () => { },
+  playEmoteChime: () => { },
+  playTeleportChime: () => { },
+  playFootstep: () => { },
 });
 
 export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -60,7 +72,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
     }
     if (audioCtxRef.current && audioCtxRef.current.state === 'suspended') {
-      audioCtxRef.current.resume().catch(() => {});
+      audioCtxRef.current.resume().catch(() => { });
     }
     return audioCtxRef.current;
   }, []);
@@ -70,7 +82,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (!soundEnabled || isTouchDeviceRef.current) return;
 
     const now = Date.now();
-    if (now - lastHoverTimeRef.current < 90) return; // 90ms throttle window to prevent hover spam
+    if (now - lastHoverTimeRef.current < 90) return;
     lastHoverTimeRef.current = now;
 
     try {
@@ -93,7 +105,7 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       osc.start(ctx.currentTime);
       osc.stop(ctx.currentTime + 0.04);
     } catch {
-      // Ignore audio synthesis errors gracefully
+      // Ignore audio synthesis errors
     }
   }, [soundEnabled, getAudioContext]);
 
@@ -162,8 +174,206 @@ export const SoundProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [soundEnabled, getAudioContext]);
 
+  // 4. Coin Chime: Sparkling dual retro coin arpeggio (987Hz -> 1318Hz, B5 to E6)
+  const playCoinChime = useCallback(() => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc1.type = 'square';
+      osc2.type = 'square';
+
+      // First note (B5)
+      osc1.frequency.setValueAtTime(987.77, ctx.currentTime);
+      // Second note (E6)
+      osc2.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.07);
+
+      gain.gain.setValueAtTime(0.06, ctx.currentTime);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime + 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.35);
+
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc1.start(ctx.currentTime);
+      osc1.stop(ctx.currentTime + 0.07);
+
+      osc2.start(ctx.currentTime + 0.07);
+      osc2.stop(ctx.currentTime + 0.35);
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
+  // 5. Door Slide Swoosh: Low-pass filtered air swoosh
+  const playDoorSlide = useCallback(() => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(120, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(360, ctx.currentTime + 0.12);
+      osc.frequency.exponentialRampToValueAtTime(90, ctx.currentTime + 0.22);
+
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.22);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.22);
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
+  // 6. Terminal Key: Mechanical switch tick
+  const playTerminalKey = useCallback(() => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(1400, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.025);
+
+      gain.gain.setValueAtTime(0.04, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.025);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.025);
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
+  // 7. Emote Reaction Chime: 3-tone arpeggio (C5 -> E5 -> G5)
+  const playEmoteChime = useCallback(() => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const tones = [523.25, 659.25, 783.99]; // C5, E5, G5
+      tones.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.06);
+
+        gain.gain.setValueAtTime(0.05, ctx.currentTime + idx * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.06 + 0.15);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(ctx.currentTime + idx * 0.06);
+        osc.stop(ctx.currentTime + idx * 0.06 + 0.15);
+      });
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
+  // 8. Teleport Shimmer Chime
+  const playTeleportChime = useCallback(() => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1600, ctx.currentTime + 0.18);
+
+      gain.gain.setValueAtTime(0.07, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.2);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.2);
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
+  // 9. Walking Footstep: Subtle soft tap with slight alternating pitch for left/right foot
+  const playFootstep = useCallback((stepIndex: number = 0) => {
+    if (!soundEnabled) return;
+
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      // Alternate base frequency between left (130Hz) and right (155Hz)
+      const baseFreq = stepIndex % 2 === 0 ? 130 : 155;
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(baseFreq, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(45, ctx.currentTime + 0.035);
+
+      gain.gain.setValueAtTime(0.035, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.035);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.035);
+    } catch {
+      // Ignore audio synthesis errors
+    }
+  }, [soundEnabled, getAudioContext]);
+
   return (
-    <SoundContext.Provider value={{ soundEnabled, toggleSound, playHover, playClick, playNavigate }}>
+    <SoundContext.Provider
+      value={{
+        soundEnabled,
+        toggleSound,
+        playHover,
+        playClick,
+        playNavigate,
+        playCoinChime,
+        playDoorSlide,
+        playTerminalKey,
+        playEmoteChime,
+        playTeleportChime,
+        playFootstep,
+      }}
+    >
       {children}
     </SoundContext.Provider>
   );

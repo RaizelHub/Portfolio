@@ -5,6 +5,7 @@ import {
   Download,
   FileText,
   FolderKanban,
+  Gamepad2,
   Github,
   Linkedin,
   Mail,
@@ -180,6 +181,20 @@ export const Sidebar: React.FC = () => {
 
         {/* 1-Click Resume Link */}
         <div className="pt-4 mt-4 border-t border-[var(--border-subtle)]">
+          <Link
+            to="/collab"
+            onClick={() => {
+              playNavigate();
+              closeDrawer();
+            }}
+            onMouseEnter={playHover}
+            className={`group mb-2 flex h-9 w-full items-center gap-2.5 px-3 text-xs font-nav font-medium transition-colors duration-150 ${
+              location.pathname === '/collab' ? 'font-bold text-[var(--accent)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            }`}
+          >
+            <Gamepad2 className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.75} />
+            <span>2D World</span>
+          </Link>
           <a
             href={profile.resumeUrl}
             target="_blank"

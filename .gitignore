@@ -13,8 +13,11 @@ lerna-debug.log*
 .env.test
 .env.production
 !.env.example
-
-/supabase
+.pnpm-store.store
+supabase
+!/supabase/migrations/
+/supabase/migrations/*
+!/supabase/migrations/20260826000001_create_portfolio_collab.sql
 /.env.example
 # Dependencies & Build Outputs
 node_modules

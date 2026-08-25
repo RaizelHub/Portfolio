@@ -15,4 +15,8 @@ export interface Profile {
   profileImage: string;
   animeProfileImage?: string;
   gooberImage?: string;
+  gcashNumber?: string;
+  maribankNumber?: string;
+  maribankQrImage?: string;
+  gcashQrImage?: string;
 }

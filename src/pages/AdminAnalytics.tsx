@@ -24,6 +24,10 @@ import {
   Check,
   LayoutGrid,
   List,
+  Compass,
+  PencilLine,
+  MessageSquareText,
+  Trash2,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { VisitorAvatar } from '../components/ui/VisitorAvatar';
@@ -32,6 +36,12 @@ import {
   type AnalyticsSummary,
   type VisitorProfileRecord,
 } from '../lib/analytics/portfolioVisitors';
+import {
+  fetchContributions,
+  fetchMessages,
+  deleteContribution,
+} from '../lib/collab/service';
+import type { CollabContribution, CollabMessage } from '../lib/collab/types';
 import { useSound } from '../context/SoundContext';
 
 function formatRelativeTime(isoDateString: string): string {
@@ -82,6 +92,10 @@ export const AdminAnalytics: React.FC = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [selectedVisitor, setSelectedVisitor] = useState<VisitorProfileRecord | null>(null);
   const [copiedId, setCopiedId] = useState(false);
+  const [activeTab, setActiveTab] = useState<'telemetry' | 'collab'>('telemetry');
+  const [contributions, setContributions] = useState<CollabContribution[]>([]);
+  const [messages, setMessages] = useState<CollabMessage[]>([]);
+  const [collabLoading, setCollabLoading] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
@@ -95,9 +109,29 @@ export const AdminAnalytics: React.FC = () => {
     }
   };
 
+  const loadCollabData = async () => {
+    setCollabLoading(true);
+    try {
+      const [c, m] = await Promise.all([fetchContributions(), fetchMessages()]);
+      setContributions(c);
+      setMessages(m);
+    } catch {
+      // ignore
+    } finally {
+      setCollabLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadData();
+    loadCollabData();
   }, []);
+
+  const handleDeleteContribution = async (contrib: CollabContribution) => {
+    playClick();
+    await deleteContribution(contrib);
+    setContributions((prev) => prev.filter((item) => item.id !== contrib.id));
+  };
 
   const handleCopy = (text: string) => {
     playClick();
@@ -152,12 +186,10 @@ export const AdminAnalytics: React.FC = () => {
 
     const refMap: Record<string, number> = {};
     const osMap: Record<string, number> = {};
-    let returningCount = 0;
 
     data.recentVisitors.forEach((v) => {
       refMap[v.referrer] = (refMap[v.referrer] || 0) + 1;
       osMap[v.os] = (osMap[v.os] || 0) + 1;
-      if (v.visitCount > 1) returningCount++;
     });
 
     const topRefs = Object.entries(refMap).sort((a, b) => b[1] - a[1]).slice(0, 4);
@@ -194,6 +226,40 @@ export const AdminAnalytics: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-2.5">
+            {/* Tab Selector */}
+            <div className="flex items-center rounded-lg bg-[#F1F5F9] dark:bg-[#141A23] p-1 border border-[#E2E8F0] dark:border-[#1E2735]">
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setActiveTab('telemetry');
+                }}
+                className={`px-3 py-1 text-xs font-mono rounded-md transition-colors ${
+                  activeTab === 'telemetry'
+                    ? 'bg-[#FFFFFF] dark:bg-[#1E2735] text-[#0F172A] dark:text-[#F8FAFC] font-bold shadow-xs'
+                    : 'text-[#64748B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC]'
+                }`}
+              >
+                Telemetry
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  playClick();
+                  setActiveTab('collab');
+                  loadCollabData();
+                }}
+                className={`flex items-center gap-1.5 px-3 py-1 text-xs font-mono rounded-md transition-colors ${
+                  activeTab === 'collab'
+                    ? 'bg-[#FFFFFF] dark:bg-[#1E2735] text-[#F59E0B] font-bold shadow-xs'
+                    : 'text-[#64748B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC]'
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>Collab &amp; World</span>
+              </button>
+            </div>
+
             <button
               onClick={handleExportJson}
               onMouseEnter={playHover}
@@ -208,40 +274,193 @@ export const AdminAnalytics: React.FC = () => {
               onClick={() => {
                 playClick();
                 loadData();
+                loadCollabData();
               }}
               onMouseEnter={playHover}
               className="px-3.5 py-1.5 rounded-lg bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#F59E0B] text-xs font-mono text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2 transition-colors cursor-pointer shadow-xs"
             >
-              <RotateCcw className={`w-3.5 h-3.5 text-[#F59E0B] ${loading ? 'animate-spin' : ''}`} />
+              <RotateCcw className={`w-3.5 h-3.5 text-[#F59E0B] ${loading || collabLoading ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
             </button>
           </div>
         </div>
 
-        {/* ── Headline Banner with Privacy Framework ── */}
-        <div className="relative overflow-hidden rounded-2xl bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] p-6 sm:p-8 shadow-sm">
-          <div className="max-w-3xl space-y-3">
-            <div className="flex items-center gap-2 font-mono text-xs text-[#F59E0B] font-semibold uppercase tracking-widest">
-              <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
-              <span>Deterministic Persona &amp; Telemetry Architecture</span>
+        {activeTab === 'collab' ? (
+          /* ── Collab & 2D World Moderation Surface ── */
+          <div className="space-y-8">
+            <div className="relative overflow-hidden rounded-2xl bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] p-6 sm:p-8 shadow-sm">
+              <div className="max-w-3xl space-y-3">
+                <div className="flex items-center gap-2 font-mono text-xs text-[#F59E0B] font-semibold uppercase tracking-widest">
+                  <Compass className="w-4 h-4 text-[#F59E0B]" />
+                  <span>2D Spatial World &amp; Collab Studio Moderation</span>
+                </div>
+                <h1 className="section-heading font-display text-[#0F172A] dark:text-[#F8FAFC]">
+                  Community Marks &amp; Visitor Wall
+                </h1>
+                <p className="body-copy text-[#475569] dark:text-[#94A3B8]">
+                  Manage persistent community contributions left on the Collab Canvas and messages posted to the Visitor Wall. Items can be reviewed and moderated in real time.
+                </p>
+              </div>
             </div>
 
-            <h1 className="section-heading font-display text-[#0F172A] dark:text-[#F8FAFC]">
-              Anonymous Visitor Intelligence
-            </h1>
+            {/* Collab Overview Stats */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] rounded-xl p-5 space-y-2">
+                <span className="font-mono text-xs uppercase text-[#64748B] font-semibold flex items-center gap-2">
+                  <PencilLine className="w-4 h-4 text-[#F59E0B]" />
+                  <span>Canvas Marks</span>
+                </span>
+                <span className="font-display text-3xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                  {contributions.length}
+                </span>
+              </div>
 
-            <p className="body-copy text-[#475569] dark:text-[#94A3B8]">
-              Real-time traffic sessions resolved into deterministic <span className="text-[#F59E0B] font-mono font-semibold">Adjective + Animal</span> personas with illustrated cartoon avatars. Full historical counts are 100% preserved without scraping personal identities.
-            </p>
+              <div className="bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] rounded-xl p-5 space-y-2">
+                <span className="font-mono text-xs uppercase text-[#64748B] font-semibold flex items-center gap-2">
+                  <MessageSquareText className="w-4 h-4 text-[#10B981]" />
+                  <span>Visitor Messages</span>
+                </span>
+                <span className="font-display text-3xl font-bold text-[#0F172A] dark:text-[#F8FAFC]">
+                  {messages.length}
+                </span>
+              </div>
+
+              <div className="bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] rounded-xl p-5 space-y-2">
+                <span className="font-mono text-xs uppercase text-[#64748B] font-semibold flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#06B6D4]" />
+                  <span>World Status</span>
+                </span>
+                <span className="font-display text-xl font-bold text-[#10B981]">
+                  Active · Online
+                </span>
+              </div>
+            </div>
+
+            {/* Collab Canvas Contributions Moderation */}
+            <div className="bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] rounded-xl p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] dark:border-[#1E2735] pb-3">
+                <h3 className="font-display text-lg font-semibold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2">
+                  <PencilLine className="w-5 h-5 text-[#F59E0B]" />
+                  <span>Collab Canvas Contributions ({contributions.length})</span>
+                </h3>
+              </div>
+
+              {contributions.length === 0 ? (
+                <p className="font-mono text-xs text-[#64748B] py-4 text-center">No canvas marks submitted yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {contributions.map((c) => (
+                    <div
+                      key={c.id}
+                      className="border border-[#E2E8F0] dark:border-[#1E2735] bg-[#F8FAFC] dark:bg-[#111620] rounded-lg p-4 space-y-3 flex flex-col justify-between"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs font-mono text-[#64748B]">
+                          <div className="flex items-center gap-1.5">
+                            <VisitorAvatar displayName={c.ownerName} avatarUrl={c.ownerAvatar} size="xs" />
+                            <span className="font-semibold text-[#0F172A] dark:text-[#F8FAFC]">{c.ownerName}</span>
+                          </div>
+                          <span className="uppercase text-[10px] px-1.5 py-0.5 rounded bg-[#E2E8F0] dark:bg-[#1E2735]">
+                            {c.type}
+                          </span>
+                        </div>
+
+                        {c.type === 'drawing' ? (
+                          <div className="h-20 bg-[#FFFFFF] dark:bg-[#181F2C] border border-[#E2E8F0] dark:border-[#1E2735] rounded p-1 flex items-center justify-center">
+                            <span className="font-mono text-[10px] text-[#64748B]">
+                              Vector Stroke ({c.content.points?.length || 0} pts)
+                            </span>
+                          </div>
+                        ) : (
+                          <p className="text-xs text-[#0F172A] dark:text-[#F8FAFC] font-sans italic p-2 bg-[#FFFFFF] dark:bg-[#181F2C] border border-[#E2E8F0] dark:border-[#1E2735] rounded">
+                            “{c.content.text}”
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="flex items-center justify-between pt-2 border-t border-[#E2E8F0] dark:border-[#1E2735] text-[10px] font-mono text-[#64748B]">
+                        <span>{formatDate(c.createdAt)}</span>
+                        <button
+                          type="button"
+                          onClick={() => void handleDeleteContribution(c)}
+                          className="flex items-center gap-1 text-[#EF4444] hover:underline"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                          <span>Delete</span>
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Visitor Wall Messages Moderation */}
+            <div className="bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] rounded-xl p-6 space-y-4">
+              <div className="flex items-center justify-between border-b border-[#E2E8F0] dark:border-[#1E2735] pb-3">
+                <h3 className="font-display text-lg font-semibold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2">
+                  <MessageSquareText className="w-5 h-5 text-[#10B981]" />
+                  <span>Visitor Wall Messages ({messages.length})</span>
+                </h3>
+              </div>
+
+              {messages.length === 0 ? (
+                <p className="font-mono text-xs text-[#64748B] py-4 text-center">No visitor messages recorded yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {messages.map((m) => (
+                    <div
+                      key={m.id}
+                      className="border border-[#E2E8F0] dark:border-[#1E2735] bg-[#F8FAFC] dark:bg-[#111620] rounded-lg p-4 space-y-2 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center gap-2 mb-2">
+                          <VisitorAvatar displayName={m.ownerName} avatarUrl={m.ownerAvatar} size="xs" />
+                          <span className="font-mono text-xs font-semibold text-[#0F172A] dark:text-[#F8FAFC]">
+                            {m.ownerName}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#0F172A] dark:text-[#F8FAFC] font-sans">
+                          “{m.message}”
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between pt-2 border-t border-[#E2E8F0] dark:border-[#1E2735] text-[10px] font-mono text-[#64748B]">
+                        <span>{formatDate(m.createdAt)}</span>
+                        {m.isLocal && <span className="text-[#F59E0B]">Local Draft</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        ) : (
+          /* ── Original Telemetry Overview ── */
+          <>
+            {/* ── Headline Banner with Privacy Framework ── */}
+            <div className="relative overflow-hidden rounded-2xl bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] p-6 sm:p-8 shadow-sm">
+              <div className="max-w-3xl space-y-3">
+                <div className="flex items-center gap-2 font-mono text-xs text-[#F59E0B] font-semibold uppercase tracking-widest">
+                  <ShieldCheck className="w-4 h-4 text-[#F59E0B]" />
+                  <span>Deterministic Persona &amp; Telemetry Architecture</span>
+                </div>
 
-        {/* ── Primary KPI Metrics Strip ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* KPI 1: Cumulative Traffic Volume */}
-          <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#F59E0B]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
-            <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
-              <span className="break-safe uppercase font-semibold tracking-wider">Total Traffic Volume</span>
+                <h1 className="section-heading font-display text-[#0F172A] dark:text-[#F8FAFC]">
+                  Anonymous Visitor Intelligence
+                </h1>
+
+                <p className="body-copy text-[#475569] dark:text-[#94A3B8]">
+                  Real-time traffic sessions resolved into deterministic <span className="text-[#F59E0B] font-mono font-semibold">Adjective + Animal</span> personas with illustrated cartoon avatars. Full historical counts are 100% preserved without scraping personal identities.
+                </p>
+              </div>
+            </div>
+
+            {/* ── Primary KPI Metrics Strip ── */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* KPI 1: Cumulative Traffic Volume */}
+              <div className="group relative bg-[#FFFFFF] dark:bg-[#141A23] border border-[#E2E8F0] dark:border-[#1E2735] hover:border-[#F59E0B]/50 rounded-xl p-5 shadow-xs transition-all space-y-3">
+                <div className="flex min-w-0 items-start justify-between gap-3 font-mono text-xs text-[#64748B]">
+                  <span className="break-safe uppercase font-semibold tracking-wider">Total Traffic Volume</span>
               <div className="p-1.5 rounded-md bg-[#F59E0B]/10 text-[#F59E0B]">
                 <Eye className="w-4 h-4" />
               </div>
@@ -622,6 +841,8 @@ export const AdminAnalytics: React.FC = () => {
             These historical records remain 100% counted toward the public total visit counter, without fabricating fake retrospective identities.
           </p>
         </div>
+        </>
+        )}
       </div>
 
       {/* ── Persona Detailed Audit Modal ── */}

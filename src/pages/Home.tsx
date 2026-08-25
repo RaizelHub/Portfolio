@@ -6,12 +6,14 @@ import { About } from '../sections/About/About';
 import { Certificates } from '../sections/Certificates/Certificates';
 import { GithubActivity } from '../sections/GithubActivity/GithubActivity';
 import { Contact } from '../sections/Contact/Contact';
+import { CollabSection } from '../sections/Collab/CollabSection';
 
 export const Home = () => {
   return (
     <div>
       <Hero />
       <ProjectsSection />
+      <CollabSection />
       <Technologies />
       <Experience />
       <About />
