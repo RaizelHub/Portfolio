@@ -4,7 +4,9 @@ import {
   Compass,
   DoorOpen,
   MessageCircle,
+  MessageSquare,
   MoreVertical,
+  PenTool,
   RotateCcw,
   Sparkles,
   User,
@@ -20,6 +22,10 @@ import { VisitorWallOverlay } from '../components/collab/VisitorWallOverlay';
 import { ProjectCartGuide } from '../components/collab/ProjectCartGuide';
 import { BudgetBeggarModal } from '../components/collab/BudgetBeggarModal';
 import { HobbiesModal } from '../components/collab/HobbiesModal';
+import { CoffeeCartModal, type CoffeeDrink } from '../components/collab/CoffeeCartModal';
+import { QuestCompletedModal, QUEST_STAMPS } from '../components/collab/QuestCompletedModal';
+import { ArcadeCabinetModal } from '../components/collab/ArcadeCabinetModal';
+import { AiJanmarkModal } from '../components/collab/AiJanmarkModal';
 import { WorldRadar } from '../components/collab/WorldRadar';
 import { WorldTerminalModal } from '../components/collab/WorldTerminalModal';
 import { EmoteWheel } from '../components/collab/EmoteWheel';
@@ -76,6 +82,7 @@ export default function CollabWorld() {
     playClick,
     playHover,
     playDoorSlide,
+    playCoinChime,
     playEmoteChime,
     playTeleportChime,
     playFootstep,
@@ -101,11 +108,18 @@ export default function CollabWorld() {
   const [isNearBudgetBeggar, setIsNearBudgetBeggar] = useState(false);
   const [isNearBasketball, setIsNearBasketball] = useState(false);
   const [isNearGamingLounge, setIsNearGamingLounge] = useState(false);
+  const [isNearCoffeeCart, setIsNearCoffeeCart] = useState(false);
+  const [isNearArcadeCabinet, setIsNearArcadeCabinet] = useState(false);
+  const [isNearAiJanmark, setIsNearAiJanmark] = useState(false);
 
   // Modals & Overlays
   const [openedProjectModal, setOpenedProjectModal] = useState<{ project: Project; isWIP: boolean } | null>(null);
   const [isBudgetBeggarOpen, setIsBudgetBeggarOpen] = useState(false);
   const [openedHobbiesModal, setOpenedHobbiesModal] = useState<'basketball' | 'gaming' | null>(null);
+  const [isCoffeeCartOpen, setIsCoffeeCartOpen] = useState(false);
+  const [isArcadeOpen, setIsArcadeOpen] = useState(false);
+  const [isAiJanmarkOpen, setIsAiJanmarkOpen] = useState(false);
+  const [isQuestCompletedOpen, setIsQuestCompletedOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isEmoteWheelOpen, setIsEmoteWheelOpen] = useState(false);
   const [isCanvasOpen, setIsCanvasOpen] = useState(false);
@@ -113,6 +127,20 @@ export default function CollabWorld() {
   const [isEscMenuOpen, setIsEscMenuOpen] = useState(false);
   const [isQuickAccessOpen, setIsQuickAccessOpen] = useState(false);
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
+
+  // Active Coffee Buff
+  const [activeCoffeeBuff, setActiveCoffeeBuff] = useState<{ drink: CoffeeDrink; expiresAt: number } | null>(null);
+
+  // Scavenger Hunt Collected Stamps
+  const [collectedStampIds, setCollectedStampIds] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem('portfolio_campus_quest_stamps');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [questToast, setQuestToast] = useState<string | null>(null);
 
   const [welcomeToast, setWelcomeToast] = useState<string | null>(null);
   const [activeVisitors, setActiveVisitors] = useState<PublicCollabVisitor[]>([]);
@@ -129,6 +157,29 @@ export default function CollabWorld() {
     y: SPAWN_POINT.y,
     direction: 'down',
   });
+
+  // Modal synchronization to pause Phaser movement & key capture while interacting with UI
+  const isAnyModalOpen = Boolean(
+    openedProjectModal ||
+    isBudgetBeggarOpen ||
+    openedHobbiesModal ||
+    isCoffeeCartOpen ||
+    isArcadeOpen ||
+    isAiJanmarkOpen ||
+    isQuestCompletedOpen ||
+    isTerminalOpen ||
+    isEmoteWheelOpen ||
+    isCanvasOpen ||
+    isVisitorWallOpen ||
+    isQuickAccessOpen ||
+    isEscMenuOpen ||
+    isResetConfirmOpen ||
+    isChatOpen
+  );
+
+  useEffect(() => {
+    phaserRef.current?.setModalOpen(isAnyModalOpen);
+  }, [isAnyModalOpen]);
 
   // 1. Initialize anonymous auth session, checkpoint & visitor state
   useEffect(() => {
@@ -226,9 +277,19 @@ export default function CollabWorld() {
 
       if (e.key === 'Escape') {
         if (openedProjectModal) {
-          setOpenedProjectModal(null);
+          handleCloseProjectModal();
         } else if (isBudgetBeggarOpen) {
           setIsBudgetBeggarOpen(false);
+        } else if (openedHobbiesModal) {
+          setOpenedHobbiesModal(null);
+        } else if (isCoffeeCartOpen) {
+          setIsCoffeeCartOpen(false);
+        } else if (isArcadeOpen) {
+          setIsArcadeOpen(false);
+        } else if (isAiJanmarkOpen) {
+          setIsAiJanmarkOpen(false);
+        } else if (isQuestCompletedOpen) {
+          setIsQuestCompletedOpen(false);
         } else if (isTerminalOpen) {
           setIsTerminalOpen(false);
         } else if (isEmoteWheelOpen) {
@@ -243,7 +304,21 @@ export default function CollabWorld() {
           setIsEscMenuOpen((prev) => !prev);
         }
       } else if (e.key === 'e' || e.key === 'E') {
-        if (openedProjectModal || isBudgetBeggarOpen || isTerminalOpen || isEmoteWheelOpen || isCanvasOpen || isVisitorWallOpen) return;
+        if (
+          openedProjectModal ||
+          isBudgetBeggarOpen ||
+          openedHobbiesModal ||
+          isCoffeeCartOpen ||
+          isArcadeOpen ||
+          isAiJanmarkOpen ||
+          isQuestCompletedOpen ||
+          isTerminalOpen ||
+          isEmoteWheelOpen ||
+          isCanvasOpen ||
+          isVisitorWallOpen
+        ) {
+          return;
+        }
 
         // Inside building near a project branch cart
         if (insideBuilding && activeProjectBranchNear) {
@@ -255,6 +330,24 @@ export default function CollabWorld() {
         else if (insideBuilding && isNearExitDoorway) {
           e.preventDefault();
           handleExitToCampus();
+        }
+        // Outside near coffee & boba cart
+        else if (!insideBuilding && isNearCoffeeCart) {
+          e.preventDefault();
+          playClick();
+          setIsCoffeeCartOpen(true);
+        }
+        // Outside near arcade machine in gaming lounge
+        else if (!insideBuilding && isNearArcadeCabinet) {
+          e.preventDefault();
+          playClick();
+          setIsArcadeOpen(true);
+        }
+        // Outside near AI Janmark digital clone
+        else if (!insideBuilding && isNearAiJanmark) {
+          e.preventDefault();
+          playClick();
+          setIsAiJanmarkOpen(true);
         }
         // Outside near budget beggar developer easter egg
         else if (!insideBuilding && isNearBudgetBeggar) {
@@ -280,7 +373,18 @@ export default function CollabWorld() {
           handleEnterBuilding(activeBuildingNear);
         }
       } else if (e.key === 'q' || e.key === 'Q') {
-        if (openedProjectModal || isTerminalOpen || isCanvasOpen || isVisitorWallOpen) return;
+        if (
+          openedProjectModal ||
+          isCoffeeCartOpen ||
+          isArcadeOpen ||
+          isAiJanmarkOpen ||
+          isQuestCompletedOpen ||
+          isTerminalOpen ||
+          isCanvasOpen ||
+          isVisitorWallOpen
+        ) {
+          return;
+        }
         e.preventDefault();
         playClick();
         setIsEmoteWheelOpen((prev) => !prev);
@@ -307,7 +411,30 @@ export default function CollabWorld() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  });
+  }, [
+    openedProjectModal,
+    isBudgetBeggarOpen,
+    openedHobbiesModal,
+    isCoffeeCartOpen,
+    isArcadeOpen,
+    isAiJanmarkOpen,
+    isQuestCompletedOpen,
+    isTerminalOpen,
+    isEmoteWheelOpen,
+    isCanvasOpen,
+    isVisitorWallOpen,
+    isQuickAccessOpen,
+    insideBuilding,
+    activeProjectBranchNear,
+    isNearExitDoorway,
+    isNearCoffeeCart,
+    isNearArcadeCabinet,
+    isNearAiJanmark,
+    isNearBudgetBeggar,
+    isNearBasketball,
+    isNearGamingLounge,
+    activeBuildingNear,
+  ]);
 
   // 4. Autosave on visibility change or page exit
   useEffect(() => {
@@ -335,9 +462,15 @@ export default function CollabWorld() {
 
   // ── Callbacks from Phaser Scene ──
 
+  const lastRadarUpdateRef = useRef<number>(0);
+
   const handlePlayerMoved = useCallback((x: number, y: number, direction: Direction, moving: boolean) => {
     currentPosRef.current = { x, y, direction };
-    setPlayerCoords({ x, y });
+    const now = Date.now();
+    if (now - lastRadarUpdateRef.current > 200) {
+      lastRadarUpdateRef.current = now;
+      setPlayerCoords({ x, y });
+    }
     if (showControlsHint && moving) {
       setShowControlsHint(false);
     }
@@ -361,11 +494,16 @@ export default function CollabWorld() {
   }, [characterId, insideBuilding, visitorProfile.anonymousId]);
 
   const handleBuildingProximity = useCallback((building: WorldBuilding | null) => {
-    setActiveBuildingNear(building);
+    setActiveBuildingNear((prev) => (prev?.id === building?.id ? prev : building));
   }, []);
 
   const handleProjectBranchProximity = useCallback((data: { project: Project; isWIP: boolean } | null) => {
-    setActiveProjectBranchNear(data);
+    setActiveProjectBranchNear((prev) => {
+      if (prev?.project?.id === data?.project?.id && prev?.isWIP === data?.isWIP) {
+        return prev;
+      }
+      return data;
+    });
   }, []);
 
   const handleExitDoorwayProximity = useCallback((nearExit: boolean) => {
@@ -426,12 +564,45 @@ export default function CollabWorld() {
     }
   };
 
+  const handleCloseProjectModal = useCallback(() => {
+    playClick();
+    setOpenedProjectModal(null);
+    phaserRef.current?.setModalOpen(false);
+    phaserRef.current?.resetInputs();
+  }, [playClick]);
+
   const handleExitToCampus = () => {
     playDoorSlide();
     setInsideBuilding(null);
     setActiveProjectBranchNear(null);
     setOpenedProjectModal(null);
+    phaserRef.current?.setModalOpen(false);
     phaserRef.current?.exitToCampus();
+  };
+
+  const handleDrinkOrdered = (drink: CoffeeDrink) => {
+    setActiveCoffeeBuff({ drink, expiresAt: Date.now() + drink.durationSeconds * 1000 });
+    phaserRef.current?.setSpeedMultiplier(drink.speedMultiplier, drink.trailColorPhaser, drink.durationSeconds * 1000);
+    setIsCoffeeCartOpen(false);
+  };
+
+  const handleQuestStampFound = (stampId: string) => {
+    if (collectedStampIds.includes(stampId)) return;
+    const next = [...collectedStampIds, stampId];
+    setCollectedStampIds(next);
+    try {
+      localStorage.setItem('portfolio_campus_quest_stamps', JSON.stringify(next));
+    } catch {
+      // ignore
+    }
+    const stampObj = QUEST_STAMPS.find((s) => s.id === stampId);
+    setQuestToast(`⭐ Discovered: ${stampObj?.name || 'Easter Egg'} (${next.length}/4)!`);
+    playCoinChime();
+    setTimeout(() => setQuestToast(null), 3500);
+
+    if (next.length === QUEST_STAMPS.length) {
+      setIsQuestCompletedOpen(true);
+    }
   };
 
   const handleSendReaction = (type: 'wave' | 'heart' | 'sparkle') => {
@@ -497,12 +668,13 @@ export default function CollabWorld() {
 
       {/* 2. Top Navigation Bar */}
       <header className="collab-topbar">
-        <div className="flex items-center gap-2.5">
+        {/* Left: Navigation & Shortcuts */}
+        <div className="flex items-center gap-2 shrink-0">
           {insideBuilding ? (
             <button
               type="button"
               onClick={handleExitToCampus}
-              className="flex items-center gap-1.5 border border-black bg-white px-3 py-1.5 text-xs font-mono font-bold uppercase text-black hover:bg-black hover:text-white transition-colors"
+              className="flex items-center gap-1.5 border border-black bg-white px-2.5 py-1 text-xs font-mono font-bold uppercase text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Exit to Campus</span>
@@ -520,7 +692,7 @@ export default function CollabWorld() {
             </Link>
           )}
 
-          <div className="hidden sm:flex items-center gap-1.5 border border-black bg-black px-2.5 py-1 text-[10px] font-mono font-bold uppercase text-white">
+          <div className="hidden sm:flex items-center gap-1.5 border border-black bg-black px-2 py-1 text-[10px] font-mono font-bold uppercase text-white">
             <span>{insideBuilding ? `🏛️ ${insideBuilding.label}` : '📍 Campus Plaza'}</span>
           </div>
 
@@ -531,9 +703,9 @@ export default function CollabWorld() {
               setIsQuickAccessOpen(true);
             }}
             onMouseEnter={playHover}
-            className="hidden sm:flex items-center gap-1.5 border border-black bg-white px-2.5 py-1 text-[10px] font-mono text-black hover:bg-black hover:text-white transition-colors"
+            className="hidden md:flex items-center gap-1 border border-black bg-white px-2 py-1 text-[10px] font-mono text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
           >
-            <Compass className="h-3.5 w-3.5" />
+            <Compass className="h-3 w-3" />
             <span>Directory</span>
           </button>
 
@@ -544,30 +716,94 @@ export default function CollabWorld() {
               setIsTerminalOpen(true);
             }}
             onMouseEnter={playHover}
-            className="hidden sm:flex items-center border border-black bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-black hover:bg-black hover:text-white transition-colors"
+            className="hidden md:flex items-center border border-black bg-white px-2 py-1 text-[10px] font-mono font-bold text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
           >
             <span>CLI [T]</span>
           </button>
         </div>
 
-        <div className="collab-presence flex items-center gap-2">
-          <Users className="h-3.5 w-3.5 text-black" />
-          <span>
-            {activeVisitors.length <= 1
-              ? 'Exploring world'
-              : `${activeVisitors.length} exploring now`}
-          </span>
+        {/* Center: Live Presence, Quest Tracker & Buffs */}
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="collab-presence hidden md:flex items-center gap-1.5">
+            <Users className="h-3 w-3 text-black" />
+            <span>
+              {activeVisitors.length <= 1
+                ? 'Exploring world'
+                : `${activeVisitors.length} exploring`}
+            </span>
+          </div>
+
+          {/* Quest Stamp Tracker Badge */}
+          <button
+            type="button"
+            onClick={() => {
+              playClick();
+              setIsQuestCompletedOpen(true);
+            }}
+            className={`flex items-center gap-1 border px-2.5 py-1 text-[10px] font-mono font-bold transition-all cursor-pointer ${
+              collectedStampIds.length === QUEST_STAMPS.length
+                ? 'border-amber-500 bg-amber-400 text-black shadow-xs'
+                : 'border-zinc-300 bg-zinc-50 text-zinc-700 hover:border-black hover:bg-black hover:text-white'
+            }`}
+            title="Click to view Campus Scavenger Hunt Stamps"
+          >
+            <span>🏆 Quest: {collectedStampIds.length}/{QUEST_STAMPS.length}</span>
+          </button>
+
+          {/* Visitor Wall Quick Button */}
+          <button
+            type="button"
+            onClick={() => {
+              playClick();
+              setIsVisitorWallOpen(true);
+            }}
+            className="flex items-center gap-1 border border-zinc-300 bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-black hover:border-black hover:bg-black hover:text-white transition-all cursor-pointer shadow-xs"
+            title="Open Community Visitor Message Wall"
+          >
+            <MessageSquare className="h-3 w-3" />
+            <span>Visitor Wall</span>
+          </button>
+
+          {/* Collab Canvas Quick Button */}
+          <button
+            type="button"
+            onClick={() => {
+              playClick();
+              setIsCanvasOpen(true);
+            }}
+            className="hidden sm:flex items-center gap-1 border border-zinc-300 bg-white px-2.5 py-1 text-[10px] font-mono font-bold text-black hover:border-black hover:bg-black hover:text-white transition-all cursor-pointer shadow-xs"
+            title="Open Shared Collab Canvas"
+          >
+            <PenTool className="h-3 w-3" />
+            <span>Canvas</span>
+          </button>
+
+          {/* Active Coffee Buff Pill */}
+          {activeCoffeeBuff && Date.now() < activeCoffeeBuff.expiresAt && (
+            <button
+              type="button"
+              onClick={() => {
+                playClick();
+                setIsCoffeeCartOpen(true);
+              }}
+              className="hidden lg:flex items-center gap-1 border border-amber-500 bg-amber-50 px-2 py-1 text-[10px] font-mono font-bold text-amber-900 shadow-xs cursor-pointer animate-fade-in"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-ping" />
+              <span>☕ +{Math.round((activeCoffeeBuff.drink.speedMultiplier - 1) * 100)}% Spd</span>
+            </button>
+          )}
         </div>
 
-        <div className="collab-identity flex items-center gap-2.5">
-          <div className="flex items-center gap-2">
+        {/* Right: Visitor Identity & Global Toggles */}
+        <div className="collab-identity flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5">
             <VisitorAvatar
               displayName={visitorProfile.displayName}
               avatarUrl={visitorProfile.avatarUrl}
               avatarSeed={visitorProfile.avatarSeed}
               size="xs"
             />
-            <span className="hidden md:inline font-mono text-[11px] font-semibold text-black">
+            <span className="hidden sm:inline font-mono text-[11px] font-semibold text-black">
               {visitorProfile.displayName}
             </span>
           </div>
@@ -579,7 +815,7 @@ export default function CollabWorld() {
               toggleSound();
             }}
             aria-label={soundEnabled ? 'Mute sound' : 'Enable sound'}
-            className="grid h-8 w-8 place-items-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
+            className="grid h-7 w-7 place-items-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
           >
             {soundEnabled ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
           </button>
@@ -591,7 +827,7 @@ export default function CollabWorld() {
               setIsEscMenuOpen(true);
             }}
             aria-label="Open menu"
-            className="grid h-8 w-8 place-items-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors"
+            className="grid h-7 w-7 place-items-center border border-black bg-white text-black hover:bg-black hover:text-white transition-colors cursor-pointer"
           >
             <MoreVertical className="h-3.5 w-3.5" />
           </button>
@@ -603,6 +839,14 @@ export default function CollabWorld() {
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 border border-black bg-white px-4 py-2 text-xs font-mono font-bold text-black shadow-xl animate-fade-in">
           <Sparkles className="h-3.5 w-3.5 text-black" />
           <span>{welcomeToast}</span>
+        </div>
+      )}
+
+      {/* Quest Stamp Toast */}
+      {questToast && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 border-2 border-amber-500 bg-amber-400 px-5 py-2.5 text-xs font-mono font-black text-black shadow-2xl animate-bounce">
+          <Sparkles className="h-4 w-4 text-black" />
+          <span>{questToast}</span>
         </div>
       )}
 
@@ -622,6 +866,10 @@ export default function CollabWorld() {
             onBudgetBeggarProximity={handleBudgetBeggarProximity}
             onBasketballProximity={handleBasketballProximity}
             onGamingLoungeProximity={handleGamingLoungeProximity}
+            onCoffeeCartProximity={setIsNearCoffeeCart}
+            onArcadeCabinetProximity={setIsNearArcadeCabinet}
+            onAiJanmarkProximity={setIsNearAiJanmark}
+            onQuestStampFound={handleQuestStampFound}
             onPlayerMoved={handlePlayerMoved}
             onCheckpointTrigger={handleCheckpointTrigger}
             onFootstep={playFootstep}
@@ -680,6 +928,28 @@ export default function CollabWorld() {
         </button>
       )}
 
+      {/* 6c-2. Inside Collab HQ: Quick Visitor Wall & Canvas Prompts */}
+      {insideBuilding?.id === 'collab-hq' && !activeProjectBranchNear && !openedProjectModal && (
+        <div className="interaction-prompt flex items-center gap-2 bg-white/95 text-black border border-black p-1.5 shadow-xl pointer-events-auto">
+          <button
+            type="button"
+            onClick={() => { playClick(); setIsVisitorWallOpen(true); }}
+            className="flex items-center gap-1.5 border border-black bg-black text-white px-2.5 py-1 text-[11px] font-mono font-bold hover:bg-[#333333] transition-colors cursor-pointer"
+          >
+            <MessageSquare className="h-3 w-3" />
+            <span>Visitor Message Wall</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => { playClick(); setIsCanvasOpen(true); }}
+            className="flex items-center gap-1.5 border border-black bg-white text-black px-2.5 py-1 text-[11px] font-mono font-bold hover:bg-black hover:text-white transition-colors cursor-pointer"
+          >
+            <PenTool className="h-3 w-3" />
+            <span>Collab Canvas</span>
+          </button>
+        </div>
+      )}
+
       {/* 6d. Outside: Budget Beggar Proximity Prompt */}
       {!insideBuilding && isNearBudgetBeggar && !activeBuildingNear && !isBudgetBeggarOpen && (
         <button
@@ -710,18 +980,39 @@ export default function CollabWorld() {
         </button>
       )}
 
-      {/* 6f. Outside: Gaming Lounge Proximity Prompt */}
-      {!insideBuilding && isNearGamingLounge && !activeBuildingNear && !isNearBudgetBeggar && !openedHobbiesModal && (
+      {/* 6f. Outside: Coffee Cart Proximity Prompt */}
+      {!insideBuilding && isNearCoffeeCart && !isAiJanmarkOpen && !isCoffeeCartOpen && (
         <button
           type="button"
-          onClick={() => {
-            playClick();
-            setOpenedHobbiesModal('gaming');
-          }}
+          onClick={() => { playClick(); setIsCoffeeCartOpen(true); }}
           className="interaction-prompt cursor-pointer hover:bg-black hover:text-white transition-all"
         >
           <kbd>E</kbd>
-          <span>Join Esports Lounge & Online Games</span>
+          <span>☕ Order from Developer Fuel Cart</span>
+        </button>
+      )}
+
+      {/* 6g. Outside: Arcade Cabinet Proximity Prompt */}
+      {!insideBuilding && isNearArcadeCabinet && !isArcadeOpen && (
+        <button
+          type="button"
+          onClick={() => { playClick(); setIsArcadeOpen(true); }}
+          className="interaction-prompt cursor-pointer hover:bg-black hover:text-white transition-all"
+        >
+          <kbd>E</kbd>
+          <span>🕹️ Play Bug Breaker Arcade</span>
+        </button>
+      )}
+
+      {/* 6h. Outside: AI Janmark Proximity Prompt */}
+      {!insideBuilding && isNearAiJanmark && !isAiJanmarkOpen && (
+        <button
+          type="button"
+          onClick={() => { playClick(); setIsAiJanmarkOpen(true); }}
+          className="interaction-prompt cursor-pointer hover:bg-black hover:text-white transition-all"
+        >
+          <kbd>E</kbd>
+          <span>🤖 Talk to AI Janmark</span>
         </button>
       )}
 
@@ -756,6 +1047,32 @@ export default function CollabWorld() {
         >
           <MessageCircle className="h-3.5 w-3.5 mr-1" />
           <span>Chat</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            playClick();
+            setIsVisitorWallOpen(true);
+          }}
+          title="Community Guestbook & Messages"
+          className="cursor-pointer"
+        >
+          <MessageSquare className="h-3.5 w-3.5 mr-1" />
+          <span>Visitor Wall</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            playClick();
+            setIsCanvasOpen(true);
+          }}
+          title="Shared Collab Canvas & Whiteboard"
+          className="cursor-pointer"
+        >
+          <PenTool className="h-3.5 w-3.5 mr-1" />
+          <span>Canvas</span>
         </button>
 
         <button
@@ -833,31 +1150,110 @@ export default function CollabWorld() {
       {isTerminalOpen && (
         <WorldTerminalModal
           visitorName={visitorProfile.displayName}
-          onClose={() => setIsTerminalOpen(false)}
+          onClose={() => {
+            setIsTerminalOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
         />
       )}
 
       {/* 11b. Budget Beggar Developer Easter Egg Modal */}
       {isBudgetBeggarOpen && (
-        <BudgetBeggarModal onClose={() => setIsBudgetBeggarOpen(false)} />
+        <BudgetBeggarModal
+          onClose={() => {
+            setIsBudgetBeggarOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
+        />
       )}
 
-      {/* 11c. Hobbies & Passions (Basketball & Gaming) Modal */}
+      {/* 11c. Hobbies & Passions (Basketball) Modal */}
       {openedHobbiesModal && (
         <HobbiesModal
           initialTab={openedHobbiesModal}
-          onClose={() => setOpenedHobbiesModal(null)}
+          onClose={() => {
+            setOpenedHobbiesModal(null);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
         />
+      )}
+
+      {/* 11d. Developer Fuel Coffee Cart Modal */}
+      {isCoffeeCartOpen && (
+        <CoffeeCartModal
+          activeBuff={activeCoffeeBuff}
+          onDrinkOrdered={handleDrinkOrdered}
+          onClose={() => {
+            setIsCoffeeCartOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
+        />
+      )}
+
+      {/* 11e. Bug Breaker Arcade Cabinet Modal */}
+      {isArcadeOpen && (
+        <ArcadeCabinetModal
+          onClose={() => {
+            setIsArcadeOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
+        />
+      )}
+
+      {/* 11f. AI Janmark Digital Clone Modal */}
+      {isAiJanmarkOpen && (
+        <AiJanmarkModal
+          onClose={() => {
+            setIsAiJanmarkOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
+        />
+      )}
+
+      {/* 11g. Quest / Scavenger Hunt Completed Modal */}
+      {isQuestCompletedOpen && (
+        <QuestCompletedModal
+          collectedStampIds={collectedStampIds}
+          onClose={() => {
+            setIsQuestCompletedOpen(false);
+            (document.activeElement as HTMLElement)?.blur?.();
+            window.focus();
+            phaserRef.current?.resetInputs();
+          }}
+        />
+      )}
+
+      {/* 11h. Quest Stamp Discovery Toast */}
+      {questToast && (
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-50 border border-amber-500 bg-amber-50 px-4 py-2 text-xs font-mono font-bold text-amber-900 shadow-lg animate-fade-in">
+          {questToast}
+        </div>
       )}
 
       {/* 12. Interactive Project Exhibition & Guide Dialogue Modal */}
       {openedProjectModal && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 overflow-y-auto"
-          onClick={() => setOpenedProjectModal(null)}
+          onPointerDown={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={handleCloseProjectModal}
         >
           <div
             className="w-full max-w-5xl max-h-[90vh] overflow-y-auto border-2 border-black bg-white p-6 shadow-2xl"
+            onPointerDown={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-black pb-3 mb-6">
@@ -868,8 +1264,8 @@ export default function CollabWorld() {
               </div>
               <button
                 type="button"
-                onClick={() => setOpenedProjectModal(null)}
-                className="flex items-center gap-1 border border-black bg-black px-3 py-1 text-xs font-mono font-bold uppercase text-white hover:bg-[#333333]"
+                onClick={handleCloseProjectModal}
+                className="flex items-center gap-1 border border-black bg-black px-3 py-1 text-xs font-mono font-bold uppercase text-white hover:bg-[#333333] cursor-pointer"
               >
                 <span>Close [ESC]</span>
                 <X className="h-4 w-4" />
@@ -991,6 +1387,34 @@ export default function CollabWorld() {
                   Exit to Campus Plaza
                 </button>
               )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEscMenuOpen(false);
+                  setIsVisitorWallOpen(true);
+                }}
+                className="flex w-full items-center justify-between border border-black bg-white p-3 text-left font-mono text-xs font-semibold text-black hover:bg-black hover:text-white transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <MessageSquare className="h-4 w-4" />
+                  <span>Visitor Message Wall</span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEscMenuOpen(false);
+                  setIsCanvasOpen(true);
+                }}
+                className="flex w-full items-center justify-between border border-black bg-white p-3 text-left font-mono text-xs font-semibold text-black hover:bg-black hover:text-white transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <PenTool className="h-4 w-4" />
+                  <span>Shared Collab Canvas</span>
+                </div>
+              </button>
 
               <button
                 type="button"

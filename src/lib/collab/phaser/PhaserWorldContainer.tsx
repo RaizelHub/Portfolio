@@ -22,6 +22,9 @@ export type PhaserWorldHandle = {
   enterBuilding: (building: WorldBuilding) => void;
   exitToCampus: () => void;
   teleportToBuildingEntrance: (buildingId: string) => void;
+  setSpeedMultiplier: (multiplier: number, trailColor: number, durationMs: number) => void;
+  resetInputs: () => void;
+  setModalOpen: (isOpen: boolean) => void;
 };
 
 type Props = {
@@ -36,6 +39,10 @@ type Props = {
   onBudgetBeggarProximity: (nearBeggar: boolean) => void;
   onBasketballProximity?: (near: boolean) => void;
   onGamingLoungeProximity?: (near: boolean) => void;
+  onCoffeeCartProximity?: (near: boolean) => void;
+  onArcadeCabinetProximity?: (near: boolean) => void;
+  onAiJanmarkProximity?: (near: boolean) => void;
+  onQuestStampFound?: (stampId: string) => void;
   onPlayerMoved: (x: number, y: number, direction: Direction, moving: boolean) => void;
   onCheckpointTrigger: (x: number, y: number, direction: Direction) => void;
   onFootstep?: (stepIndex: number) => void;
@@ -54,6 +61,10 @@ export const PhaserWorldContainer = forwardRef<PhaserWorldHandle, Props>(functio
     onBudgetBeggarProximity,
     onBasketballProximity,
     onGamingLoungeProximity,
+    onCoffeeCartProximity,
+    onArcadeCabinetProximity,
+    onAiJanmarkProximity,
+    onQuestStampFound,
     onPlayerMoved,
     onCheckpointTrigger,
     onFootstep,
@@ -95,6 +106,15 @@ export const PhaserWorldContainer = forwardRef<PhaserWorldHandle, Props>(functio
     teleportToBuildingEntrance: (_buildingId) => {
       // Handled via spawn coordinates
     },
+    setSpeedMultiplier: (multiplier, trailColor, durationMs) => {
+      sceneRef.current?.setSpeedMultiplier(multiplier, trailColor, durationMs);
+    },
+    resetInputs: () => {
+      sceneRef.current?.resetInputs();
+    },
+    setModalOpen: (isOpen: boolean) => {
+      sceneRef.current?.setModalOpen(isOpen);
+    },
   }));
 
   useEffect(() => {
@@ -114,6 +134,12 @@ export const PhaserWorldContainer = forwardRef<PhaserWorldHandle, Props>(functio
         arcade: {
           gravity: { x: 0, y: 0 },
           debug: false,
+        },
+      },
+      input: {
+        keyboard: {
+          // Never capture any key so keydown events always bubble to window
+          capture: [],
         },
       },
       scale: {
@@ -146,6 +172,10 @@ export const PhaserWorldContainer = forwardRef<PhaserWorldHandle, Props>(functio
           onBudgetBeggarProximity,
           onBasketballProximity,
           onGamingLoungeProximity,
+          onCoffeeCartProximity,
+          onArcadeCabinetProximity,
+          onAiJanmarkProximity,
+          onQuestStampFound,
           onPlayerMoved,
           onCheckpointTrigger,
           onFootstep,
@@ -177,6 +207,11 @@ export const PhaserWorldContainer = forwardRef<PhaserWorldHandle, Props>(functio
       ref={containerRef}
       className="absolute inset-0 w-full h-full overflow-hidden select-none outline-none touch-none"
       style={{ touchAction: 'none' }}
+      onPointerDown={() => {
+        // Blur the canvas immediately after click so window keeps keyboard focus
+        // This ensures React's window keydown listener always receives E / Q / T etc.
+        (document.activeElement as HTMLElement)?.blur?.();
+      }}
     />
   );
 });

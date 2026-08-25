@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import type { Project } from '../../types';
 import { useSound } from '../../context/SoundContext';
+import './WorldInterior.css';
 
 type Props = {
   project: Project;

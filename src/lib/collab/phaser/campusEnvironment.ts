@@ -25,6 +25,10 @@ export function buildCampusEnvironment(
   budgetBeggarZones: Phaser.GameObjects.Zone[];
   basketballCourtZone: Phaser.GameObjects.Zone;
   gamingLoungeZone: Phaser.GameObjects.Zone;
+  coffeeCartZone: Phaser.GameObjects.Zone;
+  arcadeCabinetZone: Phaser.GameObjects.Zone;
+  aiJanmarkZone: Phaser.GameObjects.Zone;
+  questStampZones: Array<{ id: string; zone: Phaser.GameObjects.Zone }>;
 } {
   const g = scene.add.graphics();
 
@@ -655,18 +659,20 @@ export function buildCampusEnvironment(
   const ball = scene.add.circle(courtX, courtY + 15, 4.5, 0xe67e22).setDepth(20);
   ball.setStrokeStyle(1, 0x000000);
 
-  // Shout Speech Bubble
-  const shoutBubble = scene.add.text(courtX, courtY - 50, '', {
+  // Shout Speech Bubble (initialized with non-empty string to ensure WebGL canvas context allocation)
+  const shoutBubble = scene.add.text(courtX, courtY - 50, 'YES!', {
     fontFamily: 'monospace',
     fontSize: '9px',
     fontStyle: 'bold',
     color: '#ffffff',
     backgroundColor: '#000000',
     padding: { x: 5, y: 2 },
-  }).setOrigin(0.5).setDepth(30).setAlpha(0);
+  }).setOrigin(0.5).setDepth(30).setAlpha(0).setVisible(false);
 
   // Continuous 5v5 Basketball Play Loop (Passing -> Driving -> Shooting -> "YES!" or "YAWA WALA!")
   const run5v5BasketballLoop = () => {
+    if (!scene.sys || !ball.active || !shoutBubble.active) return;
+
     // 1. Pass to Open Shooter on Wing (w2)
     ball.setPosition(w1.x, w1.y - 12);
     ball.setAlpha(1);
@@ -678,6 +684,8 @@ export function buildCampusEnvironment(
       duration: 500,
       ease: 'Linear',
       onComplete: () => {
+        if (!scene.sys || !ball.active) return;
+
         // 2. Shooter jumps and shoots towards North Rim
         scene.tweens.add({
           targets: w2,
@@ -702,6 +710,8 @@ export function buildCampusEnvironment(
           duration: 1100,
           ease: 'Quad.easeOut',
           onComplete: () => {
+            if (!scene.sys || !ball.active || !shoutBubble.active) return;
+
             const isMake = Math.random() > 0.5;
 
             if (isMake) {
@@ -717,6 +727,7 @@ export function buildCampusEnvironment(
               shoutBubble.setPosition(w2.x, w2.y - 30);
               shoutBubble.setText('YES!');
               shoutBubble.setBackgroundColor('#1b5e20');
+              shoutBubble.setVisible(true);
               shoutBubble.setAlpha(1);
 
               // Team celebration hop
@@ -742,6 +753,7 @@ export function buildCampusEnvironment(
               shoutBubble.setPosition(w2.x, w2.y - 30);
               shoutBubble.setText('YAWA WALA!');
               shoutBubble.setBackgroundColor('#b71c1c');
+              shoutBubble.setVisible(true);
               shoutBubble.setAlpha(1);
 
               // Center b5 grabs rebound
@@ -755,15 +767,23 @@ export function buildCampusEnvironment(
 
             // Fade out shout bubble
             scene.time.delayedCall(2200, () => {
+              if (!scene.sys || !shoutBubble.active) return;
               scene.tweens.add({
                 targets: shoutBubble,
                 alpha: 0,
                 duration: 300,
+                onComplete: () => {
+                  if (shoutBubble.active) shoutBubble.setVisible(false);
+                },
               });
             });
 
             // Schedule next 5v5 possession in 4.5 seconds
-            scene.time.delayedCall(4500, run5v5BasketballLoop);
+            scene.time.delayedCall(4500, () => {
+              if (scene.sys && ball.active) {
+                run5v5BasketballLoop();
+              }
+            });
           },
         });
       },
@@ -771,7 +791,11 @@ export function buildCampusEnvironment(
   };
 
   // Start 5v5 match loop after 1.5s
-  scene.time.delayedCall(1500, run5v5BasketballLoop);
+  scene.time.delayedCall(1500, () => {
+    if (scene.sys && ball.active) {
+      run5v5BasketballLoop();
+    }
+  });
 
   // Basketball Court Proximity Zone
   const basketballCourtZone = scene.add.zone(courtX, courtY, 230, 270);
@@ -856,6 +880,7 @@ export function buildCampusEnvironment(
     delay: 3000,
     loop: true,
     callback: () => {
+      if (!scene.sys || !gamingChat.active) return;
       phraseIdx = (phraseIdx + 1) % gamePhrases.length;
       gamingChat.setText(gamePhrases[phraseIdx]);
     },
@@ -865,6 +890,185 @@ export function buildCampusEnvironment(
   const gamingLoungeZone = scene.add.zone(loungeX, loungeY, 170, 130);
   scene.physics.add.existing(gamingLoungeZone, true);
 
-  return { buildingZones, budgetBeggarZones, basketballCourtZone, gamingLoungeZone };
+  // 11b. Arcade Cabinet in Gaming Lounge
+  const arcadeX = 1535;
+  const arcadeY = 230;
+  const arcG = scene.add.graphics();
+  arcG.setDepth(6);
+  // Cabinet body
+  arcG.fillStyle(0x111111, 1);
+  arcG.lineStyle(1.5, 0xf59e0b, 1);
+  arcG.fillRect(arcadeX - 12, arcadeY - 24, 24, 36);
+  arcG.strokeRect(arcadeX - 12, arcadeY - 24, 24, 36);
+  // Screen
+  arcG.fillStyle(0x000000, 1);
+  arcG.fillRect(arcadeX - 9, arcadeY - 18, 18, 16);
+  arcG.fillStyle(0x22c55e, 1);
+  arcG.fillRect(arcadeX - 6, arcadeY - 14, 12, 8);
+  // Marquee
+  arcG.fillStyle(0xf59e0b, 1);
+  arcG.fillRect(arcadeX - 10, arcadeY - 23, 20, 4);
+
+  const arcadeBadge = scene.add.text(arcadeX, arcadeY - 34, '🕹️ PLAY RETRO ARCADE', {
+    fontFamily: 'monospace',
+    fontSize: '6.5px',
+    fontStyle: 'bold',
+    color: '#ffffff',
+    backgroundColor: '#000000',
+    padding: { x: 4, y: 1.5 },
+  }).setOrigin(0.5).setDepth(16);
+  arcadeBadge.setShadow(0, 1, 'rgba(0,0,0,0.3)', 2);
+
+  const arcadeCabinetZone = scene.add.zone(arcadeX, arcadeY + 4, 60, 60);
+  scene.physics.add.existing(arcadeCabinetZone, true);
+
+  // 12. Developer Fuel Coffee & Boba Cart (Central Plaza Left: x: 820, y: 560)
+  const cafeX = 820;
+  const cafeY = 560;
+  const cafeG = scene.add.graphics();
+  cafeG.setDepth(6);
+
+  // Wooden Cart Base
+  cafeG.fillStyle(0x27272a, 1);
+  cafeG.lineStyle(1.5, 0x000000, 1);
+  cafeG.fillRect(cafeX - 25, cafeY - 10, 50, 26);
+  cafeG.strokeRect(cafeX - 25, cafeY - 10, 50, 26);
+
+  // Striped Awning (Amber & White)
+  for (let s = 0; s < 5; s++) {
+    cafeG.fillStyle(s % 2 === 0 ? 0xf59e0b : 0xffffff, 1);
+    cafeG.fillRect(cafeX - 25 + s * 10, cafeY - 26, 10, 10);
+  }
+  cafeG.strokeRect(cafeX - 25, cafeY - 26, 50, 10);
+
+  // Awning Poles
+  cafeG.fillStyle(0x000000, 1);
+  cafeG.fillRect(cafeX - 24, cafeY - 16, 2, 12);
+  cafeG.fillRect(cafeX + 22, cafeY - 16, 2, 12);
+
+  // Espresso Machine & Cups
+  cafeG.fillStyle(0xd4d4d8, 1);
+  cafeG.fillRect(cafeX - 16, cafeY - 16, 12, 10);
+  cafeG.fillStyle(0xffffff, 1);
+  cafeG.fillRect(cafeX + 4, cafeY - 12, 5, 6);
+  cafeG.fillRect(cafeX + 11, cafeY - 12, 5, 6);
+
+  // Animated Rising Coffee Steam (☕)
+  const steam = scene.add.text(cafeX - 10, cafeY - 22, '♨️', {
+    fontSize: '9px',
+  }).setOrigin(0.5).setDepth(15);
+  scene.tweens.add({
+    targets: steam,
+    y: cafeY - 30,
+    alpha: { from: 1, to: 0.2 },
+    duration: 1200,
+    repeat: -1,
+    ease: 'Sine.easeOut',
+  });
+
+  const cafeBadge = scene.add.text(cafeX, cafeY - 38, '☕ DEVELOPER FUEL · Coffee & Boba Cart', {
+    fontFamily: 'monospace',
+    fontSize: '6.5px',
+    fontStyle: 'bold',
+    color: '#ffffff',
+    backgroundColor: '#000000',
+    padding: { x: 4, y: 1.5 },
+  }).setOrigin(0.5).setDepth(16);
+  cafeBadge.setShadow(0, 1, 'rgba(0,0,0,0.3)', 2);
+
+  const coffeeCartZone = scene.add.zone(cafeX, cafeY + 5, 80, 80);
+  scene.physics.add.existing(coffeeCartZone, true);
+
+  // 13. AI Janmark Digital Clone Standing Desk (Right edge exterior of Collab HQ: x: 1290, y: 260)
+  const npcX = 1290;
+  const npcY = 260;
+  const npcG = scene.add.graphics();
+  npcG.setDepth(6);
+
+  // Modern Standing Desk
+  npcG.fillStyle(0x18181b, 1);
+  npcG.lineStyle(1.5, 0x000000, 1);
+  npcG.fillRect(npcX - 22, npcY - 8, 44, 18);
+  npcG.strokeRect(npcX - 22, npcY - 8, 44, 18);
+
+  // Dual Glowing Monitors
+  npcG.fillStyle(0x38bdf8, 1);
+  npcG.fillRect(npcX - 16, npcY - 24, 14, 12);
+  npcG.fillStyle(0xa855f7, 1);
+  npcG.fillRect(npcX + 2, npcY - 24, 14, 12);
+
+  // Janmark NPC Character
+  npcG.fillStyle(0x111111, 1); // Dark shirt
+  npcG.fillRect(npcX - 6, npcY - 2, 12, 14);
+  npcG.fillStyle(0xd4a373, 1); // Face
+  npcG.fillRect(npcX - 4, npcY - 10, 8, 8);
+  npcG.fillStyle(0x000000, 1); // Hair
+  npcG.fillRect(npcX - 5, npcY - 13, 10, 4);
+
+  const aiBadge = scene.add.text(npcX, npcY - 38, '💬 TALK TO AI JANMARK (Digital Clone)', {
+    fontFamily: 'monospace',
+    fontSize: '7px',
+    fontStyle: 'bold',
+    color: '#ffffff',
+    backgroundColor: '#000000',
+    padding: { x: 5, y: 2 },
+  }).setOrigin(0.5).setDepth(16);
+  aiBadge.setShadow(0, 1, 'rgba(0,0,0,0.3)', 2);
+
+  const aiJanmarkZone = scene.add.zone(npcX, npcY + 5, 80, 80);
+  scene.physics.add.existing(aiJanmarkZone, true);
+
+  // 14. Scavenger Hunt 4 Collectibles (Campus Explorer Quest)
+  const questItems = [
+    { id: 'golden-git', label: '⭐ Golden Git Commit', x: 180, y: 150, color: 0xf59e0b },
+    { id: 'supabase-token', label: '⚡ Supabase Token', x: 1980, y: 150, color: 0x10b981 },
+    { id: 'basketball-trophy', label: '🏆 3v3 Trophy', x: 690, y: 280, color: 0xeab308 },
+    { id: 'missing-semicolon', label: '🔣 Missing Semicolon', x: 1580, y: 300, color: 0x3b82f6 },
+  ];
+
+  const questStampZones: Array<{ id: string; zone: Phaser.GameObjects.Zone }> = [];
+
+  questItems.forEach((item) => {
+    const itemG = scene.add.graphics();
+    itemG.setDepth(6);
+    itemG.fillStyle(item.color, 1);
+    itemG.lineStyle(1.5, 0x000000, 1);
+    itemG.fillCircle(item.x, item.y, 7);
+    itemG.strokeCircle(item.x, item.y, 7);
+
+    const badge = scene.add.text(item.x, item.y - 16, item.label, {
+      fontFamily: 'monospace',
+      fontSize: '6px',
+      fontStyle: 'bold',
+      color: '#ffffff',
+      backgroundColor: '#000000',
+      padding: { x: 3, y: 1 },
+    }).setOrigin(0.5).setDepth(16);
+
+    // Subtle bobbing animation
+    scene.tweens.add({
+      targets: badge,
+      y: item.y - 20,
+      duration: 1000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    });
+
+    const qZone = scene.add.zone(item.x, item.y, 60, 60);
+    scene.physics.add.existing(qZone, true);
+    questStampZones.push({ id: item.id, zone: qZone });
+  });
+
+  return {
+    buildingZones,
+    budgetBeggarZones,
+    basketballCourtZone,
+    gamingLoungeZone,
+    coffeeCartZone,
+    arcadeCabinetZone,
+    aiJanmarkZone,
+    questStampZones,
+  };
 }
 

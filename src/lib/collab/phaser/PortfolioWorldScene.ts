@@ -32,6 +32,10 @@ export type WorldSceneEvents = {
   onBudgetBeggarProximity: (nearBeggar: boolean) => void;
   onBasketballProximity?: (near: boolean) => void;
   onGamingLoungeProximity?: (near: boolean) => void;
+  onCoffeeCartProximity?: (near: boolean) => void;
+  onArcadeCabinetProximity?: (near: boolean) => void;
+  onAiJanmarkProximity?: (near: boolean) => void;
+  onQuestStampFound?: (stampId: string) => void;
   onPlayerMoved: (x: number, y: number, direction: Direction, moving: boolean) => void;
   onCheckpointTrigger: (x: number, y: number, direction: Direction) => void;
   onFootstep?: (stepIndex: number) => void;
@@ -77,14 +81,32 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
   // Campus Structures
   private collisionGroup!: Phaser.Physics.Arcade.StaticGroup;
+  private playerCollider: Phaser.Physics.Arcade.Collider | null = null;
   private buildingZones: Array<{ building: WorldBuilding; zone: Phaser.GameObjects.Zone }> = [];
   private budgetBeggarZones: Phaser.GameObjects.Zone[] = [];
   private basketballCourtZone: Phaser.GameObjects.Zone | null = null;
   private gamingLoungeZone: Phaser.GameObjects.Zone | null = null;
+  private coffeeCartZone: Phaser.GameObjects.Zone | null = null;
+  private arcadeCabinetZone: Phaser.GameObjects.Zone | null = null;
+  private aiJanmarkZone: Phaser.GameObjects.Zone | null = null;
+  private questStampZones: Array<{ id: string; zone: Phaser.GameObjects.Zone }> = [];
+
   private activeNearBuilding: WorldBuilding | null = null;
   private isNearBudgetBeggar = false;
   private isNearBasketball = false;
   private isNearGamingLounge = false;
+  private isNearCoffeeCart = false;
+  private isNearArcadeCabinet = false;
+  private isNearAiJanmark = false;
+
+  // Scavenger Hunt: tracks stamps already emitted this session so we only fire once
+  private emittedQuestStamps = new Set<string>();
+
+  // Developer Fuel Speed Buff & Trail
+  private activeSpeedMultiplier = 1;
+  private speedBuffExpiresAt = 0;
+  private activeTrailColor = 0xf59e0b;
+  private trailTimer = 0;
 
   // Interior Hall Structures
   private interiorProjectZones: Array<{ project: Project; isWIP: boolean; zone: Phaser.GameObjects.Zone }> = [];
@@ -104,6 +126,39 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
   private lastFootstepTime = 0;
   private footstepCounter = 0;
+  private activeKeys = new Set<string>();
+  private isModalPaused = false;
+
+  private handleWindowKeyDown = (e: KeyboardEvent) => {
+    const activeEl = document.activeElement;
+    if (
+      activeEl instanceof HTMLInputElement ||
+      activeEl instanceof HTMLTextAreaElement ||
+      (activeEl && activeEl.getAttribute('contenteditable') === 'true')
+    ) {
+      return;
+    }
+    const key = e.key.toLowerCase();
+    const code = e.code.toLowerCase();
+    if (
+      ['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key) ||
+      ['keyw', 'keya', 'keys', 'keyd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(code)
+    ) {
+      this.activeKeys.add(code);
+      this.activeKeys.add(key);
+    }
+  };
+
+  private handleWindowKeyUp = (e: KeyboardEvent) => {
+    const key = e.key.toLowerCase();
+    const code = e.code.toLowerCase();
+    this.activeKeys.delete(code);
+    this.activeKeys.delete(key);
+  };
+
+  private handleWindowBlur = () => {
+    this.activeKeys.clear();
+  };
 
   constructor() {
     super({ key: 'PortfolioWorldScene' });
@@ -135,6 +190,23 @@ export class PortfolioWorldScene extends Phaser.Scene {
   }
 
   public create(): void {
+    // Attach window keyboard listeners for 100% reliable movement across modals & DOM blur
+    window.addEventListener('keydown', this.handleWindowKeyDown, { passive: true });
+    window.addEventListener('keyup', this.handleWindowKeyUp, { passive: true });
+    window.addEventListener('blur', this.handleWindowBlur);
+
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      window.removeEventListener('keydown', this.handleWindowKeyDown);
+      window.removeEventListener('keyup', this.handleWindowKeyUp);
+      window.removeEventListener('blur', this.handleWindowBlur);
+    });
+
+    this.events.once(Phaser.Scenes.Events.DESTROY, () => {
+      window.removeEventListener('keydown', this.handleWindowKeyDown);
+      window.removeEventListener('keyup', this.handleWindowKeyUp);
+      window.removeEventListener('blur', this.handleWindowBlur);
+    });
+
     // 1. Static Physics Collision Group
     this.collisionGroup = this.physics.add.staticGroup();
 
@@ -162,6 +234,7 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
     // 7. Pointer Tap-to-Move
     this.input.on('pointerdown', (pointer: Phaser.Input.Pointer) => {
+      if (this.isModalPaused) return;
       if (pointer.button === 0) {
         const worldPoint = this.cameras.main.getWorldPoint(pointer.x, pointer.y);
         this.setMoveTarget(worldPoint.x, worldPoint.y);
@@ -195,12 +268,52 @@ export class PortfolioWorldScene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
 
     // Build Campus Graphics & Colliders
-    const { buildingZones, budgetBeggarZones, basketballCourtZone, gamingLoungeZone } =
-      buildCampusEnvironment(this, this.collisionGroup);
+    const {
+      buildingZones,
+      budgetBeggarZones,
+      basketballCourtZone,
+      gamingLoungeZone,
+      coffeeCartZone,
+      arcadeCabinetZone,
+      aiJanmarkZone,
+      questStampZones,
+    } = buildCampusEnvironment(this, this.collisionGroup);
+
     this.buildingZones = buildingZones;
     this.budgetBeggarZones = budgetBeggarZones;
     this.basketballCourtZone = basketballCourtZone;
     this.gamingLoungeZone = gamingLoungeZone;
+    this.coffeeCartZone = coffeeCartZone;
+    this.arcadeCabinetZone = arcadeCabinetZone;
+    this.aiJanmarkZone = aiJanmarkZone;
+    this.questStampZones = questStampZones;
+  }
+
+  public setModalOpen(isOpen: boolean): void {
+    this.isModalPaused = isOpen;
+    this.resetInputs();
+  }
+
+  public resetInputs(): void {
+    this.activeKeys.clear();
+    this.targetPointer = null;
+    this.tapIndicator?.setVisible(false);
+    if (this.input?.keyboard) {
+      this.input.keyboard.resetKeys();
+    }
+    if (this.player) {
+      this.player.setVelocity(0, 0);
+      if (this.isMoving) {
+        this.isMoving = false;
+        this.player.play(`${this.localCharacterId}_idle_${this.currentDirection}`, true);
+      }
+    }
+  }
+
+  public setSpeedMultiplier(multiplier: number, trailColor: number, durationMs: number): void {
+    this.activeSpeedMultiplier = multiplier;
+    this.activeTrailColor = trailColor;
+    this.speedBuffExpiresAt = Date.now() + durationMs;
   }
 
   public enterBuilding(building: WorldBuilding): void {
@@ -265,12 +378,19 @@ export class PortfolioWorldScene extends Phaser.Scene {
     // Clear static collision bodies
     this.collisionGroup.clear(true, true);
 
-    // Recreate collider between player and collision group
-    if (this.player) {
-      this.physics.add.collider(this.player, this.collisionGroup);
-    }
+    // Safely destroy and clear all remote players so updateRemotePlayers never accesses destroyed objects
+    this.remotePlayers.forEach((entity) => {
+      try {
+        if (entity.sprite?.active) entity.sprite.destroy();
+        if (entity.nameLabel?.active) entity.nameLabel.destroy();
+        if (entity.bubbleContainer?.active) entity.bubbleContainer.destroy();
+      } catch {
+        // ignore
+      }
+    });
+    this.remotePlayers.clear();
 
-    // Destroy all graphics/text/zones except player and tapIndicator
+    // Destroy all other graphics/text/zones except player, name, bubble and tapIndicator
     const children = this.children.getChildren().slice();
     children.forEach((child) => {
       if (
@@ -279,7 +399,11 @@ export class PortfolioWorldScene extends Phaser.Scene {
         child !== this.playerBubbleContainer &&
         child !== this.tapIndicator
       ) {
-        child.destroy();
+        try {
+          child.destroy();
+        } catch {
+          // ignore
+        }
       }
     });
   }
@@ -326,7 +450,11 @@ export class PortfolioWorldScene extends Phaser.Scene {
     this.player.body?.setSize(22, 18);
     this.player.body?.setOffset(9, 36);
 
-    this.physics.add.collider(this.player, this.collisionGroup);
+    if (this.playerCollider) {
+      this.physics.world.removeCollider(this.playerCollider);
+      this.playerCollider = null;
+    }
+    this.playerCollider = this.physics.add.collider(this.player, this.collisionGroup);
 
     // Player Name Badge
     this.playerNameLabel = this.add.text(this.player.x, this.player.y - 36, this.localVisitorName, {
@@ -385,8 +513,17 @@ export class PortfolioWorldScene extends Phaser.Scene {
     });
   }
 
-  public override update(): void {
+  public update(): void {
     if (!this.player) return;
+
+    if (this.isModalPaused) {
+      this.player.setVelocity(0, 0);
+      if (this.isMoving) {
+        this.isMoving = false;
+        this.player.play(`${this.localCharacterId}_idle_${this.currentDirection}`, true);
+      }
+      return;
+    }
 
     // If an input/textarea (like CLI or Chat) is focused in the DOM, do not move player
     const activeEl = document.activeElement;
@@ -407,17 +544,47 @@ export class PortfolioWorldScene extends Phaser.Scene {
     let vx = 0;
     let vy = 0;
 
-    const left = this.cursors?.left?.isDown || this.wasdKeys?.A?.isDown;
-    const right = this.cursors?.right?.isDown || this.wasdKeys?.D?.isDown;
-    const up = this.cursors?.up?.isDown || this.wasdKeys?.W?.isDown;
-    const down = this.cursors?.down?.isDown || this.wasdKeys?.S?.isDown;
+    // Check speed buff expiration
+    if (this.speedBuffExpiresAt > 0 && Date.now() > this.speedBuffExpiresAt) {
+      this.activeSpeedMultiplier = 1;
+      this.speedBuffExpiresAt = 0;
+    }
+    const currentSpeed = PLAYER_SPEED * this.activeSpeedMultiplier;
+
+    const left =
+      this.activeKeys.has('keya') ||
+      this.activeKeys.has('arrowleft') ||
+      this.activeKeys.has('a') ||
+      Boolean(this.cursors?.left?.isDown) ||
+      Boolean(this.wasdKeys?.A?.isDown);
+
+    const right =
+      this.activeKeys.has('keyd') ||
+      this.activeKeys.has('arrowright') ||
+      this.activeKeys.has('d') ||
+      Boolean(this.cursors?.right?.isDown) ||
+      Boolean(this.wasdKeys?.D?.isDown);
+
+    const up =
+      this.activeKeys.has('keyw') ||
+      this.activeKeys.has('arrowup') ||
+      this.activeKeys.has('w') ||
+      Boolean(this.cursors?.up?.isDown) ||
+      Boolean(this.wasdKeys?.W?.isDown);
+
+    const down =
+      this.activeKeys.has('keys') ||
+      this.activeKeys.has('arrowdown') ||
+      this.activeKeys.has('s') ||
+      Boolean(this.cursors?.down?.isDown) ||
+      Boolean(this.wasdKeys?.S?.isDown);
 
     if (left || right || up || down) {
       this.targetPointer = null;
-      if (left) vx -= PLAYER_SPEED;
-      if (right) vx += PLAYER_SPEED;
-      if (up) vy -= PLAYER_SPEED;
-      if (down) vy += PLAYER_SPEED;
+      if (left) vx -= currentSpeed;
+      if (right) vx += currentSpeed;
+      if (up) vy -= currentSpeed;
+      if (down) vy += currentSpeed;
 
       if (vx !== 0 && vy !== 0) {
         vx *= 0.7071;
@@ -429,8 +596,8 @@ export class PortfolioWorldScene extends Phaser.Scene {
       const dist = Math.hypot(dx, dy);
 
       if (dist > 8) {
-        vx = (dx / dist) * PLAYER_SPEED;
-        vy = (dy / dist) * PLAYER_SPEED;
+        vx = (dx / dist) * currentSpeed;
+        vy = (dy / dist) * currentSpeed;
       } else {
         this.targetPointer = null;
       }
@@ -440,6 +607,27 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
     const moving = vx !== 0 || vy !== 0;
     let newDirection = this.currentDirection;
+
+    // Speed buff trailing particle effect
+    if (moving && this.activeSpeedMultiplier > 1) {
+      const now = Date.now();
+      if (now - this.trailTimer > 90) {
+        this.trailTimer = now;
+        const trailDot = this.add.circle(
+          this.player.x + (Math.random() - 0.5) * 8,
+          this.player.y + 6 + (Math.random() - 0.5) * 4,
+          3,
+          this.activeTrailColor,
+        ).setDepth(11);
+        this.tweens.add({
+          targets: trailDot,
+          alpha: 0,
+          scale: 0.2,
+          duration: 350,
+          onComplete: () => trailDot.destroy(),
+        });
+      }
+    }
 
     if (moving) {
       if (Math.abs(vx) > Math.abs(vy)) {
@@ -552,6 +740,50 @@ export class PortfolioWorldScene extends Phaser.Scene {
       this.isNearGamingLounge = nearGaming;
       this.eventsBridge?.onGamingLoungeProximity?.(nearGaming);
     }
+
+    // Check Coffee / Boba Cart Proximity
+    let nearCoffee = false;
+    if (this.coffeeCartZone) {
+      if (this.coffeeCartZone.getBounds().contains(px, py)) {
+        nearCoffee = true;
+      }
+    }
+    if (nearCoffee !== this.isNearCoffeeCart) {
+      this.isNearCoffeeCart = nearCoffee;
+      this.eventsBridge?.onCoffeeCartProximity?.(nearCoffee);
+    }
+
+    // Check Arcade Cabinet Proximity
+    let nearArcade = false;
+    if (this.arcadeCabinetZone) {
+      if (this.arcadeCabinetZone.getBounds().contains(px, py)) {
+        nearArcade = true;
+      }
+    }
+    if (nearArcade !== this.isNearArcadeCabinet) {
+      this.isNearArcadeCabinet = nearArcade;
+      this.eventsBridge?.onArcadeCabinetProximity?.(nearArcade);
+    }
+
+    // Check AI Janmark Digital Clone Proximity
+    let nearAi = false;
+    if (this.aiJanmarkZone) {
+      if (this.aiJanmarkZone.getBounds().contains(px, py)) {
+        nearAi = true;
+      }
+    }
+    if (nearAi !== this.isNearAiJanmark) {
+      this.isNearAiJanmark = nearAi;
+      this.eventsBridge?.onAiJanmarkProximity?.(nearAi);
+    }
+
+    // Check Scavenger Hunt Stamp Zones — fire only ONCE per stamp (not every frame)
+    for (const qz of this.questStampZones) {
+      if (!this.emittedQuestStamps.has(qz.id) && qz.zone.getBounds().contains(px, py)) {
+        this.emittedQuestStamps.add(qz.id);
+        this.eventsBridge?.onQuestStampFound?.(qz.id);
+      }
+    }
   }
 
   private checkInteriorProximity(): void {
@@ -559,18 +791,21 @@ export class PortfolioWorldScene extends Phaser.Scene {
     const py = this.player.y;
 
     // 1. Check Project Branch Booths
-    let nearestProjectBranch: { project: Project; isWIP: boolean } | null = null;
+    let foundZone: { project: Project; isWIP: boolean } | null = null;
     for (const pz of this.interiorProjectZones) {
       const bounds = pz.zone.getBounds();
       if (bounds.contains(px, py)) {
-        nearestProjectBranch = { project: pz.project, isWIP: pz.isWIP };
+        foundZone = { project: pz.project, isWIP: pz.isWIP };
         break;
       }
     }
 
-    if (nearestProjectBranch !== this.activeNearProjectBranch) {
-      this.activeNearProjectBranch = nearestProjectBranch;
-      this.eventsBridge?.onProjectBranchProximity(nearestProjectBranch);
+    const prevId = this.activeNearProjectBranch?.project?.id ?? null;
+    const nextId = foundZone?.project?.id ?? null;
+
+    if (prevId !== nextId) {
+      this.activeNearProjectBranch = foundZone;
+      this.eventsBridge?.onProjectBranchProximity(foundZone);
     }
 
     // 2. Check Exit Doorway
@@ -602,6 +837,10 @@ export class PortfolioWorldScene extends Phaser.Scene {
       const safeName = sanitizeUserText(remote.name || 'Visitor', 24) || 'Visitor';
 
       let entity = this.remotePlayers.get(remote.visitorId);
+      if (entity && (!entity.sprite?.active || !entity.nameLabel?.active || !entity.bubbleContainer?.active)) {
+        this.remotePlayers.delete(remote.visitorId);
+        entity = undefined;
+      }
 
       if (!entity) {
         // Enforce maximum remote players in scene (anti-DoS limit)
@@ -658,9 +897,13 @@ export class PortfolioWorldScene extends Phaser.Scene {
   public removeRemotePlayer(visitorId: string): void {
     const entity = this.remotePlayers.get(visitorId);
     if (entity) {
-      entity.sprite.destroy();
-      entity.nameLabel.destroy();
-      entity.bubbleContainer.destroy();
+      try {
+        if (entity.sprite?.active) entity.sprite.destroy();
+        if (entity.nameLabel?.active) entity.nameLabel.destroy();
+        if (entity.bubbleContainer?.active) entity.bubbleContainer.destroy();
+      } catch {
+        // ignore
+      }
       this.remotePlayers.delete(visitorId);
     }
   }
@@ -670,6 +913,20 @@ export class PortfolioWorldScene extends Phaser.Scene {
     const staleIds: string[] = [];
 
     this.remotePlayers.forEach((entity, id) => {
+      // Guard against destroyed or inactive entities
+      if (
+        !entity ||
+        !entity.sprite ||
+        !entity.sprite.active ||
+        !entity.nameLabel ||
+        !entity.nameLabel.active ||
+        !entity.bubbleContainer ||
+        !entity.bubbleContainer.active
+      ) {
+        staleIds.push(id);
+        return;
+      }
+
       // Stale player garbage collection (disconnected ungracefully)
       if (now - entity.lastUpdate > 25000) {
         staleIds.push(id);
@@ -687,8 +944,8 @@ export class PortfolioWorldScene extends Phaser.Scene {
       entity.nameLabel.setPosition(entity.sprite.x, entity.sprite.y - 36);
       entity.bubbleContainer.setPosition(entity.sprite.x, entity.sprite.y - 54);
 
-      const animKey = `char_${entity.currentDirection}`;
-      if (entity.isMoving) {
+      const animKey = `male_01_${entity.isMoving ? 'walk' : 'idle'}_${entity.currentDirection}`;
+      if (this.anims.exists(animKey)) {
         entity.sprite.play(animKey, true);
       }
     });
@@ -706,7 +963,7 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
   public showRemoteReaction(reaction: WorldReaction): void {
     const entity = this.remotePlayers.get(reaction.visitorId);
-    if (entity) {
+    if (entity && entity.bubbleContainer?.active) {
       const emojiMap = { wave: '👋', heart: '❤️', sparkle: '✨' };
       this.spawnSpeechBubble(entity.bubbleContainer, emojiMap[reaction.type] || '👋', 2200);
     }
@@ -718,12 +975,13 @@ export class PortfolioWorldScene extends Phaser.Scene {
 
   public showRemoteSpeech(speech: WorldSpeech): void {
     const entity = this.remotePlayers.get(speech.visitorId);
-    if (entity) {
+    if (entity && entity.bubbleContainer?.active) {
       this.spawnSpeechBubble(entity.bubbleContainer, speech.text, SPEECH_DURATION_MS);
     }
   }
 
   private spawnSpeechBubble(container: Phaser.GameObjects.Container, text: string, duration: number): void {
+    if (!container || !container.active) return;
     container.removeAll(true);
     const cleanText = sanitizeUserText(text, 90);
     if (!cleanText) return;
@@ -752,7 +1010,9 @@ export class PortfolioWorldScene extends Phaser.Scene {
     container.setVisible(true);
 
     this.time.delayedCall(duration, () => {
-      container.removeAll(true);
+      if (container && container.active) {
+        container.removeAll(true);
+      }
     });
   }
 }

@@ -100,20 +100,24 @@ function writeLocal<T>(key: string, values: T[]) {
 export async function ensureCollabUser(profile: VisitorProfile): Promise<User | null> {
   if (!supabase) return null;
 
-  const sessionResult = await supabase.auth.getSession();
-  if (sessionResult.data.session?.user) return sessionResult.data.session.user;
+  try {
+    const sessionResult = await supabase.auth.getSession();
+    if (sessionResult.data.session?.user) return sessionResult.data.session.user;
 
-  const result = await supabase.auth.signInAnonymously({
-    options: {
-      data: {
-        display_name: profile.displayName,
-        avatar_url: profile.avatarUrl,
+    const result = await supabase.auth.signInAnonymously({
+      options: {
+        data: {
+          display_name: profile.displayName,
+          avatar_url: profile.avatarUrl,
+        },
       },
-    },
-  });
+    });
 
-  if (result.error) return null;
-  return result.data.user;
+    if (result.error) return null;
+    return result.data.user;
+  } catch {
+    return null;
+  }
 }
 
 // ── World Checkpoint & Resume System ─────────────────────────
@@ -270,6 +274,8 @@ export class SpatialMultiplayerClient {
   private lastReactionBroadcast = 0;
   private callbacks: MultiplayerCallbacks;
 
+  private isSubscribed = false;
+
   constructor(callbacks: MultiplayerCallbacks) {
     this.callbacks = callbacks;
   }
@@ -280,6 +286,7 @@ export class SpatialMultiplayerClient {
       ...visitor,
       name: sanitizeUserText(visitor.name, 32) || 'Visitor',
     };
+    this.isSubscribed = false;
 
     const channel = supabase.channel('portfolio-world-spatial', {
       config: {
@@ -359,7 +366,14 @@ export class SpatialMultiplayerClient {
       })
       .subscribe(async (status) => {
         if (status === 'SUBSCRIBED' && this.localVisitor) {
-          await channel.track(this.localVisitor);
+          this.isSubscribed = true;
+          try {
+            await channel.track(this.localVisitor);
+          } catch {
+            // ignore
+          }
+        } else if (status === 'CLOSED' || status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') {
+          this.isSubscribed = false;
         }
       });
 
@@ -374,7 +388,8 @@ export class SpatialMultiplayerClient {
     moving: boolean,
     force = false,
   ): void {
-    if (!this.channel || !this.localVisitor) return;
+    if (!this.channel || !this.localVisitor || !this.isSubscribed) return;
+    if (this.channel.state !== 'joined') return;
     if (!isValidCoordinate(x, -200, 3000) || !isValidCoordinate(y, -200, 2000)) return;
 
     const now = Date.now();
@@ -393,15 +408,20 @@ export class SpatialMultiplayerClient {
       timestamp: now,
     };
 
-    void this.channel.send({
-      type: 'broadcast',
-      event: 'player_move',
-      payload,
-    });
+    try {
+      void this.channel.send({
+        type: 'broadcast',
+        event: 'player_move',
+        payload,
+      });
+    } catch {
+      // ignore
+    }
   }
 
   public broadcastReaction(type: 'wave' | 'heart' | 'sparkle' = 'wave'): void {
-    if (!this.channel || !this.localVisitor) return;
+    if (!this.channel || !this.localVisitor || !this.isSubscribed) return;
+    if (this.channel.state !== 'joined') return;
     const now = Date.now();
     // Rate limit reaction spam (max 1 per 350ms)
     if (now - this.lastReactionBroadcast < 350) return;
@@ -412,15 +432,20 @@ export class SpatialMultiplayerClient {
       type,
       timestamp: now,
     };
-    void this.channel.send({
-      type: 'broadcast',
-      event: 'player_reaction',
-      payload,
-    });
+    try {
+      void this.channel.send({
+        type: 'broadcast',
+        event: 'player_reaction',
+        payload,
+      });
+    } catch {
+      // ignore
+    }
   }
 
   public broadcastSpeech(text: string): void {
-    if (!this.channel || !this.localVisitor) return;
+    if (!this.channel || !this.localVisitor || !this.isSubscribed) return;
+    if (this.channel.state !== 'joined') return;
     const clean = sanitizeUserText(text, 90);
     if (!clean) return;
 
@@ -436,17 +461,22 @@ export class SpatialMultiplayerClient {
       expiresAt: now + SPEECH_DURATION_MS,
     };
 
-    void this.channel.send({
-      type: 'broadcast',
-      event: 'player_speech',
-      payload,
-    });
+    try {
+      void this.channel.send({
+        type: 'broadcast',
+        event: 'player_speech',
+        payload,
+      });
+    } catch {
+      // ignore
+    }
   }
 
   public leave(): void {
+    this.isSubscribed = false;
     if (this.channel) {
-      void this.channel.untrack();
-      void this.channel.unsubscribe();
+      void this.channel.untrack().catch(() => {});
+      void this.channel.unsubscribe().catch(() => {});
       this.channel = null;
     }
   }
