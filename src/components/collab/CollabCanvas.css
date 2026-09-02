@@ -39,6 +39,27 @@
 .collab-canvas-header-actions { display: flex; align-items: center; gap: 12px; }
 .collab-canvas-header-actions > span { color: #a8a49a; font: 600 9px/1 var(--font-mono); text-transform: uppercase; }
 .collab-canvas-header-actions > span.is-local { color: #c3a784; }
+.collab-open-full-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #4b4941;
+  background: #252420;
+  color: #ece9df;
+  font: 600 10px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.collab-open-full-btn:hover {
+  border-color: var(--accent, #c3a784);
+  background: var(--accent, #c3a784);
+  color: #161613;
+}
+.collab-open-full-btn svg { width: 13px !important; height: 13px !important; }
 .collab-canvas-header-actions button,
 .collab-zoom-group button {
   display: grid;

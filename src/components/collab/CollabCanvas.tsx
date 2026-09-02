@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
+  ExternalLink,
   Flag,
   Minus,
   MousePointer2,
@@ -361,6 +362,16 @@ export function CollabCanvas({ visitorId, visitorName, visitorAvatar, liveAvaila
         </div>
         <div className="collab-canvas-header-actions">
           <span className={liveAvailable ? 'is-live' : 'is-local'}>{liveAvailable ? 'Shared live' : 'Private draft mode'}</span>
+          <a
+            href="https://collab-canvas-web-beta.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="collab-open-full-btn"
+            title="Open standalone CollabCanvas app in new tab"
+          >
+            <span>Launch Web App</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
           <button type="button" aria-label="Close canvas" onClick={onClose}><X /></button>
         </div>
       </header>

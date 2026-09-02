@@ -26,6 +26,8 @@ interface FeaturedProjectProps {
   technologies: string[];
   /** Project slug for /projects/:slug */
   slug: string;
+  /** Optional public live deployment URL */
+  liveUrl?: string;
   /** Optional public GitHub URL */
   githubUrl?: string;
   /** The visual element (MobileShowcase, etc.) */
@@ -47,6 +49,7 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
   keyEngineering,
   technologies,
   slug,
+  liveUrl,
   githubUrl,
   visual,
   layout = 'content-left',
@@ -126,6 +129,20 @@ export const FeaturedProject: React.FC<FeaturedProjectProps> = ({
 
       {/* CTA buttons */}
       <div className="flex items-center gap-4 sm:gap-5 flex-wrap pt-1">
+        {liveUrl && (
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={playHover}
+            onClick={playClick}
+            className="group inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)] bg-[var(--accent)] px-3 py-1 text-xs font-mono font-semibold uppercase tracking-[0.08em] text-[var(--background,#161614)] hover:opacity-90 transition-all duration-150 shadow-xs"
+          >
+            <span>Live Demo</span>
+            <ExternalLink className="w-3 h-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </a>
+        )}
+
         <Link
           to={`/projects/${slug}`}
           onMouseEnter={playHover}

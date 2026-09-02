@@ -318,7 +318,7 @@ export const projects: Project[] = [
     title: 'CollabCanvas — Real-Time Collaborative Whiteboard',
     category: 'Web',
     role: 'Full-Stack Developer & Architect',
-    status: 'Working Prototype',
+    status: 'Live',
     badge: 'Real-Time System',
     description: 'A full-stack collaborative whiteboard where multiple users can draw, edit, and organize visual content together in real time with role-based sharing, live presence, and persistent storage.',
     longDescription: 'CollabCanvas is a browser-based collaborative whiteboard built with React, TypeScript, tldraw, Supabase, and Cloudflare. Users can create and manage boards, draw simultaneously with other collaborators, view live cursors and online participants, upload images, invite members, assign owner/editor/viewer permissions, create share links, restore snapshots, and export board content. The real-time synchronization layer uses Cloudflare Workers and one SQLite-backed Durable Object per board. Supabase provides authentication, PostgreSQL metadata, memberships, invitations, and Row Level Security. Uploaded assets and snapshots are stored in Cloudflare R2. Security-sensitive operations—including WebSocket authorization, viewer write restrictions, invitations, asset access, and board deletion—are validated server-side.',
@@ -363,11 +363,13 @@ export const projects: Project[] = [
     technicalDecisions: 'Implemented one Durable Object per board to coordinate document updates and presence without storing every drawing movement in PostgreSQL. Issued short-lived single-use WebSocket tickets to validate permissions server-side before connections enter room state.',
     challenges: 'Ensuring viewer permissions are strictly enforced on the server rather than relying solely on disabled frontend controls, and managing reliable board deletion. Solved by validating viewer write restrictions worker-side and implementing a deletion coordinator that revokes metadata first before executing retryable cleanup of Durable Objects and R2 assets.',
     lessonsLearned: 'Decoupling live ephemeral state (Durable Objects) from persistent account metadata (PostgreSQL) delivers sub-100ms real-time drawing sync without database contention.',
-    currentLimitations: 'Feature-complete prototype ready to deploy; production deployment pending cloud hosting infrastructure budget.',
+    currentLimitations: 'Live in public beta on Vercel with real-time multiplayer drawing and persistence.',
     results: 'Built a secure, full-stack collaborative whiteboard with live presence, persistent storage, role-based sharing, WCAG 2.2 accessibility remediation, and automated test coverage.',
     process: 'Designed & developed real-time sync architecture with Cloudflare Durable Objects -> Configured Supabase Auth & PostgreSQL RLS -> Built canvas UI with React, TypeScript & tldraw -> Integrated R2 asset storage & snapshot pipeline -> Audited WCAG 2.2 AA accessibility and configured automated tests.',
     image: 'img/collab.png',
     images: ['img/collab.png', 'img/collab1.png', 'img/collab2.png'],
+    liveUrl: 'https://collab-canvas-web-beta.vercel.app/',
+    githubUrl: 'https://github.com/RaizelHub',
     featured: true
   },
   {

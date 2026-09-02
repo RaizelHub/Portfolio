@@ -113,7 +113,7 @@ export const ProjectsSection = () => {
         category="WEB"
         title="Collab"
         subtitle="Real-Time Collaborative Whiteboard"
-        status="Status: Working prototype"
+        status="Status: Live Beta (Vercel)"
         description="A browser-based collaborative whiteboard where multiple users can draw, edit, and organize visual content together in real time with role-based sharing, live presence, and persistent storage."
         keyEngineering={[
           'Real-time collaboration with live cursors & multiplayer drawing sync',
@@ -133,6 +133,7 @@ export const ProjectsSection = () => {
           'Supabase',
         ]}
         slug="collabcanvas"
+        liveUrl="https://collab-canvas-web-beta.vercel.app/"
         githubUrl="https://github.com/RaizelHub"
         layout="content-left"
         visual={<DesktopShowcase projectName="Collab" />}

@@ -471,6 +471,18 @@ export function ProjectCartGuide({ project, isWIP }: Props) {
           </div>
 
           <div className="flex items-center gap-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1.5 border border-black bg-[var(--accent,#c3a784)] px-3.5 py-2 text-xs font-mono font-bold text-black uppercase hover:opacity-90 transition-opacity"
+              >
+                <span>Live Demo</span>
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            )}
+
             <Link
               to={`/projects/${project.slug}`}
               className="flex items-center gap-1.5 border border-black bg-black px-3.5 py-2 text-xs font-mono font-bold text-white uppercase hover:bg-[#333333] transition-colors"
