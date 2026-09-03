@@ -125,22 +125,22 @@ export const Technologies: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="technologies" className="border-b border-[var(--border-subtle)] py-[var(--section-space)]">
+    <SectionContainer id="technologies" className="border-b-2 border-black dark:border-white py-[var(--section-space)]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
-          className="section-heading font-title text-[var(--text-primary)] md:col-span-5 md:mb-0"
+          className="section-heading font-title text-[var(--text-primary)] font-black md:col-span-5 md:mb-0"
         >
           Technologies
         </h2>
 
-        <p className="body-copy text-[var(--text-secondary)] md:col-span-6 md:col-start-7">
+        <p className="body-copy text-[var(--text-secondary)] font-medium md:col-span-6 md:col-start-7">
           Languages, frameworks, databases, and workflow orchestration tools applied across practical systems.
         </p>
       </motion.div>
 
       {/* ── Grouped Technology Cards ── */}
-      <div className="grid grid-cols-1 border-t border-[var(--border-subtle)] md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {TECH_GROUPS.map((group, idx) => {
           const GroupIcon = group.icon;
 
@@ -148,18 +148,23 @@ export const Technologies: React.FC = () => {
             <motion.div
               key={group.id}
               {...entrance(idx * 0.05)}
-              className="border-b border-[var(--border-subtle)] px-0 py-8 md:px-6 lg:min-h-[330px] lg:border-r lg:px-8 [&:nth-child(3n)]:lg:border-r-0"
+              className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
             >
               {/* Group Header */}
-              <div className="mb-5 flex items-center gap-2 border-b border-[var(--border-subtle)] pb-4">
-                <GroupIcon className="w-4 h-4 text-[var(--accent)]" />
-                <h3 className="font-sans font-bold text-sm text-[var(--text-primary)]">
-                  {group.title}
-                </h3>
+              <div className="mb-5 flex items-center justify-between border-b-2 border-black dark:border-white pb-3.5">
+                <div className="flex items-center gap-2">
+                  <GroupIcon className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
+                  <h3 className="font-title font-black text-base text-[var(--text-primary)]">
+                    {group.title}
+                  </h3>
+                </div>
+                <span className="font-mono text-[10px] font-bold text-[var(--text-muted)] uppercase">
+                  {group.items.length} Skills
+                </span>
               </div>
 
               {/* Items List with Real Logo Colors */}
-              <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+              <div className="grid grid-cols-1 gap-2">
                 {group.items.map((item) => {
                   const ItemIcon = item.icon;
 
@@ -167,15 +172,15 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex min-h-10 items-center gap-2.5 border-b border-transparent py-2 transition-all duration-200 hover:border-[var(--border-subtle)] hover:translate-x-0.5"
+                      className="group flex min-h-10 items-center gap-2.5 border border-black dark:border-white bg-[var(--surface-elevated)] px-3 py-1.5 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1.5px_1.5px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2.5px_2.5px_0px_0px_rgba(255,255,255,1)]"
                     >
-                      <div className="flex h-7 w-7 shrink-0 items-center justify-center">
+                      <div className="flex h-6 w-6 shrink-0 items-center justify-center">
                         <ItemIcon
                           className="w-4 h-4 transition-transform group-hover:scale-110"
                           style={{ color: item.color }}
                         />
                       </div>
-                      <span className="break-safe font-sans text-sm font-medium leading-snug text-[var(--text-primary)]">
+                      <span className="break-safe font-mono text-xs font-bold leading-snug text-[var(--text-primary)]">
                         {item.name}
                       </span>
                     </div>

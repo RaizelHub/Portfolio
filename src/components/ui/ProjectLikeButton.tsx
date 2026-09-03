@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  fetchProjectLikeCount,
-  toggleProjectLike,
   hasUserLiked,
+  getCachedLikeCounts,
+  toggleProjectLike,
   subscribeToProjectLikes,
 } from '../../lib/projectLikes';
 import { useSound } from '../../context/SoundContext';
@@ -22,8 +22,11 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
   variant = 'default',
   className = '',
 }) => {
-  const [likes, setLikes] = useState<number>(0);
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [likes, setLikes] = useState<number>(() => {
+    const cached = getCachedLikeCounts();
+    return cached[slug] ?? 0;
+  });
+  const [isLiked, setIsLiked] = useState<boolean>(() => hasUserLiked(slug));
   const [isAnimating, setIsAnimating] = useState(false);
   const [plusOnes, setPlusOnes] = useState<{ id: number; text: string }[]>([]);
   const { playClick } = useSound();
@@ -32,12 +35,13 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
     let isMounted = true;
     setIsLiked(hasUserLiked(slug));
 
-    // Fetch initial real DB count
-    fetchProjectLikeCount(slug).then((count) => {
-      if (isMounted) setLikes(count);
-    });
+    // Fast memory read
+    const cached = getCachedLikeCounts();
+    if (cached[slug] !== undefined) {
+      setLikes(cached[slug]);
+    }
 
-    // Realtime subscription for live sync
+    // Realtime subscription for live sync across visitors
     const unsubscribe = subscribeToProjectLikes(slug, (newCount) => {
       if (isMounted) {
         setLikes(newCount);
@@ -64,7 +68,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
     setIsAnimating(true);
 
     const newId = Date.now() + Math.random();
-    setPlusOnes((prev) => [...prev, { id: newId, text: nextLiked ? '+1 ❤️' : '-1' }]);
+    setPlusOnes((prev) => [...prev, { id: newId, text: nextLiked ? '+1' : '-1' }]);
 
     setTimeout(() => {
       setPlusOnes((prev) => prev.filter((item) => item.id !== newId));
@@ -90,20 +94,18 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           onClick={handleToggle}
           title={isLiked ? `Unlike ${projectName}` : `Like ${projectName} (1 like per person)`}
           aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
-          className={`group relative inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-full border transition-all duration-200 cursor-pointer select-none ${
-            isLiked
-              ? 'bg-[var(--surface-elevated)] border-[var(--border)] text-[var(--text-primary)] font-semibold'
-              : 'bg-[var(--surface)] border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
-          }`}
+          className={`group relative inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono font-bold border-2 border-black dark:border-white transition-all duration-120 cursor-pointer select-none active:translate-x-0.5 active:translate-y-0.5 active:shadow-none ${isLiked
+              ? 'bg-[var(--surface-elevated)] text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]'
+              : 'bg-[var(--surface)] text-[var(--text-secondary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] hover:text-[var(--text-primary)]'
+            }`}
         >
           <motion.div
             animate={isAnimating && isLiked ? { scale: [1, 1.45, 0.9, 1.15, 1] } : {}}
             transition={{ duration: 0.35 }}
           >
             <Heart
-              className={`w-3.5 h-3.5 transition-colors ${
-                isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
-              }`}
+              className={`w-3.5 h-3.5 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500 group-hover:fill-rose-500'
+                }`}
             />
           </motion.div>
           <span>{likes}</span>
@@ -118,9 +120,8 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
               animate={{ opacity: 0, y: -22, scale: 1.2 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.75, ease: 'easeOut' }}
-              className={`pointer-events-none absolute -top-2 right-2 text-xs font-mono font-bold select-none ${
-                item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
-              }`}
+              className={`pointer-events-none absolute -top-2 right-2 text-xs font-mono font-black select-none ${item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
+                }`}
             >
               {item.text}
             </motion.span>
@@ -138,20 +139,15 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           onClick={handleToggle}
           title={isLiked ? `Unlike ${projectName}` : `Like ${projectName}`}
           aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
-          className={`group flex items-center gap-1.5 font-mono text-xs transition-colors cursor-pointer select-none ${
-            isLiked
-              ? 'text-[var(--text-primary)] font-semibold'
-              : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
-          }`}
+          className={`group flex items-center gap-1.5 border border-black dark:border-white bg-[var(--surface-elevated)] px-2 py-0.5 font-mono text-xs font-bold text-[var(--text-primary)] shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1.5px_1.5px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer select-none`}
         >
           <motion.div
             animate={isAnimating && isLiked ? { scale: [1, 1.4, 0.9, 1.1, 1] } : {}}
             transition={{ duration: 0.35 }}
           >
             <Heart
-              className={`w-3.5 h-3.5 transition-colors ${
-                isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
-              }`}
+              className={`w-3.5 h-3.5 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500 group-hover:fill-rose-500'
+                }`}
             />
           </motion.div>
           <span>{likes}</span>
@@ -166,7 +162,7 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
               animate={{ opacity: 0, y: -18, scale: 1.1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="pointer-events-none absolute -top-2 right-0 text-[11px] font-mono font-bold text-rose-500 select-none"
+              className="pointer-events-none absolute -top-2 right-0 text-[11px] font-mono font-black text-rose-500 select-none"
             >
               {item.text}
             </motion.span>
@@ -184,11 +180,10 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
         onClick={handleToggle}
         title={isLiked ? `Click to unlike ${projectName}` : `Like this project (1 like per person)`}
         aria-label={isLiked ? `Unlike ${projectName}` : `Like ${projectName}, current likes: ${likes}`}
-        className={`group relative flex items-center gap-2 border px-3.5 py-1.5 font-mono text-xs transition-all duration-200 cursor-pointer select-none ${
-          isLiked
-            ? 'border-[var(--border)] bg-[var(--surface-elevated)] text-[var(--text-primary)] font-semibold shadow-xs'
-            : 'border-[var(--border-subtle)] bg-[var(--surface)] text-[var(--text-secondary)] hover:border-[var(--border)] hover:text-[var(--text-primary)] hover:-translate-y-px'
-        }`}
+        className={`group relative flex items-center gap-2 border-2 border-black dark:border-white px-3.5 py-1.5 font-mono text-xs font-bold transition-all duration-120 cursor-pointer select-none active:translate-x-0.5 active:translate-y-0.5 active:shadow-none ${isLiked
+            ? 'bg-[var(--surface-elevated)] text-[var(--text-primary)] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
+            : 'bg-[var(--surface)] text-[var(--text-primary)] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]'
+          }`}
       >
         <motion.div
           animate={isAnimating && isLiked ? { scale: [1, 1.5, 0.85, 1.2, 1], rotate: [0, -12, 12, -6, 0] } : {}}
@@ -196,15 +191,14 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
           className="shrink-0"
         >
           <Heart
-            className={`w-3.5 h-3.5 transition-colors ${
-              isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500/60 group-hover:text-rose-500'
-            }`}
+            className={`w-3.5 h-3.5 transition-colors ${isLiked ? 'fill-rose-500 text-rose-500' : 'text-rose-500 group-hover:fill-rose-500'
+              }`}
           />
         </motion.div>
 
         <span>{isLiked ? 'Liked' : 'Like'}</span>
-        <span className="opacity-40">·</span>
-        <span className="font-semibold">{likes}</span>
+        <span className="opacity-40">|</span>
+        <span className="font-bold">{likes}</span>
       </button>
 
       {/* Floating feedback animation */}
@@ -216,9 +210,8 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
             animate={{ opacity: 0, y: -24, scale: 1.3 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className={`pointer-events-none absolute -top-3 right-3 text-xs font-mono font-bold select-none ${
-              item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
-            }`}
+            className={`pointer-events-none absolute -top-3 right-3 text-xs font-mono font-black select-none ${item.text.startsWith('+') ? 'text-rose-500' : 'text-[var(--text-muted)]'
+              }`}
           >
             {item.text}
           </motion.span>

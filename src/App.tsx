@@ -23,7 +23,7 @@ function PortfolioShell() {
       {!isCollab && <ScrollProgress />}
       {!isCollab && <Sidebar />}
 
-      <div className={isCollab ? 'min-h-screen' : 'flex min-h-screen flex-col lg:pr-64'}>
+      <div className={isCollab ? 'min-h-screen' : 'flex min-h-screen flex-col lg:pl-64'}>
         <main className={isCollab ? 'min-h-screen' : 'flex-grow'}>
           <ErrorBoundary>
             <Suspense fallback={<div className="min-h-screen bg-[#11110f]" aria-label="Opening Collab" />}>

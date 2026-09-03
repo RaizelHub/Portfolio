@@ -107,44 +107,44 @@ export const Projects = () => {
             to="/#projects"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
+            className="inline-flex items-center gap-2 border-2 border-black dark:border-white bg-[var(--surface)] px-3.5 py-1.5 text-xs font-mono font-bold text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
           >
-            <ArrowLeft className="w-4 h-4 text-[var(--accent)]" />
+            <ArrowLeft className="w-4 h-4 text-[var(--text-primary)]" strokeWidth={2.5} />
             <span>Return to Overview</span>
           </Link>
         </div>
 
         {/* Section Header */}
-        <div className="mb-12 max-w-4xl border-b border-[var(--border-subtle)] pb-10 pt-6">
-          <span className="mb-4 block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]">
+        <div className="mb-12 max-w-4xl border-b-2 border-black dark:border-white pb-10 pt-6">
+          <span className="mb-3 inline-block border-2 border-black dark:border-white bg-[var(--surface)] px-2.5 py-0.5 font-mono text-xs font-black uppercase tracking-[0.16em] text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
             Project Directory
           </span>
           <h1
-            className="section-heading mb-5 font-title text-[var(--text-primary)]"
+            className="section-heading mb-5 font-title text-[var(--text-primary)] font-black"
           >
             All Repositories &amp; Work
           </h1>
-          <p className="body-copy text-[var(--text-secondary)]">
+          <p className="body-copy text-[var(--text-secondary)] font-medium text-sm sm:text-base">
             The complete collection of full-stack web platforms, mobile applications, automation workflows, and hardware projects.
           </p>
         </div>
 
         {/* Controls Container: Tabs + Search Bar */}
-        <div className="mb-14 flex flex-col items-stretch justify-between gap-5 border-b border-[var(--border-subtle)] pb-7 md:flex-row md:items-center">
+        <div className="mb-14 flex flex-col items-stretch justify-between gap-5 border-b-2 border-black dark:border-white pb-7 md:flex-row md:items-center">
           {/* Category filter tabs */}
-          <div className="flex flex-wrap gap-1.5 order-2 md:order-1 text-xs font-mono">
+          <div className="flex flex-wrap gap-2 order-2 md:order-1 text-xs font-mono">
             <button
               onMouseEnter={playHover}
               onClick={() => {
                 playClick();
                 setActiveCategory('All');
               }}
-              className={`inline-flex min-h-9 items-center gap-1.5 border px-3 py-1.5 transition-colors ${activeCategory === 'All'
-                ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
-                : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
+              className={`inline-flex min-h-9 items-center gap-1.5 border-2 border-black dark:border-white px-3.5 py-1.5 font-bold transition-all duration-120 cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none ${activeCategory === 'All'
+                ? 'bg-black dark:bg-white text-white dark:text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
+                : 'bg-[var(--surface)] text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
                 }`}
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
+              <LayoutGrid className="w-3.5 h-3.5" strokeWidth={2.5} />
               <span>All ({projects.length})</span>
             </button>
 
@@ -164,12 +164,12 @@ export const Projects = () => {
                       playClick();
                       setActiveCategory(cat);
                     }}
-                    className={`inline-flex min-h-9 items-center gap-1.5 border px-3 py-1.5 transition-colors ${isActive
-                      ? 'bg-[var(--accent)] text-[var(--on-accent)] border-[var(--accent)] font-semibold shadow-xs'
-                      : 'bg-[var(--surface)] text-[var(--text-secondary)] border-[var(--border-subtle)] hover:border-[var(--border)] hover:text-[var(--text-primary)]'
+                    className={`inline-flex min-h-9 items-center gap-1.5 border-2 border-black dark:border-white px-3.5 py-1.5 font-bold transition-all duration-120 cursor-pointer active:translate-x-0.5 active:translate-y-0.5 active:shadow-none ${isActive
+                      ? 'bg-black dark:bg-white text-white dark:text-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
+                      : 'bg-[var(--surface)] text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
                       }`}
                   >
-                    <Icon className="w-3.5 h-3.5" />
+                    <Icon className="w-3.5 h-3.5" strokeWidth={2.5} />
                     <span>{meta.tab} ({categoryCounts[cat]})</span>
                   </button>
                 );
@@ -178,13 +178,13 @@ export const Projects = () => {
 
           {/* Search bar */}
           <div className="relative order-1 md:order-2 w-full md:max-w-xs shrink-0">
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-[var(--text-muted)]" />
+            <Search className="absolute left-3 top-2.5 w-4 h-4 text-[var(--text-primary)]" strokeWidth={2.5} />
             <input
               type="text"
               placeholder="Search stack, title, scope..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full border border-[var(--border-subtle)] bg-[var(--surface)] py-2 pl-9 pr-4 font-mono text-xs text-[var(--text-primary)] transition-colors placeholder:text-[var(--text-muted)] focus:border-[var(--accent)] focus:outline-none"
+              className="w-full border-2 border-black dark:border-white bg-[var(--surface)] py-2 pl-9 pr-4 font-mono text-xs font-bold text-[var(--text-primary)] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] transition-colors placeholder:text-[var(--text-muted)] focus:outline-none"
             />
           </div>
         </div>
@@ -206,17 +206,17 @@ export const Projects = () => {
                     >
                       {/* Category Header */}
                       <div className="mb-2 flex min-w-0 items-center gap-2.5">
-                        <div className="p-1.5 rounded-md bg-[var(--surface-elevated)] text-[var(--accent)]">
-                          <Icon className="w-4 h-4" />
+                        <div className="p-1.5 border-2 border-black dark:border-white bg-[var(--surface-elevated)] text-[var(--accent)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+                          <Icon className="w-4 h-4" strokeWidth={2.5} />
                         </div>
-                        <h3 className="flex min-w-0 flex-wrap items-center gap-2 font-sans text-base font-semibold text-[var(--text-primary)]">
+                        <h3 className="flex min-w-0 flex-wrap items-center gap-2 font-title text-lg font-black text-[var(--text-primary)]">
                           {group.meta?.label || group.category}
-                          <span className="font-mono text-xs font-normal text-[var(--text-muted)]">
+                          <span className="font-mono text-xs font-bold text-[var(--text-muted)]">
                             ({group.projects.length})
                           </span>
                         </h3>
                       </div>
-                      <p className="text-xs text-[var(--text-secondary)] font-sans mb-6">
+                      <p className="text-xs text-[var(--text-secondary)] font-mono font-medium mb-6">
                         {group.meta?.description}
                       </p>
 
@@ -244,12 +244,12 @@ export const Projects = () => {
             )}
           </>
         ) : (
-          <div className="text-center py-16 bg-[var(--surface)] border border-[var(--border-subtle)] rounded-xl p-6 max-w-md mx-auto font-mono">
+          <div className="text-center py-16 bg-[var(--surface)] border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] p-6 max-w-md mx-auto font-mono">
             <FolderOpen className="w-10 h-10 text-[var(--text-muted)] mx-auto mb-3" />
-            <h3 className="font-bold text-[var(--text-primary)] text-sm uppercase">
+            <h3 className="font-black text-[var(--text-primary)] text-sm uppercase">
               No repositories matched
             </h3>
-            <p className="text-xs text-[var(--text-secondary)] mt-1">
+            <p className="text-xs text-[var(--text-secondary)] mt-1 font-bold">
               Adjust search query or select another category filter.
             </p>
           </div>

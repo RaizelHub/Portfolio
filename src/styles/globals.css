@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Smooch+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Slabo+13px&family=Smooch+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -9,10 +9,11 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --font-title: 'Smooch Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
+  --font-slabo: 'Slabo 13px', serif;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — LIGHT MODE (MINIMALIST TITANIUM & PORCELAIN)
+   DESIGN TOKENS — LIGHT MODE (NEO-BRUTALISM BOLD CONTRAST)
    ══════════════════════════════════════════════════════════════════════════════ */
 :root {
   /* Font Family Tokens */
@@ -20,44 +21,45 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --font-title: 'Smooch Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
+  --font-slabo: 'Slabo 13px', serif;
 
-  /* Surfaces */
-  --background: #fafafa;
-  --background-secondary: #f4f4f5;
-  --surface: #e4e4e7;
+  /* Surfaces: Crisp Off-White Brutalist Canvas */
+  --background: #f5f4ee;
+  --background-secondary: #ece9df;
+  --surface: #ffffff;
   --surface-elevated: #ffffff;
-  --surface-hover: #d4d4d8;
+  --surface-hover: #f3efe6;
 
-  /* Borders */
-  --border: #d4d4d8;
-  --border-subtle: #e4e4e7;
+  /* High-Contrast Bold Structural Borders */
+  --border: #000000;
+  --border-subtle: #000000;
 
-  /* Typography: Strong Neutral */
-  --text-primary: #09090b;
-  --text-secondary: #52525b;
-  --text-muted: #71717a;
+  /* Typography */
+  --text-primary: #000000;
+  --text-secondary: #27272a;
+  --text-muted: #52525b;
 
-  /* Titanium Obsidian Accent */
-  --accent: #18181b;
-  --accent-hover: #000000;
-  --accent-soft: rgba(24, 24, 27, 0.08);
+  /* Accent */
+  --accent: #000000;
+  --accent-hover: #18181b;
+  --accent-soft: rgba(0, 0, 0, 0.08);
   --on-accent: #ffffff;
 
   /* Telemetry / Contribution Levels */
-  --accent-level-1: rgba(24, 24, 27, 0.18);
-  --accent-level-2: rgba(24, 24, 27, 0.42);
-  --accent-level-3: rgba(24, 24, 27, 0.68);
-  --accent-level-4: #18181b;
+  --accent-level-1: rgba(0, 0, 0, 0.15);
+  --accent-level-2: rgba(0, 0, 0, 0.40);
+  --accent-level-3: rgba(0, 0, 0, 0.70);
+  --accent-level-4: #000000;
 
   /* Semantic */
-  --success: #52525b;
-  --warning: #71717a;
-  --error: #e11d48;
-  --info: #52525b;
-  --focus: #18181b;
+  --success: #16a34a;
+  --warning: #ca8a04;
+  --error: #dc2626;
+  --info: #0284c7;
+  --focus: #000000;
 
   /* Selection */
-  --selection-bg: #18181b;
+  --selection-bg: #000000;
   --selection-color: #ffffff;
 
   /* Controlled Layout & Whitespace */
@@ -66,7 +68,7 @@
   --content-width: 1340px;
   --section-space: clamp(4.5rem, 7vw, 7rem);
 
-  /* Typography Scale — Refined & Well-Proportioned */
+  /* Typography Scale */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
   --text-base: clamp(0.9375rem, 0.2vw + 0.875rem, 1rem);
@@ -75,20 +77,24 @@
   --text-section-title: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
   --text-hero-title: clamp(2rem, 2.8vw + 0.6rem, 3.25rem);
 
-  /* Restrained Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
 
-  /* Soft Shadows */
-  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.05);
+  /* Hard Brutalist Offset Shadows */
+  --brutal-shadow: 4px 4px 0px 0px #000000;
+  --brutal-shadow-sm: 2px 2px 0px 0px #000000;
+  --brutal-shadow-lg: 6px 6px 0px 0px #000000;
+  --brutal-shadow-hover: 6px 6px 0px 0px #000000;
+  --shadow-soft: 4px 4px 0px 0px #000000;
 
   color-scheme: light;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS — DARK MODE (OBSIDIAN NOIR & LUMINOUS TITANIUM SILVER)
+   DESIGN TOKENS — DARK MODE (NEO-BRUTALISM OBSIDIAN & STARK WHITE)
    ══════════════════════════════════════════════════════════════════════════════ */
 .dark,
 html.dark {
@@ -97,48 +103,53 @@ html.dark {
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --font-title: 'Smooch Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
+  --font-slabo: 'Slabo 13px', serif;
 
-  /* Surfaces: Deep Obsidian Noir */
+  /* Surfaces: Deep Midnight Obsidian */
   --background: #090a0c;
-  --background-secondary: #0d0f12;
-  --surface: #13161a;
-  --surface-elevated: #1a1e24;
-  --surface-hover: #222830;
+  --background-secondary: #101216;
+  --surface: #14171d;
+  --surface-elevated: #1c2028;
+  --surface-hover: #232833;
 
-  /* Hairline Borders */
-  --border: #2a313c;
-  --border-subtle: #1a1f26;
+  /* High-Contrast Stark White Structural Borders */
+  --border: #ffffff;
+  --border-subtle: #ffffff;
 
-  /* Pure White & Silver Typography */
+  /* Pure White & High-Contrast Typography */
   --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
 
-  /* Luminous Titanium Silver Accent */
-  --accent: #e2e8f0;
-  --accent-hover: #ffffff;
-  --accent-soft: rgba(226, 232, 240, 0.12);
-  --on-accent: #090a0c;
+  /* Luminous White Accent */
+  --accent: #ffffff;
+  --accent-hover: #f1f5f9;
+  --accent-soft: rgba(255, 255, 255, 0.12);
+  --on-accent: #000000;
 
   /* Telemetry / Contribution Levels */
-  --accent-level-1: rgba(226, 232, 240, 0.20);
-  --accent-level-2: rgba(226, 232, 240, 0.45);
-  --accent-level-3: rgba(226, 232, 240, 0.70);
+  --accent-level-1: rgba(255, 255, 255, 0.20);
+  --accent-level-2: rgba(255, 255, 255, 0.48);
+  --accent-level-3: rgba(255, 255, 255, 0.78);
   --accent-level-4: #ffffff;
 
   /* Semantic */
-  --success: #94a3b8;
-  --warning: #cbd5e1;
-  --error: #f43f5e;
-  --info: #94a3b8;
-  --focus: #e2e8f0;
+  --success: #22c55e;
+  --warning: #eab308;
+  --error: #ef4444;
+  --info: #38bdf8;
+  --focus: #ffffff;
 
   /* Selection */
-  --selection-bg: #e2e8f0;
-  --selection-color: #090a0c;
+  --selection-bg: #ffffff;
+  --selection-color: #000000;
 
-  /* Soft Ambient Shadows */
-  --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.55);
+  /* Hard Brutalist Offset Shadows */
+  --brutal-shadow: 4px 4px 0px 0px #ffffff;
+  --brutal-shadow-sm: 2px 2px 0px 0px #ffffff;
+  --brutal-shadow-lg: 6px 6px 0px 0px #ffffff;
+  --brutal-shadow-hover: 6px 6px 0px 0px #ffffff;
+  --shadow-soft: 4px 4px 0px 0px #ffffff;
 
   color-scheme: dark;
 }
@@ -251,7 +262,7 @@ html.dark {
     text-wrap: balance;
   }
 
-  /* 3. Roboto Condensed: Primary Body Copy & General UI */
+  /* 3. Roboto Condensed / Sans: Primary Body Copy & General UI */
   p,
   .font-sans {
     font-family: var(--font-sans);
@@ -264,10 +275,110 @@ html.dark {
     font-family: var(--font-mono);
   }
 
-  /* 2. Unbounded: Interactive Navigation & Action Buttons */
+  /* 2. Unbounded / Orbitron: Interactive Navigation & Action Buttons */
   .font-nav {
     font-family: var(--font-nav);
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NEO-BRUTALISM UTILITIES & INTERACTION CLASSES
+   ══════════════════════════════════════════════════════════════════════════════ */
+.brutal-card {
+  border: 2px solid var(--border);
+  background: var(--surface);
+  box-shadow: 4px 4px 0px 0px var(--border);
+  transition: transform 150ms var(--ease-out), box-shadow 150ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
+}
+
+.brutal-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--border);
+}
+
+.brutal-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px var(--border);
+}
+
+.brutal-box {
+  border: 2px solid var(--border);
+  background: var(--surface-elevated);
+  box-shadow: 3px 3px 0px 0px var(--border);
+}
+
+.brutal-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--border);
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: 3px 3px 0px 0px var(--border);
+  font-weight: 700;
+  transition: transform 120ms var(--ease-out), box-shadow 120ms var(--ease-out), background-color 120ms ease;
+  cursor: pointer;
+}
+
+.brutal-btn-primary:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px 0px var(--border);
+}
+
+.brutal-btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px var(--border);
+}
+
+.brutal-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  box-shadow: 3px 3px 0px 0px var(--border);
+  font-weight: 700;
+  transition: transform 120ms var(--ease-out), box-shadow 120ms var(--ease-out), background-color 120ms ease;
+  cursor: pointer;
+}
+
+.brutal-btn-secondary:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4.5px 4.5px 0px 0px var(--border);
+  background: var(--surface-hover);
+}
+
+.brutal-btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px 0px var(--border);
+}
+
+.brutal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1.5px solid var(--border);
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  box-shadow: 1.5px 1.5px 0px 0px var(--border);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.brutal-input {
+  border: 2px solid var(--border);
+  background: var(--background);
+  color: var(--text-primary);
+  box-shadow: 2.5px 2.5px 0px 0px var(--border);
+  transition: box-shadow 120ms ease;
+}
+
+.brutal-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0px 0px var(--border);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -279,7 +390,7 @@ html.dark {
   max-width: none;
   font-family: var(--font-title);
   font-size: var(--text-hero-title);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.05;
   letter-spacing: 0.01em;
   white-space: nowrap;
@@ -290,7 +401,7 @@ html.dark {
   max-width: 28ch;
   font-family: var(--font-title);
   font-size: var(--text-section-title);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: 0.01em;
 }
@@ -300,7 +411,7 @@ html.dark {
   max-width: 32ch;
   font-family: var(--font-title);
   font-size: var(--text-project-title);
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.18;
   letter-spacing: 0.01em;
 }
@@ -319,7 +430,7 @@ html.dark {
 .meta-label {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent);
@@ -335,33 +446,38 @@ html.dark {
    ══════════════════════════════════════════════════════════════════════════════ */
 .media-frame {
   position: relative;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-subtle);
+  border: 2px solid var(--border);
   background: var(--surface);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
-  transition: border-color 250ms var(--ease-out);
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
 }
 
 .media-frame:hover {
-  border-color: var(--border);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--border);
+}
+
+.font-slabo {
+  font-family: var(--font-slabo);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
    SCROLLBAR & SELECTION
    ══════════════════════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: var(--background);
+  border-left: 2px solid var(--border);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--border);
-  border-radius: 4px;
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {

@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="border-t border-[var(--border-subtle)] bg-[var(--background)] py-10 font-mono text-xs text-[var(--text-secondary)] transition-colors">
+    <footer className="border-t-2 border-black dark:border-white bg-[var(--background)] py-10 font-mono text-xs text-[var(--text-secondary)] transition-colors">
       <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
         <div className="flex flex-col md:flex-row items-center justify-between gap-5">
           {/* Brand Info */}
@@ -33,14 +33,14 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Direct Social & Contact Links */}
-          <div className="flex items-center gap-4 text-xs font-mono text-[var(--text-secondary)]">
+          <div className="flex items-center gap-4 text-xs font-mono font-bold text-[var(--text-primary)]">
             <a
               href={profile.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="hover:text-[var(--text-primary)] transition-colors"
+              className="hover:underline transition-colors"
             >
               GitHub
             </a>
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="hover:text-[var(--text-primary)] transition-colors"
+              className="hover:underline transition-colors"
             >
               LinkedIn
             </a>
@@ -60,22 +60,22 @@ export const Footer: React.FC = () => {
               href={`mailto:${profile.email}`}
               onMouseEnter={playHover}
               onClick={playClick}
-              className="hover:text-[var(--text-primary)] transition-colors"
+              className="hover:underline transition-colors"
             >
               Email
             </a>
           </div>
 
           {/* Back to top & copyright */}
-          <div className="flex items-center gap-4 text-[var(--text-muted)] select-none text-[11px]">
+          <div className="flex items-center gap-4 text-[var(--text-muted)] select-none text-[11px] font-mono">
             <span>&copy; {new Date().getFullYear()}</span>
             <button
               onClick={handleBackToTop}
-              className="flex min-h-9 items-center gap-1 border border-[var(--border-subtle)] bg-[var(--surface)] p-1.5 font-mono text-[10px] uppercase transition-colors hover:border-[var(--accent)] hover:text-[var(--text-primary)]"
+              className="flex min-h-9 items-center gap-1.5 border-2 border-black dark:border-white bg-[var(--surface)] px-2.5 py-1 font-mono text-[10px] font-bold uppercase text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all cursor-pointer"
               title="Back to Top"
             >
               <span>Top</span>
-              <ArrowUp className="w-3 h-3 text-[var(--accent)]" />
+              <ArrowUp className="w-3 h-3 text-[var(--accent)]" strokeWidth={2.5} />
             </button>
           </div>
         </div>

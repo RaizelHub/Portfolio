@@ -184,8 +184,9 @@ export function subscribeToProjectLikes(slug: string, onUpdate: (newCount: numbe
   if (!client) return () => {};
 
   try {
+    const channelId = `project_likes_${slug}_${Math.random().toString(36).substring(2, 9)}`;
     const channel = client
-      .channel(`project_likes_channel_${slug}`)
+      .channel(channelId)
       .on(
         'postgres_changes',
         {
@@ -206,7 +207,11 @@ export function subscribeToProjectLikes(slug: string, onUpdate: (newCount: numbe
       .subscribe();
 
     return () => {
-      client.removeChannel(channel);
+      try {
+        client.removeChannel(channel);
+      } catch {
+        // Safe channel cleanup
+      }
     };
   } catch (err) {
     console.error('Error subscribing to project likes:', err);

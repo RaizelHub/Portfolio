@@ -44,7 +44,7 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
   if (variant === 'mobile') {
     return (
       <div
-        className="flex cursor-default select-none items-center justify-between py-1 font-mono text-xs text-[var(--text-secondary)]"
+        className="flex cursor-default select-none items-center justify-between border-2 border-black dark:border-white bg-[var(--surface)] px-2.5 py-1.5 font-mono text-xs text-[var(--text-secondary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
         role="status"
         aria-label={`${number} portfolio visits`}
       >
@@ -55,13 +55,13 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
               avatarUrl={visitor.avatarUrl}
               avatarSeed={visitor.avatarSeed}
               size="2xs"
-              className="rounded-full border border-black/20 dark:border-white/20"
+              className="rounded-none border border-black dark:border-white"
             />
           )}
-          <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" strokeWidth={2} />
-          <span>Portfolio visits</span>
+          <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" strokeWidth={2.5} />
+          <span className="font-bold text-[var(--text-primary)]">Portfolio visits</span>
         </span>
-        <span className="font-semibold text-[var(--text-primary)]" aria-hidden="true">
+        <span className="font-bold text-[var(--text-primary)]" aria-hidden="true">
           {number}
         </span>
       </div>
@@ -69,24 +69,26 @@ export const PortfolioVisitorCount: React.FC<PortfolioVisitorCountProps> = ({
   }
 
   return (
-    <span
-      className="flex cursor-default select-none items-center gap-1.5 py-1 font-mono text-xs text-[var(--text-secondary)]"
+    <div
+      className="flex cursor-default select-none items-center justify-between border-2 border-black dark:border-white bg-[var(--surface)] px-2.5 py-1.5 font-mono text-xs text-[var(--text-secondary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
       aria-label={`${count} portfolio visits`}
       title={visitor ? `${visitor.displayName} (${visitor.shortId}) · ${number} portfolio visits` : `${number} portfolio visits`}
     >
-      {visitor && (
-        <VisitorAvatar
-          displayName={visitor.displayName}
-          avatarUrl={visitor.avatarUrl}
-          avatarSeed={visitor.avatarSeed}
-          size="2xs"
-          className="rounded-full border border-black/20 dark:border-white/20"
-        />
-      )}
-      <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" aria-hidden="true" strokeWidth={2} />
-      <span className="font-medium text-[var(--text-primary)]">{number}</span>
-      <span className="hidden lg:inline">{word}</span>
-    </span>
+      <span className="flex items-center gap-1.5">
+        {visitor && (
+          <VisitorAvatar
+            displayName={visitor.displayName}
+            avatarUrl={visitor.avatarUrl}
+            avatarSeed={visitor.avatarSeed}
+            size="2xs"
+            className="rounded-none border border-black dark:border-white"
+          />
+        )}
+        <Eye className="w-3.5 h-3.5 text-black dark:text-white shrink-0" aria-hidden="true" strokeWidth={2.5} />
+        <span className="font-bold text-[var(--text-primary)]">{number}</span>
+        <span className="hidden lg:inline">{word}</span>
+      </span>
+    </div>
   );
 };
 
