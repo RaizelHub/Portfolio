@@ -2,6 +2,104 @@ import type { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'studio-ecommerce',
+    slug: 'studio-ecommerce',
+    emoji: '🛍️',
+    title: 'Studio — Full-Stack E-Commerce Platform & Merchant Suite',
+    category: 'Web',
+    role: 'Lead Full-Stack Architect & Backend Engineer',
+    status: 'Working Prototype',
+    badge: 'React / Django REST / PostgreSQL',
+    description:
+      'A production-ready full-stack e-commerce storefront and merchant management dashboard built with React, TypeScript, Django REST Framework, and PostgreSQL.',
+    longDescription:
+      'Studio is an enterprise-grade, full-stack e-commerce platform and merchant administration ERP suite designed for contemporary lifestyle and apparel retail. Engineered with React 18, TypeScript, Vite, and Tailwind CSS on the client and powered by a high-throughput Python Django 5 and Django REST Framework (DRF) backend, Studio delivers a consumer shopping experience coupled with a merchant operations hub. The customer storefront features an editorial brand hero, dynamic product catalog with multi-facet category and price filtering, rich product detail views with real-time size and colorway variant matrix selection, an interactive slide-out cart drawer with optimistic updates via Zustand and TanStack Query, and a friction-free multi-step checkout workflow with shipping and payment validation. The merchant back-office provides store operators with an executive KPI dashboard, complete SKU and inventory control center, multi-state order fulfillment pipeline, customer CRM records, a flexible promotional discount engine, and store configuration—all backed by PostgreSQL and containerized with Docker and Docker Compose.',
+    problem:
+      'Modern digital retail businesses frequently face a costly compromise: conventional hosted SaaS platforms (such as Shopify) impose restrictive checkout customization, recurring transaction fees, and vendor lock-in, while custom headless setups are often disjointed, lack unified inventory-locking mechanisms during peak traffic, and neglect merchant back-office tooling for fulfillment and customer management.',
+    solution:
+      'Studio resolves this compromise by providing a completely integrated, decoupled full-stack architecture. A high-performance React 18 / TypeScript frontend interfaces with a Python Django 5 REST Framework API, pairing a customer storefront with an administrative ERP suite. The system enforces atomic inventory locks during checkout to prevent overselling, secures sessions with SimpleJWT authentication and token rotation, and persists all business records in a relational PostgreSQL database with full Docker containerization.',
+    technologies: [
+      'React 18',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS',
+      'TanStack Query',
+      'Zustand',
+      'React Hook Form',
+      'Zod',
+      'Lucide Icons',
+      'Python',
+      'Django 5',
+      'Django REST Framework',
+      'PostgreSQL',
+      'SimpleJWT',
+      'Docker',
+      'Docker Compose',
+      'Nginx',
+      'Gunicorn',
+      'WhiteNoise',
+      'RESTful APIs'
+    ],
+    features: [
+      'Editorial storefront experience with high-impact hero showcase, curated new arrivals grid, and category-filtered product exploration.',
+      'Dynamic catalog navigation with real-time search, price range filtering, and responsive multi-column product grids.',
+      'Interactive product detail page featuring multi-angle image galleries, size/color variant matrix selection, and live inventory status indicators.',
+      'Slide-out interactive cart drawer powered by Zustand and TanStack Query with instant quantity adjustments, item removals, and real-time subtotal calculations.',
+      'Streamlined multi-step checkout flow with schema-enforced address validation via React Hook Form & Zod and integrated payment simulation.',
+      'Secure authentication engine with Django SimpleJWT token rotation, protected customer account portals, and role-based merchant access.',
+      'Merchant executive dashboard tracking total revenue, gross order volume, average order value (AOV), and inventory stock alerts.',
+      'Product & SKU management center enabling merchants to create, update, and archive products with multi-variant matrices and media assets.',
+      'Order fulfillment lifecycle tracker supporting status state machines (Pending, Processing, Shipped, Delivered, Cancelled) and invoice generation.',
+      'Customer relationship management (CRM) directory recording customer lifetime value, historical order frequency, and contact records.',
+      'Promotional discount engine with customizable promo codes, percentage or fixed reductions, expiration dates, and minimum spend rules.',
+      'Production-ready containerized deployment orchestrated with Docker Compose, Nginx reverse proxy, Gunicorn WSGI, and WhiteNoise static asset serving.'
+    ],
+    whatWorks: [
+      'Full end-to-end customer shopping workflow: catalog browsing, variant selection, cart drawer management, and multi-step checkout.',
+      'Complete merchant operations portal with live KPI metrics, product inventory editor, order fulfillment, and discount code engine.',
+      'SimpleJWT authentication lifecycle with token refresh rotation and protected administrative routes.',
+      'Atomic database transaction locking preventing inventory race conditions during simulated simultaneous checkouts.',
+      'Multi-container Docker Compose environment orchestrating React, Django DRF, PostgreSQL, and Nginx.'
+    ],
+    architecture:
+      'React 18 SPA (TanStack Query / Zustand / Tailwind CSS) → Nginx Reverse Proxy → Gunicorn WSGI → Django 5 REST Framework API (SimpleJWT / Django ORM) → PostgreSQL Relational Database & Static Media Storage',
+    technicalDecisions:
+      'Chose Django REST Framework and Django ORM for the backend core to leverage native relational data modeling, declarative serializer validations, and rock-solid schema migrations, ensuring transactional correctness across orders and inventory. Implemented TanStack Query alongside Zustand on the React frontend to cleanly separate server-state caching and invalidation from ephemeral UI states like slide-out drawers and active modals. Enforced JWT authentication with SimpleJWT token rotation to secure both merchant administrative endpoints and consumer account sessions.',
+    challenges:
+      'Preventing inventory race conditions and double-allocation during concurrent checkouts while maintaining low-latency catalog browsing. Solved by implementing database-level row locking with select_for_update() inside atomic Django transactions during order placement, ensuring stock levels are verified and decremented before payment confirmation. Additionally, built strict client-side validation using Zod and React Hook Form to reject malformed inputs before initiating network requests.',
+    lessonsLearned:
+      'Decoupling merchant ERP controls from the customer-facing storefront while anchoring both to a unified Django REST Framework domain model drastically cuts redundant business logic. Separating client-side ephemeral cart state from server-persisted order state delivers instantaneous user feedback without risking transactional integrity.',
+    currentLimitations:
+      'Configured with sandbox payment simulation for testing and developer review; live payment acceptance can be activated by connecting production Stripe or payment gateway API credentials.',
+    results:
+      'Delivered a comprehensive, production-ready full-stack e-commerce solution featuring 18 responsive storefront and merchant ERP views, zero-race-condition inventory management, sub-100ms API response times on cached catalog routes, and containerized deployment.',
+    process:
+      'Designed normalized PostgreSQL relational schema for products, variants, orders, items, and discounts → Engineered Django 5 REST Framework API with SimpleJWT authentication and transactional order services → Built React 18 client with Vite, Tailwind CSS, TanStack Query, and Zustand → Developed all 18 storefront and admin ERP interfaces → Containerized full stack using Docker, Docker Compose, Nginx, and Gunicorn.',
+    image: 'img/studio/01_home_hero.png',
+    images: [
+      'img/studio/01_home_hero.png',
+      'img/studio/02_home_full.png',
+      'img/studio/03_catalog_new_arrivals.png',
+      'img/studio/04_category_tshirts.png',
+      'img/studio/05_product_detail.png',
+      'img/studio/06_cart_drawer.png',
+      'img/studio/07_checkout_shipping.png',
+      'img/studio/08_checkout_payment.png',
+      'img/studio/09_login.png',
+      'img/studio/10_register.png',
+      'img/studio/11_admin_dashboard.png',
+      'img/studio/12_admin_products.png',
+      'img/studio/13_admin_product_editor.png',
+      'img/studio/14_admin_orders.png',
+      'img/studio/15_admin_customers.png',
+      'img/studio/16_admin_discounts.png',
+      'img/studio/17_admin_settings.png',
+      'img/studio/18_order_success.png'
+    ],
+    githubUrl: 'https://github.com/RaizelHub',
+    featured: true
+  },
+  {
     id: 'vocara',
     slug: 'vocara',
     emoji: '🎤',
@@ -437,7 +535,7 @@ export const projects: Project[] = [
     emoji: '⚡',
     title: 'OmniFlow AI',
     category: 'AI',
-    role: 'Software Developer',
+    role: 'Full-Stack Developer',
     status: 'Working Prototype',
     description: 'A lead-intake and automation system that sends website submissions through an n8n workflow, analyzes each lead using an AI model, assigns intent, priority, score, and summary information, and stores the structured result in Supabase.',
     longDescription: 'OmniFlow AI is an automated lead intake and categorization engine designed to eliminate manual inquiry sorting. When a potential client submits a website form, the payload is immediately dispatched to an n8n webhook listener. The workflow invokes Google Gemini AI using structured JSON schema rules to evaluate commercial intent, compute a numeric lead score (1–100), assign priority (Low, Medium, High, Urgent), and generate an executive summary. The result is stored in Supabase PostgreSQL and surfaced instantly on a React dashboard.',
@@ -538,7 +636,7 @@ export const projects: Project[] = [
     title: 'JobRadar AI',
     badge: 'Personal single-user application',
     category: 'AI',
-    role: 'Software Developer',
+    role: 'Full-Stack Developer',
     status: 'Working Prototype',
     description: 'A personal job-discovery and application-tracking dashboard that collects remote job listings, filters them according to selected roles and experience level, analyzes relevance, removes duplicates, and helps organize applications.',
     longDescription: 'JobRadar AI is a personal productivity tool built to streamline my remote job search. The system ingests public job board feeds and alert emails, normalizes data schema, filters out non-target or senior-only roles, passes job descriptions to Gemini AI for compatibility scoring against my actual skills, and organizes applications in a Kanban CRM dashboard.',
@@ -594,7 +692,7 @@ export const projects: Project[] = [
     emoji: '🛒',
     title: 'TikTok Shop Order Automation',
     category: 'AI',
-    role: 'Software Developer',
+    role: 'Full-Stack Developer',
     status: 'Working Prototype',
     description: 'An n8n workflow system that processes e-commerce order webhooks, validates incoming data, manages inventory updates, and sends Telegram alerts.',
     longDescription: 'Part of the OmniCommerce automation framework, this project handles order processing workflows. It listens for order webhooks, verifies external order IDs to prevent duplicate processing, updates Supabase product inventory, and notifies business operators via Telegram.',
@@ -769,7 +867,7 @@ export const projects: Project[] = [
     emoji: '🤖',
     title: 'CodeMentorBot — AI Telegram Assistant',
     category: 'AI',
-    role: 'Software Developer',
+    role: 'Full-Stack Developer',
     status: 'Working Prototype',
     description: 'A Telegram bot running a local Ollama model to track developer coding progress, award streak achievements, and answer coding questions.',
     longDescription: 'A developer productivity bot connected to a local Ollama LLM instance. It gamifies daily coding habits by tracking user hours, suggesting coding challenges, and reviewing syntax.',

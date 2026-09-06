@@ -18,17 +18,17 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       to={`/projects/${project.slug}`}
       onMouseEnter={playHover}
       onClick={playClick}
-      className="group relative flex flex-col justify-between overflow-hidden border-2 border-black dark:border-white bg-[var(--surface)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] focus-visible:outline-none"
+      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-0 bg-[var(--surface)] shadow-xl shadow-black/5 dark:shadow-2xl dark:shadow-black/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl dark:hover:shadow-black/70 focus-visible:outline-none"
       aria-label={`View ${displayTitle} case study`}
     >
-      {/* Project Image Preview: Brutalist Frame */}
-      <div className="relative aspect-[16/9] overflow-hidden border-b-2 border-black dark:border-white bg-[var(--background)]">
+      {/* Project Image Preview */}
+      <div className="relative aspect-[16/9] overflow-hidden bg-[var(--background)]">
         {project.image ? (
           <img
             src={`/${project.image}`}
             alt={`${displayTitle} Preview`}
             loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-[var(--background)] select-none font-mono">
@@ -43,7 +43,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <div>
           <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-xs uppercase leading-[1.4] tracking-[0.08em] font-bold text-[var(--text-primary)]">
             <div className="flex items-center gap-2">
-              <span className="border border-black dark:border-white bg-[var(--surface-elevated)] px-2 py-0.5 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]">{project.category}</span>
+              <span className="rounded-full border-0 bg-[var(--surface-elevated)] px-3 py-0.5 shadow-sm">{project.category}</span>
               <span>·</span>
               <span className="break-safe normal-case tracking-normal text-[var(--text-secondary)]">{project.status}</span>
             </div>
@@ -60,12 +60,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </p>
         </div>
 
-        {/* Tech badges: Brutalist tags */}
-        <div className="flex flex-wrap gap-1.5 pt-3 border-t-2 border-black dark:border-white">
+        {/* Tech badges: Rounded pills */}
+        <div className="flex flex-wrap gap-1.5 pt-3">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="border border-black dark:border-white bg-[var(--surface-elevated)] px-2 py-0.5 font-mono text-xs font-bold text-[var(--text-primary)] shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]"
+              className="rounded-full border-0 bg-[var(--surface-elevated)] px-3 py-1 font-mono text-xs font-bold text-[var(--text-primary)] shadow-sm"
             >
               {tech}
             </span>

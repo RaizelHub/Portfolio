@@ -22,6 +22,8 @@ import {
   SiGithub,
   SiDocker,
   SiVercel,
+  SiPython,
+  SiDjango,
 } from 'react-icons/si';
 import { Server, Webhook, Cpu, Code2, Smartphone, Database, Workflow, Wrench } from 'lucide-react';
 import { SectionContainer } from '../../components/layout/SectionContainer';
@@ -68,6 +70,8 @@ const TECH_GROUPS: TechGroup[] = [
     title: 'Backend',
     icon: Server,
     items: [
+      { name: 'Python', icon: SiPython, color: '#3776AB' },
+      { name: 'Django / DRF', icon: SiDjango, color: '#092E20' },
       { name: 'Node.js', icon: SiNodedotjs, color: '#5FA04E' },
       { name: 'Express', icon: SiExpress, color: '#687076' },
       { name: 'Laravel', icon: SiLaravel, color: '#FF2D20' },

@@ -83,7 +83,7 @@ export const worldBuildings: WorldBuilding[] = [
     y: 860,
     width: 270,
     height: 410,
-    projectSlugs: ['careeros', 'restaurant-ai-ops', 'receivables-control-center'],
+    projectSlugs: ['studio-ecommerce', 'careeros', 'restaurant-ai-ops', 'receivables-control-center'],
     accent: 'sand',
   },
   {

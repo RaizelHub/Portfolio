@@ -1,10 +1,12 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { Sidebar } from './components/layout/Sidebar';
+import { HeaderBar } from './components/layout/HeaderBar';
+import { DynamicIslandDock } from './components/layout/DynamicIslandDock';
 import { Footer } from './components/layout/Footer';
 import { ScrollProgress } from './components/layout/ScrollProgress';
 import { ErrorBoundary } from './components/ui/ErrorBoundary';
 import { FloatingContactModal } from './components/ui/FloatingContactModal';
+import { WeatherAmbience } from './components/ui/WeatherAmbience';
 import { SoundProvider } from './context/SoundContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { Home } from './pages/Home';
@@ -20,10 +22,11 @@ function PortfolioShell() {
 
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--text-primary)] font-sans transition-colors duration-150">
+      <WeatherAmbience />
       {!isCollab && <ScrollProgress />}
-      {!isCollab && <Sidebar />}
+      {!isCollab && <HeaderBar />}
 
-      <div className={isCollab ? 'min-h-screen' : 'flex min-h-screen flex-col lg:pl-64'}>
+      <div className={isCollab ? 'min-h-screen' : 'flex min-h-screen flex-col pb-24'}>
         <main className={isCollab ? 'min-h-screen' : 'flex-grow'}>
           <ErrorBoundary>
             <Suspense fallback={<div className="min-h-screen bg-[#11110f]" aria-label="Opening Collab" />}>
@@ -43,6 +46,7 @@ function PortfolioShell() {
         {!isCollab && <Footer />}
       </div>
 
+      {!isCollab && <DynamicIslandDock />}
       {!isCollab && <FloatingContactModal />}
     </div>
   );

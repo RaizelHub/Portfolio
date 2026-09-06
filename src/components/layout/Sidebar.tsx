@@ -21,6 +21,7 @@ import { profile } from '../../data/profile';
 import { useSound } from '../../context/SoundContext';
 import { useTheme } from '../../context/ThemeContext';
 import { PortfolioVisitorCount } from './PortfolioVisitorCount';
+import { LocalTimeWeather } from '../ui/LocalTimeWeather';
 
 /* 4 primary navigation items */
 const navLinks = [
@@ -216,7 +217,12 @@ export const Sidebar: React.FC = () => {
       </div>
 
       {/* Footer / Socials, Visitor Counter & Controls */}
-      <div className="border-t-2 border-black dark:border-white p-4 space-y-3.5 bg-[var(--background-secondary)]">
+      <div className="border-t-2 border-black dark:border-white p-4 space-y-3 bg-[var(--background-secondary)]">
+        {/* Live Local Time & Weather */}
+        <div className="px-1">
+          <LocalTimeWeather variant="sidebar" />
+        </div>
+
         {/* Live Visitor Counter */}
         <div className="px-1">
           <PortfolioVisitorCount />

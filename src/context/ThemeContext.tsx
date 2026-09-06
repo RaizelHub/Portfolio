@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
+import { fetchBukidnonWeather, type WeatherMood } from '../lib/weather';
+import { updateFavicon } from '../lib/dynamicFavicon';
 
 export type Theme = 'light' | 'dark' | 'system';
 
@@ -8,6 +10,7 @@ interface ThemeContextType {
   resolvedTheme: 'light' | 'dark';
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
+  activeWeatherMood: WeatherMood;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -26,7 +29,56 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return 'dark';
   });
 
+  const [activeWeatherMood, setActiveWeatherMood] = useState<WeatherMood>('sunny');
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('dark');
+
+  // Fetch live weather mood strictly from Patpat, Malaybalay City, Bukidnon
+  useEffect(() => {
+    let mounted = true;
+
+    const syncWeatherTheme = () => {
+      fetchBukidnonWeather()
+        .then((data) => {
+          if (mounted) {
+            setActiveWeatherMood(data.mood);
+          }
+        })
+        .catch((err) => {
+          console.warn('Weather theme sync fallback:', err);
+        });
+    };
+
+    syncWeatherTheme();
+
+    // Auto-poll live weather every 5 minutes
+    const interval = setInterval(syncWeatherTheme, 5 * 60 * 1000);
+
+    // Re-check when window is focused
+    const handleFocus = () => {
+      if (document.visibilityState === 'visible') {
+        syncWeatherTheme();
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+    document.addEventListener('visibilitychange', handleFocus);
+
+    return () => {
+      mounted = false;
+      clearInterval(interval);
+      window.removeEventListener('focus', handleFocus);
+      document.removeEventListener('visibilitychange', handleFocus);
+    };
+  }, []);
+
+  // Apply real-time weather mood to DOM & update dynamic browser tab favicon
+  useEffect(() => {
+    const root = document.documentElement;
+    const body = document.body;
+    root.setAttribute('data-weather-mood', activeWeatherMood);
+    body.setAttribute('data-weather-mood', activeWeatherMood);
+    updateFavicon(activeWeatherMood);
+  }, [activeWeatherMood]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -87,7 +139,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     if (!startViewTransition) {
       root.classList.add('theme-transition-fallback');
-      // Make sure the transition rules are active before the theme colors change.
       void root.offsetWidth;
       applyNextTheme();
       window.setTimeout(() => root.classList.remove('theme-transition-fallback'), 750);
@@ -108,7 +159,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        resolvedTheme,
+        setTheme,
+        toggleTheme,
+        activeWeatherMood,
+      }}
+    >
       {children}
     </ThemeContext.Provider>
   );

@@ -11,14 +11,14 @@ export const About: React.FC = () => {
     prefersReducedMotion
       ? {}
       : {
-        initial: { opacity: 0, y: 14 },
-        whileInView: { opacity: 1, y: 0 },
+        initial: { opacity: 0, y: 24, scale: 0.98 },
+        whileInView: { opacity: 1, y: 0, scale: 1 },
         viewport: { once: true as const, margin: '-60px' },
-        transition: { duration: 0.45, delay, ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number] },
+        transition: { duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
       };
 
   return (
-    <SectionContainer id="about" className="border-b-2 border-black dark:border-white py-[var(--section-space)]">
+    <SectionContainer id="about" className="py-[var(--section-space)]">
       {/* ── Section Header ── */}
       <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
         <h2
@@ -34,9 +34,9 @@ export const About: React.FC = () => {
 
       <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
         {/* Left Column: Direct Bio & Approach */}
-        <motion.div {...entrance(0.08)} className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] body-copy space-y-5 lg:col-span-7">
+        <motion.div {...entrance(0.08)} className="group relative rounded-3xl border-0 bg-[var(--surface)] p-6 sm:p-8 shadow-xl shadow-black/5 dark:shadow-2xl dark:shadow-black/50 hover:-translate-y-1 hover:shadow-2xl dark:hover:shadow-black/70 transition-all duration-300 body-copy space-y-5 lg:col-span-7">
           <p className="font-bold text-base sm:text-lg text-[var(--text-primary)] leading-relaxed">
-            I’m a software developer based in Bukidnon, Philippines. I design and build end-to-end applications spanning web interfaces, mobile apps with React Native, and workflow automations with n8n and Supabase.
+            I’m a full-stack developer based in Bukidnon, Philippines. I design and build end-to-end applications spanning web interfaces, mobile apps with React Native, and workflow automations with n8n and Supabase.
           </p>
 
           <p className="text-[var(--text-secondary)] font-medium leading-relaxed">
@@ -51,13 +51,13 @@ export const About: React.FC = () => {
         {/* Right Column: Operational Snapshot & Education */}
         <motion.div {...entrance(0.14)} className="space-y-6 lg:col-span-5">
           {/* Operational Snapshot */}
-          <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] space-y-4">
-            <h3 className="border-b-2 border-black dark:border-white pb-3 font-mono text-xs font-black uppercase tracking-wider text-[var(--text-primary)]">
+          <div className="group relative rounded-3xl border-0 bg-[var(--surface)] p-6 shadow-xl shadow-black/5 dark:shadow-2xl dark:shadow-black/50 hover:-translate-y-1 hover:shadow-2xl dark:hover:shadow-black/70 transition-all duration-300 space-y-4">
+            <h3 className="font-mono text-xs font-black uppercase tracking-wider text-[var(--text-primary)] pb-1">
               Operational Snapshot
             </h3>
 
             <div className="space-y-3 text-xs sm:text-sm font-sans">
-              <div className="flex items-start gap-3 border border-black dark:border-white bg-[var(--surface-elevated)] p-2.5 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]">
+              <div className="flex items-start gap-3 rounded-2xl border-0 bg-[var(--background)] p-3 shadow-sm">
                 <MapPin className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" strokeWidth={2.5} />
                 <div>
                   <span className="block font-mono text-[10px] font-bold uppercase text-[var(--text-muted)]">Location</span>
@@ -65,15 +65,15 @@ export const About: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 border border-black dark:border-white bg-[var(--surface-elevated)] p-2.5 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]">
+              <div className="flex items-start gap-3 rounded-2xl border-0 bg-[var(--background)] p-3 shadow-sm">
                 <Target className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" strokeWidth={2.5} />
                 <div>
                   <span className="block font-mono text-[10px] font-bold uppercase text-[var(--text-muted)]">Target Roles</span>
-                  <span className="text-[var(--text-primary)] font-bold text-xs">Web / Mobile / Automation</span>
+                  <span className="text-[var(--text-primary)] font-bold text-xs">Full-Stack Dev &bull; AI Automation Specialist</span>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 border border-black dark:border-white bg-[var(--surface-elevated)] p-2.5 shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]">
+              <div className="flex items-start gap-3 rounded-2xl border-0 bg-[var(--background)] p-3 shadow-sm">
                 <Clock className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" strokeWidth={2.5} />
                 <div>
                   <span className="block font-mono text-[10px] font-bold uppercase text-[var(--text-muted)]">Availability</span>
@@ -84,17 +84,17 @@ export const About: React.FC = () => {
           </div>
 
           {/* Education Box */}
-          <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] space-y-4">
-            <h3 className="flex items-center justify-between border-b-2 border-black dark:border-white pb-3 font-mono text-xs font-black uppercase tracking-wider text-[var(--text-primary)]">
+          <div className="rounded-3xl border-0 bg-[var(--surface)] p-6 shadow-xl shadow-black/5 dark:shadow-2xl dark:shadow-black/50 space-y-4">
+            <h3 className="flex items-center justify-between pb-1 font-mono text-xs font-black uppercase tracking-wider text-[var(--text-primary)]">
               <span className="flex items-center gap-2">
                 <GraduationCap className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
                 Education
               </span>
-              <span className="border border-black dark:border-white bg-[var(--surface-elevated)] px-2 py-0.5 text-xs font-bold text-[var(--text-primary)] shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1px_1px_0px_0px_rgba(255,255,255,1)]">BSIT</span>
+              <span className="rounded-full border-0 bg-[var(--surface-elevated)] px-3 py-1 text-xs font-bold text-[var(--text-primary)] shadow-sm">BSIT</span>
             </h3>
 
             {educationList.map((edu) => (
-              <div key={edu.id} className="space-y-1.5 border border-black dark:border-white bg-[var(--surface-elevated)] p-3 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1.5px_1.5px_0px_0px_rgba(255,255,255,1)]">
+              <div key={edu.id} className="space-y-1.5 rounded-2xl border-0 bg-[var(--background)] p-3.5 shadow-sm">
                 <div className="flex min-w-0 flex-col items-start gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
                   <h4 className="break-safe font-title text-sm font-black text-[var(--text-primary)]">{edu.institution}</h4>
                   <span className="font-mono text-xs font-bold text-[var(--accent)]">

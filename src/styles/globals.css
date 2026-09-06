@@ -485,6 +485,156 @@ html.dark {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
+   WEATHER-REACTIVE THEME MOODS — LIGHT & DARK PALETTES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 🌧️ RAINY MOOD (Petrichor Slate & Rain-Cyan) ── */
+[data-weather-mood="rainy"] {
+  --background: #e9eff5;
+  --background-secondary: #dfe7ef;
+  --surface: #f8fafc;
+  --surface-hover: #e2e8f0;
+  --accent: #0284c7;
+  --accent-soft: rgba(2, 132, 199, 0.12);
+  --on-accent: #ffffff;
+  --info: #0284c7;
+}
+
+.dark[data-weather-mood="rainy"],
+html.dark[data-weather-mood="rainy"] {
+  --background: #090e17;
+  --background-secondary: #0f1724;
+  --surface: #131c2b;
+  --surface-elevated: #1a2538;
+  --surface-hover: #223047;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.16);
+  --on-accent: #03101d;
+  --border: #38bdf8;
+  --border-subtle: rgba(56, 189, 248, 0.4);
+  --brutal-shadow: 4px 4px 0px 0px #38bdf8;
+  --brutal-shadow-sm: 2px 2px 0px 0px #38bdf8;
+  --brutal-shadow-lg: 6px 6px 0px 0px #38bdf8;
+  --brutal-shadow-hover: 6px 6px 0px 0px #38bdf8;
+}
+
+/* ── ☀️ SUNNY MOOD (Warm Radiant Daylight & Solar Amber) ── */
+[data-weather-mood="sunny"] {
+  --background: #fbf9f2;
+  --background-secondary: #f4efdf;
+  --surface: #ffffff;
+  --surface-hover: #faf6eb;
+  --accent: #d97706;
+  --accent-soft: rgba(217, 119, 6, 0.12);
+  --on-accent: #ffffff;
+}
+
+.dark[data-weather-mood="sunny"],
+html.dark[data-weather-mood="sunny"] {
+  --background: #0e0d0a;
+  --background-secondary: #171510;
+  --surface: #1e1b14;
+  --surface-elevated: #28241b;
+  --surface-hover: #332d22;
+  --accent: #f59e0b;
+  --accent-soft: rgba(245, 158, 11, 0.18);
+  --on-accent: #1c1303;
+  --border: #f59e0b;
+  --border-subtle: rgba(245, 158, 11, 0.4);
+  --brutal-shadow: 4px 4px 0px 0px #f59e0b;
+  --brutal-shadow-sm: 2px 2px 0px 0px #f59e0b;
+  --brutal-shadow-lg: 6px 6px 0px 0px #f59e0b;
+  --brutal-shadow-hover: 6px 6px 0px 0px #f59e0b;
+}
+
+/* ── ⛅ CLOUDY MOOD (Misty Overcast & Graphite Slate) ── */
+[data-weather-mood="cloudy"] {
+  --background: #eff1f3;
+  --background-secondary: #e4e7ea;
+  --surface: #fbfcfd;
+  --surface-hover: #e8ebed;
+  --accent: #475569;
+  --accent-soft: rgba(71, 85, 105, 0.12);
+  --on-accent: #ffffff;
+}
+
+.dark[data-weather-mood="cloudy"],
+html.dark[data-weather-mood="cloudy"] {
+  --background: #0d0f12;
+  --background-secondary: #14171d;
+  --surface: #1a1e24;
+  --surface-elevated: #222730;
+  --surface-hover: #2b323d;
+  --accent: #94a3b8;
+  --accent-soft: rgba(148, 163, 184, 0.16);
+  --on-accent: #0f172a;
+  --border: #cbd5e1;
+  --border-subtle: rgba(203, 213, 225, 0.4);
+  --brutal-shadow: 4px 4px 0px 0px #cbd5e1;
+  --brutal-shadow-sm: 2px 2px 0px 0px #cbd5e1;
+  --brutal-shadow-lg: 6px 6px 0px 0px #cbd5e1;
+  --brutal-shadow-hover: 6px 6px 0px 0px #cbd5e1;
+}
+
+/* ── ⚡ STORM MOOD (Electric Charcoal & High-Voltage Violet) ── */
+[data-weather-mood="storm"] {
+  --background: #e8ecf4;
+  --background-secondary: #dce1ee;
+  --surface: #f4f6fb;
+  --surface-hover: #e0e5f2;
+  --accent: #4f46e5;
+  --accent-soft: rgba(79, 70, 229, 0.14);
+  --on-accent: #ffffff;
+}
+
+.dark[data-weather-mood="storm"],
+html.dark[data-weather-mood="storm"] {
+  --background: #080913;
+  --background-secondary: #0f1122;
+  --surface: #15182e;
+  --surface-elevated: #1e2240;
+  --surface-hover: #282d54;
+  --accent: #818cf8;
+  --accent-soft: rgba(129, 140, 248, 0.2);
+  --on-accent: #0b0d1e;
+  --border: #818cf8;
+  --border-subtle: rgba(129, 140, 248, 0.4);
+  --brutal-shadow: 4px 4px 0px 0px #818cf8;
+  --brutal-shadow-sm: 2px 2px 0px 0px #818cf8;
+  --brutal-shadow-lg: 6px 6px 0px 0px #818cf8;
+  --brutal-shadow-hover: 6px 6px 0px 0px #818cf8;
+}
+
+/* ── 🌙 CLEAR NIGHT MOOD (Deep Midnight Obsidian & Celestial Indigo) ── */
+[data-weather-mood="night"] {
+  --background: #eef1f6;
+  --background-secondary: #e2e6f0;
+  --surface: #f7f9fc;
+  --surface-hover: #e6ebf3;
+  --accent: #4338ca;
+  --accent-soft: rgba(67, 56, 202, 0.12);
+  --on-accent: #ffffff;
+}
+
+.dark[data-weather-mood="night"],
+html.dark[data-weather-mood="night"] {
+  --background: #06070d;
+  --background-secondary: #0c0d18;
+  --surface: #111322;
+  --surface-elevated: #191c32;
+  --surface-hover: #222642;
+  --accent: #a5b4fc;
+  --accent-soft: rgba(165, 180, 252, 0.18);
+  --on-accent: #0c0e1c;
+  --border: #a5b4fc;
+  --border-subtle: rgba(165, 180, 252, 0.4);
+  --brutal-shadow: 4px 4px 0px 0px #a5b4fc;
+  --brutal-shadow-sm: 2px 2px 0px 0px #a5b4fc;
+  --brutal-shadow-lg: 6px 6px 0px 0px #a5b4fc;
+  --brutal-shadow-hover: 6px 6px 0px 0px #a5b4fc;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
    REDUCED MOTION
    ══════════════════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
@@ -500,4 +650,100 @@ html.dark {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   NO BORDER STYLE SYSTEM — MODERN SEAMLESS ELEVATION & ROUNDED GEOMETRY
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* Eliminate harsh structural borders */
+.border-2,
+.border,
+.border-b-2,
+.border-b,
+.border-t-2,
+.border-t,
+.border-r-2,
+.border-r,
+.border-l-2,
+.border-l {
+  border-color: transparent !important;
+  border-width: 0 !important;
+}
+
+/* Re-style cards & containers with smooth rounded geometry and soft diffused shadows */
+[class*="border-2"][class*="shadow-"],
+[class*="shadow-[4px_4px_0px_0px"],
+[class*="shadow-[3px_3px_0px_0px"],
+[class*="shadow-[5px_5px_0px_0px"],
+[class*="shadow-[6px_6px_0px_0px"],
+.brutal-card,
+.brutal-box {
+  border: 0 !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.dark [class*="border-2"][class*="shadow-"],
+.dark [class*="shadow-[4px_4px_0px_0px"],
+.dark [class*="shadow-[3px_3px_0px_0px"],
+.dark [class*="shadow-[5px_5px_0px_0px"],
+.dark [class*="shadow-[6px_6px_0px_0px"],
+.dark .brutal-card,
+.dark .brutal-box {
+  box-shadow: 0 18px 40px -10px rgba(0, 0, 0, 0.65), 0 6px 16px -4px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Card hover lifts */
+[class*="border-2"][class*="shadow-"]:hover,
+[class*="shadow-[4px_4px_0px_0px"]:hover,
+[class*="shadow-[3px_3px_0px_0px"]:hover,
+.brutal-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.10), 0 8px 16px -4px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dark [class*="border-2"][class*="shadow-"]:hover,
+.dark [class*="shadow-[4px_4px_0px_0px"]:hover,
+.dark [class*="shadow-[3px_3px_0px_0px"]:hover,
+.dark .brutal-card:hover {
+  box-shadow: 0 24px 52px -12px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Pills, tags, and small badges */
+[class*="shadow-[1.5px_1.5px_0px_0px"],
+[class*="shadow-[1px_1px_0px_0px"],
+[class*="shadow-[2px_2px_0px_0px"],
+.brutal-badge {
+  border: 0 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Buttons */
+.brutal-btn-primary,
+.brutal-btn-secondary,
+button[class*="border-2"],
+a[class*="border-2"] {
+  border: 0 !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.12) !important;
+}
+
+.dark .brutal-btn-primary,
+.dark .brutal-btn-secondary,
+.dark button[class*="border-2"],
+.dark a[class*="border-2"] {
+  box-shadow: 0 4px 14px -2px rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Inputs */
+input,
+textarea,
+.brutal-input {
+  border: 0 !important;
+  border-radius: 1rem !important;
+  background-color: var(--surface-elevated) !important;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.06) !important;
 }

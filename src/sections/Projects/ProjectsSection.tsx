@@ -15,6 +15,16 @@ import { useSound } from '../../context/SoundContext';
 /* ─── Secondary projects for the "More Projects" grid ─── */
 const moreProjects = [
   {
+    id: 'studio-ecommerce',
+    shortTitle: 'Studio Store',
+    subtitle: 'Full-Stack E-Commerce & ERP',
+    description:
+      'A production-ready full-stack e-commerce storefront and merchant management dashboard built with React, TypeScript, Django REST Framework, and PostgreSQL.',
+    category: 'WEB',
+    technologies: ['React 18', 'TypeScript', 'Django DRF', 'PostgreSQL', 'Docker'],
+    slug: 'studio-ecommerce',
+  },
+  {
     id: 'point-of-sale-system',
     shortTitle: 'POS System',
     subtitle: 'Retail Checkout Platform',
@@ -653,7 +663,7 @@ export const ProjectsSection: React.FC = () => {
           </div>
 
           <span className="font-mono text-xs font-bold text-[var(--text-muted)]">
-            Explore 11 other production systems
+            Explore 12 other production systems
           </span>
         </motion.div>
 

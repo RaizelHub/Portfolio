@@ -28,7 +28,7 @@ export const Footer: React.FC = () => {
               Janmark Suelto
             </span>
             <span className="text-[11px] text-[var(--text-muted)] mt-0.5 block font-mono">
-              Software Developer &bull; Bukidnon, Philippines
+              Full-Stack Developer &bull; Bukidnon, Philippines
             </span>
           </div>
 
