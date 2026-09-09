@@ -129,22 +129,30 @@ export const Technologies: React.FC = () => {
       };
 
   return (
-    <SectionContainer id="technologies" className="border-b-2 border-black dark:border-white py-[var(--section-space)]">
+    <SectionContainer id="technologies" className="border-b-2 border-neutral-300 dark:border-neutral-700 py-6 sm:py-8">
       {/* ── Section Header ── */}
-      <motion.div {...entrance()} className="mb-12 grid max-w-none gap-5 md:grid-cols-12 md:items-end">
-        <h2
-          className="section-heading font-title text-[var(--text-primary)] font-black md:col-span-5 md:mb-0"
-        >
-          Technologies
-        </h2>
+      <motion.div {...entrance()} className="mb-6 grid max-w-none gap-3 md:grid-cols-12 md:items-end">
+        <div className="md:col-span-5">
+          <div className="flex items-center gap-1.5 mb-1">
+            <div className="flex h-5 w-5 items-center justify-center rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-700">
+              <Wrench className="h-3 w-3" />
+            </div>
+            <span className="font-title text-xs font-bold tracking-wider uppercase text-neutral-900 dark:text-white">
+              Stack &amp; Tooling
+            </span>
+          </div>
+          <h2 className="font-title text-xl sm:text-2xl font-black tracking-tight text-neutral-900 dark:text-white leading-[1.1]">
+            Technologies
+          </h2>
+        </div>
 
-        <p className="body-copy text-[var(--text-secondary)] font-medium md:col-span-6 md:col-start-7">
+        <p className="text-xs text-neutral-600 dark:text-neutral-300 font-normal leading-relaxed md:col-span-6 md:col-start-7">
           Languages, frameworks, databases, and workflow orchestration tools applied across practical systems.
         </p>
       </motion.div>
 
       {/* ── Grouped Technology Cards ── */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {TECH_GROUPS.map((group, idx) => {
           const GroupIcon = group.icon;
 
@@ -152,23 +160,25 @@ export const Technologies: React.FC = () => {
             <motion.div
               key={group.id}
               {...entrance(idx * 0.05)}
-              className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] transition-all duration-150 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[5px_5px_0px_0px_rgba(255,255,255,1)]"
+              className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-4 sm:p-5 shadow-xs transition-all duration-150 hover:-translate-y-0.5 hover:border-neutral-400 dark:hover:border-neutral-600"
             >
               {/* Group Header */}
-              <div className="mb-5 flex items-center justify-between border-b-2 border-black dark:border-white pb-3.5">
+              <div className="mb-3 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
                 <div className="flex items-center gap-2">
-                  <GroupIcon className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-                  <h3 className="font-title font-black text-base text-[var(--text-primary)]">
+                  <div className="p-1 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700">
+                    <GroupIcon className="w-3.5 h-3.5" strokeWidth={2.5} />
+                  </div>
+                  <h3 className="font-title font-bold text-sm sm:text-base text-neutral-900 dark:text-white">
                     {group.title}
                   </h3>
                 </div>
-                <span className="font-mono text-[10px] font-bold text-[var(--text-muted)] uppercase">
+                <span className="font-mono text-[10px] font-semibold text-neutral-500 dark:text-neutral-400 uppercase">
                   {group.items.length} Skills
                 </span>
               </div>
 
               {/* Items List with Real Logo Colors */}
-              <div className="grid grid-cols-1 gap-2">
+              <div className="grid grid-cols-1 gap-1.5">
                 {group.items.map((item) => {
                   const ItemIcon = item.icon;
 
@@ -176,15 +186,15 @@ export const Technologies: React.FC = () => {
                     <div
                       key={item.name}
                       onMouseEnter={playHover}
-                      className="group flex min-h-10 items-center gap-2.5 border border-black dark:border-white bg-[var(--surface-elevated)] px-3 py-1.5 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] dark:shadow-[1.5px_1.5px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[2.5px_2.5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2.5px_2.5px_0px_0px_rgba(255,255,255,1)]"
+                      className="group flex min-h-9 items-center gap-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/90 px-2.5 py-1 transition-all duration-120 hover:border-neutral-400 dark:hover:border-neutral-600"
                     >
-                      <div className="flex h-6 w-6 shrink-0 items-center justify-center">
+                      <div className="flex h-5 w-5 shrink-0 items-center justify-center">
                         <ItemIcon
-                          className="w-4 h-4 transition-transform group-hover:scale-110"
+                          className="w-3.5 h-3.5 transition-transform group-hover:scale-110"
                           style={{ color: item.color }}
                         />
                       </div>
-                      <span className="break-safe font-mono text-xs font-bold leading-snug text-[var(--text-primary)]">
+                      <span className="break-safe font-mono text-xs font-semibold leading-snug text-neutral-900 dark:text-neutral-100">
                         {item.name}
                       </span>
                     </div>

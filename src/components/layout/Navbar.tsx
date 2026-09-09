@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   FileText,
-  Gamepad2,
   Menu,
   Moon,
   Sun,
@@ -123,24 +122,6 @@ export const Navbar: React.FC = () => {
               </a>
             );
           })}
-
-          {/* 2D World Link */}
-          <Link
-            to="/collab"
-            onClick={() => {
-              playNavigate();
-              closeMenu();
-            }}
-            onMouseEnter={playHover}
-            className={`flex items-center gap-1.5 border-2 px-3 py-1.5 text-[14px] font-bold transition-all duration-120 select-none ${
-              location.pathname === '/collab'
-                ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]'
-                : 'border-transparent text-[var(--text-secondary)] hover:border-black dark:hover:border-white hover:bg-[var(--surface)] hover:text-[var(--text-primary)]'
-            }`}
-          >
-            <Gamepad2 className="h-4 w-4 shrink-0" strokeWidth={2} />
-            <span>2D World</span>
-          </Link>
         </nav>
 
         {/* Right Action Icons & Controls */}
@@ -230,18 +211,6 @@ export const Navbar: React.FC = () => {
                 {link.label}
               </a>
             ))}
-
-            <Link
-              to="/collab"
-              onClick={() => {
-                playNavigate();
-                closeMenu();
-              }}
-              className="flex items-center gap-2 border-2 border-black dark:border-white bg-[var(--surface)] px-4 py-2.5 text-sm font-bold text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
-            >
-              <Gamepad2 className="h-4 w-4" />
-              <span>2D World</span>
-            </Link>
 
             <a
               href={profile.resumeUrl}

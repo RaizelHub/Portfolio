@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Slabo+13px&family=Smooch+Sans:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Noto+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Orbitron:wght@400;500;600;700;800;900&family=Slabo+13px&family=Smooch+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -7,7 +7,7 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-title: 'Smooch Sans', sans-serif;
+  --font-title: 'Noto Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
   --font-slabo: 'Slabo 13px', serif;
 }
@@ -19,16 +19,16 @@
   /* Font Family Tokens */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-title: 'Smooch Sans', sans-serif;
+  --font-title: 'Noto Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
   --font-slabo: 'Slabo 13px', serif;
 
-  /* Surfaces: Crisp Off-White Brutalist Canvas */
-  --background: #f5f4ee;
-  --background-secondary: #ece9df;
+  /* Surfaces: Crisp Neutral Canvas (Reference Aligned) */
+  --background: #eef1f5;
+  --background-secondary: #e2e7ef;
   --surface: #ffffff;
   --surface-elevated: #ffffff;
-  --surface-hover: #f3efe6;
+  --surface-hover: #f8fafc;
 
   /* High-Contrast Bold Structural Borders */
   --border: #000000;
@@ -68,14 +68,14 @@
   --content-width: 1340px;
   --section-space: clamp(4.5rem, 7vw, 7rem);
 
-  /* Typography Scale */
+  /* Typography Scale — Standardized to Home Bento compact scale */
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
-  --text-base: clamp(0.9375rem, 0.2vw + 0.875rem, 1rem);
-  --text-lg: clamp(1.0625rem, 0.25vw + 1rem, 1.25rem);
-  --text-project-title: clamp(1.35rem, 1.5vw + 0.7rem, 1.85rem);
-  --text-section-title: clamp(1.75rem, 2vw + 0.75rem, 2.5rem);
-  --text-hero-title: clamp(2rem, 2.8vw + 0.6rem, 3.25rem);
+  --text-base: 0.8125rem;
+  --text-lg: 0.9375rem;
+  --text-project-title: clamp(0.9375rem, 0.4vw + 0.875rem, 1.0625rem);
+  --text-section-title: clamp(1.25rem, 1.2vw + 0.95rem, 1.5rem);
+  --text-hero-title: clamp(1.35rem, 1.5vw + 1rem, 1.75rem);
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -90,6 +90,20 @@
   --brutal-shadow-hover: 6px 6px 0px 0px #000000;
   --shadow-soft: 4px 4px 0px 0px #000000;
 
+  /* Modern Minimalist Bento Design Tokens (Reference Aligned) */
+  --bento-bg: #eef1f5;
+  --bento-card: #ffffff;
+  --bento-card-subtle: #f8fafc;
+  --bento-border: rgba(0, 0, 0, 0.08);
+  --bento-border-hover: rgba(0, 0, 0, 0.16);
+  --bento-orange: #000000;
+  --bento-orange-light: #f1f5f9;
+  --bento-orange-border: rgba(0, 0, 0, 0.15);
+  --bento-title: #0f172a;
+  --bento-sub: #64748b;
+  --bento-badge-bg: #f1f5f9;
+  --bento-badge-text: #0f172a;
+
   color-scheme: light;
 }
 
@@ -101,7 +115,7 @@ html.dark {
   /* Font Family Tokens */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --font-title: 'Smooch Sans', sans-serif;
+  --font-title: 'Noto Sans', sans-serif;
   --font-nav: 'Orbitron', sans-serif;
   --font-slabo: 'Slabo 13px', serif;
 
@@ -151,6 +165,20 @@ html.dark {
   --brutal-shadow-hover: 6px 6px 0px 0px #ffffff;
   --shadow-soft: 4px 4px 0px 0px #ffffff;
 
+  /* Modern Bento Design Tokens — Dark Mode */
+  --bento-bg: #0c0e12;
+  --bento-card: #151821;
+  --bento-card-subtle: #191d28;
+  --bento-border: rgba(255, 255, 255, 0.08);
+  --bento-border-hover: rgba(255, 255, 255, 0.18);
+  --bento-orange: #ffffff;
+  --bento-orange-light: rgba(255, 255, 255, 0.08);
+  --bento-orange-border: rgba(255, 255, 255, 0.16);
+  --bento-title: #f8fafc;
+  --bento-sub: #94a3b8;
+  --bento-badge-bg: rgba(255, 255, 255, 0.08);
+  --bento-badge-text: #ffffff;
+
   color-scheme: dark;
 }
 
@@ -161,9 +189,11 @@ html.dark {
   html {
     width: 100%;
     max-width: 100%;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     background-color: var(--background);
     color: var(--text-primary);
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
   }
 
   body {
@@ -390,39 +420,39 @@ html.dark {
   max-width: none;
   font-family: var(--font-title);
   font-size: var(--text-hero-title);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: 0.01em;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
 /* Section Heading */
 .section-heading {
-  max-width: 28ch;
+  max-width: 36ch;
   font-family: var(--font-title);
   font-size: var(--text-section-title);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.15;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
 }
 
 /* Project Heading */
 .project-heading {
-  max-width: 32ch;
+  max-width: 40ch;
   font-family: var(--font-title);
   font-size: var(--text-project-title);
-  font-weight: 400;
-  line-height: 1.18;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 /* Body Copy */
 .body-copy {
-  max-width: 62ch;
+  max-width: 65ch;
   font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-xs);
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 /* Metadata / Section Indicators */
@@ -439,6 +469,18 @@ html.dark {
 .break-safe {
   min-width: 0;
   overflow-wrap: anywhere;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   FIXED / STICKY SIDEBAR SYSTEM
+   ══════════════════════════════════════════════════════════════════════════════ */
+.sidebar-sticky-desktop {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 10px !important;
+  height: calc(100vh - 20px) !important;
+  max-height: calc(100vh - 20px) !important;
+  align-self: flex-start !important;
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -746,4 +788,295 @@ textarea,
   border-radius: 1rem !important;
   background-color: var(--surface-elevated) !important;
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   TACTILE 3D / CLAYMORPHIC DESIGN SYSTEM (REFERENCE-ACCURATE)
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* Tactile Clay Card */
+.tactile-card {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow:
+    0 10px 24px -4px rgba(0, 0, 0, 0.04),
+    0 2px 6px -1px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .tactile-card {
+  background-color: #141720;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 14px 34px -4px rgba(0, 0, 0, 0.55),
+    0 4px 12px -2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Tactile Inset Preview Container */
+.tactile-inset {
+  background-color: #f1f3f7;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .tactile-inset {
+  background-color: #10131a;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Tactile 3D Key / Squircle Button */
+.tactile-key {
+  background-color: #ffffff;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02) !important;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tactile-key:hover {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.07),
+    0 2px 5px rgba(0, 0, 0, 0.03) !important;
+}
+
+.tactile-key:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark .tactile-key {
+  background-color: #1a1e27;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 6px 16px -2px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Tactile 3D Primary Button (Solid Black in Light Mode / White in Dark Mode) */
+.tactile-btn-orange {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out !important;
+}
+
+.tactile-btn-orange:hover {
+  background: #1f242e !important;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  transform: translateY(-1px) !important;
+}
+
+.tactile-btn-orange:active {
+  transform: translateY(1px) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.dark .tactile-btn-orange {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .tactile-btn-orange:hover {
+  background: #f1f5f9 !important;
+}
+
+/* Tactile 3D Dark Button */
+.tactile-btn-dark {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.025em;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out !important;
+}
+
+.tactile-btn-dark:hover {
+  background: #1e2229 !important;
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-1px) !important;
+}
+
+.tactile-btn-dark:active {
+  transform: translateY(1px) !important;
+}
+
+.dark .tactile-btn-dark {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Tactile Pill Subtle Button (Explore, Source Code) */
+.tactile-btn-pill {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  font-weight: 700 !important;
+  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out !important;
+}
+
+.tactile-btn-pill:hover {
+  background-color: #f8fafc !important;
+  border-color: rgba(0, 0, 0, 0.22) !important;
+  transform: translateY(-1px) !important;
+}
+
+.tactile-btn-pill:active {
+  transform: translateY(1px) !important;
+}
+
+.dark .tactile-btn-pill {
+  background-color: #1e222a !important;
+  color: #e2e8f0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Tactile Sidebar Pill Items */
+.tactile-nav-active {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark .tactile-nav-active {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.tactile-nav-inactive {
+  background-color: #21252c !important;
+  color: #9ba6b5 !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.06) !important;
+  transition: all 0.2s ease-out !important;
+}
+
+.tactile-nav-inactive:hover {
+  background-color: #2a2f38 !important;
+  color: #ffffff !important;
+  transform: translateX(2px);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   REFERENCE-ACCURATE MINIMALIST MONOCHROME UTILITIES
+   ══════════════════════════════════════════════════════════════════════════════ */
+.btn-pill-black {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 700;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  transition: all 0.15s ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.btn-pill-black:hover {
+  background-color: #1f242d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.btn-pill-black:active {
+  transform: translateY(0);
+}
+
+.dark .btn-pill-black {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark .btn-pill-black:hover {
+  background-color: #f1f5f9;
+}
+
+.btn-pill-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  color: #0f172a;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 9999px;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  transition: all 0.15s ease-out;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.btn-pill-white:hover {
+  background-color: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
+}
+
+.btn-pill-white:active {
+  transform: translateY(0);
+}
+
+.dark .btn-pill-white {
+  background-color: #151821;
+  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.dark .btn-pill-white:hover {
+  background-color: #1c202c;
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.clean-card {
+  background-color: #ffffff;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease-out;
+}
+
+.dark .clean-card {
+  background-color: #141720;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
 }

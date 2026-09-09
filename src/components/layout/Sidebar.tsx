@@ -5,7 +5,6 @@ import {
   Download,
   FileText,
   FolderKanban,
-  Gamepad2,
   Github,
   Linkedin,
   Mail,
@@ -179,22 +178,6 @@ export const Sidebar: React.FC = () => {
 
         {/* Secondary Links */}
         <div className="pt-4 mt-4 border-t-2 border-black dark:border-white space-y-2">
-          {/* 2D World Link */}
-          <Link
-            to="/collab"
-            onClick={() => {
-              playNavigate();
-              closeDrawer();
-            }}
-            onMouseEnter={playHover}
-            className={`group flex h-10 w-full items-center gap-2.5 border-2 px-3 text-[14px] font-slabo transition-all duration-120 ${location.pathname === '/collab'
-              ? 'border-black dark:border-white bg-black text-white dark:bg-white dark:text-black font-bold shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)]'
-              : 'border-transparent text-[var(--text-secondary)] hover:border-black dark:hover:border-white hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]'
-              }`}
-          >
-            <Gamepad2 className="h-4 w-4 shrink-0" strokeWidth={2} />
-            <span>2D World</span>
-          </Link>
 
           {/* 1-Click Resume Link */}
           <a

@@ -2,10 +2,10 @@ import type { Profile } from '../types/profile';
 
 export const profile: Profile = {
   name: 'Janmark Suelto',
-  title: 'Full-Stack Developer',
+  title: 'Full-Stack Developer & AI Automation Specialist',
   location: 'Patpat, Malaybalay City, Bukidnon',
   timezone: 'Open to Remote Roles',
-  bio: 'Just building secure software that works across web, mobile, backend systems, and automation workflows. Specializing in React, TypeScript, React Native, Supabase, and n8n.',
+  bio: 'I build full-stack platforms, autonomous AI workflows, and scalable web applications. Focused on clean database schemas, transactional integrity, and refined interfaces.',
   email: 'janmarkking@gmail.com',
   phone: '+63 969 022 1571',
   githubUrl: 'https://github.com/RaizelHub',

@@ -5,7 +5,6 @@ import {
   Briefcase,
   User,
   Mail,
-  Gamepad2,
   FileText,
   Volume2,
   VolumeX,
@@ -31,7 +30,6 @@ const navItems: DockItem[] = [
   { id: 'experience', label: 'Experience', icon: Briefcase, href: '/#experience' },
   { id: 'about', label: 'About', icon: User, href: '/#about' },
   { id: 'contact', label: 'Contact', icon: Mail, href: '/#contact' },
-  { id: 'collab', label: '2D World', icon: Gamepad2, href: '/collab', isRoute: true },
 ];
 
 export const DynamicIslandDock: React.FC = () => {
@@ -135,11 +133,10 @@ export const DynamicIslandDock: React.FC = () => {
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item)}
                 onMouseEnter={playHover}
-                className={`group relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border-0 transition-all cursor-pointer ${
-                  isActive
+                className={`group relative flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full border-0 transition-all cursor-pointer ${isActive
                     ? 'bg-black dark:bg-white text-white dark:text-black shadow-sm'
                     : 'text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]'
-                }`}
+                  }`}
                 aria-label={item.label}
               >
                 <Icon className="h-4 w-4" strokeWidth={isActive ? 2.5 : 2} />

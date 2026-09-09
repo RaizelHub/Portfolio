@@ -28,11 +28,11 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
         };
 
   return (
-    <div className={`mb-10 max-w-3xl ${isLeft ? 'text-left' : 'mx-auto text-center'}`}>
+    <div className={`mb-6 max-w-3xl ${isLeft ? 'text-left' : 'mx-auto text-center'}`}>
       {tag && (
         <motion.span
           {...anim(0)}
-          className="mb-4 block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[var(--accent)]"
+          className="mb-1 block font-title text-xs font-bold uppercase tracking-wider text-neutral-900 dark:text-neutral-200"
         >
           {tag}
         </motion.span>
@@ -40,7 +40,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
 
       <motion.h2
         {...anim(0.05)}
-        className="section-heading mb-4 font-title text-[var(--text-primary)]"
+        className="font-title text-xl sm:text-2xl font-black tracking-tight text-neutral-900 dark:text-white leading-[1.1] mb-1.5"
       >
         {title}
       </motion.h2>
@@ -48,7 +48,7 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       {subtitle && (
         <motion.p
           {...anim(0.1)}
-          className="body-copy text-[var(--text-secondary)]"
+          className="text-xs text-neutral-600 dark:text-neutral-300 font-normal leading-relaxed max-w-2xl"
         >
           {subtitle}
         </motion.p>

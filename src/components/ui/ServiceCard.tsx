@@ -7,7 +7,7 @@ interface ServiceCardProps {
 
 export const ServiceCard = ({ service }: ServiceCardProps) => {
   const getIcon = (iconName: string) => {
-    const defaultClass = "w-5 h-5 text-[#C7462D] dark:text-[#E25235]";
+    const defaultClass = "w-4 h-4 text-neutral-900 dark:text-white";
     switch (iconName.toLowerCase()) {
       case 'code':
         return <Code2 className={defaultClass} />;
@@ -23,25 +23,25 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
   };
 
   return (
-    <div className="group bg-[#EFEBE4] dark:bg-[#1D1C18] border border-[#D5D0C7] dark:border-[#34312B] hover:border-[#171717] dark:hover:border-[#F2EEE6] rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-4 transition-all duration-200 hover:-translate-y-0.5 shadow-sm">
-      <div className="space-y-3">
+    <div className="group bg-white dark:bg-[#161822] border-2 border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 rounded-2xl p-4 sm:p-5 flex flex-col justify-between space-y-3 transition-all duration-200 hover:-translate-y-0.5 shadow-xs">
+      <div className="space-y-2.5">
         {/* Top Label & Icon Header */}
-        <div className="flex items-center justify-between border-b border-[#D5D0C7]/80 dark:border-[#34312B]/80 pb-3">
-          <span className="font-mono text-[11px] font-bold text-[#6B6862] dark:text-[#A9A39A] uppercase tracking-wider">
+        <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
+          <span className="font-title text-xs font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
             {service.label}
           </span>
-          <div className="p-1.5 bg-[#F4F1EA] dark:bg-[#151411] border border-[#D5D0C7] dark:border-[#34312B] rounded-md">
+          <div className="p-1.5 bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-md">
             {getIcon(service.icon)}
           </div>
         </div>
 
         {/* Main Expertise Title */}
-        <h3 className="font-amarna text-lg sm:text-xl font-bold text-[#171717] dark:text-[#F2EEE6] group-hover:text-[#C7462D] dark:group-hover:text-[#E25235] transition-colors uppercase tracking-wide pt-1">
+        <h3 className="font-title text-sm sm:text-base font-bold text-neutral-900 dark:text-white transition-colors pt-0.5">
           {service.title}
         </h3>
 
         {/* Concise Description */}
-        <p className="text-xs sm:text-sm text-[#6B6862] dark:text-[#A9A39A] font-pt-sans leading-relaxed font-normal">
+        <p className="text-xs text-neutral-600 dark:text-neutral-300 font-sans leading-relaxed font-normal">
           {service.description}
         </p>
       </div>

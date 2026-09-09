@@ -15,7 +15,7 @@ export const FloatingContactModal: React.FC = () => {
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const { playHover, playClick } = useSound();
+  const { playClick } = useSound();
 
   useEffect(() => {
     const handleOpenModal = () => setIsOpen(true);
@@ -83,26 +83,7 @@ export const FloatingContactModal: React.FC = () => {
 
   return (
     <>
-      {/* Floating Trigger Button (Bottom-Right) */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            onClick={() => {
-              playClick();
-              setIsOpen(true);
-            }}
-            onMouseEnter={playHover}
-            className="group fixed bottom-6 right-6 z-50 flex min-h-11 cursor-pointer items-center gap-2 border-2 border-black dark:border-white bg-[var(--surface-elevated)] px-4 py-3 font-nav text-xs font-bold tracking-tight text-[var(--text-primary)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[5px_5px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
-            aria-label="Open Contact Modal"
-          >
-            <Mail className="w-4 h-4 text-[var(--accent)] transition-colors" strokeWidth={2.5} />
-            <span>Contact</span>
-          </motion.button>
-        )}
-      </AnimatePresence>
+      {/* Floating Contact Modal Window (Triggered via open-contact-modal event or nav) */}
 
       {/* Floating Contact Modal Window */}
       <AnimatePresence>

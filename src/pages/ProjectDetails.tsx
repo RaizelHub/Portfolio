@@ -74,62 +74,63 @@ export const ProjectDetails = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--background)] pb-[var(--section-space)] pt-8 text-[var(--text-primary)] transition-colors">
-      <div className="mx-auto w-full max-w-[var(--content-width)] px-[var(--page-gutter)]">
+    <div className="pb-16 pt-0 select-none font-sans text-[var(--text-primary)]">
+      <div>
         {/* ── Top Bar: Back & Like ── */}
-        <div className="mb-8 flex min-w-0 flex-wrap items-center justify-between gap-3 font-mono text-xs font-bold">
+        <div className="mb-6 flex min-w-0 flex-wrap items-center justify-between gap-3 font-mono text-xs font-semibold">
           <Link
-            to="/#projects"
+            to="/"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="inline-flex items-center gap-1.5 border-2 border-black dark:border-white bg-[var(--surface)] px-3.5 py-1.5 text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+            className="btn-pill-white inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold tracking-wide cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-[var(--text-primary)]" strokeWidth={2.5} />
-            <span>Return to Overview</span>
+            <ArrowLeft className="w-3.5 h-3.5 text-neutral-800 dark:text-neutral-200" strokeWidth={2.5} />
+            <span>Return to Bento Dashboard</span>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             {slug && <ProjectLikeButton slug={slug} projectName={project.title} variant="badge" />}
             <Link
               to="/projects"
               onMouseEnter={playHover}
               onClick={playClick}
-              className="border-2 border-black dark:border-white bg-[var(--surface)] px-3.5 py-1.5 text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+              className="btn-pill-white inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold tracking-wide cursor-pointer"
             >
-              All Projects Directory ({projects.length}) ↗
+              <span>Projects Directory</span>
+              <ArrowRight className="w-3 h-3 text-neutral-800 dark:text-neutral-200" />
             </Link>
           </div>
         </div>
 
         {/* ── Case Study Header Block ── */}
-        <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] mb-8 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b-2 border-black dark:border-white pb-4 font-mono text-xs">
+        <div className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-5 sm:p-6 shadow-xs mb-6 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-3 font-mono text-xs">
             <div className="flex items-center gap-2">
-              <span className="border border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-2.5 py-0.5 font-black uppercase">
+              <span className="rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-700 px-2.5 py-0.5 font-bold uppercase text-[10px]">
                 {project.category}
               </span>
-              <span className="border border-black dark:border-white bg-[var(--surface-elevated)] px-2.5 py-0.5 font-bold text-[var(--text-secondary)]">
+              <span className="rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-2.5 py-0.5 font-medium text-neutral-600 dark:text-neutral-400 text-[10px]">
                 {project.status}
               </span>
             </div>
             {project.role && (
-              <span className="text-[var(--text-muted)] font-semibold text-[11px]">
+              <span className="text-neutral-500 dark:text-neutral-400 font-medium text-[11px]">
                 Role: {project.role}
               </span>
             )}
           </div>
 
-          <div className="space-y-3">
-            <h1 className="font-title text-2xl sm:text-3xl lg:text-4xl font-normal text-[var(--text-primary)] tracking-tight">
+          <div className="space-y-2">
+            <h1 className="font-title text-xl sm:text-2xl font-black text-neutral-900 dark:text-white tracking-tight leading-[1.1]">
               {project.title}
             </h1>
-            <p className="body-copy text-[var(--text-secondary)] text-sm sm:text-base leading-relaxed max-w-4xl font-medium">
+            <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed max-w-3xl font-normal">
               {project.description}
             </p>
           </div>
 
           {/* Quick Action Bar */}
-          <div className="flex flex-wrap items-center gap-3 pt-2 font-mono text-xs">
+          <div className="flex flex-wrap items-center gap-2.5 pt-1 font-title text-xs">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
@@ -137,9 +138,9 @@ export const ProjectDetails = () => {
                 rel="noopener noreferrer"
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="inline-flex min-h-11 items-center gap-2 border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-5 py-2.5 font-bold uppercase shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="btn-pill-black inline-flex min-h-9 items-center gap-2 px-4 py-1.5 font-semibold shadow-xs cursor-pointer"
               >
-                <ExternalLink className="w-4 h-4" strokeWidth={2.5} />
+                <ExternalLink className="w-3.5 h-3.5" strokeWidth={2.5} />
                 <span>Visit Live Application ↗</span>
               </a>
             )}
@@ -151,9 +152,9 @@ export const ProjectDetails = () => {
                 rel="noopener noreferrer"
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className="inline-flex min-h-11 items-center gap-2 border-2 border-black dark:border-white bg-[var(--surface-elevated)] px-4 py-2.5 font-bold text-[var(--text-primary)] shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] transition-all duration-120 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="btn-pill-white inline-flex min-h-9 items-center gap-2 px-3.5 py-1.5 font-semibold cursor-pointer shadow-2xs"
               >
-                <Github className="w-4 h-4" />
+                <Github className="w-3.5 h-3.5" />
                 <span>Inspect Repository ↗</span>
               </a>
             )}
@@ -191,8 +192,8 @@ export const ProjectDetails = () => {
                       setActiveImageIndex(idx);
                     }}
                     className={`relative w-24 h-16 overflow-hidden border-2 transition-all shrink-0 font-mono text-[10px] bg-[var(--background)] cursor-pointer ${activeImageIndex === idx
-                        ? 'border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] opacity-100'
-                        : 'border-black/30 dark:border-white/30 opacity-60 hover:opacity-100'
+                      ? 'border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] opacity-100'
+                      : 'border-black/30 dark:border-white/30 opacity-60 hover:opacity-100'
                       }`}
                   >
                     <img
@@ -212,30 +213,30 @@ export const ProjectDetails = () => {
 
         {/* ── Problem & Solution Bento Grid ── */}
         {(project.problem || project.solution) && (
-          <div className="grid grid-cols-1 border-2 border-black dark:border-white bg-[var(--surface)] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] md:grid-cols-2 mb-8">
+          <div className="grid grid-cols-1 rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] shadow-xs md:grid-cols-2 mb-6 overflow-hidden">
             {project.problem && (
-              <div className="space-y-3 border-b-2 border-black dark:border-white p-6 sm:p-7 md:border-b-0 md:border-r-2 md:border-black md:dark:border-white">
-                <div className="flex items-center gap-2 border-b border-black/15 dark:border-white/15 pb-2.5">
-                  <Shield className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-                  <h3 className="font-mono font-black text-xs uppercase tracking-wider text-[var(--text-primary)]">
+              <div className="space-y-2.5 border-b-2 border-neutral-300 dark:border-neutral-700 p-5 md:border-b-0 md:border-r-2 md:border-neutral-300 md:dark:border-neutral-700">
+                <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                  <Shield className="w-3.5 h-3.5 text-neutral-900 dark:text-white" strokeWidth={2.5} />
+                  <h3 className="font-title font-bold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">
                     The Challenge &amp; Problem
                   </h3>
                 </div>
-                <p className="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-medium">
+                <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 font-normal">
                   {project.problem}
                 </p>
               </div>
             )}
 
             {project.solution && (
-              <div className="space-y-3 p-6 sm:p-7">
-                <div className="flex items-center gap-2 border-b border-black/15 dark:border-white/15 pb-2.5">
-                  <CheckCircle className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-                  <h3 className="font-mono font-black text-xs uppercase tracking-wider text-[var(--text-primary)]">
+              <div className="space-y-2.5 p-5">
+                <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2">
+                  <CheckCircle className="w-3.5 h-3.5 text-neutral-900 dark:text-white" strokeWidth={2.5} />
+                  <h3 className="font-title font-bold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">
                     The Architectural Solution
                   </h3>
                 </div>
-                <p className="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-medium">
+                <p className="text-xs leading-relaxed text-neutral-600 dark:text-neutral-300 font-normal">
                   {project.solution}
                 </p>
               </div>
@@ -245,21 +246,21 @@ export const ProjectDetails = () => {
 
         {/* ── Core Capabilities & Features ── */}
         {project.features && project.features.length > 0 && (
-          <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] mb-8 space-y-5">
-            <div className="flex items-center gap-2 border-b-2 border-black dark:border-white pb-3">
-              <ListTodo className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-              <h3 className="font-mono font-black text-xs uppercase tracking-wider text-[var(--text-primary)]">
+          <div className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-5 shadow-xs mb-6 space-y-3.5">
+            <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
+              <ListTodo className="w-3.5 h-3.5 text-neutral-900 dark:text-white" strokeWidth={2.5} />
+              <h3 className="font-title font-bold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">
                 Core Capabilities &amp; Engineering Highlights
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {project.features.map((feat) => (
                 <div
                   key={feat}
-                  className="flex items-start gap-3 border border-black dark:border-white bg-[var(--surface-elevated)] p-3.5 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] font-medium text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed"
+                  className="flex items-start gap-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/80 p-3 font-medium text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[var(--accent)] shrink-0 mt-0.5" strokeWidth={2.5} />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" strokeWidth={2.5} />
                   <span>{feat}</span>
                 </div>
               ))}
@@ -269,27 +270,27 @@ export const ProjectDetails = () => {
 
         {/* ── System Architecture & Data Flow ── */}
         {(project.architectureDiagramUrl || project.architecture || project.process) && (
-          <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] mb-8 space-y-5">
-            <div className="flex items-center gap-2 border-b-2 border-black dark:border-white pb-3">
-              <Workflow className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-              <h3 className="font-mono font-black text-xs uppercase tracking-wider text-[var(--text-primary)]">
+          <div className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-5 shadow-xs mb-6 space-y-3.5">
+            <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
+              <Workflow className="w-3.5 h-3.5 text-neutral-900 dark:text-white" strokeWidth={2.5} />
+              <h3 className="font-title font-bold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">
                 System Topology &amp; Architecture Flow
               </h3>
             </div>
 
             {project.architecture && (
-              <div className="border border-black dark:border-white bg-[var(--surface-elevated)] p-4 font-mono text-xs text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] leading-relaxed">
-                <span className="font-bold text-[var(--accent)] block mb-1">Architecture Pipeline:</span>
-                <p className="text-[var(--text-secondary)] font-medium">{project.architecture}</p>
+              <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/80 p-3.5 font-mono text-xs text-neutral-800 dark:text-neutral-200 leading-relaxed">
+                <span className="font-bold text-neutral-900 dark:text-white block mb-1">Architecture Pipeline:</span>
+                <p className="text-neutral-600 dark:text-neutral-300 font-sans">{project.architecture}</p>
               </div>
             )}
 
             {project.architectureDiagramUrl && (
-              <div className="overflow-hidden border-2 border-black dark:border-white bg-[var(--background)] p-3">
+              <div className="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900/80 p-3">
                 <img
                   src={`/${project.architectureDiagramUrl}`}
                   alt={`${project.title} Architecture Workflow Diagram`}
-                  className="w-full h-auto object-contain max-h-[500px]"
+                  className="w-full h-auto object-contain max-h-[460px] mx-auto"
                 />
               </div>
             )}
@@ -298,19 +299,19 @@ export const ProjectDetails = () => {
 
         {/* ── Tech Stack ── */}
         {project.technologies && project.technologies.length > 0 && (
-          <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 sm:p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] mb-8 space-y-4">
-            <div className="flex items-center gap-2 border-b-2 border-black dark:border-white pb-3">
-              <Cpu className="w-4 h-4 text-[var(--accent)]" strokeWidth={2.5} />
-              <h3 className="font-mono font-black text-xs uppercase tracking-wider text-[var(--text-primary)]">
+          <div className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-5 shadow-xs mb-6 space-y-3">
+            <div className="flex items-center gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2.5">
+              <Cpu className="w-3.5 h-3.5 text-neutral-900 dark:text-white" strokeWidth={2.5} />
+              <h3 className="font-title font-bold text-xs uppercase tracking-wider text-neutral-900 dark:text-white">
                 Technologies &amp; Tools Applied
               </h3>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
                 <span
                   key={tech}
-                  className="border border-black dark:border-white bg-[var(--surface-elevated)] px-3 py-1 font-mono text-xs font-bold text-[var(--text-primary)] shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                  className="rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-800 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-neutral-700 dark:text-neutral-300"
                 >
                   {tech}
                 </span>
@@ -320,15 +321,15 @@ export const ProjectDetails = () => {
         )}
 
         {/* ── Next Project / Navigation Footer ── */}
-        <div className="border-2 border-black dark:border-white bg-[var(--surface)] p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs font-bold">
+        <div className="rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] p-4 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-3 font-title text-xs">
           <Link
-            to="/#projects"
+            to="/projects"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="flex items-center gap-2 hover:underline text-[var(--text-secondary)]"
+            className="flex items-center gap-1.5 font-semibold text-neutral-600 dark:text-neutral-300 hover:text-black dark:hover:text-white transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Case Studies Overview</span>
+            <span>Back to Projects Directory</span>
           </Link>
 
           {nextProject && (
@@ -336,7 +337,7 @@ export const ProjectDetails = () => {
               to={`/projects/${nextProject.slug}`}
               onMouseEnter={playHover}
               onClick={playClick}
-              className="flex items-center gap-2 border-2 border-black dark:border-white bg-black dark:bg-white text-white dark:text-black px-4 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[3px_3px_0px_0px_rgba(255,255,255,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+              className="btn-pill-black inline-flex items-center gap-1.5 px-4 py-1.5 font-semibold shadow-xs"
             >
               <span>Next: {nextProject.title}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -367,6 +368,6 @@ export const ProjectDetails = () => {
           />
         </div>
       )}
-    </main>
+    </div>
   );
 };

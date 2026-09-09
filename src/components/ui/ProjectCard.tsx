@@ -11,61 +11,62 @@ interface ProjectCardProps {
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const { playHover, playClick } = useSound();
-  const displayTitle = project.title;
+  const displayTitle = project.title.split(/\s+[—–-]\s+/)[0].trim() || project.title;
 
   return (
     <Link
       to={`/projects/${project.slug}`}
       onMouseEnter={playHover}
-      onClick={playClick}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border-0 bg-[var(--surface)] shadow-xl shadow-black/5 dark:shadow-2xl dark:shadow-black/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl dark:hover:shadow-black/70 focus-visible:outline-none"
+      onClick={() => setTimeout(() => playClick(), 0)}
+      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border-2 border-neutral-300 dark:border-neutral-700 bg-white dark:bg-[#161822] shadow-xs transition-[border-color,box-shadow,transform] duration-150 hover:-translate-y-1 hover:border-neutral-400 dark:hover:border-neutral-600 hover:shadow-md focus-visible:outline-none"
       aria-label={`View ${displayTitle} case study`}
     >
       {/* Project Image Preview */}
-      <div className="relative aspect-[16/9] overflow-hidden bg-[var(--background)]">
+      <div className="relative aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-900 border-b-2 border-neutral-300 dark:border-neutral-700">
         {project.image ? (
           <img
             src={`/${project.image}`}
             alt={`${displayTitle} Preview`}
             loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            decoding="async"
+            className="h-full w-full object-cover object-top"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-[var(--background)] select-none font-mono">
-            <span className="text-2xl mb-1">{project.emoji || '⚙️'}</span>
-            <span className="text-xs text-[var(--text-primary)] font-bold uppercase">{project.category}</span>
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-neutral-100 dark:bg-neutral-900 select-none font-mono">
+            <span className="text-xl mb-1">{project.emoji || '⚙️'}</span>
+            <span className="text-[10px] text-neutral-800 dark:text-neutral-200 font-bold uppercase">{project.category}</span>
           </div>
         )}
       </div>
 
-      {/* Card Body: Title + Short Description + Arrow */}
-      <div className="flex flex-1 flex-col justify-between space-y-5 p-6 sm:p-7">
+      {/* Card Body: Title + Short Description */}
+      <div className="flex flex-1 flex-col justify-between space-y-3 p-4 sm:p-4.5">
         <div>
-          <div className="mb-3 flex min-w-0 flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-xs uppercase leading-[1.4] tracking-[0.08em] font-bold text-[var(--text-primary)]">
-            <div className="flex items-center gap-2">
-              <span className="rounded-full border-0 bg-[var(--surface-elevated)] px-3 py-0.5 shadow-sm">{project.category}</span>
+          <div className="mb-2 flex min-w-0 flex-wrap items-center justify-between gap-x-2 gap-y-1 font-mono text-[10px] uppercase font-bold text-neutral-600 dark:text-neutral-400">
+            <div className="flex items-center gap-1.5">
+              <span className="rounded-full border border-neutral-300 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5">{project.category}</span>
               <span>·</span>
-              <span className="break-safe normal-case tracking-normal text-[var(--text-secondary)]">{project.status}</span>
+              <span className="normal-case text-neutral-500 dark:text-neutral-400">{project.status}</span>
             </div>
             <ProjectLikeButton slug={project.slug} projectName={displayTitle} variant="badge" />
           </div>
-          <div className="flex min-w-0 items-start justify-between gap-3">
-            <h3 className="project-heading min-w-0 flex-1 font-title text-[var(--text-primary)] transition-colors duration-200 group-hover:underline font-normal">
+          <div className="flex min-w-0 items-start justify-between gap-2">
+            <h3 className="font-title text-sm sm:text-base font-bold text-neutral-900 dark:text-white transition-colors duration-200 group-hover:text-neutral-600 dark:group-hover:text-neutral-300">
               {displayTitle}
             </h3>
           </div>
 
-          <p className="body-copy mt-3 max-w-[55ch] text-[var(--text-secondary)] font-medium text-xs sm:text-sm">
+          <p className="mt-1.5 text-xs text-neutral-600 dark:text-neutral-300 font-normal leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
 
         {/* Tech badges: Rounded pills */}
-        <div className="flex flex-wrap gap-1.5 pt-3">
+        <div className="flex flex-wrap gap-1 pt-2">
           {project.technologies.map((tech) => (
             <span
               key={tech}
-              className="rounded-full border-0 bg-[var(--surface-elevated)] px-3 py-1 font-mono text-xs font-bold text-[var(--text-primary)] shadow-sm"
+              className="rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100/80 dark:bg-neutral-800/80 px-2 py-0.5 font-mono text-[10px] font-semibold text-neutral-700 dark:text-neutral-300"
             >
               {tech}
             </span>

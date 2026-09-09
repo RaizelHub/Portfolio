@@ -172,7 +172,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
 
   const renderGameContent = () => (
     <div className="bg-[#EFEBE4] border border-[#D5D0C7] p-6 sm:p-8 rounded-xl space-y-6 font-mono text-xs text-[#171717] w-full text-left">
-      
+
       {/* Header bar */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#D5D0C7] pb-4">
         <div className="flex items-center gap-2">
@@ -191,7 +191,7 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
           >
             RANDOM PARAGRAPH ({snippetIndex + 1}/{PARAGRAPHS.length})
           </button>
-          
+
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-1.5 bg-[#F4F1EA] hover:bg-[#EFEBE4] text-[#171717] border border-[#D5D0C7] hover:border-[#171717] rounded-md transition-colors"
@@ -228,9 +228,8 @@ export const TypingGame: React.FC<TypingGameProps> = ({ initialExpanded = false 
       {/* Paragraph Display Container */}
       <div
         onClick={() => inputRef.current?.focus()}
-        className={`relative bg-[#F4F1EA] border p-5 rounded-lg font-mono text-sm sm:text-base leading-relaxed tracking-wide min-h-[100px] cursor-text select-none ${
-          isActive ? 'border-[#C7462D]' : 'border-[#D5D0C7]'
-        }`}
+        className={`relative bg-[#F4F1EA] border p-5 rounded-lg font-mono text-sm sm:text-base leading-relaxed tracking-wide min-h-[100px] cursor-text select-none ${isActive ? 'border-[#C7462D]' : 'border-[#D5D0C7]'
+          }`}
       >
         <div className="mb-2 text-[11px] text-[#6B6862] font-bold uppercase flex justify-between">
           <span>{currentParagraph.title}</span>

@@ -33,23 +33,28 @@ export const ProjectLikeButton: React.FC<ProjectLikeButtonProps> = ({
 
   useEffect(() => {
     let isMounted = true;
+    let unsubscribe = () => {};
     setIsLiked(hasUserLiked(slug));
 
-    // Fast memory read
+    // Fast memory read (instant 0ms render)
     const cached = getCachedLikeCounts();
     if (cached[slug] !== undefined) {
       setLikes(cached[slug]);
     }
 
-    // Realtime subscription for live sync across visitors
-    const unsubscribe = subscribeToProjectLikes(slug, (newCount) => {
-      if (isMounted) {
-        setLikes(newCount);
-      }
-    });
+    // Defer realtime subscription to avoid network/thread contention during page transitions
+    const timer = setTimeout(() => {
+      if (!isMounted) return;
+      unsubscribe = subscribeToProjectLikes(slug, (newCount) => {
+        if (isMounted) {
+          setLikes(newCount);
+        }
+      });
+    }, 600);
 
     return () => {
       isMounted = false;
+      clearTimeout(timer);
       unsubscribe();
     };
   }, [slug]);
