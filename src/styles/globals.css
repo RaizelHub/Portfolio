@@ -1080,3 +1080,130 @@ textarea,
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.35);
 }
+.anime-profile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #030811;
+  border: 1px solid #23436a;
+  padding: 44px 28px;
+  min-height: 310px;
+}
+.anime-profile-art { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
+.anime-profile-image {
+  position: absolute;
+  right: -2%;
+  top: -24%;
+  width: 48%;
+  height: 155%;
+  object-fit: contain;
+  animation: ichigo-morph 14s ease-in-out infinite;
+  transform-origin: 55% 48%;
+  backface-visibility: hidden;
+}
+.anime-profile-hollow {
+  opacity: 0;
+  animation-name: hollow-morph;
+}
+.anime-profile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, #030811 0%, #030811f2 38%, #03081199 65%, #03081110 100%);
+}
+.anime-profile-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 65%, #2379e545, transparent 60%);
+  animation: ichigo-glow 14s ease-in-out infinite;
+}
+.anime-profile-content { position: relative; min-height: 220px; padding-right: 18%; }
+.anime-transition {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  animation-duration: 14s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.anime-transition-sweep {
+  top: -30%;
+  left: 45%;
+  width: 10%;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, #75cfff55 35%, #d5f2ffbb 50%, #ef444477 65%, transparent);
+  filter: blur(3px);
+  animation-name: anime-energy-sweep;
+}
+.anime-transition-pulse {
+  left: 78%;
+  top: 50%;
+  width: clamp(160px, 25vw, 320px);
+  aspect-ratio: 1;
+  border: 2px solid #ef667c;
+  border-radius: 50%;
+  box-shadow: 0 0 24px #ed345f66, inset 0 0 24px #ed345f33;
+  animation-name: anime-energy-pulse;
+}
+@keyframes anime-energy-sweep {
+  0%, 22% { opacity: 0; transform: translateX(0) skewX(-22deg); }
+  30% { opacity: .7; transform: translateX(220%) skewX(-22deg); }
+  40%, 72% { opacity: 0; transform: translateX(600%) skewX(-22deg); }
+  82% { opacity: .7; transform: translateX(220%) skewX(-22deg); }
+  94%, 100% { opacity: 0; transform: translateX(0) skewX(-22deg); }
+}
+@keyframes anime-energy-pulse {
+  0%, 26%, 76% { opacity: 0; transform: translate(-50%, -50%) scale(.35); }
+  33%, 83% { opacity: .55; transform: translate(-50%, -50%) scale(.8); }
+  45%, 95%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.7); }
+}
+.anime-profile-content h1 { color: #fff; }
+.anime-profile-content p { color: #ced9e9; }
+.anime-profile-toggle {
+  position: absolute;
+  right: 16px;
+  bottom: 12px;
+  z-index: 1;
+  color: #d9e8ff;
+  background: #071426dd;
+  border: 1px solid #46668a;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.anime-profile-toggle:focus-visible { outline: 2px solid #93c5fd; outline-offset: 3px; }
+.anime-profile-toggle:disabled { cursor: default; }
+.anime-profile[data-paused='true'] .anime-profile-image,
+.anime-profile[data-paused='true'] .anime-transition,
+.anime-profile[data-paused='true'] .anime-profile-glow { animation-play-state: paused; }
+@keyframes ichigo-morph {
+  0%, 18%, 100% { opacity: 1; transform: scale(1); filter: blur(0); }
+  30% { opacity: .55; transform: scale(.94, 1.06) skewY(-3deg); filter: blur(5px); }
+  42%, 68% { opacity: 0; transform: scale(.86, 1.12) skewY(-6deg); filter: blur(10px); }
+  82% { opacity: .55; transform: scale(1.04, .96) skewY(3deg); filter: blur(5px); }
+}
+@keyframes hollow-morph {
+  0%, 18%, 100% { opacity: 0; transform: scale(1.16, .9) skewY(6deg); filter: blur(10px); }
+  30% { opacity: .55; transform: scale(1.08, .96) skewY(3deg); filter: blur(5px); }
+  42%, 68% { opacity: 1; transform: scale(1.02); filter: blur(0); }
+  82% { opacity: .45; transform: scale(.94, 1.08) skewY(-3deg); filter: blur(5px); }
+}
+@keyframes ichigo-glow {
+  0%, 18%, 100% { opacity: .5; filter: hue-rotate(0deg); }
+  42%, 68% { opacity: .85; filter: hue-rotate(135deg); }
+}
+@media (max-width: 639px) {
+  .anime-profile { padding: 32px 20px 48px; }
+  .anime-profile-image { width: 100%; right: -25%; top: -12%; height: 125%; }
+  .anime-profile-content { padding-right: 0; }
+  .anime-profile::after { background: linear-gradient(90deg, #030811de, #03081185); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .anime-profile-image, .anime-profile-glow { animation: none; }
+  .anime-transition { animation: none; display: none; }
+  .anime-profile-hollow { opacity: 0; }
+}

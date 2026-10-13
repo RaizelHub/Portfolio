@@ -1,11 +1,23 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { profile } from '../../data/profile';
 export const TactileHero: React.FC = () => {
+  const reduceMotion = useReducedMotion();
+  const [paused, setPaused] = React.useState(false);
   return (
-    <div className="w-full mb-4 sm:mb-5 lg:mb-6 select-none font-sans">
+    <div className="anime-profile w-full mb-4 sm:mb-5 lg:mb-6 select-none font-sans" data-paused={paused || !!reduceMotion}>
+      <div className="anime-profile-art" aria-hidden="true">
+        <img src="/img/ichigo-wallpaper.jpg" alt="" className="anime-profile-image" />
+        <img src="/img/ichigo-hollow.jpg" alt="" className="anime-profile-image anime-profile-hollow" />
+        <div className="anime-profile-glow" />
+        <div className="anime-transition anime-transition-sweep" />
+        <div className="anime-transition anime-transition-pulse" />
+      </div>
+      <button type="button" className="anime-profile-toggle" onClick={() => setPaused(value => !value)} aria-pressed={paused} disabled={!!reduceMotion}>
+        {reduceMotion ? 'Motion reduced' : paused ? 'Play background' : 'Pause background'}
+      </button>
       {/* ── Hero Profile Row: Circular Avatar + Headline + Bio ── */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-5 sm:gap-7 lg:gap-8 py-1 sm:py-2">
+      <div className="anime-profile-content flex flex-col sm:flex-row items-center sm:items-center gap-5 sm:gap-7 lg:gap-8 py-1 sm:py-2">
         {/* Circular Avatar with Sleek Monochrome Frame */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
