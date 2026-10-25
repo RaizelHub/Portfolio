@@ -1,69 +1,137 @@
-import { Suspense, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { BentoSidebar } from './components/bento/BentoSidebar';
-import { ErrorBoundary } from './components/ui/ErrorBoundary';
-import { FloatingContactModal } from './components/ui/FloatingContactModal';
-import { SoundProvider } from './context/SoundContext';
-import { ThemeProvider } from './context/ThemeContext';
-import { Home } from './pages/Home';
-import { Projects } from './pages/Projects';
-import { ProjectDetails } from './pages/ProjectDetails';
-import { ServicesPage } from './pages/ServicesPage';
-import { TechnologiesPage } from './pages/TechnologiesPage';
-import { ExperiencePage } from './pages/ExperiencePage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { AdminAnalytics } from './pages/AdminAnalytics';
-
+import { Suspense, lazy, useEffect, useRef } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { BentoSidebar } from "./components/bento/BentoSidebar";
+import { ErrorBoundary } from "./components/ui/ErrorBoundary";
+import { SoundProvider } from "./context/SoundContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import { Home } from "./pages/Home";
+const Projects = lazy(() =>
+  import("./pages/Projects").then((m) => ({ default: m.Projects })),
+);
+const ProjectDetails = lazy(() =>
+  import("./pages/ProjectDetails").then((m) => ({ default: m.ProjectDetails })),
+);
+const AboutPage = lazy(() =>
+  import("./pages/AboutPage").then((m) => ({ default: m.AboutPage })),
+);
+const ExperiencePage = lazy(() =>
+  import("./pages/ExperiencePage").then((m) => ({ default: m.ExperiencePage })),
+);
+const TechnologiesPage = lazy(() =>
+  import("./pages/TechnologiesPage").then((m) => ({
+    default: m.TechnologiesPage,
+  })),
+);
+const CertificationsPage = lazy(() =>
+  import("./pages/CertificationsPage").then((m) => ({
+    default: m.CertificationsPage,
+  })),
+);
+const ContactPage = lazy(() =>
+  import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })),
+);
+const ServicesPage = lazy(() =>
+  import("./pages/ServicesPage").then((m) => ({ default: m.ServicesPage })),
+);
+const AdminAnalytics = lazy(() =>
+  import("./pages/AdminAnalytics").then((m) => ({ default: m.AdminAnalytics })),
+);
 function PortfolioShell() {
-  const location = useLocation();
-
-  // Automatically scroll to top on route change to keep layout strictly fixed
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-  }, [location.pathname]);
-
+    const timer = window.setTimeout(() => {
+      void import("./lib/analytics/portfolioVisitors")
+        .then((m) => m.registerPortfolioVisit())
+        .catch(() => {});
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, []);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const main = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const legacySections: Record<string, string> = {
+      "#about": "/about",
+      "#experience": "/experience",
+      "#contact": "/contact",
+      "#technologies": "/tools",
+      "#services": "/services",
+      "#certifications": "/certifications",
+    };
+    if (
+      (location.pathname === "/" && legacySections[location.hash]) ||
+      (location.pathname === "/about" && location.hash === "#certifications")
+    ) {
+      navigate(legacySections[location.hash], { replace: true });
+      return;
+    }
+    if (location.hash) {
+      const frame = requestAnimationFrame(() =>
+        document.getElementById(location.hash.slice(1))?.scrollIntoView(),
+      );
+      return () => cancelAnimationFrame(frame);
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    main.current?.focus({ preventScroll: true });
+  }, [location.pathname, location.hash, navigate]);
   return (
-    <div className="min-h-screen w-full bg-[#eef1f5] dark:bg-[#0c0e12] text-neutral-900 dark:text-neutral-100 font-sans transition-colors duration-200 flex flex-col lg:flex-row">
-      {/* Left Sidebar (Desktop Flush Dock / Mobile Drawer) */}
+    <div className="portfolio-shell">
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <BentoSidebar />
-
-      {/* Right Main Content Showcase (Full Screen Width) */}
-      <main className="flex-1 min-w-0 w-full px-3.5 sm:px-5 lg:px-6 xl:px-8 py-2.5 sm:py-3 lg:py-3.5 flex flex-col justify-start">
+      <main id="main-content" ref={main} tabIndex={-1} className="main-content">
+        <div className="page-topline">
+          <span>JANMARK SUELTO / PORTFOLIO</span>
+          <span>Web · Mobile · Automation</span>
+        </div>
         <ErrorBoundary>
           <Suspense
             fallback={
-              <div className="min-h-[60vh] flex items-center justify-center text-sm text-neutral-400">
-                Loading showcase...
-              </div>
+              <p className="empty-state" role="status">
+                Loading page…
+              </p>
             }
           >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:slug" element={<ProjectDetails />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/tools" element={<TechnologiesPage />} />
-              <Route path="/technologies" element={<Navigate to="/tools" replace />} />
-              <Route path="/experience" element={<ExperiencePage />} />
               <Route path="/about" element={<AboutPage />} />
+              <Route path="/experience" element={<ExperiencePage />} />
+              <Route path="/tools" element={<TechnologiesPage />} />
+              <Route
+                path="/technologies"
+                element={<Navigate to="/tools" replace />}
+              />
+              <Route path="/certifications" element={<CertificationsPage />} />
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/admin/analytics" element={<AdminAnalytics />} />
-              <Route path="/analytics" element={<Navigate to="/admin/analytics" replace />} />
+              <Route
+                path="/analytics"
+                element={<Navigate to="/admin/analytics" replace />}
+              />
               <Route path="/collab" element={<Navigate to="/" replace />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
         </ErrorBoundary>
+        <footer className="site-footer">
+          <span>© {new Date().getFullYear()} Janmark Suelto</span>
+          <span>Built with React & TypeScript</span>
+        </footer>
       </main>
-
-      {/* Interactive Contact Modal */}
-      <FloatingContactModal />
     </div>
   );
 }
-
-function App() {
+export default function App() {
   return (
     <ThemeProvider>
       <SoundProvider>
@@ -74,5 +142,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

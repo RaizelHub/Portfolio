@@ -1,30 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { Experience } from '../sections/Experience/Experience';
-import { useSound } from '../context/SoundContext';
-
-export const ExperiencePage: React.FC = () => {
-  const { playClick, playHover } = useSound();
-
+import { Link } from "react-router-dom";
+import { experiences } from "../data/experience";
+export function ExperiencePage() {
   return (
-    <div className="min-h-screen pb-16 pt-0 select-none font-sans">
-      {/* Back Navigation Bar */}
-      <div className="mb-4">
-        <Link
-          to="/"
-          onClick={playClick}
-          onMouseEnter={playHover}
-          className="btn-pill-white inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold tracking-wide cursor-pointer"
-        >
-          <ArrowLeft className="h-3.5 w-3.5 text-neutral-800 dark:text-neutral-200" />
-          <span>Return to Bento Dashboard</span>
+    <>
+      <header className="page-heading">
+        <p className="eyebrow">Portfolio / Experience</p>
+        <h1>Practical experience. Useful lessons.</h1>
+        <p>
+          Hands-on IT support experience, alongside independent and academic
+          software projects.
+        </p>
+      </header>
+      {experiences.map((e) => (
+        <article className="career-row panel" key={e.id}>
+          <div>
+            <p className="eyebrow">Internship</p>
+            <h2>{e.company}</h2>
+            <p>{e.period}</p>
+            <p>{e.location}</p>
+          </div>
+          <div>
+            <h3>{e.role}</h3>
+            <p>{e.description}</p>
+            <ul>
+              {e.responsibilities.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+            <ul className="tags">
+              <li>Troubleshooting</li>
+              <li>IT asset management</li>
+              <li>Documentation</li>
+            </ul>
+          </div>
+        </article>
+      ))}
+      <section className="section prose">
+        <h2>Project experience</h2>
+        <p>
+          My portfolio includes independent applications and academic work,
+          including the Smartpipe IoT capstone. These are presented separately
+          from employment, with their current status and limitations.
+        </p>
+        <Link className="text-link" to="/projects">
+          Explore project case studies ↗
         </Link>
-      </div>
-
-      <Experience />
-    </div>
+      </section>
+    </>
   );
-};
-
-export default ExperiencePage;
+}

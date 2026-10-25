@@ -1,30 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import { Services } from '../sections/Services/Services';
-import { useSound } from '../context/SoundContext';
-
-export const ServicesPage: React.FC = () => {
-  const { playClick, playHover } = useSound();
-
+import { Link } from "react-router-dom";
+import { services } from "../data/services";
+export function ServicesPage() {
   return (
-    <div className="min-h-screen pb-16 pt-0 select-none font-sans">
-      {/* Back Navigation Bar */}
-      <div className="mb-4">
-        <Link
-          to="/"
-          onClick={playClick}
-          onMouseEnter={playHover}
-          className="btn-pill-white inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold tracking-wide cursor-pointer"
-        >
-          <ArrowLeft className="h-3.5 w-3.5 text-neutral-800 dark:text-neutral-200" />
-          <span>Return to Bento Dashboard</span>
-        </Link>
+    <>
+      <header className="page-heading">
+        <p className="eyebrow">Portfolio / Services</p>
+        <h1>What I can help build.</h1>
+        <p>Areas I work on through my software projects.</p>
+      </header>
+      <div className="skills-grid">
+        {services.map((s, i) => (
+          <article className="panel service-panel" key={s.id}>
+            <span className="metadata">0{i + 1}</span>
+            <h2>{s.title}</h2>
+            <p>{s.description}</p>
+          </article>
+        ))}
       </div>
-
-      <Services />
-    </div>
+      <section className="contact-strip">
+        <h2>Let’s discuss your project or role.</h2>
+        <Link className="button primary" to="/contact">
+          Contact me ↗
+        </Link>
+      </section>
+    </>
   );
-};
-
-export default ServicesPage;
+}
