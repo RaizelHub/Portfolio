@@ -409,10 +409,10 @@ export const projects: Project[] = [
     currentLimitations: 'Live in public beta on Vercel with real-time multiplayer drawing and persistence.',
     results: 'Built a secure, full-stack collaborative whiteboard with live presence, persistent storage, role-based sharing, WCAG 2.2 accessibility remediation, and automated test coverage.',
     process: 'Designed & developed real-time sync architecture with Cloudflare Durable Objects -> Configured Supabase Auth & PostgreSQL RLS -> Built canvas UI with React, TypeScript & tldraw -> Integrated R2 asset storage & snapshot pipeline -> Audited WCAG 2.2 AA accessibility and configured automated tests.',
-    image: 'img/collab.png',
-    images: ['img/collab.png', 'img/collab1.png', 'img/collab2.png'],
+    image: 'img/collabcanvas/whiteboard.webp',
+    images: ['img/collabcanvas/whiteboard.webp', 'img/collabcanvas/pages.webp', 'img/collabcanvas/collaboration.webp'],
     liveUrl: 'https://collab-canvas-web-beta.vercel.app/',
-    githubUrl: 'https://github.com/RaizelHub',
+    githubUrl: 'https://github.com/RaizelHub/collab-canvas',
     featured: true
   },
   {

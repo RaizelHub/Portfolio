@@ -29,7 +29,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             alt={`${displayTitle} Preview`}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover object-top"
+            className={project.slug === 'collabcanvas' ? "h-full w-full object-contain p-1 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.01]" : "h-full w-full object-cover object-top"}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-neutral-100 dark:bg-neutral-900 select-none font-mono">

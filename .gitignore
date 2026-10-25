@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 # Environment files
+portfolio-screenshots/
 .env
 .env*.local
 .env.development

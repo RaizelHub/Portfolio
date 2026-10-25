@@ -19,19 +19,19 @@ interface DesktopShowcaseProps {
 
 const defaultCollabImages: ShowcaseImage[] = [
   {
-    src: 'img/collab.png',
+    src: 'img/collabcanvas/whiteboard.webp',
     title: 'Multiplayer Whiteboard Canvas',
     subtitle: 'Real-time vector drawing, shape rendering, and live cursor presence',
   },
   {
-    src: 'img/collab1.png',
-    title: 'Workspace & Permissions',
-    subtitle: 'Role-based sharing (Owner, Editor, Viewer) with secure invite links',
+    src: 'img/collabcanvas/pages.webp',
+    title: 'Pages — Research Proposal',
+    subtitle: 'Structured writing with a manuscript outline and formatting tools',
   },
   {
-    src: 'img/collab2.png',
-    title: 'Snapshots & Asset Export',
-    subtitle: 'Automated state persistence and Cloudflare R2 asset storage',
+    src: 'img/collabcanvas/collaboration.webp',
+    title: 'Shared Board & Live Presence',
+    subtitle: 'Connected collaborators, live cursors, and sticky-note editing',
   },
 ];
 
@@ -71,7 +71,7 @@ export const DesktopShowcase: React.FC<DesktopShowcaseProps> = ({
             animate={prefersReducedMotion ? {} : { opacity: 1 }}
             exit={prefersReducedMotion ? {} : { opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="w-full h-full object-cover object-top group-hover:scale-[1.015] transition-transform duration-300"
+            className={currentImage.src.startsWith('img/collabcanvas/') ? "w-full h-full object-contain p-1 motion-safe:group-hover:scale-[1.01] motion-safe:transition-transform motion-safe:duration-300" : "w-full h-full object-cover object-top group-hover:scale-[1.015] transition-transform duration-300"}
           />
         </AnimatePresence>
 

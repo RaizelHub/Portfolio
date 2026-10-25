@@ -44,7 +44,7 @@ export const TactileGrid: React.FC = () => {
       slug: 'collabcanvas',
       title: 'CollabCanvas',
       referenceTitle: 'Real-Time Whiteboard',
-      image: '/img/collab.png',
+      image: '/img/collabcanvas/whiteboard.webp',
       badge: 'Real-Time System',
       isMobile: false,
       liveUrl: projects.find((p) => p.slug === 'collabcanvas')?.liveUrl || 'https://collab-canvas-web-beta.vercel.app/',
@@ -313,8 +313,10 @@ export const TactileGrid: React.FC = () => {
                     >
                       <img
                         src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover object-top"
+                        alt={item.id === 'collabcanvas' ? 'CollabCanvas whiteboard with sticky notes, drawing tools, and style controls' : item.title}
+                        loading="lazy"
+                        decoding="async"
+                        className={item.id === 'collabcanvas' ? "w-full h-full object-contain p-1 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.01]" : "w-full h-full object-cover object-top"}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-1.5">
                         <span className="text-[9px] font-bold text-white tracking-wider uppercase">

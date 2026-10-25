@@ -68,11 +68,11 @@ const FLAGSHIP_PROJECTS: FlagshipData[] = [
     badge: 'Distributed WebSocket Canvas System',
     description:
       'Infinite multiplayer virtual whiteboard with room state synchronization, low-latency cursor tracking, and persistent vector object manipulation.',
-    image: 'img/collabcanvas/01_hero.png',
-    simulatedUrl: 'collabcanvas.vercel.app',
+    image: 'img/collabcanvas/whiteboard.webp',
+    simulatedUrl: 'collab-canvas-web-beta.vercel.app',
     technologies: ['React 19', 'TypeScript', 'WebSockets', 'HTML5 Canvas', 'Node.js'],
     liveUrl: 'https://collab-canvas-web-beta.vercel.app',
-    githubUrl: 'https://github.com/JanmarkSuelto',
+    githubUrl: 'https://github.com/RaizelHub/collab-canvas',
   },
   {
     id: 'jobradar-ai',
@@ -235,7 +235,7 @@ export const Projects = () => {
                   <img
                     src={`/${activeFlagship.image}`}
                     alt={activeFlagship.shortTitle}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
+                    className={activeFlagship.slug === 'collabcanvas' ? "w-full h-full object-contain p-1 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.01]" : "w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"}
                   />
                 </div>
               </div>
@@ -441,7 +441,7 @@ export const Projects = () => {
                           alt={displayTitle}
                           loading="lazy"
                           decoding="async"
-                          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-104 pt-6"
+                          className={project.slug === 'collabcanvas' ? "w-full h-full object-contain pt-6 px-1 pb-1 motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.01]" : "w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-104 pt-6"}
                         />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center p-4 pt-8 select-none font-mono">
