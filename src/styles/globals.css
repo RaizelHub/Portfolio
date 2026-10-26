@@ -1287,3 +1287,34 @@ input[type="checkbox"] {
 .project-card p {
   font-size: 14px;
 }
+.github-activity-panel { min-width: 0; }
+.activity-summary, .activity-caption { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.activity-summary { margin-bottom: 20px; font-size: 13px; }
+.activity-summary strong { color: var(--text-primary); font-weight: 600; }
+.activity-summary > span, .activity-caption, .activity-source { font-size: 11px; color: var(--text-secondary); }
+.activity-scroll { overflow-x: auto; max-width: 100%; padding: 5px 0; }
+.activity-calendar { display: block; min-width: 760px; }
+.activity-calendar text { fill: var(--text-secondary); font-size: 10px; font-family: inherit; }
+.contribution-cell { fill: var(--cell-color); background: var(--cell-color); }
+.level-0 { --cell-color: #eeeeeb; }
+.level-1 { --cell-color: #c7c7c3; }
+.level-2 { --cell-color: #969692; }
+.level-3 { --cell-color: #60605d; }
+.level-4 { --cell-color: #252524; }
+.dark .level-0 { --cell-color: #292929; }
+.dark .level-1 { --cell-color: #505050; }
+.dark .level-2 { --cell-color: #808080; }
+.dark .level-3 { --cell-color: #b5b5b5; }
+.dark .level-4 { --cell-color: #ededed; }
+.activity-legend { display: flex; align-items: center; gap: 5px; }
+.activity-legend .contribution-cell { width: 11px; height: 11px; border-radius: 2px; }
+.activity-message { min-height: 145px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 15px; font-size: 14px; }
+.activity-source { margin-top: 18px; }
+.activity-source a { text-decoration: underline; text-underline-offset: 3px; }
+.activity-details { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 12px; font-size: 12px; }
+.activity-details summary { cursor: pointer; padding: 10px 0; }
+.activity-table-scroll { max-height: 260px; overflow: auto; }
+.activity-details table { width: 100%; border-collapse: collapse; text-align: left; }
+.activity-details caption { text-align: left; color: var(--text-secondary); padding: 12px 0; }
+.activity-details th, .activity-details td { padding: 8px; border-bottom: 1px solid var(--border); }
+.activity-details tbody th { font-weight: 400; }

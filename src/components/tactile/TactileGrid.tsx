@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { projects } from "../../data/projects";
 import { ProjectCard } from "../projects/PortfolioProjectCard";
 import { featuredSlugs } from "../../data/featuredProjects";
+import { GithubActivity } from "../../sections/GithubActivity/GithubActivity";
 export function TactileGrid() {
   return (
     <>
@@ -24,6 +25,7 @@ export function TactileGrid() {
             ))}
         </div>
       </section>
+      <GithubActivity />
       <section className="home-background section">
         <div>
           <p className="eyebrow">A little background</p>

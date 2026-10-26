@@ -14,7 +14,7 @@ export const profile: Profile = {
   whatsappUrl: "https://wa.me/qr/YHP7U5VEMH5IP1",
   messengerUrl: "https://m.me/Raizelxdarriii90",
   resumeUrl: "/Suelto-Janmark-Full-Stack.Resume.pdf",
-  profileImage: "/img/optimized/editorial_portrait.webp",
+  profileImage: "/img/optimized/editorial-portrait-cutout.png",
   animeProfileImage: "/img/Anime.png",
   gcashNumber: "0969 022 1571",
   maribankNumber: "0969 022 1571",
