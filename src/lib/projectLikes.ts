@@ -1,61 +1,7 @@
 import { supabase } from './supabase';
 
-const USER_LIKES_KEY = 'portfolio_user_liked_slugs_v1';
-const LIKES_CACHE_KEY = 'portfolio_project_like_counts_v1';
-
-/**
- * Get map of projects liked by this visitor on this browser: { [slug: string]: boolean }
- */
-export function getUserLikedSlugs(): Record<string, boolean> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(USER_LIKES_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
-export function saveUserLikedSlugs(likedMap: Record<string, boolean>) {
-  if (typeof window === 'undefined') return;
-  try {
-    localStorage.setItem(USER_LIKES_KEY, JSON.stringify(likedMap));
-  } catch {
-    // ignore
-  }
-}
-
-/**
- * Check if the current visitor has already liked this project
- */
-export function hasUserLiked(slug: string): boolean {
-  const userLikes = getUserLikedSlugs();
-  return Boolean(userLikes[slug]);
-}
-
-/**
- * Get cached likes from memory/localStorage
- */
-export function getCachedLikeCounts(): Record<string, number> {
-  if (typeof window === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(LIKES_CACHE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch {
-    return {};
-  }
-}
-
-export function setCachedLikeCount(slug: string, count: number) {
-  if (typeof window === 'undefined') return;
-  try {
-    const cache = getCachedLikeCounts();
-    cache[slug] = Math.max(0, count);
-    localStorage.setItem(LIKES_CACHE_KEY, JSON.stringify(cache));
-  } catch {
-    // ignore
-  }
-}
+import { LIKES_CACHE_KEY, getUserLikedSlugs, saveUserLikedSlugs, getCachedLikeCounts, setCachedLikeCount } from './projectLikeStorage';
+export { getUserLikedSlugs, saveUserLikedSlugs, hasUserLiked, getCachedLikeCounts, setCachedLikeCount } from './projectLikeStorage';
 
 /**
  * Fetch real like count for a project from Supabase database
